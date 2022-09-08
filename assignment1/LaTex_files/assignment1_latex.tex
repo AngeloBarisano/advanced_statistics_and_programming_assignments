@@ -35,6 +35,25 @@ The third category of data distinguishes in the type of housing that was recorde
 The fourth category focuses on the quality and condition aspect of the property as a function of years since remodeling (YearRemodAdd), building finalize date (YearBuilt), and the overall rating of quality (OverallQual) and condition (OverallCond) of the property.
 
 
+Dependent: 'SalePrice'
+Time var:  'MoSold','YrSold', 'YearBuilt', 'YearRemodAdd'
+Property Size: 'LotArea', ',('tot_lviing_area_property' = 'GrLivArea' + 'TotalBsmtSF'), 'X1stFlrSF', 'X2ndFlrSF', 'KitchenAbvGr', 'BedroomAbvGr', 'BsmtFullBath', 'FullBath','TotRmsAbvGrd','GarageCars',
+Type of property: 'BldgType', 'MSSubClass'
+Neighborhood: 'MSZoning', 'Neighborhood',
+Overall Quality: 'OverallQual', 'OverallCond',
+
+
+Relevant vairables:
+Dependent: 'SalePrice'
+Time var:  'MoSold','YrSold', 
+Property Size: 'LotArea', ',('tot_lviing_area_property' = 'GrLivArea' + 'TotalBsmtSF') 'BedroomAbvGr', (tot_bathrooms = 'BsmtFullBath', 'FullBath'), 'GarageCars'
+Type of property: 'BldgType'
+Neighborhood: 'MSZoning', 'Neighborhood',
+Overall Quality: 'OverallQual', 'OverallCond'
+
+
+
+
 Note, variables such as central heating have been discarded as those usually are contained in the type of house (appartments tend to have central administered heating from the overall building).
 
 MAKE A CAUSAL SCHEME!!!! HErE IN LATEX
@@ -44,7 +63,34 @@ MAKE A CAUSAL SCHEME!!!! HErE IN LATEX
 
 
 
-
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Thu, Sep 08, 2022 - 23:58:39
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+Id & 1,460 & 730.500 & 421.610 & 1 & 1,460 \\ 
+SalePrice & 1,460 & 180,921.200 & 79,442.500 & 34,900 & 755,000 \\ 
+YearBuilt & 1,460 & 1,971.268 & 30.203 & 1,872 & 2,010 \\ 
+YearRemodAdd & 1,460 & 1,984.866 & 20.645 & 1,950 & 2,010 \\ 
+LotArea & 1,460 & 10,516.830 & 9,981.265 & 1,300 & 215,245 \\ 
+GrLivArea & 1,460 & 1,515.464 & 525.480 & 334 & 5,642 \\ 
+TotalBsmtSF & 1,460 & 1,057.429 & 438.705 & 0 & 6,110 \\ 
+BedroomAbvGr & 1,460 & 2.866 & 0.816 & 0 & 8 \\ 
+BsmtFullBath & 1,460 & 0.425 & 0.519 & 0 & 3 \\ 
+FullBath & 1,460 & 1.565 & 0.551 & 0 & 3 \\ 
+GarageCars & 1,460 & 1.767 & 0.747 & 0 & 4 \\ 
+OverallQual & 1,460 & 6.099 & 1.383 & 1 & 10 \\ 
+OverallCond & 1,460 & 5.575 & 1.113 & 1 & 9 \\ 
+tot\_living\_area & 1,460 & 2,572.893 & 823.598 & 334 & 11,752 \\ 
+tot\_bathrooms & 1,460 & 1.990 & 0.732 & 0 & 6 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 
 
 
