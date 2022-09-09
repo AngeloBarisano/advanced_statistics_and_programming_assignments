@@ -156,39 +156,6 @@ which(colSums(is.na(df))>0)
 
 
 
-```{r Data cleaning and imputation}
-# Missing Value Treatment
-for(i in c(1:78))
-{
-  if(class(train[,i])=="factor")
-  {
-    train[is.na(train[,i]),i]<-names(which.max(table(train[,i])))
-  }else{
-    train[is.na(train[,i]),i]<-median(unlist(train[,i]),na.rm = TRUE)
-  }
-}
-
-```
-
-Condition1: Proximity to various conditions
-	
-       Artery	Adjacent to arterial street
-       Feedr	Adjacent to feeder street	
-       Norm	Normal	
-       RRNn	Within 200' of North-South Railroad
-       RRAn	Adjacent to North-South Railroad
-       PosN	Near positive off-site feature--park, greenbelt, etc.
-       PosA	Adjacent to postive off-site feature
-       RRNe	Within 200' of East-West Railroad
-       RRAe	Adjacent to East-West Railroad
-	
-Condition2: Proximity to various conditions (if more than one is present)
---> PUt condition based on general categories: Such as proximity to important streets, adjacedn to railroats, near park/ nature, normal (4 categories to be remodeled)
-
-
-Then: pool yes no: PoolArea
-
-
 
 # 1 Collect and prepare data
 
@@ -275,8 +242,6 @@ df_$PoolArea[df_$PoolArea == 0] <- FALSE
 
 
 ```{r inspect dypes of the variables at hand}
-
-
 # to make it clear that only certain operations can be performed on the data
 df_$Id <- as.factor(df_$Id)
 df_$MoSold <- as.factor(df_$MoSold)
@@ -315,7 +280,7 @@ df_temp <- df_ %>%
   select(-one_of(c('Id')))
 skewness(df_temp$SalePrice)
 
-stargazer(df_temp, type = 'text')
+stargazer(df_temp)
 ```
 
 
@@ -331,8 +296,6 @@ table(df$MSZoning, df$Neighborhood)
 table(df$BldgType)
 ```
 ```{r plots, echo=FALSE}
-View(df_)
-
 # scaplom
 
 df_temp <- df_ %>%
@@ -416,7 +379,7 @@ bar + stat_summary(
   colour = "Black"
 ) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Zoning', y = 'Sale Price')
 
-HYPOTHESIS: Zoning matters
+# HYPOTHESIS: Zoning matters
 
 ```
 
@@ -443,14 +406,16 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), 
 
 ```{r plots, echo=FALSE}
 # condition is not important in comparison with quality of the house !!!!  
-HYPOTHESIS: Condition is unimportant (compared to quality of the house)
+# HYPOTHESIS: Condition is unimportant (compared to quality of the house)
+
 scatter <- ggplot(df_, aes(OverallCond, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
 
 ```
 ```{r plots, echo=FALSE}
 
-HYPOTHESIS: Quality and SALES + Neighborhood clusters
+# HYPOTHESIS: Quality and SALES + Neighborhood clusters
+
 # Quality, sales and neighborhood havign a rumble 
 
 scatter <- ggplot(df_, aes(OverallQual, SalePrice))
@@ -515,6 +480,8 @@ bar + stat_summary(
 ```{r plots, echo=FALSE}
 # Final hypothesis: the effect of total living space on sales price is determined by the zoning
 # MAYBE TRY BUILDING TYPE!!
+
+
 scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price") + xlim(0, 7000)
  
