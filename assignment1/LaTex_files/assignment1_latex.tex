@@ -1,9 +1,9 @@
 \documentclass{article}
 \usepackage{color}
 \usepackage{tikz}
-
-% Tikz settings optimized for causal graphs.
-% Just copy-paste this part
+\usepackage{ntheorem}
+\theoremseparator{:}
+\newtheorem{hyp}{Hypothesis}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
 \tikzset{
     -Latex,auto,node distance =1 cm and 1 cm,semithick,
@@ -36,9 +36,9 @@ To start, a total of 1,460 house sales were recorded between 2006 and 2010 for t
  
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Fri, Sep 09, 2022 - 12:53:46
+% Date and time: Fri, Sep 09, 2022 - 22:51:21
 \begin{table}[!htbp] \centering 
-  \caption{Descriptive Statistics} 
+  \caption{} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}}lccccc} 
 \\[-1.8ex]\hline 
@@ -54,11 +54,13 @@ TotalBsmtSF & 1,460 & 1,057.429 & 438.705 & 0 & 6,110 \\
 BedroomAbvGr & 1,460 & 2.866 & 0.816 & 0 & 8 \\ 
 BsmtFullBath & 1,460 & 0.425 & 0.519 & 0 & 3 \\ 
 FullBath & 1,460 & 1.565 & 0.551 & 0 & 3 \\ 
+PoolArea & 1,460 & 0.005 & 0.069 & 0 & 1 \\ 
 GarageCars & 1,460 & 1.767 & 0.747 & 0 & 4 \\ 
 OverallQual & 1,460 & 6.099 & 1.383 & 1 & 10 \\ 
 OverallCond & 1,460 & 5.575 & 1.113 & 1 & 9 \\ 
 tot\_living\_area & 1,460 & 2,572.893 & 823.598 & 334 & 11,752 \\ 
 tot\_bathrooms & 1,460 & 1.990 & 0.732 & 0 & 6 \\ 
+Adjacent\_features\_bool & 1,460 & 0.137 & 0.344 & 0 & 1 \\ 
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
@@ -121,35 +123,75 @@ quality and condition to sales price
 \end{center}
 
 
+Based on the valuation strategies discussed above, a theory was set up to explain the variation in sales prices and the corresponding causal relationship scheme can be seen in Plot 1. 
+When combined with the EDA in part 1, the following hypothesis were posed.
+
+\indent As can be reasoned from \textbf{PLOT XXX}, which displays the assumed direct positive association between Total Living Space (IV) and Sale Price (DV). Consequently,we assume that:
+
+\begin{hyp}[H\ref{hyp:first}] \label{hyp:first}
+Total Living Space has a positive effect on Sales Price.
+\end{hyp}
+
+\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Plot 2: Hypothesis 1}};
+ 	\node (1) at (0,0) {Total Living Space};
+	\node (2) [right = of 1] {Sales Price};
+	\path (1) edge node[above] {$+$}(2);
+\end{tikzpicture}
+\end{center}
 
 
+\indent Moreover, upon further investigation, the zoning was take into account in order to reflect administrative borders for the district of Ames. As these borders/ zones are commonly used for calculating local property taxes, the type of zone a specific property falls into promises to explain further variation not only in Sale Price itself, but also moderate the direct effect of Total Living Space and Sales Price.\footnote{It is notable that of all 1460 observations in the sample, 1151 are attributable to less densly populated areas while 218 records pertain to moreately densely populated neighbourhoods} Subsequently, the follow-up hypothesis investigates whether the geograpic separation of the districts of Ames into categoreis ranging fro mdensly to less densly populated areas impact the assocaition of 
+
+\begin{hyp}[H\ref{hyp:first}] \label{hyp:second}
+Zoning moderates the direct effect of Total Living Space and Sales Price, while having itself an impact on the Sale Price. Moreover, less densly populated zones have a more positive association with Slaes Price than more densely populationed zones.
+\end{hyp}
+
+\indent Thirdly, it is intuitive that the Quality (IV) of a construction at least in part explains its valuation. However, as was discovered during the EDA in part 1 as well as the suggestions made in the reviewed valuation strategies, such an association commonly cluster. Thus, Neighborhood (IV) is assumed to moderate the direct effect of Quality on Sales Price, while itself displaying a positive effect on Sales Price; the argument being that richer households group together and create as a cluster more qualitative (expensive) homes, which then results in an increase sales price 
+
+\begin{hyp}[H\ref{hyp:first}] \label{hyp:third}
+Neighborhood of a construction moderates the relationship of Quality on Sales Price, while displaying a positive relationship itself; thus, 
+\end{hyp}
+
+\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Plot 4: Hypothesis 3}};
+ 	\node (1) at (0,0) {Quality};
+	\node (2) [right = of 1] {Sales Price};
+	\node (3) at (1.25,-1.5) {Neighborhood};
+	
+	\coordinate (4) at (1.25,0);
+	
+	\path (1) edge node[above] {$+$}(2);
+	\path (3) edge node[right] {$+$}(4);
+\end{tikzpicture}
+\end{center}
 
 
+%to do:
+%- properly elaborate on your theroy from above; explain this through a causal relationship scheme
+%- SO FIRST DO THE CAUSAL RELATIONSHIP SCHEME HAND IN HADN WITH THE THEORY FROM ABOVE
+%- REGARDING NON LINEARITY ASSUMPTION of A1: Add APPENDIX WITH geom_smooth() a smooth line!
+%- After this, deduce 3 hypothesis for the porject
+%- After this formulate the population regression model
+
+%- Then explain in which way this population regression model messes with the linear assumptions; %which linear asssumptions are going to cause a problem? Which will not cause a problem?
+%- POSSIBLE INTERACTION: MSZoning and Neighborhood OR MSZoning and total living area as tzhe zoning %classifies into rural or not rural
 
 
+%# Final hypothesis: the effect of total living space on sales price is %determined by the zoning
+%# MAYBE TRY BUILDING TYPE!!
+
+%# HYPOTHESIS: Zoning matters
+%# HYPOTHESIS: Quality and SALES + Neighborhood clusters
+%# HYPOTHESIS: Condition is unimportant (compared to quality of the house)
+%# HYPOTHESIS: Zoning matters - done 
+%# HYPOTHESIS: total living area impact on price! - done
 
 
-
-\indent The first category of data pertains to the size dimension of the house in
-question. Here the size of the house (1stFlrSF + 2ndFlrSF), combined with
-further information regarding the of bathrooms (BsmtFullBath + FullBath),
-Bedrooms (Bedroom), and Kitchen explain the overall living space of a house
-or appartment. Additionally, the lot size (LotArea) of the property and the
-garage (GarageCars/GarageArea) specification complement this category.
-
-The Second category describes neighborhood and location related characteristics of the property. School districts (indirectly included as unobservable!!!) and afluent neighborhoods naturally have a large impact on the saleprice. Additionally, neighborhoods may, thus, function as cluster correction for similarities in the error term when correcting for heteroscedasticity; assuming that sales in the same neighborhood share similar underlying variation. Finally, the neighborhood may control for the size of the house; we would generally assume that big houses are more expensive. However, if we consider New York downtown, to large houses in the country side of Iowa, small flats (in new york) might induce that small properties cost more than large properties. 
-
-The third category of data distinguishes in the type of housing that was recorded as a sale in the data (MSSubClass, BldgType). 
-
-The fourth category focuses on the quality and condition aspect of the property as a function of years since remodeling (YearRemodAdd), building finalize date (YearBuilt), and the overall rating of quality (OverallQual) and condition (OverallCond) of the property.
-
-
-
-
-
-Note, variables such as central heating have been discarded as those usually are contained in the type of house (appartments tend to have central administered heating from the overall building).
-
-MAKE A CAUSAL SCHEME!!!! HErE IN LATEX
 
 
 
