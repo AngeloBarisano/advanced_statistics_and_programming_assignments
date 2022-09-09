@@ -1,8 +1,21 @@
 \documentclass{article}
+\usepackage{color}
+\usepackage{tikz}
+
+% Tikz settings optimized for causal graphs.
+% Just copy-paste this part
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
 
 \begin{document}
 \section{Data Prep, EDA, and Theory development}
-\subsection{Varaible Selection \& Explanation:}
+\subsection{Varaible Selection \& Explanation}
 \indent For the purpose of analyzing the determinats of house (sales) prices in the US a theory was developed based on combining two common valuation strategies in real-estate; "vergleichswert verfahren, sachwert verfahren".
 
 \indent Based on the theory, four categories of regressors were identified in the data, promising to best represent the population regression equation. 
@@ -54,7 +67,7 @@ tot\_bathrooms & 1,460 & 1.990 & 0.732 & 0 & 6 \\
 It is notable that upon selecting the aforementioned variables, no preprossessing in the form of imputation or data deletion had to be applied. However, in order to decrease the complecity of the interaction term, the variable MSZoning was binned into (rural, mixed rural, and urban) based on the corresponding zoning categories\footnote{$https://www.kaggle.com/competitions/home-data-for-ml-course/data$}.
 
 
-\subsection{Exploratory Data Analysis:}\footnote{The theory underlying the choice of the variables will be further elaborated upon in Section 2}
+\subsection{Exploratory Data Analysis}\footnote{The theory underlying the choice of the variables will be further elaborated upon in Section 2}
 A scatter plot matrix is provided in the appendix for the numeric variables. The EDA shows the four data categories with respect to the sale price of the property. Thus, the plots represented, inter alia, drove the development of the hypothesis down the line in combination with the aforementioned valuation strategies. 
 
 
@@ -70,7 +83,54 @@ quality and condition to sales price
 
 
 
+\section{Theoretical model and OLS assumptions}
 
+\begin{tikzpicture}
+    \node[state] (1) {$Z$};
+    \node[state] (2) [right =of 1] {$X$};
+    \node[state] (3) [right =of 2] {$Y$};
+    \node[state] (4) [above right =of 1,xshift=-0.3cm,yshift=-0.3cm] {$W$};
+
+    \path (1) edge node[above] {$\lambda_{zx}$} (2);
+    \path (2) edge node[above] {$\lambda_{xy}$} (3);
+    \path[bidirected] (2) edge[bend left=60] node[above] {$\epsilon_{xy}$} (3);
+    \path (4) edge node[el,above] {$\lambda_{wz}$} (1);
+    \path[bidirected] (4) edge[bend left=50] node[el,above] {$\epsilon_{wy}$} (3);
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}
+    \node (1) at (0,0) {Proximity};
+    \node (2) [right = of 1] {Tutoring};
+    \node (3) [right = of 2] {GPA};
+    \node (4) [below = of 2] {Library};
+
+    \path (1) edge  (2);
+    \path (2) edge (3);
+    \path[bidirected] (2) edge[bend left=50]  (3);
+    \path (4) edge (3);
+    \path (1) edge (4);
+    
+    
+    \path (1) edge node[above] {$+$} (2);
+\end{tikzpicture}
+
+
+
+
+
+
+\begin{tikzpicture}
+    \node (1) at (0,0) {Neighborhood};
+	\node (2) [above = of 1] {Total Living Space};
+	\node (3) [right = of 1] {Sale Price};
+	\node (4) [below = of 3] {Building Type};
+	\node (5) [right = of 4] {Adjacent Features};
+	\node (6) [above = of 5] {Areal Zoning};
+	\node (7) [below = of 1] {Property Quality};
+	\node (8) [right = of 2] {Property Quality};
+\end{tikzpicture}
 
 
 

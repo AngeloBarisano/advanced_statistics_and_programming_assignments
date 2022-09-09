@@ -350,25 +350,73 @@ pairs(df_temp, pch = 19)
 
 ```
 
-```{r plots, echo=FALSE}
-View(df_)
-# SalePrice, tot_living_area, 
-# table(subset(df_, MSZoning != "C (all)" & MSZoning != "FV")$MSZoning)
-table(subset(df_, MSZoning != "C (all)")$MSZoning)
-df_subset <- subset(df_, MSZoning != "C (all)")
+
+
+```{r }
+
 # first plot:
 # sales price with respect to size of the living area conditional on the ZONING!
 scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")+ xlim(0, 7000)
 
 
+# HYPOTHESIS: total living area impact on price! 
+
+```
+
+
+
+
+```{r plots, echo=FALSE}
+
+
+# SalePrice, tot_living_area, 
+df_subset <- subset(df_, MSZoning != "C (all)")  
+  
+# now drill down
 scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning')
 
 
 
 #' the first thing to note is that there are quite some extreme outliers in terms of living space
-#' 
+
+
+
+#' then try to set the focus on the xlim to control for the outliers
+scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
+
+
+#' Finally, only consider the two most important features: RL (Low density) and RM (Moderate density)
+df_subset <- subset(df_, MSZoning == "RM" | MSZoning == "RL" )
+scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
+
+
+#' as we expected, rurak areas (Low density) correspond with a larger size
+#' however, have is interesting in this equation is that the low density region
+#' tends to be sold higher than that of moderately dense
+bar <- ggplot(df_, aes(MSZoning, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Zoning', y = 'Sale Price')
+
+#' these findings are supported by the corresponding barcharts; certain zonings correspond with higher sales price
+bar <- ggplot(df_subset, aes(MSZoning, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Zoning', y = 'Sale Price')
+
+HYPOTHESIS: Zoning matters
 
 ```
 
@@ -394,23 +442,15 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), 
 
 
 ```{r plots, echo=FALSE}
-# Second plots:
-# living space and sales price wrt Neighborhood 
-
+# condition is not important in comparison with quality of the house !!!!  
+HYPOTHESIS: Condition is unimportant (compared to quality of the house)
 scatter <- ggplot(df_, aes(OverallCond, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
 
-
-scatter <- ggplot(df_, aes(OverallQual, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price")
-
-
-
-Adjacent_features_bool
-
-table(df_$Neighborhood)
 ```
 ```{r plots, echo=FALSE}
+
+HYPOTHESIS: Quality and SALES + Neighborhood clusters
 # Quality, sales and neighborhood havign a rumble 
 
 scatter <- ggplot(df_, aes(OverallQual, SalePrice))
@@ -448,21 +488,41 @@ scatter + geom_point() + geom_smooth(method = "lm",
 #' but also so does neighborhood (afluent neighborhoods) suggesting clusters in the data!
 ```
 ```{r plots, echo=FALSE}
-# Second plots:
-# living space and sales price wrt Neighborhood 
-
-scatter <- ggplot(df_, aes(OverallCond, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
+# Adjacent_features_bool
 
 
-scatter <- ggplot(df_, aes(OverallQual, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price")
+#' plot some showing the distribution of arousal by film
+bar <- ggplot(df_, aes(Adjacent_features, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Has Adrjacent Features', y = 'Sale Price')
+
+#' sadly the sample size for recreation is too low even when combined iwth Condition2
+#' so we disregard this angle
+
+```
 
 
 
-Adjacent_features_bool
 
-table(df_$Neighborhood)
+
+
+
+```{r plots, echo=FALSE}
+# Final hypothesis: the effect of total living space on sales price is determined by the zoning
+# MAYBE TRY BUILDING TYPE!!
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price") + xlim(0, 7000)
+ 
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Quality of the property', y = "Sale Price", color = 'MSZoning')
+
+
+colnames(df_)
 ```
 
 
