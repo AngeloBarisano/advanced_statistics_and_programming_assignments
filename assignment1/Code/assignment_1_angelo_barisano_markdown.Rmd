@@ -170,6 +170,23 @@ for(i in c(1:78))
 
 ```
 
+Condition1: Proximity to various conditions
+	
+       Artery	Adjacent to arterial street
+       Feedr	Adjacent to feeder street	
+       Norm	Normal	
+       RRNn	Within 200' of North-South Railroad
+       RRAn	Adjacent to North-South Railroad
+       PosN	Near positive off-site feature--park, greenbelt, etc.
+       PosA	Adjacent to postive off-site feature
+       RRNe	Within 200' of East-West Railroad
+       RRAe	Adjacent to East-West Railroad
+	
+Condition2: Proximity to various conditions (if more than one is present)
+--> PUt condition based on general categories: Such as proximity to important streets, adjacedn to railroats, near park/ nature, normal (4 categories to be remodeled)
+
+
+Then: pool yes no: PoolArea
 
 
 
@@ -192,26 +209,76 @@ df_ <- df[, c(
   'BsmtFullBath',
   'FullBath',
   # garage cars may not be relevant!!
+  'PoolArea', 
+  'Condition1',
+  'Condition2',
   'GarageCars',
   'BldgType',
   'MSZoning',
   'Neighborhood',
-  'MSZoning',
   'OverallQual',
-  'OverallCond'
+  'OverallCond',
+  'LotShape'
 )]
 
 # create the interesting varaibles
 df_$tot_living_area <- df_$GrLivArea + df_$TotalBsmtSF
 df_$tot_bathrooms <- df_$BsmtFullBath + df_$FullBath
 
-df_
+# resample Condition1 and Condition2 into categories of variables 
+match_df = data.frame(
+  old = c("Artery", "Feedr", "Norm", "PosA", "PosN", "RRAe", "RRAn", "RRNe", "RRNn"),
+  new = c(
+    'Good Street Access',
+    'Good Street Access',
+    'Normal',
+    'Close to Recreation',
+    'Close to Recreation',
+    'Adjacent to Railroad',
+    'Adjacent to Railroad',
+    'Adjacent to Railroad',
+    'Adjacent to Railroad'
+  )
+)
+
+df_ <- df_ %>% mutate(Adjacent_features = match_df$new[match(Condition1,match_df$old)])
+df_$Adjacent_features <- as.factor(df_$Adjacent_features)
+
+
+# and now, in much simpler: if an advantage is adjacent, then True, if normal False
+
+match_df = data.frame(
+  old = c("Artery", "Feedr", "Norm", "PosA", "PosN", "RRAe", "RRAn", "RRNe", "RRNn"),
+  new = c(
+    TRUE,
+    TRUE,
+    FALSE,
+    TRUE,
+    TRUE,
+    TRUE,
+    TRUE,
+    TRUE,
+    TRUE
+  )
+)
+
+df_ <- df_ %>% mutate(Adjacent_features_bool = match_df$new[match(Condition1,match_df$old)])
+
+
+# create a variable of pool true of false:
+df_$PoolArea[df_$PoolArea != 0] <- TRUE
+df_$PoolArea[df_$PoolArea == 0] <- FALSE
+
 ```
+
+
+
 
 ```{r inspect dypes of the variables at hand}
 
 
 # to make it clear that only certain operations can be performed on the data
+df_$Id <- as.factor(df_$Id)
 df_$MoSold <- as.factor(df_$MoSold)
 df_$YrSold <- as.factor(df_$YrSold)
 
@@ -219,9 +286,8 @@ df_$Neighborhood <- as.factor(df_$Neighborhood)
 df_$BldgType <- as.factor(df_$BldgType)
 df_$MSZoning <- as.factor(df_$MSZoning)
 
-
-
-str(df_)
+# poolarea is pointless as only few people have a pool
+df_$PoolArea <- as.logical(df_$PoolArea)
 
 ```
 
@@ -231,6 +297,7 @@ str(df_)
 ```{r inspect missing values}
 # display missing values by column
 colSums(is.na(df_))
+
 
 # select all columns which have missing data 
 which(colSums(is.na(df_))>0)
@@ -248,7 +315,7 @@ df_temp <- df_ %>%
   select(-one_of(c('Id')))
 skewness(df_temp$SalePrice)
 
-stargazer(df_, type = 'text')
+stargazer(df_temp, type = 'text')
 ```
 
 
@@ -256,19 +323,151 @@ stargazer(df_, type = 'text')
 df$MSZoning
 table(df$Neighborhood)
 table(df$MSZoning)
-stargazer(table(df$Neighborhood, df$MSZoning))
+
+table1 <- table(table(df$Neighborhood, df$MSZoning))
+stargazer(ftable(table1))
+
 table(df$MSZoning, df$Neighborhood)
 table(df$BldgType)
 ```
+```{r plots, echo=FALSE}
+View(df_)
 
+# scaplom
 
+df_temp <- df_ %>%
+  select(-one_of(
+    c(
+      'Id',
+      'MoSold',
+      'YrSold',
+      'BldgType',
+      'MSZoning',
+      'Neighborhood'
+    )
+  ))
+pairs(df_temp, pch = 19)
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r plots, echo=FALSE}
+View(df_)
+# SalePrice, tot_living_area, 
+# table(subset(df_, MSZoning != "C (all)" & MSZoning != "FV")$MSZoning)
+table(subset(df_, MSZoning != "C (all)")$MSZoning)
+df_subset <- subset(df_, MSZoning != "C (all)")
+# first plot:
+# sales price with respect to size of the living area conditional on the ZONING!
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")
+
+
+scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning')
+
+
+
+#' the first thing to note is that there are quite some extreme outliers in terms of living space
+#' 
+
+```
+
+
+```{r plots, echo=FALSE}
+# Second plots:
+# living space and sales price wrt Neighborhood 
+
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")
+
+
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood')
+
+
+
+
+
+```
+
+
+
+
+```{r plots, echo=FALSE}
+# Second plots:
+# living space and sales price wrt Neighborhood 
+
+scatter <- ggplot(df_, aes(OverallCond, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
+
+
+scatter <- ggplot(df_, aes(OverallQual, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price")
+
+
+
+Adjacent_features_bool
+
+table(df_$Neighborhood)
+```
+```{r plots, echo=FALSE}
+# Quality, sales and neighborhood havign a rumble 
+
+scatter <- ggplot(df_, aes(OverallQual, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price")
+
+
+scatter <- ggplot(df_, aes(OverallQual, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Quality of the property', y = "Sale Price", color = 'Neighborhood')
+
+
+
+#
+#' THe interesting observation here is that not only does the quality of houses and the sale price show a positive (not completely linear -- rather quadratic)associtiation; but also do the neighborhoods tend to cluster. Thus, this suggests that there are well-off neighborhoods and worse 
+#' off neighborhoods #'suggesting that neighborhoods are an important factor in this equation.
+
+# now select only a few neighborhoods as comparison top drive home the point of clsuters in the data
+df_subset <-
+  subset(
+    df_,
+    Neighborhood == "NoRidge" |
+      Neighborhood == "OldTown" |
+      Neighborhood == "CollgCr" |
+      Neighborhood == "NridgHt" 
+  )
+
+
+
+scatter <-
+  ggplot(df_subset, aes(OverallQual, SalePrice, colour = Neighborhood))
+
+scatter + geom_point() + geom_smooth(method = "lm",
+                                     aes(fill = "Neighborhood"),
+                                     alpha = 0.1) + labs(x = 'Quality of the property', y = "Sale Price", color = 'Neighborhood')
+#' as can be seen, not only does quality of the property  have a positive association with sale price
+#' but also so does neighborhood (afluent neighborhoods) suggesting clusters in the data!
+```
+```{r plots, echo=FALSE}
+# Second plots:
+# living space and sales price wrt Neighborhood 
+
+scatter <- ggplot(df_, aes(OverallCond, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
+
+
+scatter <- ggplot(df_, aes(OverallQual, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price")
+
+
+
+Adjacent_features_bool
+
+table(df_$Neighborhood)
+```
+
+
+
+
+
+
+
