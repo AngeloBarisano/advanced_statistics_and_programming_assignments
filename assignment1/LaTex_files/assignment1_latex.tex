@@ -85,52 +85,43 @@ quality and condition to sales price
 
 \section{Theoretical model and OLS assumptions}
 
+
+
+
+\begin{center}
 \begin{tikzpicture}
-    \node[state] (1) {$Z$};
-    \node[state] (2) [right =of 1] {$X$};
-    \node[state] (3) [right =of 2] {$Y$};
-    \node[state] (4) [above right =of 1,xshift=-0.3cm,yshift=-0.3cm] {$W$};
-
-    \path (1) edge node[above] {$\lambda_{zx}$} (2);
-    \path (2) edge node[above] {$\lambda_{xy}$} (3);
-    \path[bidirected] (2) edge[bend left=60] node[above] {$\epsilon_{xy}$} (3);
-    \path (4) edge node[el,above] {$\lambda_{wz}$} (1);
-    \path[bidirected] (4) edge[bend left=50] node[el,above] {$\epsilon_{wy}$} (3);
-\end{tikzpicture}
-
-
-
-\begin{tikzpicture}
-    \node (1) at (0,0) {Proximity};
-    \node (2) [right = of 1] {Tutoring};
-    \node (3) [right = of 2] {GPA};
-    \node (4) [below = of 2] {Library};
-
-    \path (1) edge  (2);
-    \path (2) edge (3);
-    \path[bidirected] (2) edge[bend left=50]  (3);
-    \path (4) edge (3);
-    \path (1) edge (4);
-    
-    
-    \path (1) edge node[above] {$+$} (2);
-\end{tikzpicture}
-
-
-
-
-
-
-\begin{tikzpicture}
-    \node (1) at (0,0) {Neighborhood};
+	\centering
+ 	\node at (3.25,3.25) {\textbf{Plot 1: Causal relationship Scheme}};
+    \node (1) at (0,0) {Property Quality};
 	\node (2) [above = of 1] {Total Living Space};
 	\node (3) [right = of 1] {Sale Price};
 	\node (4) [below = of 3] {Building Type};
 	\node (5) [right = of 4] {Adjacent Features};
 	\node (6) [above = of 5] {Areal Zoning};
-	\node (7) [below = of 1] {Property Quality};
-	\node (8) [right = of 2] {Property Quality};
+	\node (7) [below = of 1] {Neighborhood};
+	\node (8) [right = of 2] {Lot Area};
+	
+	\path (7) edge node[above] {$+$} (3);
+	% \path (7) edge node[left] {$?$} (2);
+	\path (7) edge[bend left=10](1);
+	\path (1) edge[bend left=10](7);
+	\path (8) edge node[above] {$+$}(2);
+	\path (2) edge node[above] {$+$}(3);
+	\path (1) edge node[above] {$+$}(3);
+	\path (8) edge node[left] {$+$}(3);
+	\path (4) edge node[left] {$?$}(3);
+	\path (7) edge node[above] {$?$}(4);
+	\path (6) edge node[above] {$+$}(8);
+	\path (7) edge[bend right=25](5);
+	\path (5) edge node[above] {$?$}(3);
+	\path (6) edge node[above] {$?$}(3);
+	\path (6) edge[bend right=45] node[above] {$?$}(2);
+
 \end{tikzpicture}
+\end{center}
+
+
+
 
 
 
