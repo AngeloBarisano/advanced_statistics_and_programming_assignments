@@ -25,6 +25,7 @@ library("reshape")
 library("Hmisc")
 library("ggplot2")
 library("dplyr")
+library("moments")
 
 
 
@@ -190,10 +191,12 @@ df_ <- df[, c(
   'BedroomAbvGr',
   'BsmtFullBath',
   'FullBath',
+  # garage cars may not be relevant!!
   'GarageCars',
   'BldgType',
   'MSZoning',
   'Neighborhood',
+  'MSZoning',
   'OverallQual',
   'OverallCond'
 )]
@@ -202,7 +205,7 @@ df_ <- df[, c(
 df_$tot_living_area <- df_$GrLivArea + df_$TotalBsmtSF
 df_$tot_bathrooms <- df_$BsmtFullBath + df_$FullBath
 
-
+df_
 ```
 
 ```{r inspect dypes of the variables at hand}
@@ -215,7 +218,6 @@ df_$YrSold <- as.factor(df_$YrSold)
 df_$Neighborhood <- as.factor(df_$Neighborhood)
 df_$BldgType <- as.factor(df_$BldgType)
 df_$MSZoning <- as.factor(df_$MSZoning)
-df_$Neighborhood <- as.factor(df_$Neighborhood)
 
 
 
@@ -242,11 +244,22 @@ which(colSums(is.na(df_))>0)
 
 
 ```{r stargazer output and summary statistics}
-stargazer(df_)
+df_temp <- df_ %>%
+  select(-one_of(c('Id')))
+skewness(df_temp$SalePrice)
+
+stargazer(df_, type = 'text')
 ```
 
 
-
+```{r categorical variable prelim analyiss}
+df$MSZoning
+table(df$Neighborhood)
+table(df$MSZoning)
+stargazer(table(df$Neighborhood, df$MSZoning))
+table(df$MSZoning, df$Neighborhood)
+table(df$BldgType)
+```
 
 
 
