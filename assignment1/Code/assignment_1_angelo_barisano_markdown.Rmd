@@ -236,8 +236,58 @@ df_ <- df_ %>% mutate(Adjacent_features_bool = match_df$new[match(Condition1,mat
 df_$PoolArea[df_$PoolArea != 0] <- TRUE
 df_$PoolArea[df_$PoolArea == 0] <- FALSE
 
-```
 
+
+
+# adjust for family homes
+# the distinction made here is simply that:
+# stand alone house vs multiple houses together
+match_df = data.frame(
+  old = c("1Fam", "2fmCon", "Duplex",  "Twnhs", "TwnhsE" ),
+  new = c(
+    "Single Family Home",
+    "Multiple Combined Units",
+    "Multiple Combined Units",
+    "Multiple Combined Units",
+    "Multiple Combined Units"
+  )
+)
+
+df_ <- df_ %>% mutate(Building_type = match_df$new[match(BldgType,match_df$old)])
+
+
+
+# group irregular lothspaes
+match_df = data.frame(
+  old = c("IR1", "IR2", "IR3",  "Reg"),
+  new = c(
+    "Irregular",
+    "Irregular",
+    "Irregular",
+    "Regular"
+  )
+)
+
+df_ <- df_ %>% mutate(LotShape = match_df$new[match(LotShape,match_df$old)])
+
+
+# group zoning 
+match_df = data.frame(
+  old = c("C (all)","FV","RH","RL","RM" ),
+  new = c(
+    "Commercial",
+    "Floating Village",
+    "Moderate-High Density",
+    "Low Density",
+    "Moderate-High Density"
+  )
+)
+
+df_ <- df_ %>% mutate(MSZoning_grouped = match_df$new[match(MSZoning,match_df$old)])
+
+
+table(df_$MSZoning_grouped)
+```
 
 
 
@@ -285,16 +335,18 @@ stargazer(df_temp)
 
 
 ```{r categorical variable prelim analyiss}
-df$MSZoning
-table(df$Neighborhood)
-table(df$MSZoning)
-
-table1 <- table(table(df$Neighborhood, df$MSZoning))
-stargazer(ftable(table1))
-
-table(df$MSZoning, df$Neighborhood)
-table(df$BldgType)
+# df$MSZoning
+# table(df$Neighborhood)
+# table(df$MSZoning)
+# 
+# table1 <- table(table(df$Neighborhood, df$MSZoning))
+# stargazer(ftable(table1))
+# 
+# table(df$MSZoning, df$Neighborhood)
+# table(df$BldgType)
 ```
+
+
 ```{r plots, echo=FALSE}
 # scaplom
 
@@ -309,11 +361,9 @@ df_temp <- df_ %>%
       'Neighborhood'
     )
   ))
-pairs(df_temp, pch = 19)
+# pairs(df_temp, pch = 19)
 
 ```
-
-
 
 ```{r }
 
@@ -329,15 +379,16 @@ scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'L
 
 
 
-
 ```{r plots, echo=FALSE}
 
 
-# SalePrice, tot_living_area, 
-df_subset <- subset(df_, MSZoning != "C (all)")  
-  
+
+# SalePrice, tot_living_area,
+df_subset <- subset(df_, MSZoning != "C (all)")
+
 # now drill down
-scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter <-
+  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning')
 
 
@@ -347,13 +398,15 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alph
 
 
 #' then try to set the focus on the xlim to control for the outliers
-scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+scatter <-
+  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
 
 
 #' Finally, only consider the two most important features: RL (Low density) and RM (Moderate density)
-df_subset <- subset(df_, MSZoning == "RM" | MSZoning == "RL" )
-scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+df_subset <- subset(df_, MSZoning == "RM" | MSZoning == "RL")
+scatter <-
+  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
 
 
@@ -380,7 +433,25 @@ bar + stat_summary(
 ) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Zoning', y = 'Sale Price')
 
 # HYPOTHESIS: Zoning matters
+# Possibly group High and moderately populated areas together
+table(df_$MSZoning_grouped)
 
+df_subset <-
+  subset(df_,
+         MSZoning_grouped == "Moderate-High Density" |
+           MSZoning_grouped == "Low Density")
+scatter <-
+  ggplot(df_subset,
+         aes(tot_living_area, SalePrice, colour = MSZoning_grouped))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning_grouped"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning_grouped') + xlim(0, 7000)
+
+
+
+
+
+```
+```{r plots, echo=FALSE}
+table(df_$MSZoning)
 ```
 
 
@@ -396,7 +467,28 @@ scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood')
 
 
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
 
+
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') + xlim(0, 7000)
+
+df_subset <-
+  subset(
+    df_,
+    Neighborhood == "NoRidge" |
+      Neighborhood == "OldTown" |
+      Neighborhood == "CollgCr" |
+      Neighborhood == "NridgHt" 
+  )
+
+scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
+
+
+scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') + xlim(0, 7000)
 
 
 ```
@@ -410,6 +502,26 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), 
 
 scatter <- ggplot(df_, aes(OverallCond, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
+
+
+df_subset <-
+  subset(
+    df_,
+    Neighborhood == "NoRidge" |
+      Neighborhood == "OldTown" |
+      Neighborhood == "CollgCr" |
+      Neighborhood == "NridgHt" 
+  )
+
+scatter <- ggplot(df_subset, aes(OverallCond, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Condition of the property', y = "Sale Price")
+
+
+scatter <- ggplot(df_subset, aes(OverallCond, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Condition of the property', y = "Sale Price", color = 'Neighborhood')
+
+#' rsulting from this observation one hypothesis might be that neighborhood does not moderate the 
+#' association between condition and sales price 
 
 ```
 ```{r plots, echo=FALSE}
@@ -457,6 +569,24 @@ scatter + geom_point() + geom_smooth(method = "lm",
 
 
 #' plot some showing the distribution of arousal by film
+bar <- ggplot(df_, aes(Condition1, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Adjacent Features', y = 'Sale Price')
+
+bar <- ggplot(df_, aes(Adjacent_features_bool, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Has Adjacent Features', y = 'Sale Price')
+
 bar <- ggplot(df_, aes(Adjacent_features, SalePrice))
 
 bar + stat_summary(
@@ -464,11 +594,11 @@ bar + stat_summary(
   geom = "bar",
   fill = 'white',
   colour = "Black"
-) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Has Adrjacent Features', y = 'Sale Price')
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Adjacent Features Grouped', y = 'Sale Price')
 
 #' sadly the sample size for recreation is too low even when combined iwth Condition2
 #' so we disregard this angle
-
+table(df_$Adjacent_features_bool)
 ```
 
 
@@ -483,13 +613,77 @@ bar + stat_summary(
 
 
 scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price") + xlim(0, 7000)
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
  
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = MSZoning))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Quality of the property', y = "Sale Price", color = 'MSZoning')
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Building_type))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Building_type')
 
 
-colnames(df_)
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Building_type))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Building_type') 
+
+# maybe: the difference in buildign type prices can be explained by the itneraction with size; one family
+# homes tend to be larger to begin with for instance
+
+# table(df_$Building_type)
+```
+```{r final attempt at plot: TWO numeric Independent variables}
+# Homesize to sale price by lotshape (awkward lotshape may mean smaller houses only possible)
+
+
+scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = LotShape))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Lot Shape') + xlim(0, 7000)
+
+
+#' lotshpae has no interesting outcome here:
+#' so the hypothesis to be tested would be: an irregular lotshape does not impact the relationship of livingarea to saleprice
+
+
+#' make a brplot here 
+bar <- ggplot(df_, aes(LotShape, SalePrice))
+
+bar + stat_summary(
+  fun = mean,
+  geom = "bar",
+  fill = 'white',
+  colour = "Black"
+) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'LotShape', y = 'Sale Price')
+#' even though irregular lot sizes show a higher average sales price; this seems not to be of a causal nature; as such this question is not worth to be investigated.
+
+```
+
+
+```{r final attempt at plot: TWO numeric Independent variables}
+# Lotsize, tot_living_area, SalePrice
+
+ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
+  geom_point(aes(size = LotArea), alpha = 0.5) +
+  scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
+  scale_size(range = c(1, 13)) + # Adjust the range of points size
+  theme_set(theme_bw() +theme(legend.position = "bottom"))+ xlim(0, 7000)
+
+
+
+ggplot(df_, aes(x = LotArea, y = SalePrice)) +
+  geom_point(aes(size = tot_living_area), alpha = 0.5) +
+  scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
+  scale_size(range = c(1, 13)) + # Adjust the range of points size
+  theme_set(theme_bw() +theme(legend.position = "bottom"))+ xlim(0, 7000)
+
+#' Either way, no clear association can be discerned; so we leave this trajectory
+```
+
+
+```{r final attempt at plot: TWO numeric Independent variables}
+# LotArea, tot_living_area, SalePrice
+
+ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
+  geom_point(aes(color = Adjacent_features_bool, size = LotArea), alpha = 0.5) +
+  scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
+  scale_size(range = c(1, 13)) + # Adjust the range of points size
+  theme_set(theme_bw() +theme(legend.position = "bottom")) + xlim(0, 7000)
+
+#' pointless
 ```
 
 
@@ -498,3 +692,9 @@ colnames(df_)
 
 
 
+
+
+
+
+
+NOTE: It my be interesting to know whether Neighborhoods all fall into the same Zoning
