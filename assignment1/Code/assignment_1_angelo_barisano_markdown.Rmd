@@ -275,8 +275,8 @@ df_ <- df_ %>% mutate(LotShape = match_df$new[match(LotShape,match_df$old)])
 match_df = data.frame(
   old = c("C (all)","FV","RH","RL","RM" ),
   new = c(
-    "Commercial",
-    "Floating Village",
+    "Other",
+    "Other",
     "Moderate-High Density",
     "Low Density",
     "Moderate-High Density"
@@ -287,6 +287,16 @@ df_ <- df_ %>% mutate(MSZoning_grouped = match_df$new[match(MSZoning,match_df$ol
 
 
 table(df_$MSZoning_grouped)
+
+# time since house was sold (2010) minus the building date: age of house when sold
+df_$age_of_house_when_sold <- df_$YrSold - df_$YearBuilt
+
+# time since remodeling at year of sale in years
+
+df_$time_since_remodeling <- df_$YrSold - df_$YearRemodAdd
+
+
+
 ```
 
 
@@ -441,12 +451,12 @@ df_subset <-
          MSZoning_grouped == "Moderate-High Density" |
            MSZoning_grouped == "Low Density")
 scatter <-
-  ggplot(df_subset,
+  ggplot(df_,
          aes(tot_living_area, SalePrice, colour = MSZoning_grouped))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning_grouped"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning_grouped') + xlim(0, 7000)
 
 
-
+#' possibly, zoning is a better term; while we should ignore OTHER category, the other variables
 
 
 ```
@@ -684,17 +694,63 @@ ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
   theme_set(theme_bw() +theme(legend.position = "bottom")) + xlim(0, 7000)
 
 #' pointless
+
+
+table(df_$Neighborhood)
+
+
 ```
 
 
 
 
+```{r maybe new houses are more expensive}
+
+scatter <- ggplot(df_, aes(age_of_house_when_sold, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
+
+scatter <- ggplot(df_, aes(time_since_remodeling, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
+
+scatter <- ggplot(df_, aes(time_since_remodeling, SalePrice, colour = Neighborhood))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') 
 
 
+# 
+# 
+# 
+# df_$age_of_house_when_sold
+# 
+# 
+# # time since house was sold (2010) minus the building date: age of house when sold
+# df_$age_of_house_when_sold <- df_$YrSold - df_$YearBuilt
+# 
+# # time since remodeling at year of sale in years
+# 
+# df_$time_since_remodeling <- df_$YrSold - df_$YearRemodAdd
+# 
+# # - difference between year Sold and year remodeled OR build if no remodeled date --> Lower number more positive relation to sale price
+# 
+# # first: does build date have an association with sale price
+# # second: does the time between sale and remodel have an impact on sale price?
+# 
+# 
+# df_$YearRemodAdd
+# df_$YearBuilt
+# 
+# 
+# # YearRemodAdd: Remodel date (same as construction date if no remodeling or additions)
+# df_$YearRemodAdd - df_$YearBuilt 
+# 
+# df_$YrSold
+# 
+# df_$YrSold - df_$YearRemodAdd
+table(df_$Adjacent_features)
 
-
-
-
+table(df_$MSZoning_grouped)
+table(df_$MSZoning)
+View(df_)
+```
 
 
 NOTE: It my be interesting to know whether Neighborhoods all fall into the same Zoning
