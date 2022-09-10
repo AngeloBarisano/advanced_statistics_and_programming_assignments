@@ -26,7 +26,7 @@ library("Hmisc")
 library("ggplot2")
 library("dplyr")
 library("moments")
-
+library ("lm.beta")
 
 
 setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1")
@@ -189,7 +189,7 @@ df_ <- df[, c(
 )]
 
 # create the interesting varaibles
-df_$tot_living_area <- df_$GrLivArea + df_$TotalBsmtSF
+df_$tot_liv_area <- df_$GrLivArea + df_$TotalBsmtSF
 df_$tot_bathrooms <- df_$BsmtFullBath + df_$FullBath
 
 # resample Condition1 and Condition2 into categories of variables 
@@ -293,7 +293,7 @@ df_$age_of_house_when_sold <- df_$YrSold - df_$YearBuilt
 
 # time since remodeling at year of sale in years
 
-df_$time_since_remodeling <- df_$YrSold - df_$YearRemodAdd
+df_$y_since_rem <- df_$YrSold - df_$YearRemodAdd
 
 
 
@@ -302,6 +302,8 @@ df_$time_since_remodeling <- df_$YrSold - df_$YearRemodAdd
 
 
 ```{r inspect dypes of the variables at hand}
+df_$SalePrice <- df_$SalePrice/1000
+
 # to make it clear that only certain operations can be performed on the data
 df_$Id <- as.factor(df_$Id)
 df_$MoSold <- as.factor(df_$MoSold)
@@ -379,12 +381,12 @@ df_temp <- df_ %>%
 
 # first plot:
 # sales price with respect to size of the living area conditional on the ZONING!
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")+ xlim(0, 7000)
 
 
 # HYPOTHESIS: total living area impact on price! 
-
+# PICTURE 1; Hypothesis 1
 ```
 
 
@@ -393,12 +395,12 @@ scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'L
 
 
 
-# SalePrice, tot_living_area,
+# SalePrice, tot_liv_area,
 df_subset <- subset(df_, MSZoning != "C (all)")
 
 # now drill down
 scatter <-
-  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+  ggplot(df_subset, aes(tot_liv_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning')
 
 
@@ -409,14 +411,14 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alph
 
 #' then try to set the focus on the xlim to control for the outliers
 scatter <-
-  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+  ggplot(df_subset, aes(tot_liv_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
 
 
 #' Finally, only consider the two most important features: RL (Low density) and RM (Moderate density)
 df_subset <- subset(df_, MSZoning == "RM" | MSZoning == "RL")
 scatter <-
-  ggplot(df_subset, aes(tot_living_area, SalePrice, colour = MSZoning))
+  ggplot(df_subset, aes(tot_liv_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning') + xlim(0, 7000)
 
 
@@ -452,12 +454,12 @@ df_subset <-
            MSZoning_grouped == "Low Density")
 scatter <-
   ggplot(df_,
-         aes(tot_living_area, SalePrice, colour = MSZoning_grouped))
+         aes(tot_liv_area, SalePrice, colour = MSZoning_grouped))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning_grouped"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'MSZoning_grouped') + xlim(0, 7000)
 
 
 #' possibly, zoning is a better term; while we should ignore OTHER category, the other variables
-
+# PICTURE 2; Hypothesis 2
 
 ```
 ```{r plots, echo=FALSE}
@@ -469,19 +471,19 @@ table(df_$MSZoning)
 # Second plots:
 # living space and sales price wrt Neighborhood 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood')
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') + xlim(0, 7000)
 
 df_subset <-
@@ -493,11 +495,11 @@ df_subset <-
       Neighborhood == "NridgHt" 
   )
 
-scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice))
+scatter <- ggplot(df_subset, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
 
 
-scatter <- ggplot(df_subset, aes(tot_living_area, SalePrice, colour = Neighborhood))
+scatter <- ggplot(df_subset, aes(tot_liv_area, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') + xlim(0, 7000)
 
 
@@ -622,14 +624,14 @@ table(df_$Adjacent_features_bool)
 # MAYBE TRY BUILDING TYPE!!
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price") + xlim(0, 7000)
  
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Building_type))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice, colour = Building_type))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Building_type')
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = Building_type))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice, colour = Building_type))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Building_type') 
 
 # maybe: the difference in buildign type prices can be explained by the itneraction with size; one family
@@ -641,7 +643,7 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"),
 # Homesize to sale price by lotshape (awkward lotshape may mean smaller houses only possible)
 
 
-scatter <- ggplot(df_, aes(tot_living_area, SalePrice, colour = LotShape))
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice, colour = LotShape))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Lot Shape') + xlim(0, 7000)
 
 
@@ -664,9 +666,9 @@ bar + stat_summary(
 
 
 ```{r final attempt at plot: TWO numeric Independent variables}
-# Lotsize, tot_living_area, SalePrice
+# Lotsize, tot_liv_area, SalePrice
 
-ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
+ggplot(df_, aes(x = tot_liv_area, y = SalePrice)) +
   geom_point(aes(size = LotArea), alpha = 0.5) +
   scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
   scale_size(range = c(1, 13)) + # Adjust the range of points size
@@ -675,7 +677,7 @@ ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
 
 
 ggplot(df_, aes(x = LotArea, y = SalePrice)) +
-  geom_point(aes(size = tot_living_area), alpha = 0.5) +
+  geom_point(aes(size = tot_liv_area), alpha = 0.5) +
   scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
   scale_size(range = c(1, 13)) + # Adjust the range of points size
   theme_set(theme_bw() +theme(legend.position = "bottom"))+ xlim(0, 7000)
@@ -685,9 +687,9 @@ ggplot(df_, aes(x = LotArea, y = SalePrice)) +
 
 
 ```{r final attempt at plot: TWO numeric Independent variables}
-# LotArea, tot_living_area, SalePrice
+# LotArea, tot_liv_area, SalePrice
 
-ggplot(df_, aes(x = tot_living_area, y = SalePrice)) +
+ggplot(df_, aes(x = tot_liv_area, y = SalePrice)) +
   geom_point(aes(color = Adjacent_features_bool, size = LotArea), alpha = 0.5) +
   scale_color_manual(values = c("#AA4371", "#E7B800", "#FC4E07")) +
   scale_size(range = c(1, 13)) + # Adjust the range of points size
@@ -709,12 +711,22 @@ table(df_$Neighborhood)
 scatter <- ggplot(df_, aes(age_of_house_when_sold, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
 
-scatter <- ggplot(df_, aes(time_since_remodeling, SalePrice))
+scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
 
-scatter <- ggplot(df_, aes(time_since_remodeling, SalePrice, colour = Neighborhood))
+scatter <- ggplot(df_, aes(y_since_rem, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') 
 
+
+scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Quality of the property', y = "Sale Price") 
+
+# PICTURE 3; Hypothesis 3
+df_$y_since_rem 
+ggplot(df_, aes(x = OverallQual, y = SalePrice)) +
+  geom_point(aes(size = y_since_rem))  
+# + scale_size(range = c(1, 10)) + # Adjust the range of points size
+  theme_set(theme_bw() +theme(legend.position = "bottom"))
 
 # 
 # 
@@ -727,7 +739,7 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), 
 # 
 # # time since remodeling at year of sale in years
 # 
-# df_$time_since_remodeling <- df_$YrSold - df_$YearRemodAdd
+# df_$y_since_rem <- df_$YrSold - df_$YearRemodAdd
 # 
 # # - difference between year Sold and year remodeled OR build if no remodeled date --> Lower number more positive relation to sale price
 # 
@@ -751,6 +763,128 @@ table(df_$MSZoning_grouped)
 table(df_$MSZoning)
 View(df_)
 ```
+# Regression analysis
+
+```{r }
+
+
+#create dummy variables
+df_$low_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Low Density", 1, 0)
+
+df_$hig_med_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Moderate-High Density", 1, 0)
+
+df_$other_zone <- 
+  ifelse(df_$MSZoning_grouped == "Other", 1, 0)
+df_$ln_SalePrice <- log(df_$SalePrice)
+
+
+
+full_model_wo_interaction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea ,
+    data = df_
+  )
+full_model_wo_interaction.beta<-lm.beta(full_model_wo_interaction)
+
+
+
+full_model_w_interaction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area + I(tot_liv_area ^ 2) + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea + OverallQual *
+      y_since_rem + tot_liv_area * low_density_zone + tot_liv_area * other_zone ,
+    data = df_
+  )
+full_model_w_interaction.beta<-lm.beta(full_model_w_interaction)
+
+
+
+full_model_w_interaction_ln <-
+  lm(
+    ln_SalePrice ~ 1 + tot_liv_area + I(tot_liv_area ^ 2) + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea + OverallQual *
+      y_since_rem + tot_liv_area * low_density_zone + tot_liv_area * other_zone ,
+    data = df_
+  )
+full_model_w_interaction_ln.beta<-lm.beta(full_model_w_interaction_ln)
+
+
+
+stargazer (
+  full_model_wo_interaction
+  , full_model_w_interaction
+  # , full_model_w_interaction_ln
+  , type = 'text'
+)
+
+
+
+
+stargazer(full_model_w_interaction, full_model_w_interaction.beta, type = "text")
+
+stargazer(lm.beta(full_model_w_interaction), type = 'text')
+
+
+
+stargazer(full_model_w_interaction, full_model_w_interaction.beta,
+            coef = list(full_model_w_interaction$coefficients,
+            full_model_w_interaction.beta$standardized.coefficients),
+            # p = list (coef(summary(full_model_w_interaction))[,4], coef(summary(full_model_w_interaction.beta))[,5]),
+            type='text')
+
+stargazer(full_model_wo_interaction, full_model_wo_interaction.beta,
+            coef = list(full_model_wo_interaction$coefficients,
+            full_model_wo_interaction.beta$standardized.coefficients),
+            # p = list (coef(summary(full_model_w_interaction))[,4], coef(summary(full_model_w_interaction.beta))[,5]),
+            type='text')
+
+
+
+
+https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/
+  
+  https://stackoverflow.com/questions/42076903/including-standardized-coefficients-in-a-stargazer-table
+```
+
+
+
+
+# test it 
+full_model <- lm(score ~ teachers + lunch + computer + income + expenditure + calworks + students, data= CASchools)
+stargazer (full_model, type = "text")
+
+# standard error manual calcualtions
+seBasic <- sqrt(diag(vcov(full_model)))
+seWhite <- sqrt(diag(vcov(full_model, type = 'HC0')))
+
+#' why to cluster standard errrors? 
+#' maybe there are underlying reasons such that for instance
+#' county actually influences these issues 
+seClust <- sqrt(diag(vcov(full_model, cluster = 'country')))
+
+
+stargazer(full_model, full_model, full_model, se = list (seBasic, seWhite, seClust), type = 'text')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 NOTE: It my be interesting to know whether Neighborhoods all fall into the same Zoning

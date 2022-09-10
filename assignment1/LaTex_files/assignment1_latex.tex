@@ -75,19 +75,6 @@ It is notable that upon selecting the aforementioned variables, no preprossessin
 \subsection{Exploratory Data Analysis}\footnote{The theory underlying the choice of the variables will be further elaborated upon in Section 2}
 A scatter plot matrix is provided in the appendix for the numeric variables. The EDA shows the four data categories with respect to the sale price of the property. Thus, the plots represented, inter alia, drove the development of the hypothesis down the line in combination with the aforementioned valuation strategies. 
 
-
-
-first analysis:
-Size of living area to sales price with respect to building type
-
-Second analysis
-total rooms and sales price with respect to size zoning
-
-Third analysis
-quality and condition to sales price
-
-
-
 \section{Theoretical model and OLS assumptions}
 
 
@@ -99,29 +86,22 @@ quality and condition to sales price
  	\node at (3.25,3.25) {\textbf{Plot 1: Causal relationship Scheme}};
     \node (1) at (0,0) {Property Quality};
 	\node (2) [above = of 1] {Total Living Space};
-	\node (3) [right = of 1] {Sale Price};
-	\node (4) [below = of 3] {Building Type};
-	\node (5) [right = of 4] {Adjacent Features};
-	\node (6) [above = of 5] {Areal Zoning};
-	\node (7) [below = of 1] {Neighborhood};
-	\node (8) [right = of 2] {Lot Area};
+	\node (3) [right = of 2] {Sale Price};
+	\node (4) at (2.15,2.5) {Zoning};
+	\node (5) [right = of 1] {Years Since Remodeling};
+	\node (6) [right = of 4] {LotArea};
 	
-	\path (7) edge node[above] {$+$} (3);
-	% \path (7) edge node[left] {$?$} (2);
-	\path (7) edge[bend left=10](1);
-	\path (1) edge[bend left=10](7);
-	\path (8) edge node[above] {$+$}(2);
-	\path (2) edge node[above] {$+$}(3);
-	\path (1) edge node[above] {$+$}(3);
-	\path (8) edge node[left] {$+$}(3);
-	\path (4) edge node[left] {$?$}(3);
-	\path (7) edge node[above] {$?$}(4);
-	\path (6) edge node[above] {$+$}(8);
-	\path (7) edge[bend right=25](5);
-	\path (5) edge node[above] {$?$}(3);
-	\path (6) edge node[above] {$?$}(3);
-	\path (6) edge[bend right=45] node[above] {$?$}(2);
-
+	\coordinate (7) at (2.15,1.65);
+	\path (4) edge node[left] {$?$} (7);
+	
+	\path (1) edge node[above] {$+$} (3);
+	\path (5) edge node[right] {$+$} (3);
+	
+	\coordinate (8) at (2,0.75);
+	\path (5) edge node[above] {$-$} (8);
+	
+	\path (2) edge node[below] {$+$} (3);
+	\path (6) edge node[below] {$+$} (3);
 \end{tikzpicture}
 \end{center}
 
@@ -157,7 +137,7 @@ Zoning moderates (MIV) the direct postive association of Total Living Space (IV)
  	\node at (1.5,1) {\textbf{Plot 3: Hypothesis 2}};
  	\node (1) at (0,0) {Total Living Space};
 	\node (2) [right = of 1] {Sales Price};
-	\node (3) at (2,-1.5) {Zoning};
+	\node (3) at (2,-1.25) {Zoning};
 	
 	\coordinate (4) at (2,0);
 	
@@ -167,12 +147,9 @@ Zoning moderates (MIV) the direct postive association of Total Living Space (IV)
 \end{center}
 
 
-\indent \paragraph{} As the previous hypothesis suggested, location may be an important factor in explaining the variance in Sale Price. The assumption that affluent houses tend to cluster in afluent neighborhoods is, thus, close. We can thus assume that afluent neighborhood tend to pose the best qualitative propertie. As was discovered during the EDA in part 1, Quality (IV) has a positive association with Sale Price (DV). Subsequently, this research investigates to what extend this clustering differs for the different Neighborhood(s) (IV). \textbf{However, due to Neighborhood not being a suitable variable for this analysis, Zoning again is used as a proxy.}
-
+\indent \paragraph{} Finally, the sales price is not only dependent on the size and the location of the construction, but also its Quality (IV). Correspondingly, one might assume a positive relationship between the quality of a given property and the Years Since Remodeling (M-IV) or Construction. Thus, the final hypothesis states that\footnote{Note that in order for this hypothesis to work, an initial association of Years Since Remodeling would have to be included in previous Hypotheses}
 \begin{hyp}[H\ref{hyp:third}] \label{hyp:third}
-Neighborhood of a property moderates the relationship of Quality on Sales Price. Neighborhoods tend to cluster and display simiar patterns observed.\footnote{This hypothesis is partially meant to show the problematic of clustering in the data; this will be further investigated in part 3 \& 4 of this research assignment}
-
-
+Years Since Remodeling (M-IV) or Construction has an amplyfiying effect on the direct postive effect of Quality (IV) and Sale Price (DV)
 \end{hyp}
 
 \begin{center}
@@ -181,10 +158,9 @@ Neighborhood of a property moderates the relationship of Quality on Sales Price.
  	\node at (1.5,1) {\textbf{Plot 4: Hypothesis 3}};
  	\node (1) at (0,0) {Quality};
 	\node (2) [right = of 1] {Sales Price};
-	\node (3) at (1.25,-1.5) {Neighborhood};
+	\node (3) at (1.25,-1.12) {Years Since Remodeling};
 	
 	\coordinate (4) at (1.25,0);
-	
 	\path (1) edge node[above] {$+$}(2);
 	\path (3) edge node[right] {$+$}(4);
 \end{tikzpicture}
@@ -192,38 +168,16 @@ Neighborhood of a property moderates the relationship of Quality on Sales Price.
 
 
 
-FURTHERMORE, a possible fourht hypothesis pertains to the capital that has to be invested upon buying the house; such as remodeling etc. This value is assumed to be larger for houses that have not been remodeled for along time before being sold. As such, the foruth hypothesis states that (ADDITIONALLY, we assume this relationship to hold for neighborhoods as well! so neighborhoods doe not ahve an impact here)
-
-\begin{hyp}[H\ref{hyp:fourth}] \label{hyp:fourth}
-Years Since Last Remodelling (IV) has a negative association with Sale Price (DV)
-\textbf{IMPORTANT! ZONING MAY BE AN ALTERNATIVE TO NEIGHBORHOOD HERE WHICH WOULD MAKE THE ANALYSIS WAY EASIER IN GENERAL}
-\end{hyp}
-
-\begin{center}
-\begin{tikzpicture}
-	\centering
- 	\node at (1.5,1) {\textbf{Plot 4: Hypothesis 3}};
- 	\node (1) at (0,0) {Years Since Remodeing};
-	\node (2) [right = of 1] {Sales Price};
-
-
-	
-	\path (1) edge node[above] {$-$}(2);
-
-\end{tikzpicture}
-\end{center}
 
 
 
+$$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning_{Low Density} + \beta_{5}  Zoning_{Other} + \beta_{6}  YearsSinceRemodeling + \beta_{7}  LotArea + \beta_{8} TotLivingSpace*Zoning_{Low Density} + \beta_{9} TotLivingSpace*Zoning_{Other} +\epsilon$$
 
-\begin{center}
-$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning_{Low Density} + \beta_{5}  Zoning_{Other} + \beta_{6}  YearsSinceRemodeling + \beta_{7}  LotArea + \beta_{8} TotLivingSpace*Zoning_{Low Density} + \beta_{9} TotLivingSpace*Zoning_{Other} +\epsilon$
-\end{center}
 
 \textbf{IMPORTANT: DO YOU INCLUDE A QUADRATIC TERM IN THE POPULATION REGRESSION MODEL????}
-\begin{center}
-$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning - \beta_{5}  YearsSinceRemodeling + \beta_{6}  LotArea + \beta_{7} TotLivingSpace*Zoning + \beta_{8} AdjacentFeatures + \beta_{9} BuildingType \epsilon$
-\end{center}
+
+$$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning - \beta_{5}  YearsSinceRemodeling + \beta_{6}  LotArea + \beta_{7} TotLivingSpace*Zoning + \beta_{8} AdjacentFeatures + \beta_{9} BuildingType \epsilon$$
+
 
 
 
@@ -244,7 +198,7 @@ A4: The error term has a constant variance for each observation expected! --> he
 Generally, as the sample size increases, this assumption becomes less important for the estimate itself, considering that OLS is a consistent estimator; which is the case here (N is quite large). However, heteroscedastictiy may lead to problems regarding inference, as the standard error of the estimate may still be biased. As such, solutions will be later implemented to control for such violations.
 
 
-A5: Data generation: xi can be random or fixed
+A5: Data generation: xi can be random or fixed; the data was collected for predictive purposes so we might not be able to veryfy this.
 
 A6: Normal distribution of disturbanc (The error term is normally distributed. generally, the means that the error term has a population mean of zeor and standard errror of 1. Generally, most distributions tend to approach normal distributions as sample sizes increase. For some distirbutions such as Sales Price (which is of a financial nature), this can also be remedied through tra´nsforming (here apply log transform). Additionally, multiple controls and test will be conducted down the line to investiate this issue.
 
@@ -255,8 +209,125 @@ A6: Normal distribution of disturbanc (The error term is normally distributed. g
 
 \section{OLS regression and model fit}
 
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Sat, Sep 10, 2022 - 23:06:26
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{SalePrice} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ tot\_living\_area & 0.040$^{***}$ & 0.056$^{***}$ \\ 
+  & (0.002) & (0.004) \\ 
+  & & \\ 
+ I(tot\_living\_area$\hat{\mkern6mu}$2) &  & $-$0.00000$^{***}$ \\ 
+  &  & (0.00000) \\ 
+  & & \\ 
+ OverallQual & 24.614$^{***}$ & 31.638$^{***}$ \\ 
+  & (1.120) & (1.266) \\ 
+  & & \\ 
+ low\_density\_zone & 17.558$^{***}$ & $-$23.347$^{***}$ \\ 
+  & (2.896) & (9.011) \\ 
+  & & \\ 
+ other\_zone & 11.981$^{**}$ & $-$63.223$^{***}$ \\ 
+  & (5.284) & (20.282) \\ 
+  & & \\ 
+ time\_since\_remodeling & $-$0.460$^{***}$ & 2.274$^{***}$ \\ 
+  & (0.060) & (0.219) \\ 
+  & & \\ 
+ LotArea & 0.001$^{***}$ & 0.001$^{***}$ \\ 
+  & (0.0001) & (0.0001) \\ 
+  & & \\ 
+ OverallQual:time\_since\_remodeling &  & $-$0.487$^{***}$ \\ 
+  &  & (0.038) \\ 
+  & & \\ 
+ tot\_living\_area:low\_density\_zone &  & 0.017$^{***}$ \\ 
+  &  & (0.004) \\ 
+  & & \\ 
+ tot\_living\_area:other\_zone &  & 0.028$^{***}$ \\ 
+  &  & (0.008) \\ 
+  & & \\ 
+ Constant & $-$81.443$^{***}$ & $-$137.445$^{***}$ \\ 
+  & (6.536) & (10.840) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,460 & 1,460 \\ 
+R$^{2}$ & 0.763 & 0.799 \\ 
+Adjusted R$^{2}$ & 0.762 & 0.798 \\ 
+Residual Std. Error & 38.725 (df = 1453) & 35.744 (df = 1449) \\ 
+F Statistic & 781.201$^{***}$ (df = 6; 1453) & 575.803$^{***}$ (df = 10; 1449) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
 
 
+The study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Price ($\hat{\beta}$ = 0.040, $p$ = 0.01)
+
+\paragraph{Effect Size} regarding teh discussion which variable has the largest effect sized, the standardized coefficietns were used. This is primarily due to the large ranges in some varaibles such as total living area [334, 11,752] when compared to Quality [1,10]. This will cause the OLS to overstate the the cofificent with the large range in values, amking it appear to be greater than it is. Thus, to this end we use standardized coefficients
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Sun, Sep 11, 2022 - 00:09:15
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & ln\_SalePrice \\ 
+\hline \\[-1.8ex] 
+ tot\_liv\_area & 0.0004 \\ 
+  & (0.00002) \\ 
+  & \\ 
+ I(tot\_liv\_area$\hat{\mkern6mu}$2) & $-$0.00000$^{***}$ \\ 
+  & (0.000) \\ 
+  & \\ 
+ OverallQual & 0.124 \\ 
+  & (0.006) \\ 
+  & \\ 
+ low\_density\_zone & 0.105 \\ 
+  & (0.039) \\ 
+  & \\ 
+ other\_zone & $-$0.344$^{***}$ \\ 
+  & (0.089) \\ 
+  & \\ 
+ y\_since\_rem & $-$0.0004$^{***}$ \\ 
+  & (0.001) \\ 
+  & \\ 
+ LotArea & 0.00000 \\ 
+  & (0.00000) \\ 
+  & \\ 
+ OverallQual:y\_since\_rem & $-$0.001$^{***}$ \\ 
+  & (0.0002) \\ 
+  & \\ 
+ tot\_liv\_area:low\_density\_zone & 0.00001 \\ 
+  & (0.00002) \\ 
+  & \\ 
+ tot\_liv\_area:other\_zone & 0.0002 \\ 
+  & (0.00004) \\ 
+  & \\ 
+ Constant & 3.515 \\ 
+  & (0.047) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,460 \\ 
+R$^{2}$ & 0.848 \\ 
+Adjusted R$^{2}$ & 0.847 \\ 
+Residual Std. Error & 0.156 (df = 1449) \\ 
+F Statistic & 807.324$^{***}$ (df = 10; 1449) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
 
 
 
