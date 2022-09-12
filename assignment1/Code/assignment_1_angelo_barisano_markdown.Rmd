@@ -27,7 +27,8 @@ library("ggplot2")
 library("dplyr")
 library("moments")
 library ("lm.beta")
-
+library("fastDummies")
+library("gtsummary")
 
 setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1")
 
@@ -765,6 +766,119 @@ table(df_$MSZoning)
 View(df_)
 ```
 # Regression analysis
+```{r}
+# Preanalysis: is quality as an interval?
+# regress all categories of quality on the outcome but leave the lowest out; see wherther there is a step up
+
+df_$low_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Low Density", 1, 0)
+
+df_$hig_med_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Moderate-High Density", 1, 0)
+
+df_$other_zone <- 
+  ifelse(df_$MSZoning_grouped == "Other", 1, 0)
+
+# create the dummies
+OverallQual_grouped_dummies <- fastDummies::dummy_cols(df_$OverallQual)
+#add index column to data frame
+OverallQual_grouped_dummies <- tibble::rowid_to_column(OverallQual_grouped_dummies, "Id")
+
+
+df_y <- df_[c("Id", "SalePrice")] 
+
+
+# now merge the Y and the dummies for this regression; so that the normal regression equation can be done
+jointdataset <- merge(df_y, OverallQual_grouped_dummies, by = 'Id')
+
+# now run the regression compared to the lowest category and look whether there are natural steps between the variabels 
+quality_regression_checkup <-
+  lm(
+    SalePrice ~ 1 + .data_2 + .data_3 + .data_4 + .data_5 + .data_6 + .data_7 + .data_8 + .data_9 + .data_10,
+    data = jointdataset
+  )
+
+stargazer (
+  quality_regression_checkup
+, type = 'text'
+)
+
+coef(summary(quality_regression_checkup))[, 1:2]
+
+#' arguemtns:
+#' 1. like a likert scale
+#' 2. the standard errors are extremely constant
+#' 3. The plot suggests the same
+#' 4. the estimates increase steadily´
+#' PLOT IT!
+```
+
+
+
+
+
+
+
+```{r }
+#' run regression of y ~ and only the quality as factor ; if you see a constant increase then indication of linearity; but there is also maybe a quadratic term in it
+
+#create dummy variables
+df_$low_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Low Density", 1, 0)
+
+df_$hig_med_density_zone <-
+  ifelse(df_$MSZoning_grouped == "Moderate-High Density", 1, 0)
+
+df_$other_zone <- 
+  ifelse(df_$MSZoning_grouped == "Other", 1, 0)
+df_$ln_SalePrice <- log(df_$SalePrice)
+
+
+# main regression univariate
+
+full_model_wo_interaction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea ,
+    data = df_
+  )
+full_model_wo_interaction.beta<-lm.beta(full_model_wo_interaction)
+
+
+
+# multivaraite without interaction terms
+
+full_model_w_interaction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area + I(tot_liv_area ^ 2) + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea + OverallQual *
+      y_since_rem + tot_liv_area * low_density_zone + tot_liv_area * other_zone ,
+    data = df_
+  )
+full_model_w_interaction.beta<-lm.beta(full_model_w_interaction)
+
+# multivaraite with interaction and quadaratic terms etc
+
+
+full_model_w_interaction_ln <-
+  lm(
+    ln_SalePrice ~ 1 + tot_liv_area + I(tot_liv_area ^ 2) + OverallQual + low_density_zone + other_zone + y_since_rem + LotArea + OverallQual *
+      y_since_rem + tot_liv_area * low_density_zone + tot_liv_area * other_zone ,
+    data = df_
+  )
+full_model_w_interaction_ln.beta<-lm.beta(full_model_w_interaction_ln)
+
+
+
+stargazer (
+  full_model_wo_interaction
+  , full_model_w_interaction
+  # , full_model_w_interaction_ln
+  , type = 'text'
+)
+
+
+
+```
+
 
 ```{r }
 #' run regression of y ~ and only the quality as factor ; if you see a constant increase then indication of linearity; but there is also maybe a quadratic term in it
@@ -842,9 +956,9 @@ stargazer(full_model_wo_interaction, full_model_wo_interaction.beta,
 
 
 
-https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/
+# https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/
   
-  https://stackoverflow.com/questions/42076903/including-standardized-coefficients-in-a-stargazer-table
+# https://stackoverflow.com/questions/42076903/including-standardized-coefficients-in-a-stargazer-table
 ```
 
 
