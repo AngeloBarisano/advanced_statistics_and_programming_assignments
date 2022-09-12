@@ -384,7 +384,8 @@ df_temp <- df_ %>%
 scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price")+ xlim(0, 7000)
 
-
+scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
+scatter + geom_point() + geom_smooth() + labs(x = 'Living space in square feet', y = "Sale Price")+ xlim(0, 7000)
 # HYPOTHESIS: total living area impact on price! 
 # PICTURE 1; Hypothesis 1
 ```
@@ -709,13 +710,13 @@ table(df_$Neighborhood)
 ```{r maybe new houses are more expensive}
 
 scatter <- ggplot(df_, aes(age_of_house_when_sold, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.4) + labs(x = 'Age of house at point of sale', y = "Sale Price")
 
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.1) + labs(x = 'Age of house at point of sale', y = "Sale Price")
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.4) + labs(x = 'Age of house at point of sale', y = "Sale Price")
 
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice, colour = Neighborhood))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') 
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.4) + labs(x = 'Living space in square feet', y = "Sale Price", color = 'Neighborhood') 
 
 
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
@@ -766,7 +767,7 @@ View(df_)
 # Regression analysis
 
 ```{r }
-
+#' run regression of y ~ and only the quality as factor ; if you see a constant increase then indication of linearity; but there is also maybe a quadratic term in it
 
 #create dummy variables
 df_$low_density_zone <-

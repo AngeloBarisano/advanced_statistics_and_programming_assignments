@@ -27,6 +27,8 @@
 \end{itemize}
 
 To this end, this reasearch assignemnt draws data from an apprisal project conducted by... in the Ames district, Iowa (USA) (CITE DATA SOURCE HERE!!!). Corresponding to the aforementioned data categories, the following variables were selected to be used in varying degrees in the model. It may be noted, that due to the data being limited to a city in the midwest of the USA, the generalization resulting from this research may only extend to similar cities. However, due to the data originating from one district alone results in the comparability of the sale instances recorded in the data; meaning that stark contrasts in sales prices may be less due to the simple fact that one sale may have been made in Iowa and the other in New York, which naturally yields higher prices.
+\textbf{INCLUDE FREQQUENCY TABLES FOR THE CATEGORICAL VAIRABLES}
+
 
 To start, a total of 1,460 house sales were recorded between 2006 and 2010 for the district of Ames, Iowa (USA). The dependent varibale was identified to be SalePrice. As can be observed in Table 1, the mean sale price of a house was \$180,921.20 (SD = 79,442.50). Combined with the range [34,900, 755,000] a positive skewness was to be expected (skew = 1.881), considering that the outcome variable is a of financial nature.
 \textbf{IMPORTANT! TELL THAT WE HAVE LARGE RANGES ETC SO THIS MEAN WE NEED STANDARDIZED COEF}
@@ -69,6 +71,8 @@ Adjacent\_features\_bool & 1,460 & 0.137 & 0.344 & 0 & 1 \\
 \end{tabular} 
 \end{table} 
 \end{center}
+
+\textbf{KEEP STAT PART IN STARGAZER USE QUANTILES IN THE SUMMARY STATISTIC; ANd remove the N; ALSO ADD DESCRIPTIVES}
 
 It is notable that upon selecting the aforementioned variables, no preprossessing in the form of imputation or data deletion had to be applied. However, in order to decrease the complecity of the interaction term, the variable MSZoning was binned into (rural, mixed rural, and urban) based on the corresponding zoning categories\footnote{$https://www.kaggle.com/competitions/home-data-for-ml-course/data$}.
 
@@ -143,7 +147,7 @@ Zoning moderates (MIV) the direct postive association of Total Living Space (IV)
 	\coordinate (4) at (2,0);
 	
 	\path (1) edge node[above] {$+$}(2);
-	\path (3) edge node[right] {$+$}(4);
+	\path (3) edge node[right] {$*$}(4);
 \end{tikzpicture}
 \end{center}
 
@@ -175,7 +179,7 @@ Years Since Remodeling (M-IV) or Construction has an amplyfiying effect on the d
 $$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning_{Low Density} + \beta_{5}  Zoning_{Other} + \beta_{6}  YearsSinceRemodeling + \beta_{7}  LotArea + \beta_{8} TotLivingSpace*Zoning_{Low Density} + \beta_{9} TotLivingSpace*Zoning_{Other} +\epsilon$$
 
 
-\textbf{IMPORTANT: DO YOU INCLUDE A QUADRATIC TERM IN THE POPULATION REGRESSION MODEL????}
+\textbf{IMPORTANT: DO YOU INCLUDE A QUADRATIC TERM IN THE POPULATION REGRESSION MODEL???? NO! BUt make more equations explaining each quadartic term and represent the interaction effects etc adn what not }
 
 $$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning - \beta_{5}  YearsSinceRemodeling + \beta_{6}  LotArea + \beta_{7} TotLivingSpace*Zoning + \beta_{8} AdjacentFeatures + \beta_{9} BuildingType \epsilon$$
 
@@ -187,17 +191,19 @@ $$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2
 
 https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/
 
-A1: Linearity of model parameters and error term; through the formulation of the (population) regression model, addressing the models' functional form. Thus, a violation of this assumtion is practically impossible if the functional for of the population regression is defined correctly. 
+A1: Linearity of model parameters and error term; through the formulation of the (population) regression model, addressing the models' functional form. Thus, a violation of this assumtion is practically impossible if the functional for of the population regression is defined correctly. WHeterh the relationship between the indent and the dependent is of linear nature.
 
 A2: desribes that for a linear system to be solvable, no independent variable can be a linear function of other independent variables. This implies that for dummy varaibles to have one "comparative" category to be droped. furthermore, the "almost" failure of this assumtion, multicollinearity also brings problems with it. While some multicollinearity is to be expected between the coeficients; strong multicollinearity leads to a lower precision in the estimate. Further tests will be conducted to probe for this assumption violation. 
 
 A3: This assumption is referred to as mean independence (or exogeniety); assuming no correlation/systematic association between independent variables and residuals (or conditional mean error is dependent on independent variables). However,as could be seen during the EDA in part 1, the linearity assumption holds for most of the variables we have observed except for a weak quadratic relationship. 
 Thus this assumption might induce a bais/ or reduce consistency of the estimator; this is why this assumption must be treated with care. but it is also difficult to be found as omitted variable bias is very likely to have occured during this issue; one example might be crime which has an impact on whether a certain neighborhood is afluent or not.
 \textbf{MISSING OR OMMITTED VARIABLES}
+
 A4: The error term has a constant variance for each observation expected! --> heteroscedasticity
 
 Generally, as the sample size increases, this assumption becomes less important for the estimate itself, considering that OLS is a consistent estimator; which is the case here (N is quite large). However, heteroscedastictiy may lead to problems regarding inference, as the standard error of the estimate may still be biased. As such, solutions will be later implemented to control for such violations.
 
+\textbf{DISUSS WHAT CAN GO WRONG APPLIED TO MY DATA AND MY MODEL like last lecture in eci; Come up with a situation where this is violated; EG FULL RANK: NUMBER OF BEDROOMS AND TOTAL LIVING SPACE; HOUSE SIZE AND TOTAL LOT SIZE can pose multicollinearity problems}
 
 A5: Data generation: xi can be random or fixed; the data was collected for predictive purposes so we might not be able to veryfy this.
 
@@ -330,6 +336,7 @@ F Statistic & 807.324$^{***}$ (df = 10; 1449) \\
 \end{tabular} 
 \end{table} 
 
-
+\section{task 5}
+TIPP \textbf{run regression once with and once without the dummies to see the effect of the subsample }
 
 \end{document}
