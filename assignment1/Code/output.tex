@@ -1,0 +1,54 @@
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Tue, Sep 13, 2022 - 11:10:33
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{SalePrice} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ tot\_liv\_area & 0.075^{***} & 0.042^{***} & 0.056^{***} \\ 
+  & (0.002) & (0.002) & (0.004) \\ 
+  & & & \\ 
+ I(tot\_liv\_area$\hat{\mkern6mu}$2) &  &  & -0.00000^{***} \\ 
+  &  &  & (0.00000) \\ 
+  & & & \\ 
+ OverallQual &  & 23.991^{***} & 31.638^{***} \\ 
+  &  & (1.125) & (1.266) \\ 
+  & & & \\ 
+ low\_density\_zone &  & 19.720^{***} & -23.347^{***} \\ 
+  &  & (2.897) & (9.011) \\ 
+  & & & \\ 
+ other\_zone &  & 12.487^{**} & -63.223^{***} \\ 
+  &  & (5.336) & (20.282) \\ 
+  & & & \\ 
+ y\_since\_rem &  & -0.445^{***} & 2.274^{***} \\ 
+  &  & (0.060) & (0.219) \\ 
+  & & & \\ 
+ LotArea &  &  & 0.001^{***} \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ OverallQual:y\_since\_rem &  &  & -0.487^{***} \\ 
+  &  &  & (0.038) \\ 
+  & & & \\ 
+ tot\_liv\_area:low\_density\_zone &  &  & 0.017^{***} \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ tot\_liv\_area:other\_zone &  &  & 0.028^{***} \\ 
+  &  &  & (0.008) \\ 
+  & & & \\ 
+ Constant & -12.397^{***} & -80.656^{***} & -137.445^{***} \\ 
+  & (4.279) & (6.599) & (10.840) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
