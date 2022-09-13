@@ -980,7 +980,7 @@ stargazer(full_model_w_interaction, full_model_w_interaction.beta,
             full_model_w_interaction.beta$standardized.coefficients),
             type='text')
 
-
+test achnage will cause erro 
 ```
 
 
