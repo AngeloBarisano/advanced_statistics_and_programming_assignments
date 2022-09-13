@@ -52,6 +52,7 @@ To start, a total of 1,460 house sales were recorded between 2006 and 2010 for t
 \textbf{TIME SINCE REMODELING AT YEAR OF SALE; Time since building is also negative but this one is clearer!; ALSO THIS RELATIPONSHIP HOLDS FOR NEIGHBORHOODS!!!!}
  
 
+
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 09, 2022 - 22:51:21
 \begin{center}
@@ -122,6 +123,8 @@ A scatter plot matrix is provided in the appendix for the numeric variables. The
 	
 \end{tikzpicture}
 \end{center}
+
+\textbf{include the INTERACTION EFFECT TO THE ARROW LIKE ON THE SLIDE; include the LOTAREA becasue it is very difficult; but LOTAREA might be used as an example on mulitcollinearity in this case}
 
 $$ {SalePrice} = \alpha + \beta_{1} TotalLivingSpace - \beta_{2}  Property Quality - \beta_{3}  YearsSinceRemodeling  \linebreak
 + \beta_{4}  LotArea + \beta_{5} Zoning + \epsilon$$
@@ -209,12 +212,13 @@ The linearity of model parameters and error term assumption suggests that a) the
 
 
 A2: desribes that for a linear system to be solvable, no independent variable can be a linear function of other independent variables; e.g. this way a 2-dimensional sphere might be compressed to a line, figuratively speaking, meaning that there is no optimal (or none at all) solution for the parameters in question. This first part of the assumtion might easily be violated when not dropping a "comparative" category of a categorical varaible. However, violations of full rank might also come in the form of multicollinearity. Multicollinearity is the "almost" violation of the full rank violation as a given variable may, for isntance, be highly correlated with another given variable. This way the sphere is almost compressed to a single line, which leads to a multitute of problems regarding inference of the model: primairly, the standard errors of the model become unstable to the inclusion of other explanatory or control variables. This assumption is commonly to some extend violated, as some multicollinearity is always present between the explanatory variables (actually making regression interesting in the first place). As such, a good example might be if we included the Total Linving Space and the TotalNumberofRooms, both of which will be strongly correlated. Further tests will be conducted to probe for this assumption violation. 
+\textbf{in what direction is the estimator baised when this variable is left out}
 
 A3: This assumption is referred to as mean independence (or exogeniety); assuming no correlation/systematic association between independent variables and residuals (or conditional mean error is dependent on independent variables). Thus this assumption might induce a bais/ or reduce consistency of the estimator and is, thus, critical to the model itself. A common way, this variable is violated is via unobserved confounders or ommitted variables. If a given variable is left out, part of the error term can be explained by a given variable which suffers under the influence of the confounder. An example in this case will be the missign information regariding crime by neighborhood. It is obvious that higher crime levels will reduce the value in a given area. Thus, given a certain Neighborhood in question, part of the variance that would have been explained by the Crime variable is now falsely attributed to Neighborhood, biasing the estimate.
 
 A4: The error term has a constant variance for each observation expected! --> heteroscedasticity
 The assumption of homoscedasticity suggests constance variance of each observation. However, if the variance of the estimate is varying we face heteroscedastic variances. While this is not necessarily problematic regarding the estimated parameter (coefficient), heteroscedastictiy impacts the standard errors of the estimate, leading to problems regarding inference; heteroscedastitiy can lead to both type I and II error. In this research, this violation might occur if the eg. sales prices vary stronger for large houses than for small houses. The resulting (averaged) standard error would neither be rebresenative for small and large house standard errors and, thus, inference itself.
-
+\textbf{NOTE AUTOCORRELATION AND YEARS SINCE BUILT}
 
 Generally, as the sample size increases, this assumption becomes less important for the estimate itself, considering that OLS is a consistent estimator; which is the case here (N is quite large). However, heteroscedastictiy may lead to problems regarding inference, as the standard error of the estimate may still be biased. As such, solutions will be later implemented to control for such violations.
 
@@ -223,6 +227,12 @@ Generally, as the sample size increases, this assumption becomes less important 
 A5: Data generation: xi can be random or fixed; the data was collected for predictive purposes so we might not be able to veryfy this. 
 
 A6: This assumption regards inference; if the residuals do not follow a standard normal distribution, this might result in incorrect decisions as the distribution might for instance be "fatter" in the tails, resulting in potentially Type I or Type II errors. This might be the case if for instance we do not have a lot of observations for e.g. subcategories. Subsequently, the resulting inference might be biased. However, as the sample size increases, most distributions approach the normal form. 
+
+%\textbf{another example would be the inclusion of year buid; as we have time since remodeled in the model; if we included year build this is multicollinearity problem by defintion
+
+%Should we Include YEAR build? Maybe autocorrelation problems?}
+
+%\textbf{AUTOCORRELATION PROBLEMS????}
 
 Normal distribution of disturbanc (The error term is normally distributed. generally, the means that the error term has a population mean of zeor and standard errror of 1. Generally, most distributions tend to approach normal distributions as sample sizes increase. For some distirbutions such as Sales Price (which is of a financial nature), this can also be remedied through tra´nsforming (here apply log transform). Additionally, multiple controls and test will be conducted down the line to investiate this issue.
 
@@ -233,11 +243,11 @@ Normal distribution of disturbanc (The error term is normally distributed. gener
 
 \section{OLS regression and model fit}
 
+\textbf{POssible show how you build different models and look for interesting features in the model}
 
 
 
-
-
+\textbf{check whether month is uniformly ditributed here on avaerage }
 
 
 
@@ -446,6 +456,6 @@ TIPP \textbf{run regression once with and once without the dummies to see the ef
 Additionally: when reporting these outputs as stargazer; stargazer does not report the standardized error but the normal coefficeints; so you have to change that to standardized coefficients
 
 
-BUT THE BIG PROBLEM IS: IF YOU REPORT IT VIA STARGAZER SOME EFFECTS MISS THE ***!!!! even when they are significant; and if you normally standrize it each variabel by hand, then the standard errrors change even though they should not: So to do: get the Std coef from eg "full_model_w_interaction.beta" AND THE STANDARD ERRORS from the normal regression "full_model_w_interaction" output}
+%BUT THE BIG PROBLEM IS: IF YOU REPORT IT VIA STARGAZER SOME EFFECTS MISS THE ***!!!! even when they are significant; and if you normally standrize it each variabel by hand, then the standard errrors change even though they should not: So to do: get the Std coef from eg "full_model_w_interaction.beta" AND THE STANDARD ERRORS from the normal regression "full_model_w_interaction" output}
 
 \end{document}

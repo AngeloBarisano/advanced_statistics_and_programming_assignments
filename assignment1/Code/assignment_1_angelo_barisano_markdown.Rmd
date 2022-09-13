@@ -90,6 +90,9 @@ show_F_in_two_lines <- function(stargazer) {
 ```{r Initial data inspection}
 # View(df)
 # str(df)
+
+
+table(df_$MSZoning)
 ```
 
 
@@ -203,6 +206,9 @@ colSums(is.na(df))
 # select all columns which have missing data 
 which(colSums(is.na(df))>0)
 
+
+
+table(df$Street)
 ```
 
 
@@ -344,7 +350,7 @@ table(df_$MSZoning_grouped)
 df_$age_of_house_when_sold <- df_$YrSold - df_$YearBuilt
 
 # time since remodeling at year of sale in years
-
+#' we do this becasue only the age of the house AT TIME OF YEAR SOLD IS RELEVANT!!! 
 df_$y_since_rem <- df_$YrSold - df_$YearRemodAdd
 
 
@@ -756,7 +762,14 @@ table(df_$Neighborhood)
 
 ```
 
+```{r}
+scatter <- ggplot(df_, aes(OverallCond, SalePrice))
 
+scatter <- ggplot(df_, aes(OverallCond, SalePrice))
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Building_type"), alpha = 0.4) + labs(x = 'Age of house at point of sale', y = "Sale Price in 1000s")
+
+df_$
+```
 
 
 ```{r maybe new houses are more expensive}
@@ -910,6 +923,7 @@ stargazer (
   uni_var_model,
   mulit_var_model,
   full_model_w_interaction
+  , type = 'text'
 ) |>
   show_F_in_two_lines()
 
@@ -980,7 +994,7 @@ stargazer(full_model_w_interaction, full_model_w_interaction.beta,
             full_model_w_interaction.beta$standardized.coefficients),
             type='text')
 
-test achnage will cause erro 
+
 ```
 
 
