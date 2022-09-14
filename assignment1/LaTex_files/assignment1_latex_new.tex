@@ -6,7 +6,8 @@
 \geometry{a4paper, left=3cm, top=3cm, bottom=3cm, right=3cm}
 \usepackage{changepage}
 \usepackage{booktabs}
-\usepackage[labelfont = sc]{caption}
+%\usepackage[labelfont = sc]{caption}
+\usepackage[font=small]{caption}
 \DeclareCaptionFormat{mycaptionfont}{\fontsize{12}{13}\selectfont#1#2#3}
 \usepackage{threeparttable}
 \usepackage{graphicx}
@@ -42,7 +43,9 @@ For the purpoase of analyzing the determinants of prices of home sales in the US
 \end{itemize}
 
 
-As can be seen in Table 1, a total of 1,460 house sales were recorded between 2006 and 2010 for the district of Ames, Iowa (USA). The dependent varibale was identified to be SalePrice. As can be observed in Table 1, the mean sale price of a house was (in 1000s) \$180.921 (SD = 79.443). Combined with the range [34,900, 755,000] a positive skewness was to be expected (skew = 1.881), considering that the outcome variable is a of financial nature. The Total Living Area displays a mean of 2,572.89 square feet (SD = 823.598) in addition to a large range of values[334, 11,752].  
+As can be seen in Table 1, a total of 1,460 house sales were recorded between 2006 and 2010 for the district of Ames, Iowa (USA).
+%\footnote{https : //www.kaggle.com/competitions/home − data − f or − ml − course/data} The dependent varibale was identified to be SalePrice. 
+As can be observed in Table 1, the mean sale price of a house was (in 1000s) \$180.921 (SD = 79.443). Combined with the range [34,900, 755,000] a positive skewness was to be expected (skew = 1.881), considering that the outcome variable is a of financial nature. The Total Living Area displays a mean of 2,572.89 square feet (SD = 823.598) in addition to a large range of values[334, 11,752].  
 Years Since remodeling (at time of sale) shows that the average property did not undergo renovations for 22.95 (~23) years (SD = 20.950). Contrary to expectation, this varaible distributes reasonably equally across the range, stopping out at a maximum of 60 years (See Figure 1B - quantiles).
 Furhermore, the variable Quality (and Condition) represents a rating from 1 to 10, similar to a Likert Scale. Quality has to be considered a categorical variable in this case i.a. because the distances between each rating level are not constant and the distribution is skewed \textbf{(SEE SUPPLEMENTARY APPENDIX REGRESSION AND PICTURE)}. However, while strictrly speakign there we cannot consider Quality a numerical variable, for the purpose of certain examples at a later point, this variable will be considered as both a categorical and numerical variable (no inference will be made is used as numerical). Finally, Lot Area, will be used as a confounder in the regressions to control for the association larger lot sizes creating larger houses (\textbf{AS AN INTERACTION}). 
 
@@ -91,24 +94,28 @@ Beyond this table, there are multiple categorical variables \textbf{(see Appendi
      \centering
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[scale=0.3]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h1.jpg"}
-         \caption{Positive association of total Living Space \& Sale Price \& optimal line}
+         \includegraphics[scale=0.325]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h1.jpg"}
+         \small
+         \caption{Positive association of total Living Space \& Sale Price \& optimal line; range [0, 7000]}
          \label{fig:y equals x}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[scale=0.30]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h3.jpg"}
-         \caption{Positive association of total Living Space \& Sale Price}
+         \includegraphics[scale=0.325]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h3.jpg"}
+         \small
+         \caption{Positive association of total Living Space \& Sale Price }
          \label{fig:three sin x}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[scale=0.325]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h2.2.jpg"}
-         \caption{Positive association of total Living Space \& Sale Price}
+         \includegraphics[scale=0.35]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h2.2.jpg"}
+         \small
+         \caption{Positive association of total Living Space \& Sale Price; range [0, 7000]}
          \label{fig:five over x}
      \end{subfigure}
+     	\small
         \caption{Three Hypothesis Graphs displaying their repective association with the outcome variable}
         \label{fig:three graphs}
 \end{figure}
@@ -118,25 +125,14 @@ Finally, the plots are to be considered in the context of the hypothesis in the 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\section{Theoretical model and OLS assumptions}
+\subsection{Hypotheses}
+Based on the plots generated during the EDA, a mini theory was created to explain the variation in the sales price of properties (Figure 2). 
 
 \begin{center}
 \begin{tikzpicture}
 	\centering
- 	\node at (3.25,3.5) {\textbf{Plot 1: Causal relationship Scheme}};
+ 	\node at (3.25,-2.25) {FIGURE 2: Causal relationship Scheme};
     \node (1) at (0,0) {Total Living Space};
 	\node (2) [right = of 1] {Sale Price};
 	\node (3) [above = of 2] {Zoning};
@@ -149,6 +145,123 @@ Finally, the plots are to be considered in the context of the hypothesis in the 
 	
 \end{tikzpicture}
 \end{center}
+
+
+
+Based on this model, the following three hypothesis were created. 
+\subsubsection{Hypotheses 1}
+
+
+\indent \paragraph{} \textbf{Figure 1A} displays a potential direct positive association between Total Living Space (IV) and Sale Price (DV), including an optimal fit, showing a small. Thus, one expects that larger houses have a higher sale price. Consequently,we assume that:
+
+\begin{hyp}[H\ref{hyp:first}] \label{hyp:first}
+Total living space (IV) has a direct postive association with Sales Price (DV)
+\end{hyp}
+
+% plot hypothesis 
+\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,0.85) {\textbf{Figure 3: Hypothesis 1}};
+ 	\node (1) at (0,0) {Total Living Space};
+	\node (2) [right = of 1] {Sales Price};
+	\path (1) edge node[above] {$+$}(2);
+\end{tikzpicture}
+\end{center}
+
+
+\indent \paragraph{} Subsequently, when taking the Zoning (MSZoning or MSZoning\_grouped - IV) into account to reflect the administrative borderrs of the Ames districts, larger houses in more densly populated areas of the city appear to have a lower price when compared to houses of same size in less densly populated areas as can be seen in \textbf{Plot XXXX2}. This suggests a separation between "downtown less affluent areas" and "suburban affluent areas"\footnote{As an extention\: we will test whether the groups of Neighborhoods generally stay in the same zoning category; if Neighborhoods and Zoning are not related (so eg 50 \% of one neighborhood is in rural zone while the other part is in moderately populated zone) then we have a problem that this woudl induce a bias. Otherwise, we can just proceed.} and concludes in the hypothesis that
+
+\begin{hyp}[H\ref{hyp:second}] \label{hyp:second}
+Zoning moderates (MIV) the direct postive association of Total Living Space (IV) and Sale Price (DV). The association of Space and Sale Price is proposed to be weaker for more densly populated areas than for more rural areas. 
+\end{hyp}
+
+%fgure h2
+\begin{center}
+
+
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Figure 4: Hypothesis 2}};
+ 	\node (1) at (0,0) {Total Living Space};
+	\node (2) [right = of 1] {Sales Price};
+	\node (3) at (2,-1.25) {Zoning};
+	
+	\coordinate (4) at (2,0);
+	
+	\path (1) edge node[above] {$+$}(2);
+	\path (3) edge node[right] {$*$}(4);
+\end{tikzpicture}
+\end{center}
+
+\indent \paragraph{} As can be observed on Figure 1c, older the houses 8not renovated (IV), are associated with lower sales  prices (DV). Thus, the final hypothesis corresponds to: 
+
+
+\begin{hyp}[H\ref{hyp:third}] \label{hyp:third}
+Years Since Remodeling (M-IV) or Construction has an amplyfiying effect on the direct postive effect of Quality (IV) and Sale Price (DV)
+\end{hyp}
+
+% figure h3
+\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Figure 5: Hypothesis 3}};
+ 	\node (1) at (0,0) {Years Since Remodeling};
+	\node (2) [right = of 1] {Sales Price};
+	%\node (3) at (1.25,-1.12) {Years Since Remodeling};
+	
+	%\coordinate (4) at (1.25,0);
+	\path (1) edge node[above] {$-$}(2);
+	%\path (3) edge node[right] {$-$}(4);
+\end{tikzpicture}
+\end{center}
+
+%$$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning_{Low Density} + \beta_{5}  Zoning_{Other} + \beta_{6}  YearsSinceRemodeling + \beta_{7}  LotArea + \beta_{8} TotLivingSpace*Zoning_{Low Density} + \beta_{9} TotLivingSpace*Zoning_{Other} +\epsilon$$
+
+
+
+\textbf{IMPORTANT: DO YOU INCLUDE A QUADRATIC TERM IN THE POPULATION REGRESSION MODEL???? NO! BUt make more equations explaining each quadartic term and represent the interaction effects etc adn what not }
+
+(2-1)$$ {SalePrice} = \alpha + \beta_{1} TotalLivingSpace - \beta_{2}  Zoning - \beta_{3}  YearsSinceRemodeling +\epsilon$$ (2-1)
+
+
+
+\subsection{Assumptions}
+
+
+\indent A1: The linearity of model parameters and error term assumption suggests that a) the functional form of the underlying population regression model is linear and additive. Thus, this assumption is generally assumed to hold, i.a. not having introduced quadratic or polynominal (by parameter) terms into the population regression equation (2-1). However as Figure 1b shows, there might be a quadratic relationship present between Total Living Area and Sale Price. The reason why this might be the case may be that with increasion values for x ([X = x]), the effect of X on Y increases, which would be represented in later regression models by an additional quadratic term in the regression equation. However, as will be shown in later parts, this can be (partially) remedied.
+
+\indent A2: Full rank assumes that no independent variable can be a linear function of other independent variables; e.g.a 2-dimensional sphere might be compressed to a line, figuratively speaking, meaning that there is no optimal (or none at all) solution for the parameters in question. This first part of the assumtion might easily be violated when not dropping a "comparative" category of a categorical varaible. However, violations of full rank might also come in the form of multicollinearity. Multicollinearity is the "almost" violation of the full rank violation as a given variable may, for isntance, be highly correlated with another given variable. This way the sphere is almost compressed to a single line, which leads to a multitute of problems regarding inference of the model: primairly, the standard errors of the model become unstable to the inclusion of other explanatory or control variables. Multicollinearity is almost always present with observational data (actually making regression interesting in the first place); however, the extend is more relevant. For example might be if we included the Total Linving Space and the TotalNumberofRooms, both of which will be strongly correlated. Further tests will be conducted to probe for this assumption violation. 
+
+
+\textbf{in what direction is the estimator baised when this variable is left out}
+
+A3: This assumption is referred to as mean independence (or exogeniety); assuming no correlation/systematic association between independent variables and residuals (or conditional mean error is dependent on independent variables). Thus this assumption might induce a bias/ or reduce consistency of the estimator and is, thus, critical to the model itself. A common way, this variable is violated is via unobserved confounders or ommitted variables. If a given variable is left out, part of the error term can be explained by a given variable which suffers under the influence of the confounder. An example in this case will be the missign information regariding crime by the area a property is located. It is obvious that higher crime levels will reduce the value in a given area. Thus, given a certain Neighborhood in question, part of the variance that would have been explained by the Crime variable is now falsely attributed to Neighborhood, biasing the estimate.
+Omitted variables bias the estimate of the population coefficient  either up or down, thereby reducing the consistency of the estimate. 
+
+A4: The error term has a constant variance for each observation expected! --> heteroscedasticity
+
+The assumption of homoscedasticity assumes constance variance of each observation. However, if the variance of the estimate is varying we face heteroscedastic variances. While this is not necessarily problematic regarding the estimated parameter (coefficient), heteroscedastictiy impacts the standard errors of the estimate, leading to problems regarding inference; heteroscedastitiy can lead to both type I and II error. In this research, this violation might occur if the eg. sales prices vary stronger for large houses than for small houses. The resulting (averaged) standard error would neither be rebresenative for small and large house standard errors and, thus, inference itself.
+\textbf{NOTE AUTOCORRELATION AND YEARS SINCE BUILT}
+
+Generally, as the sample size increases, this assumption becomes less important for the estimate itself, considering that OLS is a consistent estimator; which is the case here (N is quite large). However, heteroscedastictiy may lead to problems regarding inference, as the standard error of the estimate may still be biased. As such, solutions will be later implemented to control for such violations.
+
+
+
+A5: Data generation: xi can be random or fixed; the data was collected for predictive purposes so we might not be able to veryfy this. As the data was not generated via a random experiment,none of the variables at hand are \textbf{random variables}
+Due to the data originating from sales in a town in Iowa (Ames), we have to assume that the data at ahnd is "fixed". Thus, inference regardign a wider population cannot be made from this data, as its fixed nature only applies to small towns in the mid-western USA. However, we can assume that the fixed variables collected are measured without error; particualrly as the sample collected can be somewhat representative of the wider popualtion of small towns in the mid-western USA. 
+
+
+generally, due to the nature of the data, being a 
+
+\textbf{in order to }
+
+A6: This assumption regards inference; if the residuals do not follow a standard normal distribution, this might result in incorrect decisions as the distribution might for instance be "fatter" in the tails, resulting in potentially Type I or Type II errors. This might be the case if for instance we do not have a lot of observations for e.g. subcategories. Subsequently, the resulting inference might be biased. However, as the sample size increases, most distributions approach the normal form. 
+However, in order to answer the question, this assumtion is violated via i.a. large amounts of outliers. As can be seen in Figure 1a the range goes from 0 to 7000 square feet, thus, ommits two extreme outliers.
+
+
+\section{OLS regression and model fit}
+\subsection{Normal Regression}
 
 
 

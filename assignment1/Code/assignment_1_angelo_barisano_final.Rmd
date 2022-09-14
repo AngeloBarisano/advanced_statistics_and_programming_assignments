@@ -10,7 +10,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
 
-```{r import data & set wkdir}
+```{r import data & set wkdir, include=FALSE}
 # clear environment
 rm(list=ls())
 
@@ -28,16 +28,6 @@ library("fastDummies")
 library("gtsummary")
 library("stringr")
 library("extrafont")
-
-
-# fix font 
-# Run once
-# install.packages("extrafont")
-library(extrafont)
-# Install **TTF** Latin Modern Roman fonts from www.fontsquirrel.com/fonts/latin-modern-roman
-# Import the newly installed LModern fonts, change the pattern according to the 
-# filename of the lmodern ttf files in your fonts folder
-# font_import(pattern = "lmroman*")
 loadfonts()
 
 
@@ -187,6 +177,8 @@ match_df = data.frame(
 df_ <-
   df_ %>% mutate(MSZoning_gr = match_df$new[match(MSZoning, match_df$old)])
 
+# fix y_since_rem
+df[df$y_since_rem < 0, "y_since_rem"] <- 0
 
 ```
 
@@ -235,7 +227,11 @@ which(colSums(is.na(df_))>0)
 ```
 
 
+```{r stargazer stats}
+colnames(df_)
 
+
+```
 
 ```{r stargazer stats}
 
@@ -248,7 +244,10 @@ stargazer(
   type = 'text',
   omit.summary.stat = c("N"),
   summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max")
-  , title="Descriptive Statistics of Numeric Indepdenent and Dependent Varaible"
+  , title="Descriptive Statistics of Numeric Indepdenent and Dependent Varaible",
+  covariate.labels = 
+        c("SalePrice", "Lot Area", "Quality", "Condition",
+          "Total Living Space", "Years Since Remodeling")
   # , initial.zero = F
   # ,single.row=TRUE)
 )
@@ -259,9 +258,18 @@ stargazer(
   omit.summary.stat = c("N"),
   summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max")
   , title="Descriptive Statistics of Numeric Indepdenent and Dependent Varaible"
+  ,
+    covariate.labels = 
+        c("SalePrice", "Lot Area", "Quality", "Condition",
+          "Total Living Space", "Years Since Remodeling")
   # , initial.zero = F
   # ,single.row=TRUE)
 )
+
+
+
+
+
 
 ```
 
@@ -497,21 +505,160 @@ bar + stat_summary(
 
 
 
+# Run the regressions
+
+```{r, echo = FALSE}
+# QUALITY LINEARITY ASSUMTION
+
+# Preanalysis: is quality as an interval?
+# regress all categories of quality on the outcome but leave the lowest out; see wherther there is a step up
+
+# create the dummies
+OverallQual_grouped_dummies <- fastDummies::dummy_cols(df_$OverallQual)
+#add index column to data frame
+OverallQual_grouped_dummies <- tibble::rowid_to_column(OverallQual_grouped_dummies, "Id")
+
+
+df_y <- df_[c("Id", "SalePrice")] 
+
+
+# now merge the Y and the dummies for this regression; so that the normal regression equation can be done
+jointdataset <- merge(df_y, OverallQual_grouped_dummies, by = 'Id')
+
+# now run the regression compared to the lowest category and look whether there are natural steps between the variabels 
+quality_regression_checkup <-
+  lm(
+    SalePrice ~ 1 + .data_2 + .data_3 + .data_4 + .data_5 + .data_6 + .data_7 + .data_8 + .data_9 + .data_10,
+    data = jointdataset
+  )
+
+stargazer (
+  quality_regression_checkup
+, type = 'text'
+)
+
+coef(summary(quality_regression_checkup))[, 1:2]
+
+#' arguemtns:
+#' 1. like a likert scale
+#' 2. the standard errors are extremely constant
+#' 3. The plot suggests the same
+#' 4. the estimates increase steadily´
+#' PLOT IT!
+
+```
 
 
 
 
 
 
+# Task 3
+
+```{r }
+# create dummies
+df_$low_density_zone <-
+  ifelse(df_$MSZoning_gr == "Low Density", 1, 0)
+
+df_$hig_med_density_zone <-
+  ifelse(df_$MSZoning_gr == "Moderate2High Density", 1, 0)
+
+df_$commercial_zone <- 
+  ifelse(df_$MSZoning_gr == "Commercial", 1, 0)
+
+df_$floating_zone <- 
+  ifelse(df_$MSZoning_gr == "Floating Village", 1, 0)
+
+
+table(df_$MSZoning_gr)
+
+# main model
+main_multi_var_model <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone,
+    data = df_
+  )
+
+main_multi_var_model.beta<-lm.beta(main_multi_var_model)
+
+
+
+# With interaction adn quadrartic terms
+mulit_var_model <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area^2)+ tot_liv_area * low_density_zone + tot_liv_area*commercial_zone + tot_liv_area* floating_zone ,
+    data = df_
+  )
+
+mulit_var_model.beta<-lm.beta(mulit_var_model)
+
+
+# with covariates and confounders and control
+multi_var_model_w_confounders <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type,
+    data = df_
+  )
+multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
+
+# with interaction and covariates and confounders and control
+multi_var_model_w_confounders_ninteraction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    data = df_
+  )
+multi_var_model_w_confounders_ninteraction.beta <-
+  lm.beta(multi_var_model_w_confounders_ninteraction)
 
 
 
 
 
+stargazer (
+  main_multi_var_model,
+  mulit_var_model,
+  multi_var_model_w_confounders,
+  multi_var_model_w_confounders_ninteraction
+  , type = 'text'
+) |>
+  show_F_in_two_lines()
 
 
 
 
+#, keep = 'Dummy1:Dummy2:Dummy3'
+
+```
+
+
+
+```{r }
+
+
+
+stargazer(
+  main_multi_var_model,
+  mulit_var_model,
+  multi_var_model_w_confounders,
+  multi_var_model_w_confounders_ninteraction,
+  omit = c(
+    "YrSold2008",
+    "YrSold2009",
+    "YrSold2010",
+    "OverallQual_cat3",
+    "OverallQual_cat4",
+    "OverallQual_cat5",
+    "OverallQual_cat6",
+    "OverallQual_cat7",
+    "OverallQual_cat8",
+    "OverallQual_cat9",
+    "OverallQual_cat10",
+    "Building_typeSingle Family Home "
+  )
+) |>
+  show_F_in_two_lines()
+
+```
 
 
 
