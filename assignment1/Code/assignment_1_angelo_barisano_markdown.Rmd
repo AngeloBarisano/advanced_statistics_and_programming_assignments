@@ -876,6 +876,10 @@ coef(summary(quality_regression_checkup))[, 1:2]
 #' 4. the estimates increase steadily´
 #' PLOT IT!
 ```
+
+
+
+
 ``` {r task 3 run simple regressions}
 
 # main regression univariate

@@ -183,6 +183,44 @@ df[df$y_since_rem < 0, "y_since_rem"] <- 0
 ```
 
 
+```{r introduce Quality into the equation}
+
+table_out <- table(df_$OverallQual_cat )
+#Add cumFreq and proportions
+table_out <- transform(table_out, cumFreq = cumsum(Freq), relative = prop.table(Freq))
+
+#' based on the resulting table, the Quality variables will be split into 
+#' 3 groups; these groups will not be equally distributed, however, the size of the underlyign groups tend to be somewhat simialr
+#' Furthermore: one would expect that about 67% of respondents are in the one std region 
+#' Thus, we assume that the distribution somewhat is according that of a normal distributi
+table_out$cumsum_freq <- cumsum(table_out$relative)
+table_out
+
+
+match_df = data.frame(
+  old = c( 1,2,3,4,5,6,7,8,9, 10),
+  new = c(
+    "Low",
+    "Low",
+    "Low",
+    "Low",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "High"
+  )
+)
+
+df_ <-
+  df_ %>% mutate(OverallQual_grouped = match_df$new[match(OverallQual, match_df$old)])
+
+
+```
+
+
+
 
 ```{r inspect dypes of the variables at hand}
 # adjust the scale of saleprice for easier handling
@@ -570,6 +608,8 @@ df_$floating_zone <-
   ifelse(df_$MSZoning_gr == "Floating Village", 1, 0)
 
 
+
+df_$ln_SalePrice <-  log(df_$SalePrice)
 table(df_$MSZoning_gr)
 
 # main model
@@ -601,10 +641,13 @@ multi_var_model_w_confounders <-
   )
 multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
 
+
+
 # with interaction and covariates and confounders and control
+# logscale SalePrice!
 multi_var_model_w_confounders_ninteraction <-
   lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    ln_SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
     data = df_
   )
 multi_var_model_w_confounders_ninteraction.beta <-
@@ -697,7 +740,7 @@ stargazer(
     coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
     coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
   ),
-  type = 'latex',
+  type = 'text',
   omit = c(
     "YrSold2008",
     "YrSold2009",
@@ -730,9 +773,90 @@ stargazer(
 ```
 
 
+main_multi_var_model.beta<-lm.beta(main_multi_var_model)
 
 
 
+
+
+mulit_var_model.beta<-lm.beta(mulit_var_model)
+
+
+# with covariates and confounders and control
+multi_var_model_w_confounders <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type,
+    data = df_
+  )
+multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
+
+# with interaction and covariates and confounders and control
+multi_var_model_w_confounders_ninteraction <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    data = df_
+  )
+multi_var_model_w_confounders_ninteraction.beta <-
+  lm.beta(multi_var_model_w_confounders_ninteraction)
+
+
+
+
+```{r Combined Table}
+
+multi_var_model_w_confounders_ninteraction
+multi_var_model_w_confounders
+
+# only compare the two most important models 
+
+stargazer(
+  multi_var_model_w_confounders,
+  multi_var_model_w_confounders.beta,
+  multi_var_model_w_confounders_ninteraction,
+  multi_var_model_w_confounders_ninteraction.beta,
+  coef = list(
+    multi_var_model_w_confounders$coefficients,
+    multi_var_model_w_confounders.beta$standardized.coefficients,
+    multi_var_model_w_confounders_ninteraction$coefficients,
+    multi_var_model_w_confounders_ninteraction.beta$standardized.coefficients
+  ),
+  p = list (
+    coef(summary(multi_var_model_w_confounders))[, 4],
+    coef(summary(multi_var_model_w_confounders.beta))[, 5],
+    coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
+    coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
+  ),
+  type = 'latex',
+  omit = c(
+    "YrSold2008",
+    "YrSold2009",
+    "YrSold2010",
+    "OverallQual_cat3",
+    "OverallQual_cat4",
+    "OverallQual_cat5",
+    "OverallQual_cat6",
+    "OverallQual_cat7",
+    "OverallQual_cat8",
+    "OverallQual_cat9",
+    "OverallQual_cat10",
+    "Building_typeSingle Family Home "
+  ),
+  header = FALSE,
+  # to get rid of r package output text
+  single.row = FALSE,
+  # to put coefficients and standard errors on same line
+  # no.space = TRUE,
+  # to remove the spaces after each line of coefficients
+  column.sep.width = "3pt",
+  # to reduce column width
+  font.size = "small" # to make font size smaller
+  # ,float.env = "sidewaystable"
+) |>
+  show_F_in_two_lines()
+
+
+
+```
 
 
 
