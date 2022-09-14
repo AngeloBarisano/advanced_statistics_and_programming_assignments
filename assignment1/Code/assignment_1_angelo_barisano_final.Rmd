@@ -641,6 +641,7 @@ stargazer(
   mulit_var_model,
   multi_var_model_w_confounders,
   multi_var_model_w_confounders_ninteraction,
+ type = 'text',
   omit = c(
     "YrSold2008",
     "YrSold2009",
@@ -654,14 +655,79 @@ stargazer(
     "OverallQual_cat9",
     "OverallQual_cat10",
     "Building_typeSingle Family Home "
-  )
+  ),
+  
+  
+            header=FALSE, # to get rid of r package output text
+
+          single.row = FALSE, # to put coefficients and standard errors on same line
+
+          no.space = TRUE, # to remove the spaces after each line of coefficients
+
+          column.sep.width = "3pt", # to reduce column width
+
+          font.size = "small" # to make font size smaller
+        # ,float.env = "sidewaystable"
 ) |>
   show_F_in_two_lines()
 
 ```
 
 
+```{r }
 
+
+
+# only compare the two most important models 
+
+stargazer(
+  multi_var_model_w_confounders,
+  multi_var_model_w_confounders.beta,
+  multi_var_model_w_confounders_ninteraction,
+  multi_var_model_w_confounders_ninteraction.beta,
+  coef = list(
+    multi_var_model_w_confounders$coefficients,
+    multi_var_model_w_confounders.beta$standardized.coefficients,
+    multi_var_model_w_confounders_ninteraction$coefficients,
+    multi_var_model_w_confounders_ninteraction.beta$standardized.coefficients
+  ),
+  p = list (
+    coef(summary(multi_var_model_w_confounders))[, 4],
+    coef(summary(multi_var_model_w_confounders.beta))[, 5],
+    coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
+    coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
+  ),
+  type = 'latex',
+  omit = c(
+    "YrSold2008",
+    "YrSold2009",
+    "YrSold2010",
+    "OverallQual_cat3",
+    "OverallQual_cat4",
+    "OverallQual_cat5",
+    "OverallQual_cat6",
+    "OverallQual_cat7",
+    "OverallQual_cat8",
+    "OverallQual_cat9",
+    "OverallQual_cat10",
+    "Building_typeSingle Family Home "
+  ),
+  header = FALSE,
+  # to get rid of r package output text
+  single.row = FALSE,
+  # to put coefficients and standard errors on same line
+  # no.space = TRUE,
+  # to remove the spaces after each line of coefficients
+  column.sep.width = "3pt",
+  # to reduce column width
+  font.size = "small" # to make font size smaller
+  # ,float.env = "sidewaystable"
+) |>
+  show_F_in_two_lines()
+
+
+
+```
 
 
 
