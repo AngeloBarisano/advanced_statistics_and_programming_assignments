@@ -4,8 +4,8 @@ output: html_document
 date: '2022-09-13'
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
 
 
@@ -27,6 +27,20 @@ library ("lm.beta")
 library("fastDummies")
 library("gtsummary")
 library("stringr")
+library("extrafont")
+
+
+# fix font 
+# Run once
+# install.packages("extrafont")
+library(extrafont)
+# Install **TTF** Latin Modern Roman fonts from www.fontsquirrel.com/fonts/latin-modern-roman
+# Import the newly installed LModern fonts, change the pattern according to the 
+# filename of the lmodern ttf files in your fonts folder
+# font_import(pattern = "lmroman*")
+loadfonts()
+
+
 
 
 setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1")
@@ -257,24 +271,18 @@ stargazer(
 
 ```{r First Hypothesis Plot}
 # livingSpace by SalePrice
-
-
-pdf(file="h1.pdf")
-
 scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price in 1000s")+ xlim(0, 7000)  + theme(
-  axis.text.x = element_text(size = 15),
-  axis.text.y = element_text(size = 15),
-  axis.title = element_text(size = 20)
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red")  + geom_smooth() + labs(x = 'Living space in square feet', y = "Sale Price in 1000s")+ xlim(0, 7000)  + theme(
+  axis.text.x = element_text(size = 17,family="LM Roman 10"),
+  axis.text.y = element_text(size = 17, family="LM Roman 10"),
+  axis.title = element_text(size = 20, family="LM Roman 10")
 )     
-
-
 #+ ggtitle("Sale Price by Living Space in square feet")
-dev.off()
-
+ggsave("h1.jpg")
 #' Add Descritption: Two outliers left out for representative reasons 
 
 # smooth the plot
+
 scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
 scatter + geom_point() + geom_smooth() + labs(x = 'Living space in square feet', y = "Sale Price in 1000s")+ xlim(0, 7000) 
 
@@ -310,45 +318,43 @@ bar + stat_summary(
 
 ```{r Second Hypothesis Plot}
 # now drill down
-pdf(file="h2.1.pdf")
+
+
 scatter <-
   ggplot(df_, aes(tot_liv_area, SalePrice, colour = MSZoning))
 scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s") + xlim(0, 7000) + theme_set(theme_bw()+ theme(legend.position = "bottom"))  + theme(
-  axis.text.x = element_text(size = 15),
-  axis.text.y = element_text(size = 15),
-  axis.title = element_text(size = 20),
-  legend.text = element_text(size = 14)
+  axis.text.x = element_text(size = 15, family="LM Roman 10"),
+  axis.text.y = element_text(size = 15, family="LM Roman 10"),
+  axis.title = element_text(size = 20, family="LM Roman 10"),
+  legend.text = element_text(size = 14, family="LM Roman 10")
 )     
 
 
 #+ ggtitle("Sale Price by Living Space in square feet subsectioned by Zone")
-dev.off()
+ggsave("h2.1.jpg")
 
 
 
 # Now obseve the groups we identified before
-pdf(file="h2.2.pdf")
-
-
 
 scatter <-
   ggplot(df_,
          aes(tot_liv_area, SalePrice, colour = MSZoning_gr),
          cex.lab = 30)
 scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning_gr') + xlim(0, 7000)  + theme_set(theme_bw() + theme(legend.position = "bottom")) + theme(
-  axis.text.x = element_text(size = 15),
-  axis.text.y = element_text(size = 15),
-  axis.title = element_text(size = 20),
-  legend.text = element_text(size = 14)
+  axis.text.x = element_text(size = 17 ,family="LM Roman 10"),
+  axis.text.y = element_text(size = 17,family="LM Roman 10"),
+  axis.title = element_text(size = 20,family="LM Roman 10"),
+  legend.text = element_text(size = 16,family="LM Roman 10")
 )     
 
-.title
+ggsave("h2.2.jpg")
 
 #+ ggtitle("Sale Price by Living Space in square feet subsectioned by Zone")
 
 
 
-dev.off()
+
 #' While not incredibly strong we would expect the effect of Lining Space on Sale Price to be stronger for Low density 
 #' areas than for High or Medium; in this case Moderate2High density
 
@@ -420,34 +426,30 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "y_since_rem"), a
 ggplot(df_, aes(x = OverallQual_cat, y = SalePrice)) +
   geom_boxplot()+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + labs(size = "Years Since Remodeling")
 
-pdf(file="supplement_appendix_Quality_yearssinceremodeling_sale.pdf")
+
+
+
 
 ggplot(df_, aes(x = OverallQual, y = SalePrice)) +
-  geom_point(aes(size = y_since_rem))+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(size = "Years Since Remodeling")  + theme(
-  axis.text.x = element_text(size = 15),
-  axis.text.y = element_text(size = 15),
-  axis.title = element_text(size = 20),
-  legend.text = element_text(size = 14))+ scale_x_continuous(breaks = scales::pretty_breaks())
+  geom_point(aes(size = y_since_rem))+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(size = "Years Since Remodeling",family="LM Roman 10")  + theme(text=element_text(family="LM Roman 10"),
+  axis.text.x = element_text(size = 17,family="LM Roman 10"),
+  axis.text.y = element_text(size = 17,family="LM Roman 10"),
+  axis.title = element_text(size = 20,family="LM Roman 10"),
+  legend.text = element_text(size = 16,family="LM Roman 10")) + scale_x_continuous(breaks = scales::pretty_breaks())
+
+ggsave(file="supplement_appendix_Quality_yearssinceremodeling_sale.jpg")
 
 
-dev.off()
 
 # this is the hypothesis plot 
-
-
-pdf(file="h3.pdf")
-
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.4) + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(x = 'Time Since last Remodeling at point of sale', y = "Sale Price in 1000s",fill = "Years Since Remodeling")  + theme(
-  axis.text.x = element_text(size = 15),
-  axis.text.y = element_text(size = 15),
+scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.4) + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(x = 'Time Since last Remodeling at point of sale', y = "Sale Price in 1000s",fill = "Years Since Remodeling")  + theme(text=element_text(family="LM Roman 10"),
+  axis.text.x = element_text(size = 17),
+  axis.text.y = element_text(size = 17),
   axis.title = element_text(size = 20)
 )     
-
-
-
 #+ ggtitle("Sale Price by Years Since Remodeling before sale year")
-dev.off()
+ggsave(file="h3.jpg")
 
 
 #' This shows that this variable is a great control for the quality of the house and its condition 
