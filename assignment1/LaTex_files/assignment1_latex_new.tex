@@ -2,6 +2,8 @@
 \usepackage{color}
 \usepackage{tikz}
 \usepackage{ntheorem}
+\usepackage{caption}
+\usepackage{subcaption}
 \theoremseparator{:}
 \newtheorem{hyp}{Hypothesis}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
@@ -17,10 +19,49 @@
 \subsection{Varaible Selection \& Explanation}
 
 
-\includegraphics{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h1.pdf"}
-\includegraphics{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h2.1.pdf"}
-\includegraphics{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h2.1.pdf"}
-\includegraphics{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h3.pdf"}
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[scale=0.3]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h1.jpg"}
+         \caption{Positive association of total Living Space \& Sale Price \& optimal line}
+         \label{fig:y equals x}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[scale=0.30]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h3.jpg"}
+         \caption{Positive association of total Living Space \& Sale Price}
+         \label{fig:three sin x}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[scale=0.325]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/h2.2.jpg"}
+         \caption{Positive association of total Living Space \& Sale Price}
+         \label{fig:five over x}
+     \end{subfigure}
+        \caption{Three Hypothesis Graphs displaying their repective association with the outcome variable}
+        \label{fig:three graphs}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -257,9 +257,19 @@ stargazer(
 
 ```{r First Hypothesis Plot}
 # livingSpace by SalePrice
+
+
 pdf(file="h1.pdf")
+
 scatter <- ggplot(df_, aes(tot_liv_area, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price in 1000s")+ xlim(0, 7000) + ggtitle("Your Title Here")
+scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'Living space in square feet', y = "Sale Price in 1000s")+ xlim(0, 7000)  + theme(
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15),
+  axis.title = element_text(size = 20)
+)     
+
+
+#+ ggtitle("Sale Price by Living Space in square feet")
 dev.off()
 
 #' Add Descritption: Two outliers left out for representative reasons 
@@ -279,7 +289,7 @@ scatter + geom_point() + geom_smooth() + labs(x = 'Living space in square feet',
 scatter <-
   ggplot(subset(df_, MSZoning == "High Density" |MSZoning == "Moderate Density"  ), aes(tot_liv_area, SalePrice, colour = MSZoning))
 
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning') 
+scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning')  #+ggtitle("Sale Price by Zone")
 #' interestingly: Moderate and High density appear to be quite comparable
 
 
@@ -303,21 +313,44 @@ bar + stat_summary(
 pdf(file="h2.1.pdf")
 scatter <-
   ggplot(df_, aes(tot_liv_area, SalePrice, colour = MSZoning))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning') + xlim(0, 7000)
+scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s") + xlim(0, 7000) + theme_set(theme_bw()+ theme(legend.position = "bottom"))  + theme(
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15),
+  axis.title = element_text(size = 20),
+  legend.text = element_text(size = 14)
+)     
+
+
+#+ ggtitle("Sale Price by Living Space in square feet subsectioned by Zone")
 dev.off()
 
 
 
 # Now obseve the groups we identified before
 pdf(file="h2.2.pdf")
+
+
+
 scatter <-
-  ggplot(df_, aes(tot_liv_area, SalePrice, colour = MSZoning_gr))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "MSZoning_gr"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning_gr') + xlim(0, 7000)
+  ggplot(df_,
+         aes(tot_liv_area, SalePrice, colour = MSZoning_gr),
+         cex.lab = 30)
+scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning_gr') + xlim(0, 7000)  + theme_set(theme_bw() + theme(legend.position = "bottom")) + theme(
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15),
+  axis.title = element_text(size = 20),
+  legend.text = element_text(size = 14)
+)     
+
+.title
+
+#+ ggtitle("Sale Price by Living Space in square feet subsectioned by Zone")
+
+
+
 dev.off()
 #' While not incredibly strong we would expect the effect of Lining Space on Sale Price to be stronger for Low density 
 #' areas than for High or Medium; in this case Moderate2High density
-
-
 
 #' Hypothesis 2: The effect of Total Living Space on Sales Price is stronger (association is stronger) for Low Density zones than for Moderate OR High Density areas; A second part of this analysis invols Moderate2High 
 
@@ -387,17 +420,33 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "y_since_rem"), a
 ggplot(df_, aes(x = OverallQual_cat, y = SalePrice)) +
   geom_boxplot()+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + labs(size = "Years Since Remodeling")
 
+pdf(file="supplement_appendix_Quality_yearssinceremodeling_sale.pdf")
 
 ggplot(df_, aes(x = OverallQual, y = SalePrice)) +
-  geom_point(aes(size = y_since_rem))+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(size = "Years Since Remodeling")
+  geom_point(aes(size = y_since_rem))+  xlab("Quality of the property") + ylab("Sale Price in 1000s") + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(size = "Years Since Remodeling")  + theme(
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15),
+  axis.title = element_text(size = 20),
+  legend.text = element_text(size = 14))+ scale_x_continuous(breaks = scales::pretty_breaks())
 
+
+dev.off()
 
 # this is the hypothesis plot 
 
 
 pdf(file="h3.pdf")
+
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
-scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "y_since_rem"), alpha = 0.4) + labs(x = 'Time Since last Remodeling at point of sale', y = "Sale Price in 1000s")
+scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.4) + theme_set(theme_bw()+ theme(legend.position = "bottom")) + labs(x = 'Time Since last Remodeling at point of sale', y = "Sale Price in 1000s",fill = "Years Since Remodeling")  + theme(
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15),
+  axis.title = element_text(size = 20)
+)     
+
+
+
+#+ ggtitle("Sale Price by Years Since Remodeling before sale year")
 dev.off()
 
 
