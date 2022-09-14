@@ -13,9 +13,17 @@
 \usepackage{graphicx}
 \usepackage{ntheorem}
 \usepackage{caption}
+
+
+\usepackage{pdflscape}
+
+
 \captionsetup{format=mycaptionfont}
 \usepackage{subcaption}
 \theoremseparator{:}
+\usepackage{lscape}
+
+
 \newtheorem{hyp}{Hypothesis}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
 \tikzset{
@@ -262,6 +270,112 @@ However, in order to answer the question, this assumtion is violated via i.a. la
 
 \section{OLS regression and model fit}
 \subsection{Normal Regression}
+
+
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 14, 2022 - 20:32:12
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{-0.0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Regresson Results}}
+\centering 
+  \label{}
+\begin{tabular}{@{\extracolsep{1pt}}lcccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{SalePrice} \\ 
+\\[-1.8ex] & Model (1) & Model (2) & Model (3) & Model (4)\\ 
+\hline \\[-1.8ex] 
+ Constant & 19.800$^{***}$ & 17.888$^{*}$ & 15.229 & 24.550 \\ 
+  & (5.216) & (10.325) & (25.697) & (24.541) \\ 
+  & & & & \\ 
+ tot\_liv\_area & 0.064$^{***}$ & 0.077$^{***}$ & 0.035$^{***}$ & 0.038$^{***}$ \\ 
+  & (0.002) & (0.005) & (0.002) & (0.005) \\ 
+  & & & & \\ 
+ y\_since\_rem & $-$0.978$^{***}$ & $-$0.886$^{***}$ & $-$0.492$^{***}$ & $-$0.493$^{***}$ \\ 
+  & (0.062) & (0.060) & (0.056) & (0.051) \\ 
+  & & & & \\ 
+ low\_density\_zone & 21.276$^{***}$ & $-$43.580$^{***}$ & 16.640$^{***}$ & $-$31.118$^{***}$ \\ 
+  & (3.306) & (10.704) & (2.753) & (8.368) \\ 
+  & & & & \\ 
+ commercial\_zone & $-$22.490 & 35.669 & $-$25.251$^{**}$ & $-$35.782 \\ 
+  & (14.449) & (44.222) & (11.881) & (35.624) \\ 
+  & & & & \\ 
+ floating\_zone & 32.125$^{***}$ & $-$70.000$^{**}$ & 18.710$^{***}$ & $-$8.247 \\ 
+  & (6.473) & (29.023) & (5.258) & (22.841) \\ 
+  & & & & \\ 
+ I(tot\_liv\_area$\hat{\mkern6mu}$2) &  & $-$0.00001$^{***}$ &  & $-$0.00000 \\ 
+  &  & (0.00000) &  & (0.00000) \\ 
+  & & & & \\ 
+ tot\_liv\_area:low\_density\_zone &  & 0.028$^{***}$ &  & 0.019$^{***}$ \\ 
+  &  & (0.005) &  & (0.004) \\ 
+  & & & & \\ 
+ tot\_liv\_area:commercial\_zone &  & $-$0.031 &  & 0.0001 \\ 
+  &  & (0.021) &  & (0.017) \\ 
+  & & & & \\ 
+ tot\_liv\_area:floating\_zone &  & 0.043$^{***}$ &  & 0.013 \\ 
+  &  & (0.011) &  & (0.009) \\ 
+  & & & & \\ 
+ tot\_liv\_area:LotArea &  &  &  & $-$0.00000$^{***}$ \\ 
+  &  &  &  & (0.00000) \\ 
+  & & & & \\ 
+ LotArea &  &  & 0.001$^{***}$ & 0.005$^{***}$ \\ 
+  &  &  & (0.0001) & (0.0005) \\ 
+  & & & & \\ 
+ YrSold & NO & NO & YES & YES\\ 
+  &  &  &  &  \\ 
+ % & & & & \\ 
+ OverallQual\_cat & NO & NO & YES & YES\\ 
+  &  &  &  &  \\ 
+ % & & & & \\ 
+ Building\_type & NO & NO & YES & YES\\ 
+  &  &  &  &  \\ 
+ % & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,460 & 1,460 & 1,460 & 1,460 \\ 
+R$^{2}$ & 0.686 & 0.714 & 0.803 & 0.836 \\ 
+Adjusted R$^{2}$ & 0.685 & 0.712 & 0.800 & 0.833 \\ 
+Residual Std. Error & 44.612 & 42.645 & 35.548 & 32.488 \\ 
+& (df = 1454) & (df = 1450) & (df = 1439) & (df = 1434)\\
+F Statistic & 634.508$^{***}$  & 401.461$^{***}$  & 292.393$^{***}$  & 291.609$^{***}$  \\ 
+ & (df = 5; 1454) & (df = 9; 1450) & (df = 20; 1439) & (df = 25; 1434) \\
+\hline 
+\hline \\[-3ex] 
+\end{tabular} 
+%
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 1460. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. Model (1) contains all dependent variable regressors without any interactions. Model (2) contains hypothesized interactions and quadratic term. Model (3) contains confoudners and control variables without intercation. Model (4) contains all independent variables and control variables and intercations. Dummies for YearSold, Quality, and BuildingType are only represented with a placeholder.  
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
