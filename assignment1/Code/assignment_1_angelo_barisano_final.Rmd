@@ -28,6 +28,7 @@ library("fastDummies")
 library("gtsummary")
 library("stringr")
 library("extrafont")
+library("gridExtra")
 loadfonts()
 
 
@@ -653,18 +654,17 @@ multi_var_model_w_confounders_ninteraction <-
 multi_var_model_w_confounders_ninteraction.beta <-
   lm.beta(multi_var_model_w_confounders_ninteraction)
 
+# not logscale the outcome but everythign else
+multi_var_model_w_confounders_ninteraction_unscaled <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    data = df_
+  )
+multi_var_model_w_confounders_ninteraction_unscaled.beta <-
+  lm.beta(multi_var_model_w_confounders_ninteraction_unscaled)
 
 
 
-
-stargazer (
-  main_multi_var_model,
-  mulit_var_model,
-  multi_var_model_w_confounders,
-  multi_var_model_w_confounders_ninteraction
-  , type = 'text'
-) |>
-  show_F_in_two_lines()
 
 
 
@@ -772,36 +772,6 @@ stargazer(
 
 ```
 
-
-main_multi_var_model.beta<-lm.beta(main_multi_var_model)
-
-
-
-
-
-mulit_var_model.beta<-lm.beta(mulit_var_model)
-
-
-# with covariates and confounders and control
-multi_var_model_w_confounders <-
-  lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type,
-    data = df_
-  )
-multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
-
-# with interaction and covariates and confounders and control
-multi_var_model_w_confounders_ninteraction <-
-  lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
-    data = df_
-  )
-multi_var_model_w_confounders_ninteraction.beta <-
-  lm.beta(multi_var_model_w_confounders_ninteraction)
-
-
-
-
 ```{r Combined Table}
 
 multi_var_model_w_confounders_ninteraction
@@ -857,6 +827,101 @@ stargazer(
 
 
 ```
+
+
+# Part 4 Diagnostics
+
+```{r da modal}
+# not logscale the outcome but everythign else
+multi_var_model_w_confounders_ninteraction_unscaled <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    data = df_
+  )
+multi_var_model_w_confounders_ninteraction_unscaled.beta <-
+  lm.beta(multi_var_model_w_confounders_ninteraction_unscaled)
+
+
+
+```
+
+
+
+```{r}
+# Tests and controls for Homoscedasitcity
+# Run models with clustered SE, robust SE, and normal se
+# multi_var_model_w_confounders_ninteraction
+# 
+# multi_var_model_w_confounders_ninteraction_unscaled
+df_$Neighborhood
+
+# Make plots
+# png(filename="normalityplots.png")
+# par(mfrow = c(2,2))
+# plot(multi_var_model_w_confounders_ninteraction)
+# dev.off()
+
+
+
+# pagan breusch test
+lmtest::bptest(multi_var_model_w_confounders_ninteraction)
+
+
+# robust SE
+seBasic <- sqrt( diag( vcov( m_2 )))
+seWhite <- sqrt( diag(vcovHC( m_2, type="HC0")))
+stargazer(m_2,m_2,se=list(seBasic,seWhite),
+omit=c("LotArea","X2ndFlrSF","MSZoning","FullBath",
+"HalfBath","BedroomAbvGr","BasementDummy",
+"PoolDummy"),no.space=TRUE,font.size="footnotesize",
+column.labels = c("Regular standard error","Robust standard error"))
+
+
+
+
+
+
+# standard error manual calcualtions
+seBasic_full <- sqrt(diag(vcov(multi_var_model_w_confounders_ninteraction)))
+seWhite_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, type = 'HC0')))
+
+#' why to cluster standard errrors? 
+#' maybe there are underlying reasons such that for instance
+#' county actually influences these issues 
+seClust_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, cluster = 'Neighborhood')))
+
+stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, se = list (seBasic_full, seWhite_full, seClust_full), type = 'text')
+#' how to interpret?
+#' eg income we see no real heteroscedasticity; so there is less varaince or SE 
+#' but lunch was heteroscedastic --> the result ofthe fix is wider SE
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
