@@ -29,6 +29,7 @@ library("gtsummary")
 library("stringr")
 library("extrafont")
 library("gridExtra")
+library("AER")
 loadfonts()
 
 
@@ -648,7 +649,7 @@ multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
 # logscale SalePrice!
 multi_var_model_w_confounders_ninteraction <-
   lm(
-    ln_SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    ln_SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + tot_liv_area * LotArea ,
     data = df_
   )
 multi_var_model_w_confounders_ninteraction.beta <-
@@ -811,29 +812,21 @@ stargazer(
 
 # Part 4 Diagnostics
 
-```{r da modal}
-# not logscale the outcome but everythign else
-multi_var_model_w_confounders_ninteraction_unscaled <-
-  lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
-    data = df_
-  )
-multi_var_model_w_confounders_ninteraction_unscaled.beta <-
-  lm.beta(multi_var_model_w_confounders_ninteraction_unscaled)
 
+  multi_var_model_w_confounders,
+  multi_var_model_w_confounders.beta,
+  multi_var_model_w_confounders_ninteraction_unscaled,
+  multi_var_model_w_confounders_ninteraction_unscaled.beta,
+  multi_var_model_w_confounders_ninteraction,
+  multi_var_model_w_confounders_ninteraction.beta,
 
-
-```
-
-
-
-```{r}
+```{r A4}
 # Tests and controls for Homoscedasitcity
 # Run models with clustered SE, robust SE, and normal se
 # multi_var_model_w_confounders_ninteraction
 # 
 # multi_var_model_w_confounders_ninteraction_unscaled
-df_$Neighborhood
+
 
 # Make plots
 # png(filename="normalityplots.png")
@@ -848,13 +841,13 @@ lmtest::bptest(multi_var_model_w_confounders_ninteraction)
 
 
 # robust SE
-seBasic <- sqrt( diag( vcov( m_2 )))
-seWhite <- sqrt( diag(vcovHC( m_2, type="HC0")))
-stargazer(m_2,m_2,se=list(seBasic,seWhite),
-omit=c("LotArea","X2ndFlrSF","MSZoning","FullBath",
-"HalfBath","BedroomAbvGr","BasementDummy",
-"PoolDummy"),no.space=TRUE,font.size="footnotesize",
-column.labels = c("Regular standard error","Robust standard error"))
+# seBasic <- sqrt( diag( vcov( m_2 )))
+# seWhite <- sqrt( diag(vcovHC( m_2, type="HC0")))
+# stargazer(m_2,m_2,se=list(seBasic,seWhite),
+# omit=c("LotArea","X2ndFlrSF","MSZoning","FullBath",
+# "HalfBath","BedroomAbvGr","BasementDummy",
+# "PoolDummy"),no.space=TRUE,font.size="footnotesize",
+# column.labels = c("Regular standard error","Robust standard error"))
 
 
 
@@ -865,12 +858,26 @@ column.labels = c("Regular standard error","Robust standard error"))
 seBasic_full <- sqrt(diag(vcov(multi_var_model_w_confounders_ninteraction)))
 seWhite_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, type = 'HC0')))
 
+
 #' why to cluster standard errrors? 
 #' maybe there are underlying reasons such that for instance
 #' county actually influences these issues 
 seClust_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, cluster = 'Neighborhood')))
 
-stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, se = list (seBasic_full, seWhite_full, seClust_full), type = 'text')
+stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, se = list (seBasic_full, seWhite_full, seClust_full), type = 'text' , omit = c(
+    "YrSold2008",
+    "YrSold2009",
+    "YrSold2010",
+    "OverallQual_cat3",
+    "OverallQual_cat4",
+    "OverallQual_cat5",
+    "OverallQual_cat6",
+    "OverallQual_cat7",
+    "OverallQual_cat8",
+    "OverallQual_cat9",
+    "OverallQual_cat10",
+    "Building_typeSingle Family Home "
+  ))
 #' how to interpret?
 #' eg income we see no real heteroscedasticity; so there is less varaince or SE 
 #' but lunch was heteroscedastic --> the result ofthe fix is wider SE
@@ -883,10 +890,59 @@ stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confound
 
 
 
+```{r A2}
+
+
+
+vif <- corvif(multi_var_model_w_confounders_ninteraction, type = 'predictor')
+stargazer(vif, type = 'text')
+vif <- corvif(multi_var_model_w_confounders_ninteraction)
+stargazer(vif, type = 'text')
+
+#' while there are some variables that dispaly a VIF of more than 5, this does not automatically indicate mulitcollineariy. however this necessitats further analysis of this issue to reduce the probabiltiy of having a problem with multicllinearity. 
 
 
 
 
+
+
+
+```
+
+
+
+
+
+# just an example 
+CASchools$incomex2 <- (CASchools$income * 2)
+
+full_model <- lm(score ~ teachers + lunch + computer + income + incomex2 +  expenditure + calworks + students, data= CASchools)
+stargazer(full_model, type = 'text')
+
+
+
+# imperfect multcollineraity 
+
+full_model <- lm(score ~ teachers + lunch + computer + income +  expenditure + calworks + students, data= CASchools)
+
+vif <- vif(full_model)
+
+stargazer(vif, type = 'text')
+#' if vif is higher than 5, it is bad!!!
+
+
+
+# remedies: DO NOT TAKE OUT THE MULTICOLLINEAR VARIABLES!!!!
+# better solution
+# combine multicollinear varaibles (principal components); pretty much same explanation
+
+# eg instead pf students and teachers you use te ratio size whcih is students to teachers
+# so better combine 
+full_model <- lm(score ~ size + lunch + computer + income +  expenditure + calworks , data= CASchools)
+
+vif <- vif(full_model)
+
+stargazer(vif, type = 'text')
 
 
 
