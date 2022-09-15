@@ -271,6 +271,172 @@ However, in order to answer the question, this assumtion is violated via i.a. la
 \section{OLS regression and model fit}
 \subsection{Normal Regression}
 
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.5cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Merged Standardized Regresson Results containing both standardized and unstandardized coefficients FINAL VERSION 3 models complete yay}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-7pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{2}{c}{SalePrice} & \multicolumn{2}{c}{SalePrice} & \multicolumn{2}{c}{ln\_SalePrice} \\ 
+\\[-1.8ex] & Model (1) & Std. Coef.& Model (2) & Std. Coef.&  Model (3) & Std. Coef.\\ 
+\hline \\[-1.8ex] 
+ Constant & 15.229 &  & 24.550 &  & 3.584$^{***}$ &  \\ 
+  & (25.697) &  & (24.541) &  & (0.114) & \\ 
+  & & & & & & \\ 
+ Living Space & 0.035$^{***}$ & 0.362$^{***}$ & 0.038$^{***}$ & 0.393$^{***}$ & 0.0003$^{***}$ & 0.684$^{***}$ \\ 
+  & (0.002) & & (0.005) & & (0.00002) &  \\ 
+  & & & & & & \\ 
+ Years Since Remodeling & $-$0.492$^{***}$ & $-$0.128$^{***}$ & $-$0.493$^{***}$ & $-$0.128$^{***}$ & $-$0.003$^{***}$ & $-$0.170$^{***}$ \\ 
+  & (0.056) &  & (0.051) &  & (0.0002) &  \\ 
+  & & & & & & \\ 
+ Low Dens. Zone & 16.640$^{***}$ & 0.086$^{***}$ & $-$31.118$^{***}$ & $-$0.160$^{***}$ & 0.077$^{**}$ & 0.079$^{**}$ \\ 
+  & (2.753) &  & (8.368) & & (0.039) &  \\ 
+  & & & & & & \\ 
+ Commercial Zone & $-$25.251$^{**}$ & $-$0.026$^{**}$ & $-$35.782 & $-$0.037 & $-$0.673$^{***}$ & $-$0.139$^{***}$ \\ 
+  & (11.881) &  & (35.624) &  & (0.165) &  \\ 
+  & & & & & & \\ 
+ Floating Zone & 18.710$^{***}$ & 0.049$^{***}$ & $-$8.247 & $-$0.021 & 0.127 & 0.065 \\ 
+  & (5.258) & & (22.841) & & (0.106) &  \\ 
+  & & & & & & \\ 
+ Lot Area & 0.001$^{***}$ & 0.074$^{***}$ & 0.005$^{***}$ & 0.616$^{***}$ & 0.00002$^{***}$ & 0.404$^{***}$ \\ 
+  & (0.0001) &  & (0.0005) &  & (0.00000) &  \\ 
+  & & & & & & \\ 
+  
+ I(Living Space$\hat{\mkern6mu}$2) &  &  & $-$0.00000 & $-$0.002 & $-$0.00000$^{***}$ & $-$0.234$^{***}$ \\ 
+  &  &  & (0.00000) &  & (0.000) &  \\ 
+  & & & & & & \\ 
+ Living Space:Low Dens. Zone &  &  & 0.019$^{***}$ & 0.308$^{***}$ & 0.00002 & 0.058 \\ 
+  &  &  & (0.004) & & (0.00002) &  \\ 
+  & & & & & & \\ 
+ Living Space:Commercial Zone &  &  & 0.0001 & 0.0002 & 0.0002$^{**}$ & 0.067$^{**}$ \\ 
+  &  &  & (0.017) & & (0.0001) & \\ 
+  & & & & & & \\ 
+ Living Space:Floating Zone &  &  & 0.013 & 0.088 & 0.00002 & 0.022 \\ 
+  &  &  & (0.009) &  & (0.00004) & \\ 
+  & & & & & & \\ 
+ Living Space:Lot Area &  &  & $-$0.00000$^{***}$ & $-$0.647$^{***}$ & $-$0.000$^{***}$ & $-$0.396$^{***}$ \\ 
+  &  &  & (0.00000) &  & (0.000) &  \\ 
+  & & & & & & \\ 
+  Year Sold & YES & YES & YES & YES & YES & YES \\ 
+  %&  & &  &  \\ 
+  % & & & & \\ 
+  Overall Quality Rating & YES & YES & YES & YES & YES & YES \\  
+  % & (32.730) & (32.730) & (30.513) & (30.513) \\ 
+  %& & & & \\ 
+  Building Type & YES & YES & YES & YES & YES & YES \\ 
+  %& (2.654) & (2.654) & (2.501) & (2.501) \\ 
+  % & & & & \\ 
+\hline \\[-1.8ex]  
+\end{tabular} 
+%%%%%%%
+\small 
+\centering
+\begin{tabular}{@{\extracolsep{19pt}}lcccccc} 
+R$^{2}$ && 0.803 &   0.836 &  0.861   \\ 
+Adjusted R$^{2}$ && 0.800 &  0.833 &   0.858  \\ 
+Residual Std. Error && 35.548  & 32.488  & 0.150   \\ 
+df Residual Std. Error && (df = 1439)  & (df = 1434) & (df = 1434)\\
+F Statistic& & 292.393$^{***}$    & 291.609$^{***}$   & 354.941$^{***}$    \\ 
+df F Statistic && (df = 20; 1439)  & (df = 25; 1434)  & (df = 25; 1434)   \\
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 1460. All observations included in any model. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. This table reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3). The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3). For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. 
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
+
+
+\textbf{NOTE: This regression table shifts from including interaction effects, scaling, etc from one model to the other; I chose to 
+The choice to not include incremental models was done to keep the analysisi concise. In the appendix one can see that the $Adj-  R²$ increases also only due to the inclusion of further control variables without interaction terms. Nonetheless, also the interaction terms imrpove on the model fit (with and without control variables). Finally, Model (3) \& (4) include all interaction effects and scaled variables (such as LN SalePrice) as no model shows a lower isses in this regard.} Thus, only the simple multi-variate model and an extensive model was displayed.
+
+
+
+
+
+
+
+
+
+Table 2 reports a simplified (1) and complex model (3), containing all corresponding interaction effects and control varaibles \footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price}
+
+
+Table 2 reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3).\footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price} The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3).\footnote{It may be noted that the Sale Price will be log scaled in Part 4; the interaction term of Total Living Space with itself was already included in this section as I assume that part 3 is mainly about the independent variables demonstrating once the noremal interpretation; as such a complete model will be provided in part 4, containing the log scaled version of the independent}
+
+
+
+
+
+he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
+
+
+Table 3 reports the regression results of  for the four sucessively extensive models starting from only the independent variable from Figure 2, then adding interaction terms in model (2), control variables in model (3) without interactions, and a complete model (4) including interaction terms, which will be discussed below. All four models have been reported to demonstrate that for the main indepenent variables (see Figure 2) the coefficients and Standard Errors are stable to the inclusion of control variables and interaction terms.\footnote{Please note that log scaling of the dependent variable was not done on purpose at this point due to this task falling into part 4 of this assignment}
+Considering model (4) as the Complete model
+Specifically, this research shows that the association Total Living Space and Sale Price is positive and  statistically significant (($\hat{\beta}$ = 0.040, $p$ = 0.01)
+
+
+he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
+
+Overall, the inclusion of the interaction of Zone (M-IV) and Total Living Area (IV), in addition to introducing a quadratic term of Total Living Area (IV) improves the model fit sighlty from 
+
+
+\subsection{Standardized Regression Coefficients and Effect Size}
+
+
+
+
+
+
+
+
+
+
+\section{Diagnostic checking}
+\textbf{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price}
+
+\textbf{IMPORTANT: FOR PART 4 CREATE A TABLE THAT CONATINS OLS ROBUST TO STANDARD ERRORS!!!! (THIS EXACT TABLE!!)}
+
+\textbf{IMPOIRTANT HERE WE WILL NOT ONLY COMPARE THE BASE MODEL WITHOUT SCALE SALE PRICE, But also THE FULL MODEL WITH SCALED EVERYTHING and corrections for standard errors }
+
+to do: 1) log scale outcome variable because it is a an important factor; 2) secondly, the quadractic term of Total livign space is already in the part before, but here the rational is different was we were only talking about the independent variables in that case. as such I did not consider the total living area to be an issue here 
+
+
+
+
+\section{Subset analyses}
+\textbf{In this analysis we will examine further interaction and subsection analysis; such as quality as a numeric variable}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+\textbf{MERGE THE STANDARDZIDER AND UNSTANDARDIZED TABLE}
+
+
 
 
 \begin{table}[!htbp] \centering 
@@ -278,7 +444,7 @@ However, in order to answer the question, this assumtion is violated via i.a. la
 \begin{threeparttable}
 \small
 \captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{Merged Standardized Regresson Results containing both standardized and unstandardized coefficients FINAL VERSION}}
+\caption{\textsc{Merged Standardized Regresson Results containing both standardized and unstandardized coefficients FINAL VERSION BACKUP}}
 \centering 
   \label{}
 \small 
@@ -354,428 +520,6 @@ df F Statistic & (df = 20; 1439) & (df = 20; 1439) & (df = 25; 1434) & (df = 25;
 %
 \end{table}
 
-\textbf{NOTE: This regression table shifts from including interaction effects, scaling, etc from one model to the other; I chose to 
-
-The choice to not include incremental models was done to keep the analysisi concise. In the appendix one can see that the $Adj-  R²$ increases also only due to the inclusion of further control variables without interaction terms. Nonetheless, also the interaction terms imrpove on the model fit (with and without control variables). Finally, Model (3) \& (4) include all interaction effects and scaled variables (such as LN SalePrice) as no model shows a lower isses in this regard.} Thus, only the simple multi-variate model and an extensive model was displayed.
-
-
-
-
-
-%%%%%
-%Backup"!!!
-\begin{table}[!htbp] \centering 
-\begin{adjustwidth}{-0.0cm}{-0cm}
-\begin{threeparttable}
-\small
-\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{Merged Standardized Regresson Results containing both standardized and unstandardized coefficients}}
-\centering 
-  \label{}
-\small 
-\begin{tabular}{@{\extracolsep{-1pt}}lcccc} 
-\\[-5.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{2}{c}{Sale Price} & \multicolumn{2}{c}{ln(Sale Price)} \\ 
-\\[-1.8ex] & Model (1) & Std.Model (2) & Model (3) & Std.Model (4)\\ 
-\hline \\[-1.8ex] 
- Constant & 15.229 & / & 3.584$^{***}$ & / \\ 
-  & (25.697) & (25.697) & (0.114) & (0.114) \\ 
-  & & & & \\ 
- Total Living Space & 0.035$^{***}$ & 0.362$^{***}$ & 0.0003$^{***}$ & 0.684$^{***}$ \\ 
-  & (0.002) & (0.002) & (0.00002) & (0.00002) \\ 
-  & & & & \\ 
- Years Since Remodelling & $-$0.492$^{***}$ & $-$0.128$^{***}$ & $-$0.003$^{***}$ & $-$0.170$^{***}$ \\ 
-  & (0.056) & (0.056) & (0.0002) & (0.0002) \\ 
-  & & & & \\ 
- Low Density Zone & 16.640$^{***}$ & 0.086$^{***}$ & 0.077$^{**}$ & 0.079$^{**}$ \\ 
-  & (2.753) & (2.753) & (0.039) & (0.039) \\ 
-  & & & & \\ 
- Commercial Zone & $-$25.251$^{**}$ & $-$0.026$^{**}$ & $-$0.673$^{***}$ & $-$0.139$^{***}$ \\ 
-  & (11.881) & (11.881) & (0.165) & (0.165) \\ 
-  & & & & \\ 
- Floating Zone & 18.710$^{***}$ & 0.049$^{***}$ & 0.127 & 0.065 \\ 
-  & (5.258) & (5.258) & (0.106) & (0.106) \\ 
-  & & & & \\ 
- I(Total Living Area$\hat{\mkern6mu}$2) &  &  & $-$0.00000$^{***}$ & $-$0.234$^{***}$ \\ 
-  &  &  & (0.000) & (0.000) \\ 
-  & & & & \\ 
- Lot Area & 0.001$^{***}$ & 0.074$^{***}$ & 0.00002$^{***}$ & 0.404$^{***}$ \\ 
-  & (0.0001) & (0.0001) & (0.00000) & (0.00000) \\ 
-  & & & & \\ 
- "Total Living Area":"Low Density Zone" &  &  & 0.00002 & 0.058 \\ 
-  &  &  & (0.00002) & (0.00002) \\ 
-  & & & & \\ 
- "Total Living Area":"Commercial Zone" &  &  & 0.0002$^{**}$ & 0.067$^{**}$ \\ 
-  &  &  & (0.0001) & (0.0001) \\ 
-  & & & & \\ 
- "Total Living Area":"Floating Zone" &  &  & 0.00002 & 0.022 \\ 
-  &  &  & (0.00004) & (0.00004) \\ 
-  & & & & \\ 
- "Total Living Area":"Lot Area" &  &  & $-$0.000$^{***}$ & $-$0.396$^{***}$ \\ 
-  &  &  & (0.000) & (0.000) \\ 
-  & & & & \\ 
-  Year Sold & YES & YES & YES & YES \\ 
-  %&  & &  &  \\ 
-  % & & & & \\ 
-  Overall Quality Rating & YES & YES & YES & YES \\  
-  % & (32.730) & (32.730) & (30.513) & (30.513) \\ 
-  %& & & & \\ 
-  Building Type & YES & YES & YES & YES \\ 
-  %& (2.654) & (2.654) & (2.501) & (2.501) \\ 
-  % & & & & \\ 
-\hline \\[-1.8ex] 
-R$^{2}$ & 0.803 & 0.803 & 0.861 & 0.861 \\ 
-Adjusted R$^{2}$ & 0.800 & 0.800 & 0.858 & 0.858 \\ 
-Residual Std. Error & 35.548 & 35.548  & 0.150  & 0.150 \\
-df Residual Std. Error & (df = 1439) & (df = 1439) & (df = 1434) & (df = 1434)\\
-F Statistic & 292.393$^{***}$  & 292.393$^{***}$  & 354.941$^{***}$  & 354.941$^{***}$  \\ 
-df F Statistic & (df = 20; 1439) & (df = 20; 1439) & (df = 25; 1434) & (df = 25; 1434) \\
-\hline 
-\hline \\[-3.5ex] 
-\end{tabular} 
-\begin{tablenotes}[para,flushleft]
-      \small
-      \item\textit{Note:} N = 1460. All observations included in any model. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. This table reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3). The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3). For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. 
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-%
-\end{table}
-%%%%%%%%%%
-
-
-
-
-Table 2 reports a simplified (1) and complex model (3), containing all corresponding interaction effects and control varaibles \footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price}
-
-
-Table 2 reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3).\footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price} The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3).\footnote{It may be noted that the Sale Price will be log scaled in Part 4; the interaction term of Total Living Space with itself was already included in this section as I assume that part 3 is mainly about the independent variables demonstrating once the noremal interpretation; as such a complete model will be provided in part 4, containing the log scaled version of the independent}
-
-
-
-
-
-he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
-
-
-Table 3 reports the regression results of  for the four sucessively extensive models starting from only the independent variable from Figure 2, then adding interaction terms in model (2), control variables in model (3) without interactions, and a complete model (4) including interaction terms, which will be discussed below. All four models have been reported to demonstrate that for the main indepenent variables (see Figure 2) the coefficients and Standard Errors are stable to the inclusion of control variables and interaction terms.\footnote{Please note that log scaling of the dependent variable was not done on purpose at this point due to this task falling into part 4 of this assignment}
-Considering model (4) as the Complete model
-Specifically, this research shows that the association Total Living Space and Sale Price is positive and  statistically significant (($\hat{\beta}$ = 0.040, $p$ = 0.01)
-
-
-he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
-
-Overall, the inclusion of the interaction of Zone (M-IV) and Total Living Area (IV), in addition to introducing a quadratic term of Total Living Area (IV) improves the model fit sighlty from 
-
-
-\subsection{Standardized Regression Coefficients and Effect Size}
-
-
-
-
-
-
-
-
-
-
-\section{Diagnostic checking}
-\textbf{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price}
-
-\textbf{IMPORTANT: FOR PART 4 CREATE A TABLE THAT CONATINS OLS ROBUST TO STANDARD ERRORS!!!! (THIS EXACT TABLE!!)}
-
-\textbf{IMPOIRTANT HERE WE WILL NOT ONLY COMPARE THE BASE MODEL WITHOUT SCALE SALE PRICE, But also THE FULL MODEL WITH SCALED EVERYTHING and corrections for standard errors }
-
-to do: 1) log scale outcome variable because it is a an important factor; 2) secondly, the quadractic term of Total livign space is already in the part before, but here the rational is different was we were only talking about the independent variables in that case. as such I did not consider the total living area to be an issue here 
-
-
-
-
-\section{Subset analyses}
-\textbf{In this analysis we will examine further interaction and subsection analysis; such as quality as a numeric variable}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
-
-\textbf{MERGE THE STANDARDZIDER AND UNSTANDARDIZED TABLE}
-
-
-
-
-
-
-% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Wed, Sep 14, 2022 - 20:32:12
-\begin{table}[!htbp] \centering 
-\begin{adjustwidth}{-0.0cm}{-0cm}
-\begin{threeparttable}
-\small
-\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{Merged Standardized Regresson Results}}
-\centering 
-  \label{}
-\small 
-\begin{tabular}{@{\extracolsep{-1pt}}lcccc} 
-\\[-5.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{4}{c}{SalePrice} \\ 
-\\[-1.8ex] & Model (1) & Std.Model (2) & Model (3) & Std.Model (4)\\ 
-\hline \\[-1.8ex] 
- Constant & 19.800$^{***}$ & / & 24.550 & / \\ 
-  & (5.216) & (5.216) & (24.541) & (24.541) \\ 
-  & & & & \\ 
- Total Living Area & 0.064$^{***}$ & 0.667$^{***}$ & 0.038$^{***}$ & 0.393$^{***}$ \\ 
-  & (0.002) & (0.002) & (0.005) & (0.005) \\ 
-  & & & & \\ 
- Time Since Remodelling & $-$0.978$^{***}$ & $-$0.254$^{***}$ & $-$0.493$^{***}$ & $-$0.128$^{***}$ \\ 
-  & (0.062) & (0.062) & (0.051) & (0.051) \\ 
-  & & & & \\ 
- Low-Density Zone & 21.276$^{***}$ & 0.109$^{***}$ & $-$31.118$^{***}$ & $-$0.160$^{***}$ \\ 
-  & (3.306) & (3.306) & (8.368) & (8.368) \\ 
-  & & & & \\ 
- Commercial Zone & $-$22.490 & $-$0.023 & $-$35.782 & $-$0.037 \\ 
-  & (14.449) & (14.449) & (35.624) & (35.624) \\ 
-  & & & & \\ 
- Floating Village Zone & 32.125$^{***}$ & 0.083$^{***}$ & $-$8.247 & $-$0.021 \\ 
-  & (6.473) & (6.473) & (22.841) & (22.841) \\ 
-  & & & & \\ 
- I(Total Living Area$\hat{\mkern6mu}$2) &  &  & $-$0.00000 & $-$0.002 \\ 
-  &  &  & (0.00000) & (0.00000) \\ 
-  & & & & \\ 
- Lot Area &  &  & 0.005$^{***}$ & 0.616$^{***}$ \\ 
-  &  &  & (0.0005) & (0.0005) \\ 
-  & & & & \\ 
- "Total Living Area":"Low-Density Zone" &  &  & 0.019$^{***}$ & 0.308$^{***}$ \\ 
-  &  &  & (0.004) & (0.004) \\ 
-  & & & & \\ 
- "Total Living Area":"Commercial Zone" &  &  & 0.0001 & 0.0002 \\ 
-  &  &  & (0.017) & (0.017) \\ 
-  & & & & \\ 
- "Total Living Area":"Floating Village Zone" &  &  & 0.013 & 0.088 \\ 
-  &  &  & (0.009) & (0.009) \\ 
-  & & & & \\ 
- "Total Living Area":"Lot Area" &  &  & $-$0.00000$^{***}$ & $-$0.647$^{***}$ \\ 
-  &  &  & (0.00000) & (0.00000) \\ 
-  & & & & \\ 
-  YrSold & YES & YES & YES & YES \\ 
-  %&  & &  &  \\ 
- % & & & & \\ 
- OverallQual & YES & YES & YES & YES \\  
- % & (32.730) & (32.730) & (30.513) & (30.513) \\ 
- %& & & & \\ 
- BuildingType & YES & YES & YES & YES \\ 
-  %& (2.654) & (2.654) & (2.501) & (2.501) \\ 
-% & & & & \\ 
-\hline \\[-1.8ex] 
-%Observations & 1,460 & 1,460 & 1,460 & 1,460 \\ 
-R$^{2}$ & 0.686 & 0.686 & 0.836 & 0.836 \\ 
-Adjusted R$^{2}$ & 0.685 & 0.685 & 0.833 & 0.833 \\ 
-Residual Std. Error & 44.612  & 44.612 & 32.488  & 32.488 \\ 
-df Residual Std. Error & (df = 1454) & (df = 1454) &(df = 1434) &(df = 1434)\\
-F Statistic & 634.508$^{***}$  & 634.508$^{***}$  & 291.609$^{***}$  & 291.609$^{***}$  \\ df F Statistic & (df = 5; 1454) & (df = 5; 1454) & (df = 25; 1434) & (df = 25; 1434) \\
-\hline 
-\hline \\[-3.5ex] 
-\end{tabular} 
-\begin{tablenotes}[para,flushleft]
-      \small
-      \item\textit{Note:} N = 1460. All observations included in any model. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. This table reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3). The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3). For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. 
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-%
-\end{table}
-
-
-
-
-
-% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Wed, Sep 14, 2022 - 20:32:12
-\begin{table}[!htbp] \centering
-\begin{adjustwidth}{-0.0cm}{-0cm}
-\begin{threeparttable}
-\small
-\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{Regresson Results}}
-\centering 
-  \label{}
-\begin{tabular}{@{\extracolsep{1pt}}lcccc} 
-\\[-5.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{4}{c}{SalePrice} \\ 
-\\[-1.8ex] & Model (1) & Model (2) & Model (3) & Model (4)\\ 
-\hline \\[-1.8ex] 
- Constant & 19.800$^{***}$ & 17.888$^{*}$ & 15.229 & 24.550 \\ 
-  & (5.216) & (10.325) & (25.697) & (24.541) \\ 
-  & & & & \\ 
- tot\_liv\_area & 0.064$^{***}$ & 0.077$^{***}$ & 0.035$^{***}$ & 0.038$^{***}$ \\ 
-  & (0.002) & (0.005) & (0.002) & (0.005) \\ 
-  & & & & \\ 
- y\_since\_rem & $-$0.978$^{***}$ & $-$0.886$^{***}$ & $-$0.492$^{***}$ & $-$0.493$^{***}$ \\ 
-  & (0.062) & (0.060) & (0.056) & (0.051) \\ 
-  & & & & \\ 
- low\_density\_zone & 21.276$^{***}$ & $-$43.580$^{***}$ & 16.640$^{***}$ & $-$31.118$^{***}$ \\ 
-  & (3.306) & (10.704) & (2.753) & (8.368) \\ 
-  & & & & \\ 
- commercial\_zone & $-$22.490 & 35.669 & $-$25.251$^{**}$ & $-$35.782 \\ 
-  & (14.449) & (44.222) & (11.881) & (35.624) \\ 
-  & & & & \\ 
- floating\_zone & 32.125$^{***}$ & $-$70.000$^{**}$ & 18.710$^{***}$ & $-$8.247 \\ 
-  & (6.473) & (29.023) & (5.258) & (22.841) \\ 
-  & & & & \\ 
- I(tot\_liv\_area$\hat{\mkern6mu}$2) &  & $-$0.00001$^{***}$ &  & $-$0.00000 \\ 
-  &  & (0.00000) &  & (0.00000) \\ 
-  & & & & \\ 
- tot\_liv\_area:low\_density\_zone &  & 0.028$^{***}$ &  & 0.019$^{***}$ \\ 
-  &  & (0.005) &  & (0.004) \\ 
-  & & & & \\ 
- tot\_liv\_area:commercial\_zone &  & $-$0.031 &  & 0.0001 \\ 
-  &  & (0.021) &  & (0.017) \\ 
-  & & & & \\ 
- tot\_liv\_area:floating\_zone &  & 0.043$^{***}$ &  & 0.013 \\ 
-  &  & (0.011) &  & (0.009) \\ 
-  & & & & \\ 
- tot\_liv\_area:LotArea &  &  &  & $-$0.00000$^{***}$ \\ 
-  &  &  &  & (0.00000) \\ 
-  & & & & \\ 
- LotArea &  &  & 0.001$^{***}$ & 0.005$^{***}$ \\ 
-  &  &  & (0.0001) & (0.0005) \\ 
-  & & & & \\ 
- YrSold & NO & NO & YES & YES\\ 
-  &  &  &  &  \\ 
- % & & & & \\ 
- OverallQual & NO & NO & YES & YES\\ 
-  &  &  &  &  \\ 
- % & & & & \\ 
- BuildingType & NO & NO & YES & YES\\ 
-  &  &  &  &  \\ 
- % & & & & \\ 
-\hline \\[-1.8ex] 
-Observations & 1,460 & 1,460 & 1,460 & 1,460 \\ 
-R$^{2}$ & 0.686 & 0.714 & 0.803 & 0.836 \\ 
-Adjusted R$^{2}$ & 0.685 & 0.712 & 0.800 & 0.833 \\ 
-Residual Std. Error & 44.612 & 42.645 & 35.548 & 32.488 \\ 
-& (df = 1454) & (df = 1450) & (df = 1439) & (df = 1434)\\
-F Statistic & 634.508$^{***}$  & 401.461$^{***}$  & 292.393$^{***}$  & 291.609$^{***}$  \\ 
- & (df = 5; 1454) & (df = 9; 1450) & (df = 20; 1439) & (df = 25; 1434) \\
-\hline 
-\hline \\[-3ex] 
-\end{tabular} 
-%
-\begin{tablenotes}[para,flushleft]
-      \small
-      \item\textit{Note:} N = 1460. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. Model (1) contains all dependent variable regressors without any interactions. Model (2) contains hypothesized interactions and quadratic term. Model (3) contains confoudners and control variables without intercation. Model (4) contains all independent variables and control variables and intercations. Dummies for YearSold, Quality, and BuildingType are only represented with a placeholder.  
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-%
-\end{table}
-
-
-
-% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Wed, Sep 14, 2022 - 20:32:12
-\begin{table}[!htbp] \centering 
-\begin{adjustwidth}{-0.0cm}{-0cm}
-\begin{threeparttable}
-\small
-\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{Standardized Regresson Results}}
-\centering 
-  \label{}
-\small 
-\begin{tabular}{@{\extracolsep{1pt}}lcccc} 
-\\[-5.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{4}{c}{SalePrice} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-\hline \\[-1.8ex] 
- Constant & 15.229 & / & 24.550 & / \\ 
-  & (25.697) & (25.697) & (24.541) & (24.541) \\ 
-  & & & & \\ 
- tot\_liv\_area & 0.035$^{***}$ & 0.362$^{***}$ & 0.038$^{***}$ & 0.393$^{***}$ \\ 
-  & (0.002) & (0.002) & (0.005) & (0.005) \\ 
-  & & & & \\ 
- y\_since\_rem & $-$0.492$^{***}$ & $-$0.128$^{***}$ & $-$0.493$^{***}$ & $-$0.128$^{***}$ \\ 
-  & (0.056) & (0.056) & (0.051) & (0.051) \\ 
-  & & & & \\ 
- low\_density\_zone & 16.640$^{***}$ & 0.086$^{***}$ & $-$31.118$^{***}$ & $-$0.160$^{***}$ \\ 
-  & (2.753) & (2.753) & (8.368) & (8.368) \\ 
-  & & & & \\ 
- commercial\_zone & $-$25.251$^{**}$ & $-$0.026$^{**}$ & $-$35.782 & $-$0.037 \\ 
-  & (11.881) & (11.881) & (35.624) & (35.624) \\ 
-  & & & & \\ 
- floating\_zone & 18.710$^{***}$ & 0.049$^{***}$ & $-$8.247 & $-$0.021 \\ 
-  & (5.258) & (5.258) & (22.841) & (22.841) \\ 
-  & & & & \\ 
- I(tot\_liv\_area$\hat{\mkern6mu}$2) &  &  & $-$0.00000 & $-$0.002 \\ 
-  &  &  & (0.00000) & (0.00000) \\ 
-  & & & & \\ 
- LotArea & 0.001$^{***}$ & 0.074$^{***}$ & 0.005$^{***}$ & 0.616$^{***}$ \\ 
-  & (0.0001) & (0.0001) & (0.0005) & (0.0005) \\ 
-  & & & & \\ 
- tot\_liv\_area:low\_density\_zone &  &  & 0.019$^{***}$ & 0.308$^{***}$ \\ 
-  &  &  & (0.004) & (0.004) \\ 
-  & & & & \\ 
- tot\_liv\_area:commercial\_zone &  &  & 0.0001 & 0.0002 \\ 
-  &  &  & (0.017) & (0.017) \\ 
-  & & & & \\ 
- tot\_liv\_area:floating\_zone &  &  & 0.013 & 0.088 \\ 
-  &  &  & (0.009) & (0.009) \\ 
-  & & & & \\ 
- tot\_liv\_area:LotArea &  &  & $-$0.00000$^{***}$ & $-$0.647$^{***}$ \\ 
-  &  &  & (0.00000) & (0.00000) \\ 
-  & & & & \\ 
- YrSold & YES & YES & YES & YES \\ 
-  %&  & &  &  \\ 
-  & & & & \\ 
- OverallQual & YES & YES & YES & YES \\  
- % & (32.730) & (32.730) & (30.513) & (30.513) \\ 
- & & & & \\ 
- BuildingType & YES & YES & YES & YES \\ 
-  %& (2.654) & (2.654) & (2.501) & (2.501) \\ 
- & & & & \\ 
-\hline \\[-1.8ex] 
-Observations & 1,460 & 1,460 & 1,460 & 1,460 \\ 
-R$^{2}$ & 0.686 & 0.714 & 0.803 & 0.836 \\ 
-Adjusted R$^{2}$ & 0.685 & 0.712 & 0.800 & 0.833 \\ 
-Residual Std. Error & 44.612 & 42.645 & 35.548 & 32.488 \\ 
-& (df = 1454) & (df = 1450) & (df = 1439) & (df = 1434)\\
-F Statistic & 634.508$^{***}$  & 401.461$^{***}$  & 292.393$^{***}$  & 291.609$^{***}$  \\ 
- & (df = 5; 1454) & (df = 9; 1450) & (df = 20; 1439) & (df = 25; 1434) \\
-\hline 
-\hline \\[-3.4ex] 
-\end{tabular} 
-\begin{tablenotes}[para,flushleft]
-      \small
-      \item\textit{Note:} N = 1460. OLS estimates, robust standard errors in parentheses.*** p$<$0.01, ** p$<$0.05, * p$<$0.1. Model (1) contains all dependent variable regressors without any interactions. Model (2) contains hypothesized interactions and quadratic term. Model (3) contains confoudners and control variables without intercation. Model (4) contains all independent variables and control variables and intercations. Dummies for YearSold, Quality, and BuildingType are only represented with a placeholder.  
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-%
-\end{table}
 
 
 

@@ -654,16 +654,15 @@ multi_var_model_w_confounders_ninteraction <-
 multi_var_model_w_confounders_ninteraction.beta <-
   lm.beta(multi_var_model_w_confounders_ninteraction)
 
+
 # not logscale the outcome but everythign else
 multi_var_model_w_confounders_ninteraction_unscaled <-
   lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
     data = df_
   )
 multi_var_model_w_confounders_ninteraction_unscaled.beta <-
   lm.beta(multi_var_model_w_confounders_ninteraction_unscaled)
-
-
 
 
 
@@ -678,46 +677,62 @@ multi_var_model_w_confounders_ninteraction_unscaled.beta <-
 ```{r }
 
 
-
-stargazer(
-  main_multi_var_model,
-  mulit_var_model,
-  multi_var_model_w_confounders,
-  multi_var_model_w_confounders_ninteraction,
- type = 'text',
-  omit = c(
-    "YrSold2008",
-    "YrSold2009",
-    "YrSold2010",
-    "OverallQual_cat3",
-    "OverallQual_cat4",
-    "OverallQual_cat5",
-    "OverallQual_cat6",
-    "OverallQual_cat7",
-    "OverallQual_cat8",
-    "OverallQual_cat9",
-    "OverallQual_cat10",
-    "Building_typeSingle Family Home "
-  ),
-  
-  
-            header=FALSE, # to get rid of r package output text
-
-          single.row = FALSE, # to put coefficients and standard errors on same line
-
-          no.space = TRUE, # to remove the spaces after each line of coefficients
-
-          column.sep.width = "3pt", # to reduce column width
-
-          font.size = "small" # to make font size smaller
-        # ,float.env = "sidewaystable"
-) |>
-  show_F_in_two_lines()
+# 
+# stargazer(
+#   main_multi_var_model,
+#   mulit_var_model,
+#   multi_var_model_w_confounders,
+#   multi_var_model_w_confounders_ninteraction,
+#  type = 'text',
+#   omit = c(
+#     "YrSold2008",
+#     "YrSold2009",
+#     "YrSold2010",
+#     "OverallQual_cat3",
+#     "OverallQual_cat4",
+#     "OverallQual_cat5",
+#     "OverallQual_cat6",
+#     "OverallQual_cat7",
+#     "OverallQual_cat8",
+#     "OverallQual_cat9",
+#     "OverallQual_cat10",
+#     "Building_typeSingle Family Home "
+#   ),
+#   
+#   
+#             header=FALSE, # to get rid of r package output text
+# 
+#           single.row = FALSE, # to put coefficients and standard errors on same line
+# 
+#           no.space = TRUE, # to remove the spaces after each line of coefficients
+# 
+#           column.sep.width = "3pt", # to reduce column width
+# 
+#           font.size = "small" # to make font size smaller
+#         # ,float.env = "sidewaystable"
+# ) |>
+#   show_F_in_two_lines()
 
 ```
 
 
 ```{r }
+# stargazer(multi_var_model_w_confounders,
+# multi_var_model_w_confounders_ninteraction_unscaled,
+# multi_var_model_w_confounders_ninteraction, type = 'text')
+
+
+```
+
+```{r Combined Table}
+
+# multi_var_model_w_confounders_ninteraction
+# multi_var_model_w_confounders
+
+# stargazer(multi_var_model_w_confounders,
+# multi_var_model_w_confounders_ninteraction_unscaled,
+# multi_var_model_w_confounders_ninteraction, type = 'text')
+
 
 
 
@@ -726,17 +741,25 @@ stargazer(
 stargazer(
   multi_var_model_w_confounders,
   multi_var_model_w_confounders.beta,
+  multi_var_model_w_confounders_ninteraction_unscaled,
+  multi_var_model_w_confounders_ninteraction_unscaled.beta,
   multi_var_model_w_confounders_ninteraction,
   multi_var_model_w_confounders_ninteraction.beta,
   coef = list(
     multi_var_model_w_confounders$coefficients,
     multi_var_model_w_confounders.beta$standardized.coefficients,
+    
+    multi_var_model_w_confounders_ninteraction_unscaled$coefficients,
+    multi_var_model_w_confounders_ninteraction_unscaled.beta$standardized.coefficients,
+    
     multi_var_model_w_confounders_ninteraction$coefficients,
     multi_var_model_w_confounders_ninteraction.beta$standardized.coefficients
   ),
   p = list (
     coef(summary(multi_var_model_w_confounders))[, 4],
     coef(summary(multi_var_model_w_confounders.beta))[, 5],
+    coef(summary(multi_var_model_w_confounders_ninteraction_unscaled))[, 4],
+    coef(summary(multi_var_model_w_confounders_ninteraction_unscaled.beta))[, 5],
     coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
     coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
   ),
@@ -755,78 +778,35 @@ stargazer(
     "OverallQual_cat10",
     "Building_typeSingle Family Home "
   ),
-  header = FALSE,
+  header = TRUE,
   # to get rid of r package output text
   single.row = FALSE,
   # to put coefficients and standard errors on same line
   # no.space = TRUE,
   # to remove the spaces after each line of coefficients
   column.sep.width = "3pt",
+
   # to reduce column width
   font.size = "small" # to make font size smaller
   # ,float.env = "sidewaystable"
-) |>
-  show_F_in_two_lines()
+) |>show_F_in_two_lines()
 
 
 
 ```
 
-```{r Combined Table}
-
-multi_var_model_w_confounders_ninteraction
-multi_var_model_w_confounders
-
-# only compare the two most important models 
-
-stargazer(
-  multi_var_model_w_confounders,
-  multi_var_model_w_confounders.beta,
-  multi_var_model_w_confounders_ninteraction,
-  multi_var_model_w_confounders_ninteraction.beta,
-  coef = list(
-    multi_var_model_w_confounders$coefficients,
-    multi_var_model_w_confounders.beta$standardized.coefficients,
-    multi_var_model_w_confounders_ninteraction$coefficients,
-    multi_var_model_w_confounders_ninteraction.beta$standardized.coefficients
-  ),
-  p = list (
-    coef(summary(multi_var_model_w_confounders))[, 4],
-    coef(summary(multi_var_model_w_confounders.beta))[, 5],
-    coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
-    coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
-  ),
-  type = 'latex',
-  omit = c(
-    "YrSold2008",
-    "YrSold2009",
-    "YrSold2010",
-    "OverallQual_cat3",
-    "OverallQual_cat4",
-    "OverallQual_cat5",
-    "OverallQual_cat6",
-    "OverallQual_cat7",
-    "OverallQual_cat8",
-    "OverallQual_cat9",
-    "OverallQual_cat10",
-    "Building_typeSingle Family Home "
-  ),
-  header = FALSE,
-  # to get rid of r package output text
-  single.row = FALSE,
-  # to put coefficients and standard errors on same line
-  # no.space = TRUE,
-  # to remove the spaces after each line of coefficients
-  column.sep.width = "3pt",
-  # to reduce column width
-  font.size = "small" # to make font size smaller
-  # ,float.env = "sidewaystable"
-) |>
-  show_F_in_two_lines()
 
 
 
-```
+
+
+
+
+
+
+
+
+
 
 
 # Part 4 Diagnostics
