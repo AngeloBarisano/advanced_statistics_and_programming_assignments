@@ -30,6 +30,7 @@ library("stringr")
 library("extrafont")
 library("gridExtra")
 library("AER")
+library("DAAG")
 loadfonts()
 
 
@@ -596,6 +597,7 @@ coef(summary(quality_regression_checkup))[, 1:2]
 # Task 3
 
 ```{r }
+
 # create dummies
 df_$low_density_zone <-
   ifelse(df_$MSZoning_gr == "Low Density", 1, 0)
@@ -603,10 +605,10 @@ df_$low_density_zone <-
 df_$hig_med_density_zone <-
   ifelse(df_$MSZoning_gr == "Moderate2High Density", 1, 0)
 
-df_$commercial_zone <- 
+df_$commercial_zone <-
   ifelse(df_$MSZoning_gr == "Commercial", 1, 0)
 
-df_$floating_zone <- 
+df_$floating_zone <-
   ifelse(df_$MSZoning_gr == "Floating Village", 1, 0)
 
 
@@ -621,18 +623,18 @@ main_multi_var_model <-
     data = df_
   )
 
-main_multi_var_model.beta<-lm.beta(main_multi_var_model)
+main_multi_var_model.beta <- lm.beta(main_multi_var_model)
 
 
 
 # With interaction adn quadrartic terms
 mulit_var_model <-
   lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area^2)+ tot_liv_area * low_density_zone + tot_liv_area*commercial_zone + tot_liv_area* floating_zone ,
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone ,
     data = df_
   )
 
-mulit_var_model.beta<-lm.beta(mulit_var_model)
+mulit_var_model.beta <- lm.beta(mulit_var_model)
 
 
 # with covariates and confounders and control
@@ -641,7 +643,8 @@ multi_var_model_w_confounders <-
     SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type,
     data = df_
   )
-multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
+multi_var_model_w_confounders.beta <-
+  lm.beta(multi_var_model_w_confounders)
 
 
 
@@ -649,7 +652,8 @@ multi_var_model_w_confounders.beta<-lm.beta(multi_var_model_w_confounders)
 # logscale SalePrice!
 multi_var_model_w_confounders_ninteraction <-
   lm(
-    ln_SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + tot_liv_area * LotArea ,
+    ln_SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + I(tot_liv_area ^
+                                                                                                               2) + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + tot_liv_area * LotArea ,
     data = df_
   )
 multi_var_model_w_confounders_ninteraction.beta <-
@@ -659,17 +663,12 @@ multi_var_model_w_confounders_ninteraction.beta <-
 # not logscale the outcome but everythign else
 multi_var_model_w_confounders_ninteraction_unscaled <-
   lm(
-    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea*tot_liv_area ,
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + tot_liv_area * low_density_zone + tot_liv_area * commercial_zone + tot_liv_area * floating_zone + LotArea + YrSold  + OverallQual_cat + Building_type + LotArea *
+      tot_liv_area ,
     data = df_
   )
 multi_var_model_w_confounders_ninteraction_unscaled.beta <-
   lm.beta(multi_var_model_w_confounders_ninteraction_unscaled)
-
-
-
-
-
-#, keep = 'Dummy1:Dummy2:Dummy3'
 
 ```
 
@@ -735,10 +734,7 @@ multi_var_model_w_confounders_ninteraction_unscaled.beta <-
 # multi_var_model_w_confounders_ninteraction, type = 'text')
 
 
-
-
 # only compare the two most important models 
-
 stargazer(
   multi_var_model_w_confounders,
   multi_var_model_w_confounders.beta,
@@ -759,10 +755,18 @@ stargazer(
   p = list (
     coef(summary(multi_var_model_w_confounders))[, 4],
     coef(summary(multi_var_model_w_confounders.beta))[, 5],
-    coef(summary(multi_var_model_w_confounders_ninteraction_unscaled))[, 4],
-    coef(summary(multi_var_model_w_confounders_ninteraction_unscaled.beta))[, 5],
-    coef(summary(multi_var_model_w_confounders_ninteraction))[, 4],
-    coef(summary(multi_var_model_w_confounders_ninteraction.beta))[, 5]
+    coef(
+      summary(multi_var_model_w_confounders_ninteraction_unscaled)
+    )[, 4],
+    coef(
+      summary(multi_var_model_w_confounders_ninteraction_unscaled.beta)
+    )[, 5],
+    coef(summary(
+      multi_var_model_w_confounders_ninteraction
+    ))[, 4],
+    coef(summary(
+      multi_var_model_w_confounders_ninteraction.beta
+    ))[, 5]
   ),
   type = 'text',
   omit = c(
@@ -786,11 +790,11 @@ stargazer(
   # no.space = TRUE,
   # to remove the spaces after each line of coefficients
   column.sep.width = "3pt",
-
+  
   # to reduce column width
   font.size = "small" # to make font size smaller
   # ,float.env = "sidewaystable"
-) |>show_F_in_two_lines()
+) |> show_F_in_two_lines()
 
 
 
@@ -820,8 +824,9 @@ stargazer(
   multi_var_model_w_confounders_ninteraction,
   multi_var_model_w_confounders_ninteraction.beta,
 
-```{r A4}
-# Tests and controls for Homoscedasitcity
+```{r }
+A4
+# Tests andcontrols for Homoscedasitcity
 # Run models with clustered SE, robust SE, and normal se
 # multi_var_model_w_confounders_ninteraction
 # 
@@ -864,7 +869,59 @@ seWhite_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, typ
 #' county actually influences these issues 
 seClust_full <- sqrt(diag(vcovHC(multi_var_model_w_confounders_ninteraction, cluster = 'Neighborhood')))
 
-stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, multi_var_model_w_confounders_ninteraction, se = list (seBasic_full, seWhite_full, seClust_full), type = 'text' , omit = c(
+
+stargazer(
+  multi_var_model_w_confounders_ninteraction,
+  multi_var_model_w_confounders_ninteraction,
+  multi_var_model_w_confounders_ninteraction,
+  se = list (seBasic_full, seWhite_full, seClust_full),
+  type = 'latex' ,
+  omit = c(
+    "YrSold2008",
+    "YrSold2009",
+    "YrSold2010",
+    "OverallQual_cat3",
+    "OverallQual_cat4",
+    "OverallQual_cat5",
+    "OverallQual_cat6",
+    "OverallQual_cat7",
+    "OverallQual_cat8",
+    "OverallQual_cat9",
+    "OverallQual_cat10",
+    "Building_typeSingle Family Home "
+  )
+)
+#' how to interpret?
+#' eg income we see no real heteroscedasticity; so there is less varaince or SE 
+#' but lunch was heteroscedastic --> the result ofthe fix is wider SE
+
+
+
+
+
+```
+
+
+
+```{r}
+
+# A2
+
+
+# library("AER")
+# vif <- vif(multi_var_model_w_confounders_ninteraction, type = 'predictor')
+# stargazer(vif, type = 'text')
+vif_ <- vif(multi_var_model_w_confounders_ninteraction)
+stargazer(vif_, type = 'text')
+
+#' while there are some variables that dispaly a VIF of more than 5, this does not automatically indicate mulitcollineariy. however this necessitats further analysis of this issue to reduce the probabiltiy of having a problem with multicllinearity. Overall, the increased VIF can mostly be attributed to the incusion of interaction effects. 
+
+vif(multi_var_model_w_confounders_ninteraction)
+
+stargazer(vif(multi_var_model_w_confounders_ninteraction))
+# In order t
+
+stargazer(DAAG::vif(multi_var_model_w_confounders), type = "latex", omit = c(
     "YrSold2008",
     "YrSold2009",
     "YrSold2010",
@@ -878,34 +935,6 @@ stargazer(multi_var_model_w_confounders_ninteraction, multi_var_model_w_confound
     "OverallQual_cat10",
     "Building_typeSingle Family Home "
   ))
-#' how to interpret?
-#' eg income we see no real heteroscedasticity; so there is less varaince or SE 
-#' but lunch was heteroscedastic --> the result ofthe fix is wider SE
-
-
-
-
-
-```
-
-
-
-```{r A2}
-
-
-
-vif <- corvif(multi_var_model_w_confounders_ninteraction, type = 'predictor')
-stargazer(vif, type = 'text')
-vif <- corvif(multi_var_model_w_confounders_ninteraction)
-stargazer(vif, type = 'text')
-
-#' while there are some variables that dispaly a VIF of more than 5, this does not automatically indicate mulitcollineariy. however this necessitats further analysis of this issue to reduce the probabiltiy of having a problem with multicllinearity. 
-
-
-
-
-
-
 
 ```
 
@@ -913,47 +942,60 @@ stargazer(vif, type = 'text')
 
 
 
-# just an example 
-CASchools$incomex2 <- (CASchools$income * 2)
-
-full_model <- lm(score ~ teachers + lunch + computer + income + incomex2 +  expenditure + calworks + students, data= CASchools)
-stargazer(full_model, type = 'text')
 
 
 
-# imperfect multcollineraity 
+```{r}
+# A3
+ggplot(
+  mapping = aes(
+    multi_var_model_w_confounders_ninteraction$fitted.values,
+    multi_var_model_w_confounders_ninteraction$residuals
+  )
+) + geom_point() +
+  geom_smooth() + geom_smooth(method = "lm", color = "red", se =
+                                FALSE) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fitted values", y = "Residuals")
 
-full_model <- lm(score ~ teachers + lunch + computer + income +  expenditure + calworks + students, data= CASchools)
-
-vif <- vif(full_model)
-
-stargazer(vif, type = 'text')
-#' if vif is higher than 5, it is bad!!!
-
-
-
-# remedies: DO NOT TAKE OUT THE MULTICOLLINEAR VARIABLES!!!!
-# better solution
-# combine multicollinear varaibles (principal components); pretty much same explanation
-
-# eg instead pf students and teachers you use te ratio size whcih is students to teachers
-# so better combine 
-full_model <- lm(score ~ size + lunch + computer + income +  expenditure + calworks , data= CASchools)
-
-vif <- vif(full_model)
-
-stargazer(vif, type = 'text')
+ggsave("meanindepedence.jpg")
+```
 
 
 
 
+```{r }
+# A 6
+df_n <- df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction$fitted.values,
+                                     resids = multi_var_model_w_confounders_ninteraction$residuals)
+p1 <- ggplot(df_n, aes(x = resids)) +
+  geom_histogram(color = "black", fill = "white") + theme_classic() +
+  labs(x = "Residuals", y = "Frequency")
+p2 <- qplot(sample = multi_var_model_w_confounders_ninteraction$residuals) + theme_classic()
+grid.arrange(p1, p2, nrow = 1)
+
+ggsave("nonnormailtyplot2s.jpg")
+
+
+shapiro.test(multi_var_model_w_confounders_ninteraction$residuals)
 
 
 
 
+df_n <- df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction_unscaled$fitted.values,
+                                     resids = multi_var_model_w_confounders_ninteraction_unscaled$residuals)
+p1 <- ggplot(df_n, aes(x = resids)) +
+  geom_histogram(color = "black", fill = "white") + theme_classic() +
+  labs(x = "Residuals", y = "Frequency")
+p2 <- qplot(sample = multi_var_model_w_confounders_ninteraction_unscaled$residuals) + theme_classic()
+grid.arrange(p1, p2, nrow = 1)
+
+# ggsave("nonnormailtyplot2s.jpg")
 
 
+shapiro.test(multi_var_model_w_confounders_ninteraction_unscaled$residuals)
 
+```
 
 
 

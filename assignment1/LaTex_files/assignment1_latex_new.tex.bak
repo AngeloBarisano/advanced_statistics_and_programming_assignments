@@ -137,13 +137,7 @@ Finally, the plots are to be considered in the context of the hypothesis in the 
 \subsection{Hypotheses}
 Based on the plots generated during the EDA, a mini theory was created to explain the variation in the sales price of properties (Figure 2). 
 
-
-
-
-Based on this model, the following three hypothesis were created. 
-\subsubsection{Hypotheses 1}
-
-\begin{center}
+%\begin{center}
 \begin{tikzpicture}
 	\centering
  	\node at (3.25,-2.25) {FIGURE 2: Causal relationship Scheme};
@@ -160,11 +154,28 @@ Based on this model, the following three hypothesis were created.
 \end{tikzpicture}
 \end{center}
 
+
+
+Based on this model, the following three hypothesis were created. 
+\subsubsection{Hypotheses 1}
+
+
 \indent \paragraph{} \textbf{Figure 1A} displays a potential direct positive association between Total Living Space (IV) and Sale Price (DV), including an optimal fit, showing a small. Thus, one expects that larger houses have a higher sale price. Consequently,we assume that:
 
 \begin{hyp}[H\ref{hyp:first}] \label{hyp:first}
 Total living space (IV) has a direct postive association with Sales Price (DV)
 \end{hyp}
+
+% plot hypothesis 
+%\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,0.85) {\textbf{Figure 3: Hypothesis 1}};
+ 	\node (1) at (0,0) {Total Living Space};
+	\node (2) [right = of 1] {Sales Price};
+	\path (1) edge node[above] {$+$}(2);
+\end{tikzpicture}
+\end{center}
 
 
 \indent \paragraph{} Subsequently, when taking the Zoning (MSZoning or MSZoning\_grouped - IV) into account to reflect the administrative borderrs of the Ames districts, larger houses in more densly populated areas of the city appear to have a lower price when compared to houses of same size in less densly populated areas as can be seen in \textbf{Plot XXXX2}. This suggests a separation between "downtown less affluent areas" and "suburban affluent areas"\footnote{As an extention\: we will test whether the groups of Neighborhoods generally stay in the same zoning category; if Neighborhoods and Zoning are not related (so eg 50 \% of one neighborhood is in rural zone while the other part is in moderately populated zone) then we have a problem that this woudl induce a bias. Otherwise, we can just proceed.} and concludes in the hypothesis that
@@ -173,7 +184,23 @@ Total living space (IV) has a direct postive association with Sales Price (DV)
 Zoning moderates (MIV) the direct postive association of Total Living Space (IV) and Sale Price (DV). The association of Space and Sale Price is proposed to be weaker for more densly populated areas than for more rural areas. 
 \end{hyp}
 
+%fgure h2
+%\begin{center}
 
+
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Figure 4: Hypothesis 2}};
+ 	\node (1) at (0,0) {Total Living Space};
+	\node (2) [right = of 1] {Sales Price};
+	\node (3) at (2,-1.25) {Zoning};
+	
+	\coordinate (4) at (2,0);
+	
+	\path (1) edge node[above] {$+$}(2);
+	\path (3) edge node[right] {$*$}(4);
+\end{tikzpicture}
+%\end{center}
 
 \indent \paragraph{} As can be observed on Figure 1c, older the houses 8not renovated (IV), are associated with lower sales  prices (DV). Thus, the final hypothesis corresponds to:\footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price} 
 
@@ -182,7 +209,20 @@ Zoning moderates (MIV) the direct postive association of Total Living Space (IV)
 Years Since Remodeling (M-IV) or Construction has an amplyfiying effect on the direct postive effect of Quality (IV) and Sale Price (DV)
 \end{hyp}
 
-
+% figure h3
+\begin{center}
+\begin{tikzpicture}
+	\centering
+ 	\node at (1.5,1) {\textbf{Figure 5: Hypothesis 3}};
+ 	\node (1) at (0,0) {Years Since Remodeling};
+	\node (2) [right = of 1] {Sales Price};
+	%\node (3) at (1.25,-1.12) {Years Since Remodeling};
+	
+	%\coordinate (4) at (1.25,0);
+	\path (1) edge node[above] {$-$}(2);
+	%\path (3) edge node[right] {$-$}(4);
+\end{tikzpicture}
+\end{center}
 
 %$$ {SalePrice} = \alpha + \beta_{1} TotLivingSpace - \beta_{2}  TotLivingSpace^2 + \beta_{3}  Quality + \beta_{4}  Zoning_{Low Density} + \beta_{5}  Zoning_{Other} + \beta_{6}  YearsSinceRemodeling + \beta_{7}  LotArea + \beta_{8} TotLivingSpace*Zoning_{Low Density} + \beta_{9} TotLivingSpace*Zoning_{Other} +\epsilon$$
 
@@ -548,11 +588,8 @@ Considering the $N=$ 1460 sample size, applying the Shapiro-Wilk test returns an
 
 
 
-\textbf{TO DO: ADD PLOT; ADD TABLE; ETC! Of a very simple model; then make two: main vairbales: the grouped quality, and the building type, and then Quality as quantitative and the years since remodeling}
+\textbf{TO DO: ADD PLOT; ADD TABLE; ETC!}
 
-For sake of this exercise, Qulaity will be considered a quantitative variable. additionally, assumptions regarding normaltiy and scaling are ignored for simplicity. The preceeding models show the interaction on Building type, quality and years since remodeling. 
-
-\textbf{show the plot of QUALITY SALES PRICE AND YEARS SINCE REMODELING; THEN SHOW MAYBE BUILDING TYPE LIVING SPACE AND SALE PRICE OR SOMETHING LIKE THAT}
 
 
 
