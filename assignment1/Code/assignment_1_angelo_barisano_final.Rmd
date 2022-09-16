@@ -114,9 +114,9 @@ df_ <- df[, c(
   'BldgType',
   'MSZoning',
   'Neighborhood',
-  'OverallQual',
-  'OverallCond'
+  'OverallQual'
 )]
+
 
 # create the interesting varaibles
 df_$tot_liv_area <- df_$GrLivArea + df_$TotalBsmtSF
@@ -278,7 +278,8 @@ colnames(df_)
 
 df_temp <- df_ %>%
   select(-one_of(c('Id', "MoSold", "YrSold", "BldgType")))
-print(skewness(df_temp$SalePrice))
+print(skewness(df_$SalePrice))
+print(skewness(df_$tot_liv_area))
 
 stargazer(
   df_temp,
