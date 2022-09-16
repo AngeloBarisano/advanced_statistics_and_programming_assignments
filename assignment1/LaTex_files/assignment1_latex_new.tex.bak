@@ -297,19 +297,19 @@ df F Statistic && (df = 20; 1439)  & (df = 25; 1434)  & (df = 25; 1434)   \\
 
 
 Table 2 displays the regression results for three incrementally compelx models to explain Sale Price. These models were chosen as they concisely combine most necessary information for part 3, and 4. Standardized coefficients are adjacent to the respective models. Standard errors are not robust (see part 4). 
-Overall, all three reported models are each jointly significant, displaying a significant F-test ($F$ = 292.393, $p$ < 0.001; $F$ = 291.609, $p$ = 0.001, $F$ = 354.941, $p$ = 0.001). 
+Overall, all three reported models are each jointly significant, displaying a significant F-test ($F$ = 292.393, $p$ $<$  0.001; $F$ = 291.609, $p$ $<$ 0.001, $F$ = 354.941, $p$ $<$  0.001). 
 Not considering the control variables and interaction terms, the results of model one suggest that Total Living Area have a signifiacnt positive effect on Sale Price ($\hat{\beta}$ = 0.035, $p$ < 0.001) as hypothesized. Thus, an increase in Living Area by one square feet increases the sale price by \$35\footnote{remember: Sale Price is in 1000s}.
-Additionally, Years Since Remodeling follows the expected pattern and shows a significant negative effect on Sale Price ($\hat{\beta}$ = -0.128, $p$ = 0.01). Additionally, when compared to the Moderate to High category in Zoning, the Low Density Zone shows a signifiacnt higher Sale Price (intercept) ($\hat{\beta}$ = 0.086, $p$ < 0.001). Finally, this model explains 80.3\% of the variation in Sale Price.
-
-Please note that model (3) was included for the purpose of part 4 and will, thus, interpreted accordingly at a later point for conciseness. 
-
-The decreased effect size of Years Since Remodelling on Sale Price compared to Total Living Area is likely to be explained by the large range of values with small incremental steps for Living Space.
+Additionally, Years Since Remodeling follows the expected pattern and shows a significant negative effect on Sale Price ($\hat{\beta}$ = -0.128, $p$ $<$ 0.001). Additionally, when compared to the Moderate to High category in Zoning, the Low Density Zone shows a signifiacnt higher Sale Price (intercept) ($\hat{\beta}$ = 0.086, $p$ $<$ 0.001). Finally, this model explains 80.3\% of the variation in Sale Price.
+\indent Now considering model (2), which includes several interaction terms and one quadratic term.\footnote{Note: model (3) will be used in part 4}
 
 
 
-\textbf{NOTE: This regression table shifts from including interaction effects, scaling, etc from one model to the other; I chose to 
-The choice to not include incremental models was done to keep the analysisi concise. In the appendix one can see that the $Adj-  R²$ increases also only due to the inclusion of further control variables without interaction terms. Nonetheless, also the interaction terms imrpove on the model fit (with and without control variables). Finally, Model (3) \& (4) include all interaction effects and scaled variables (such as LN SalePrice) as no model shows a lower isses in this regard.} Thus, only the simple multi-variate model and an extensive model was displayed.
 
+\textbf{The decreased effect size of Years Since Remodelling on Sale Price compared to Total Living Area is likely to be explained by the large range of values with small incremental steps for Living Space.}
+
+
+
+\subsection{Standardized coeffiicents}
 
 
 
@@ -322,15 +322,6 @@ Table 2 reportes the (unstandardized) regression results for the Model (1) exclu
 
 he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
 
-
-Table 3 reports the regression results of  for the four sucessively extensive models starting from only the independent variable from Figure 2, then adding interaction terms in model (2), control variables in model (3) without interactions, and a complete model (4) including interaction terms, which will be discussed below. All four models have been reported to demonstrate that for the main indepenent variables (see Figure 2) the coefficients and Standard Errors are stable to the inclusion of control variables and interaction terms.\footnote{Please note that log scaling of the dependent variable was not done on purpose at this point due to this task falling into part 4 of this assignment}
-Considering model (4) as the Complete model
-Specifically, this research shows that the association Total Living Space and Sale Price is positive and  statistically significant (($\hat{\beta}$ = 0.040, $p$ = 0.01)
-
-
-he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
-
-Overall, the inclusion of the interaction of Zone (M-IV) and Total Living Area (IV), in addition to introducing a quadratic term of Total Living Area (IV) improves the model fit sighlty from 
 
 
 \subsection{Standardized Regression Coefficients and Effect Size}
@@ -346,7 +337,7 @@ Overall, the inclusion of the interaction of Zone (M-IV) and Total Living Area (
 
 \section{Diagnostic checking}
 \subsection{A1}
-As can be seen in Figure 1a, Total Living Space tends to display non linearity with the outcome. Subsequently, Table 2 shows the inclusion of a quadratic term when compraing Model 2 and 3. Overall, including not only the qudratic term ($\hat{\beta}$ = 0.002, $p$ < 0.001; $adj.\hat{\beta}$ = 0.234, $p$ < 0.001), but also logscaling the outcome improves the model beyond chance. Thus, the issue of non-linearity is reduced.
+As can be seen in Figure 1a, Total Living Space tends to display non linearity with the outcome. Subsequently, Table 2 shows the inclusion of a quadratic term when compraing Model 2 and 3. Overall, including not only the qudratic term ($\hat{\beta}$ = 0.002, $p$ < 0.001; $adj.\hat{\beta}$ = 0.234, $p$ $<$ 0.001), but also logscaling the outcome improves the model beyond chance. Thus, the issue of non-linearity is reduced.
 
 
 \subsection{A2}
