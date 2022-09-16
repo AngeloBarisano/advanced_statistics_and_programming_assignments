@@ -276,13 +276,13 @@ A6: If the residuals do not follow a standard normal distribution, this might re
 %%%%%%%
 \small 
 \centering
-\begin{tabular}{@{\extracolsep{25pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{39pt}}lcccccc} 
 R$^{2}$ && 0.803 &   0.836 &  0.861   \\ 
 Adjusted R$^{2}$ && 0.800 &  0.833 &   0.858  \\ 
 Residual Std. Error && 35.548  & 32.488  & 0.150   \\ 
-df Residual Std. Error && (df = 1439)  & (df = 1434) & (df = 1434)\\
+
 F Statistic& & 292.393$^{***}$    & 291.609$^{***}$   & 354.941$^{***}$    \\ 
-df F Statistic && (df = 20; 1439)  & (df = 25; 1434)  & (df = 25; 1434)   \\
+
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
@@ -299,45 +299,21 @@ df F Statistic && (df = 20; 1439)  & (df = 25; 1434)  & (df = 25; 1434)   \\
 Table 2 displays the regression results for three incrementally compelx models to explain Sale Price. These models were chosen as they concisely combine most necessary information for part 3, and 4. Standardized coefficients are adjacent to the respective models. Standard errors are not robust (see part 4). 
 Overall, all three reported models are each jointly significant, displaying a significant F-test ($F$ = 292.393, $p$ $<$  0.001; $F$ = 291.609, $p$ $<$ 0.001, $F$ = 354.941, $p$ $<$  0.001). 
 Not considering the control variables and interaction terms, the results of model one suggest that Total Living Area have a signifiacnt positive effect on Sale Price ($\hat{\beta}$ = 0.035, $p$ < 0.001) as hypothesized. Thus, an increase in Living Area by one square feet increases the sale price by \$35\footnote{remember: Sale Price is in 1000s}.
-Additionally, Years Since Remodeling follows the expected pattern and shows a significant negative effect on Sale Price ($\hat{\beta}$ = -0.128, $p$ $<$ 0.001). Additionally, when compared to the Moderate to High category in Zoning, the Low Density Zone shows a signifiacnt higher Sale Price (intercept) ($\hat{\beta}$ = 0.086, $p$ $<$ 0.001). Finally, this model explains 80.3\% of the variation in Sale Price.
-\indent Now considering model (2), which includes several interaction terms and one quadratic term.\footnote{Note: model (3) will be used in part 4}
+Additionally, Years Since Remodeling follows the expected pattern and shows a significant negative effect on Sale Price ($\hat{\beta}$ = -0.492, $p$ $<$ 0.001). Additionally, when compared to the Moderate to High category in Zoning, the Low Density Zone shows a signifiacnt higher Sale Price (intercept) ($\hat{\beta}$ = 0.086, $p$ $<$ 0.001). Finally, this model explains 80.3\% of the variation in Sale Price.
 
+\indent Now considering model (2), which includes several interaction terms and one quadratic term.\footnote{Note: model (3) will be used in part 4} We see that the coefficeints for Living Space ($\hat{\beta}$ = 0.038, $p$ $<$ 0.001) and Years Since Remodelling ($\hat{\beta}$ = -0.493, $p$ $<$ 0.001) display almost no changes. Furthermore, the interesing interaction terms report significant findings. Primairly, the Low Density Zone seems to disply a stronger positve relationship in terms of Living Space and Sale Price when compared to hig to Medium density zone ($\hat{\beta}$ = -0.308, $p$ $<$ 0.001). Furthermore, the quadratic term of Living Space is significant, suggesting an increase of Sale Price veyond the linear term expressed above ($\hat{\beta}$ = -0.002, $p$ $<$ 0.01). however, what is most striking about the model is that the Low Density Zone appears to change its direction; when compared to the Moderate to High Density Zone, the Low density Zone reports a lower Sale Price. It might be noted, that part of this might be explained by the interaction of Living Space and Low Density Zone ($\hat{\beta}$ = 0.019, $p$ $<$ 0.001), which still shows, that there might be a positive relationship between Living Space and Sale Price hypothesized to be higher for Low Density (see next section).
 
-
-
-\textbf{The decreased effect size of Years Since Remodelling on Sale Price compared to Total Living Area is likely to be explained by the large range of values with small incremental steps for Living Space.}
-
-
+Finally, the model (2) improved significantly in model fit over the model (1) significantly beyond chance, reported by $adjR²$. As such not only the model (2) ($R²$ = 0.836,$adjR²$ = 0.833) improved the model fit significantly over model (1) ($R²$ = 0.803,$adjR²$ = 0.800). Thus, the inclusion of the interaction terms improved on the model.
 
 \subsection{Standardized coeffiicents}
-
-
-
-
-Table 2 reportes the (unstandardized) regression results for the Model (1) excluding any interaction effects \& and inclduing those interaction effects in Model (3).\footnote{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price} The corresponding standardized coefficients can be foudn in Std.Model (2) \& (3).\footnote{It may be noted that the Sale Price will be log scaled in Part 4; the interaction term of Total Living Space with itself was already included in this section as I assume that part 3 is mainly about the independent variables demonstrating once the noremal interpretation; as such a complete model will be provided in part 4, containing the log scaled version of the independent}
-
-
-
-
-
-he study of Sales Price of property in Ames, Iowa, has shown that the Total Living Area has a significant postive effect on the Sales Pri
-
-
-
-\subsection{Standardized Regression Coefficients and Effect Size}
-
-
-\textbf{DONT FORGET ME!!!!}
-
-
-
-
+However, while the evaluation of the fit of the models can be done via $adjR²$, the comparions of the regressors is not directly possible. this is due to the difference in ranges for the data. Subsequently, Table 2 reports the standardized coefficietnts adjacent to the unstandardized coefficients. Overall, when ignoreing the control variable (model (2)) Lot Area ($\hat{\beta}std$ = 0.616, $p$ $<$ 0.001), of the theory relevant variables, it might appear that Living Space dispalys the larges effect Size ($\hat{\beta}std$ = -0.393, $p$ $<$ 0.001). This is also in accordance with model (1). However, becasue of this specific reason, the control variable Lot area, and its interaction with Living Space was included, as it displays a very large standardizeed negative term ($\hat{\beta}std$ = -0.647, $p$ $<$ 0.001). Thus, while it might appear from the standardized coefficients, that Living Space has the largest effect size, it is notable that Years Since Remodeling ($\hat{\beta}adj$ = -0.128, $p$ $<$ 0.001) has a larger effect size than Living Space. Finally, the standardized coefficient for the interaction of Living Space and Low Density Zone $\hat{\beta}adj$ = 0.308, $p$ $<$ 0.001) now exceeds the negative std. coefficient for Low Density Zone $\hat{\beta}adj$ = -0.160, $p$ $<$ 0.001), suggesting support for hypothesis (2) after all. \footnote{Please note that the interpretation of effect sizes follows that if eg. X changes by one standard deviation, how many standard deviations does the outcome change. This is uninformatiove, and, thus, not reported}
+To conclude, among the quantitative relevant variables, the largest effect size should be attributed to Years Since Remodelling, ignoring control variables, due to the aboforementioned interaction term. 
 
 
 
 \section{Diagnostic checking}
 \subsection{A1}
-As can be seen in Figure 1a, Total Living Space tends to display non linearity with the outcome. Subsequently, Table 2 shows the inclusion of a quadratic term when compraing Model 2 and 3. Overall, including not only the qudratic term ($\hat{\beta}$ = 0.002, $p$ < 0.001; $adj.\hat{\beta}$ = 0.234, $p$ $<$	 0.001), but also logscaling the outcome improves the model beyond chance. Thus, the issue of non-linearity is reduced.
+As can be seen in Figure 1a, Total Living Space tends to display non linearity with the outcome. Subsequently, Table 2 shows the inclusion of a quadratic term when compraing Model 2 and 3. Overall, including not only the qudratic term ($\hat{\beta}$ = 0.002, $p$ $<$ 0.001; $adj.\hat{\beta}$ = 0.234, $p$ $<$	 0.001), but also logscaling the outcome improves the model beyond chance. Thus, the issue of non-linearity is reduced.
 
 
 \subsection{A2}
@@ -381,13 +357,8 @@ tot\_liv\_area:LotArea & $46.292$ & $1$ & $6.804$ \\
 \end{adjustwidth}
 %
 \end{table}
-Considering multicollinearity, Table 3 reports the VIF for the variables in the main model (3) (see Table 2) excluding control-categorical variables. In order to assess multicollinearity, the VIF was calculated using the "AER" package in R. To make the resulting VIF comparable, the GVIF\^(1/(2*Df)) is used.\footnote{\textbf{IMPORTANT %$https://www.tandfonline.com/doi/abs/10.1080/01621459.1992.10475190#.U2jkTFdMzTo$
+Considering multicollinearity, Table 3 reports the VIF for the variables in the main model (3) (see Table 2) excluding control-categorical variables. In order to assess multicollinearity, the VIF was calculated. To make the resulting VIF comparable, the GVIF\^(1/(2*Df)) is used.\footnote{\textbf{IMPORTANT %$https://www.tandfonline.com/doi/abs/10.1080/01621459.1992.10475190#.U2jkTFdMzTo$
 }} While some variables display a VIF of more than 5, this does not automatically suggest multicollinearity. However, this necessitates further anaylysis. Considering i.a. Table 2 again, one can see that the standard errors remain stable across all models\footnote{(not reported) There seems to be some multicollinearity problems with the control variable categories of Quality}. The inclusion of more varibles, interaction terms, or scaling the outcome, does not cause the standard error estimates to vary considerably. Finally, the stability of the model and the significane of most of the terms in context of the significanfce of the overall model ($F$ = 354.941, $df$ = 25) indicates that multicollinearity might not pose a considerable problem in this model.
-
-
-
-\subsection{A3}
-
 
 \subsection{A4}
 Table 4 presents the regression results for model (3) in Table 2 with robust standard errors (White) in model (2) of Table 4, and clustered standard errors by Neighborhood in model (3). Neighborhood was chosen due to the assumption that houses in the same neighborhood might share variance (such as lower crime neighborhoods). Overall, this research does not seem to suffer from any systematic problems of heteroscedasitity, considering the stablity of the standard erros across all three reported model in Table 4.\footnote{Large Changes in Standrad errors in the Commercial Zone category and Floating Zone category might be attributable to their very small sample size}. Complementarily, the residulas vs fitted plot in Figure 2, in addition to the Breusch Pagan test ($BP$ = 106.62, df = 25, $p$ < 0.001), maintianing the null hypothesis of constant distributed resiudals, heteroscedasticity does not seem to pose a problem in this model. 
@@ -487,14 +458,8 @@ F Statistic (df = 25; 1434) & 354.941$^{***}$ & 354.941$^{***}$ & 354.941$^{***}
 \end{table}
 
 
-
-
-\subsection{A5}
-
-
-
 \subsection{A6}
-Considering the $N=$ 1460 sample size, applying the Shapiro-Wilk test returns an expected rejection of non-normal distribution of theresiudals ($"$ = 0.95161,  $p$ < 0.001). Interestingly, without log scaling the Sale Price (DV) and introducing the quadratic term for Total Living Space, the normality plot in Figure 3 suggests some nonelinearity, while showing a significant Shapiro-Wilk test ($"$ = 0.8712,  $p$ < 0.001). However, this disappears after applying both the log scale on the outcome and the quadratic term on the Total Living Space. Nevertheless, due to the large sample size, issues with the normal distribution assumption of theresiudals can be neglected in this case. 
+Considering the $N=$ 1460 sample size, applying the Shapiro-Wilk test returns an expected rejection of non-normal distribution of the resiudals ($SW$ = 0.95161,  $p$ $<$ 0.001). Interestingly, without log scaling the Sale Price (DV) and introducing the quadratic term for Total Living Space, the normality plot in Figure 3 suggests some nonelinearity, while showing a significant Shapiro-Wilk test ($SW$ = 0.8712,  $p$ $<$ 0.001). However, this largely disappears after applying both the log scale on the outcome and the quadratic term on the Total Living Space in model (3) of Table 2 (see Figure 2 upper right). Nevertheless, due to the large sample size, issues with the normal distribution assumption of theresiudals can be neglected in this case. 
 
 
 
@@ -516,34 +481,89 @@ Considering the $N=$ 1460 sample size, applying the Shapiro-Wilk test returns an
 
 
 \section{Subset analyses}
-\textbf{In this analysis we will examine further interaction and subsection analysis; such as quality as a numeric variable}
-
-
-
-\textbf{TO DO: ADD PLOT; ADD TABLE; ETC! Of a very simple model; then make two: main vairbales: the grouped quality, and the building type, and then Quality as quantitative and the years since remodeling}
-
-For sake of this exercise, Qulaity will be considered a quantitative variable. additionally, assumptions regarding normaltiy and scaling are ignored for simplicity. The preceeding models show the interaction on Building type, quality and years since remodeling. 
-
-\textbf{show the plot of QUALITY SALES PRICE AND YEARS SINCE REMODELING; THEN SHOW MAYBE BUILDING TYPE LIVING SPACE AND SALE PRICE OR SOMETHING LIKE THAT}
+Finally, the subset analysis considers two different models due to breviety concerns. For sake of this exercise, Qulaity will be considered a quantitative variable. additionally, assumptions regarding normaltiy and scaling are ignored for simplicity. The preceeding models show the interaction on Building type, quality and years since remodeling. 
+As can be seen in Table 5, the subset analysis contains two types: the interaction of Years Since Remodelled and Overall Quality, both to be quantitaive, and Zoning, where the categories of interest are Low Density vs High Density (See Figure 1c). 
+From the interpretation of Quality ($SW$ = 31.370  $p$ $<$ 0.001) and Years Since Remodelling ($SW$ = 1.890,  $p$ $<$ 0.001) as an interaction term ($SW$ = -0.418,  $p$ $<$ 0.001) follows, as expected, that for one year more not remodelled, the effect of a unit change in Quality on Sale Price is reduced by \$418. Thus, Years Since Remodeling has a negative (assumed) effect on the relationship of Quality on Sale Price. 
+Following this line of thought, as was done in Part 3, the interpretation of subset analysis regarding simple categories is that  Low Density Zone properties show a \$1670 lower Sale Price than Moderate to High Density properties. Then, considering the interaction term of Living Area and Low Density Zone, this implies that given the Zone Low Density, the effect of Living Area on Sale Price is \$ 9 stronger per additional square feet in Living Area when compared to Moderate to High Density Zone.  
 
 
 
 
 
 
-\section{FINAL REMARKS}
-\textbf{In this analysis we will examine further interaction and subsection analysis; such as quality as a numeric variable}
+% FIGURE 
+\begin{figure}
+
+         \includegraphics[scale=0.50]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment1/Code/supplement_appendix_Quality_yearssinceremodeling_sale.jpg"}
+         \small
+         \caption{Quality of Property to Sales moderated by Years Since Remodelling}
+\end{figure}
 
 
 
 
-\textbf{It is notable, that more complex analysis will be considered in part 4 \& 5, such as the moderating effect of Years Since remodeling on the association of Quality and Sale price}
 
-\textbf{IMPORTANT: FOR PART 4 CREATE A TABLE THAT CONATINS OLS ROBUST TO STANDARD ERRORS!!!! (THIS EXACT TABLE!!)}
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Sep 16, 2022 - 16:20:11
+\begin{table}[!htbp] \centering 
+  \caption{Subset Analysis Regression} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{0pt}}lcc} 
+\\[-5.5ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{SalePrice} \\ 
+\\[-1.8ex] & Model (1) & Std.Coef\\ 
+\hline \\[-1.8ex] 
+ tot\_liv\_area & 0.033$^{***}$ & 0.338$^{***}$ \\ 
+  & (0.004) & (0.004) \\ 
+  & & \\ 
+ y\_since\_rem & 1.890$^{***}$ & 0.491$^{***}$ \\ 
+  & (0.231) & (0.231) \\ 
+  & & \\ 
+ low\_density\_zone & $-$1.610 & $-$0.008 \\ 
+  & (9.192) & (9.192) \\ 
+  & & \\ 
+ commercial\_zone & $-$5.504 & $-$0.006 \\ 
+  & (39.209) & (39.209) \\ 
+  & & \\ 
+ floating\_zone & $-$65.837$^{**}$ & $-$0.171$^{**}$ \\ 
+  & (25.549) & (25.549) \\ 
+  & & \\ 
+ OverallQual & 31.370$^{***}$ & 0.546$^{***}$ \\ 
+  & (1.322) & (1.322) \\ 
+  & & \\ 
+ y\_since\_rem:OverallQual & $-$0.418$^{***}$ & $-$0.564$^{***}$ \\ 
+  & (0.040) & (0.040) \\ 
+  & & \\ 
+ tot\_liv\_area:low\_density\_zone & 0.009$^{**}$ & 0.155$^{**}$ \\ 
+  & (0.004) & (0.004) \\ 
+  & & \\ 
+ tot\_liv\_area:commercial\_zone & $-$0.009 & $-$0.019 \\ 
+  & (0.019) & (0.019) \\ 
+  & & \\ 
+ tot\_liv\_area:floating\_zone & 0.030$^{***}$ & 0.206$^{***}$ \\ 
+  & (0.010) & (0.010) \\ 
+  & & \\ 
+ Constant & $-$104.441$^{***}$ &  \\ 
+  & (11.037) & (11.037) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+R$^{2}$ & 0.779 & 0.779 \\ 
+Adjusted R$^{2}$ & 0.777 & 0.777 \\ 
+Residual Std. Error (df = 1449) & 37.489 & 37.489 \\ 
+F Statistic (df = 10; 1449) & 510.275$^{***}$ & 510.275$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:} N = 1460 & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
 
-\textbf{IMPOIRTANT HERE WE WILL NOT ONLY COMPARE THE BASE MODEL WITHOUT SCALE SALE PRICE, But also THE FULL MODEL WITH SCALED EVERYTHING and corrections for standard errors }
 
-to do: 1) log scale outcome variable because it is a an important factor; 2) secondly, the quadractic term of Total livign space is already in the part before, but here the rational is different was we were only talking about the independent variables in that case. as such I did not consider the total living area to be an issue here 
+
+
+
 
 
 
