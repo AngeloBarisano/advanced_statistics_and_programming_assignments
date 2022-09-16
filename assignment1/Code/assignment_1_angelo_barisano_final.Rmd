@@ -25,7 +25,6 @@ library("dplyr")
 library("moments")
 library ("lm.beta")
 library("fastDummies")
-library("gtsummary")
 library("stringr")
 library("extrafont")
 library("gridExtra")
@@ -42,50 +41,7 @@ df <- read.csv("Data/train.csv", header= TRUE, sep= ",")
 
 ```
 
-### Setting up a small function to fix the stargazer output
-``` {r fix stargazer}
-# credit: https://stackoverflow.com/questions/63959113/how-can-we-display-f-statistic-degrees-of-freedom-in-two-lines
 
-
-show_F_in_two_lines <- function(stargazer) {
-  # `Stringr` works better than base's regex 
-  require(stringr)
-
-  # If you remove `capture.output()`, not only the modified LaTeX code 
-  # but also the original code would show up
-  stargazer <- stargazer |>
-    capture.output()
-
-  # Reuse the index in which F-statistics are displayed
-  position_F <- str_which(stargazer, "F Statistic")
-
-  # Extract only F-statistics
-  Fs <- stargazer[position_F] |>
-    str_replace_all("\\(.*?\\)", "")
-
-  # Extract only df values and make a new line for them
-  dfs <- stargazer[position_F] |>
-    str_extract_all("\\(.*?\\)") |>
-    unlist() |>
-    (
-      \(dfs)
-      paste0(" & ", dfs, collapse = "")
-    )() |>
-    paste0(" \\\\")
-
-  # Reuse table elements that are specified
-  # after the index of F-statistics
-  after_Fs <- stargazer[-seq_len(position_F)]
-
-  c(
-    stargazer[seq_len(position_F - 1)],
-    Fs,
-    dfs,
-    after_Fs
-  ) |>
-    cat(sep = "\n")
-}
-```
 
 
 
@@ -360,9 +316,7 @@ bar + stat_summary(
   colour = "Black"
 ) + stat_summary(fun.data = mean_cl_normal, geom = "pointrange") + labs(x = 'Zoning', y = 'Sale Price')
 
-#' Additionally, High and Moderate density are also in this case quite comparable in all their statistics
-#' As such, one can assume that these two groups might be comparable and can be merged
-#' However, there might be other reasons underlying this issue; such as the small sample size of High density 
+
 ```
 
 
@@ -399,16 +353,6 @@ scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Liv
 )     
 
 ggsave("h2.2.jpg")
-
-#+ ggtitle("Sale Price by Living Space in square feet subsectioned by Zone")
-
-
-
-
-#' While not incredibly strong we would expect the effect of Lining Space on Sale Price to be stronger for Low density 
-#' areas than for High or Medium; in this case Moderate2High density
-
-#' Hypothesis 2: The effect of Total Living Space on Sales Price is stronger (association is stronger) for Low Density zones than for Moderate OR High Density areas; A second part of this analysis invols Moderate2High 
 
 ```
 
@@ -447,10 +391,7 @@ scatter + geom_point() + geom_smooth(method = "lm", color = "Red") + labs(x = 'L
 
 scatter <- ggplot(df_subset, aes(tot_liv_area, SalePrice, colour = Neighborhood))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'Neighborhood') + xlim(0, 7000)
-
-#' generally, as can be seen in these polots, the associations tend to cluster under certain neighborhoods and seem to be quite linear; However, this is less clear due to the amount of Neighborhoods and visually, this variable is not easy to be analysed
-#' Additionally, it is to be expected that this variable would have a confounder possibly explaining a lot of the variance in the sales price; Crime by neighborhood
-#' this necessitates another study to this end with other data 
+ 
 ```
 
 
@@ -460,17 +401,6 @@ scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "Neighborhood"), 
 scatter <- ggplot(df_, aes(y_since_rem, SalePrice))
 scatter + geom_point() + geom_smooth(method = "lm", aes(fill = "y_since_rem"), alpha = 0.4) + labs(x = 'Time Since last Remodeling at point of sale', y = "Sale Price in 1000s")
 #' Increasing cears since the house was remodeled (at time of sale of house) has a negative association with Sale price; as is to be expected
-
-
-#' subseqeutnly, the connection between quality of the house, which represents its features and the quality of the house as 
-#' a whole then might be impacted by the years since remodeling
-#' 
-#' The interpretation would follow as: For eg Qualitygroup2 compared to quality group1; for an increase in time since remodeling, the association of Qualitygroup2 with Sale price will decrease by amount X
-#' 
-#' What is interesting with this question is that it opens up: WHEN does the quality get reduced
-#' Furthermore, when treating qualtiy as a numeric variable, a similar effect can be observed, as will be demonstrated later 
-#' 
-#' finally, it is notable that ALL categories are more negative than the first category in this moderation term. This was to be expected; which suggests that overall higher quality corresponds with "more recent or more modern houses"
 
 
 ggplot(df_, aes(x = OverallQual_cat, y = SalePrice)) +
@@ -550,10 +480,6 @@ bar + stat_summary(
 # Run the regressions
 
 ```{r, echo = FALSE}
-# QUALITY LINEARITY ASSUMTION
-
-# Preanalysis: is quality as an interval?
-# regress all categories of quality on the outcome but leave the lowest out; see wherther there is a step up
 
 # create the dummies
 OverallQual_grouped_dummies <- fastDummies::dummy_cols(df_$OverallQual)
@@ -581,12 +507,7 @@ stargazer (
 
 coef(summary(quality_regression_checkup))[, 1:2]
 
-#' arguemtns:
-#' 1. like a likert scale
-#' 2. the standard errors are extremely constant
-#' 3. The plot suggests the same
-#' 4. the estimates increase steadily´
-#' PLOT IT!
+
 
 ```
 
@@ -675,67 +596,10 @@ multi_var_model_w_confounders_ninteraction_unscaled.beta <-
 
 
 
-```{r }
 
-
-# 
-# stargazer(
-#   main_multi_var_model,
-#   mulit_var_model,
-#   multi_var_model_w_confounders,
-#   multi_var_model_w_confounders_ninteraction,
-#  type = 'text',
-#   omit = c(
-#     "YrSold2008",
-#     "YrSold2009",
-#     "YrSold2010",
-#     "OverallQual_cat3",
-#     "OverallQual_cat4",
-#     "OverallQual_cat5",
-#     "OverallQual_cat6",
-#     "OverallQual_cat7",
-#     "OverallQual_cat8",
-#     "OverallQual_cat9",
-#     "OverallQual_cat10",
-#     "Building_typeSingle Family Home "
-#   ),
-#   
-#   
-#             header=FALSE, # to get rid of r package output text
-# 
-#           single.row = FALSE, # to put coefficients and standard errors on same line
-# 
-#           no.space = TRUE, # to remove the spaces after each line of coefficients
-# 
-#           column.sep.width = "3pt", # to reduce column width
-# 
-#           font.size = "small" # to make font size smaller
-#         # ,float.env = "sidewaystable"
-# ) |>
-#   show_F_in_two_lines()
-
-```
-
-
-```{r }
-# stargazer(multi_var_model_w_confounders,
-# multi_var_model_w_confounders_ninteraction_unscaled,
-# multi_var_model_w_confounders_ninteraction, type = 'text')
-
-
-```
 
 ```{r Combined Table}
 
-# multi_var_model_w_confounders_ninteraction
-# multi_var_model_w_confounders
-
-# stargazer(multi_var_model_w_confounders,
-# multi_var_model_w_confounders_ninteraction_unscaled,
-# multi_var_model_w_confounders_ninteraction, type = 'text')
-
-
-# only compare the two most important models 
 stargazer(
   multi_var_model_w_confounders,
   multi_var_model_w_confounders.beta,
@@ -826,34 +690,9 @@ stargazer(
   multi_var_model_w_confounders_ninteraction.beta,
 
 ```{r }
-A4
-# Tests andcontrols for Homoscedasitcity
-# Run models with clustered SE, robust SE, and normal se
-# multi_var_model_w_confounders_ninteraction
-# 
-# multi_var_model_w_confounders_ninteraction_unscaled
-
-
-# Make plots
-# png(filename="normalityplots.png")
-# par(mfrow = c(2,2))
-# plot(multi_var_model_w_confounders_ninteraction)
-# dev.off()
-
-
-
+# A4
 # pagan breusch test
 lmtest::bptest(multi_var_model_w_confounders_ninteraction)
-
-
-# robust SE
-# seBasic <- sqrt( diag( vcov( m_2 )))
-# seWhite <- sqrt( diag(vcovHC( m_2, type="HC0")))
-# stargazer(m_2,m_2,se=list(seBasic,seWhite),
-# omit=c("LotArea","X2ndFlrSF","MSZoning","FullBath",
-# "HalfBath","BedroomAbvGr","BasementDummy",
-# "PoolDummy"),no.space=TRUE,font.size="footnotesize",
-# column.labels = c("Regular standard error","Robust standard error"))
 
 
 
@@ -892,9 +731,6 @@ stargazer(
     "Building_typeSingle Family Home "
   )
 )
-#' how to interpret?
-#' eg income we see no real heteroscedasticity; so there is less varaince or SE 
-#' but lunch was heteroscedastic --> the result ofthe fix is wider SE
 
 
 
@@ -907,20 +743,12 @@ stargazer(
 ```{r}
 
 # A2
-
-
-# library("AER")
-# vif <- vif(multi_var_model_w_confounders_ninteraction, type = 'predictor')
-# stargazer(vif, type = 'text')
 vif_ <- vif(multi_var_model_w_confounders_ninteraction)
 stargazer(vif_, type = 'text')
-
-#' while there are some variables that dispaly a VIF of more than 5, this does not automatically indicate mulitcollineariy. however this necessitats further analysis of this issue to reduce the probabiltiy of having a problem with multicllinearity. Overall, the increased VIF can mostly be attributed to the incusion of interaction effects. 
 
 vif(multi_var_model_w_confounders_ninteraction)
 
 stargazer(vif(multi_var_model_w_confounders_ninteraction))
-# In order t
 
 stargazer(DAAG::vif(multi_var_model_w_confounders), type = "latex", omit = c(
     "YrSold2008",
@@ -967,12 +795,14 @@ ggsave("meanindepedence.jpg")
 
 ```{r }
 # A 6
-df_n <- df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction$fitted.values,
-                                     resids = multi_var_model_w_confounders_ninteraction$residuals)
+df_n <-
+  df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction$fitted.values,
+                 resids = multi_var_model_w_confounders_ninteraction$residuals)
 p1 <- ggplot(df_n, aes(x = resids)) +
   geom_histogram(color = "black", fill = "white") + theme_classic() +
   labs(x = "Residuals", y = "Frequency")
-p2 <- qplot(sample = multi_var_model_w_confounders_ninteraction$residuals) + theme_classic()
+p2 <-
+  qplot(sample = multi_var_model_w_confounders_ninteraction$residuals) + theme_classic()
 grid.arrange(p1, p2, nrow = 1)
 
 ggsave("nonnormailtyplot2s.jpg")
@@ -983,12 +813,14 @@ shapiro.test(multi_var_model_w_confounders_ninteraction$residuals)
 
 
 
-df_n <- df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction_unscaled$fitted.values,
-                                     resids = multi_var_model_w_confounders_ninteraction_unscaled$residuals)
+df_n <-
+  df_ %>% mutate(fitted = multi_var_model_w_confounders_ninteraction_unscaled$fitted.values,
+                 resids = multi_var_model_w_confounders_ninteraction_unscaled$residuals)
 p1 <- ggplot(df_n, aes(x = resids)) +
   geom_histogram(color = "black", fill = "white") + theme_classic() +
   labs(x = "Residuals", y = "Frequency")
-p2 <- qplot(sample = multi_var_model_w_confounders_ninteraction_unscaled$residuals) + theme_classic()
+p2 <-
+  qplot(sample = multi_var_model_w_confounders_ninteraction_unscaled$residuals) + theme_classic()
 grid.arrange(p1, p2, nrow = 1)
 
 # ggsave("nonnormailtyplot2s.jpg")
@@ -999,11 +831,39 @@ shapiro.test(multi_var_model_w_confounders_ninteraction_unscaled$residuals)
 ```
 
 
+# Subset Analysis
 
 
 
+```{r }
+# Subsection analyiss
+full_model_sub <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem + low_density_zone +  commercial_zone + floating_zone + y_since_rem *
+      OverallQual +  tot_liv_area * low_density_zone +  tot_liv_area * commercial_zone +  tot_liv_area * floating_zone ,
+    data = df_
+  )
+
+full_model_sub.beta <- lm.beta(full_model_sub)
+stargazer
+
+stargazer(
+  full_model_sub,
+  full_model_sub.beta,
+  coef = list(
+    full_model_sub$coefficients,
+    full_model_sub.beta$standardized.coefficients
+  ),
+  p = list (coef(summary(full_model_sub))[, 4],
+            coef(summary(
+              full_model_sub.beta
+            ))[, 5]),
+  type = 'latex'
+)
 
 
+
+```
 
 
 

@@ -21,7 +21,7 @@
 \theoremseparator{:}
 \usepackage{lscape}
 
-
+\usepackage[utf8]{inputenc}
 \newtheorem{hyp}{Hypothesis}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
 \tikzset{
@@ -35,20 +35,17 @@
 
 
 
-
 \begin{document}
 
-\newpage
+
+\title{Sales Price Estimation Assignment 1}
+\author{Angelo Barisano; 508903 }
+\date{September 16th, 2022}
+\maketitle
 
 
 
-
-
-
-
-
-
-
+\pagebreak
 
 \section{Data Prep, EDA, and Theory development}
 \subsection{Varaible Selection \& Explanation}
