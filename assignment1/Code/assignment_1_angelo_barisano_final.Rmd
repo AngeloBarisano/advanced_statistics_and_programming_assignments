@@ -659,7 +659,7 @@ stargazer(
   # to reduce column width
   font.size = "small" # to make font size smaller
   # ,float.env = "sidewaystable"
-) |> show_F_in_two_lines()
+) 
 
 
 

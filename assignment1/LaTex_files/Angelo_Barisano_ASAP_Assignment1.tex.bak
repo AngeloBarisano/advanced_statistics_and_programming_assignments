@@ -78,7 +78,7 @@ For the purpose of analysing the determinants of prices of home sales in the US,
 
 
 
-Additionally, multiple categorical variables are used in this assignment, such as Zoning and Year of Sale. The original (MS)Zoning variable contains seven categories, of which five contain data; these zones correspond to the administrative classification of the ground on which the properties are constructed (Commercial n = 10, Floating Village n = 65, Low-Density n = 1151, Moderate-Density n = 218, High-Density n = 16 contain data; Residential Low Density Park, Agricultural, Industrial do not contain records). For the purpose of this analysis, this number was reduced to four categories based on the similar behaviour of Moderate and High Density properties in  the data. This is interesting as Ames, Iowa, represents the stereotypical picture of a mid-western town in the US, displaying fewer densly populated areas; curtailing possibilities of extrapolation to similar samples. Thus, the main question of this analysis section focuses on the difference between Low and Medium to High density zoned properties.\footnote{Floating Village (n = 67) and Commercial (n =10) behave too differently to be merged; their sample size makes them negligbile; they are included to not rmove any data.} In addition, year of sale will be used to control for the effect of the 2008/2009 housing crisis.
+Additionally, multiple categorical variables are used in this assignment, such as Zoning and Year of Sale. The original (MS)Zoning variable contains seven categories, of which five contain data; these zones correspond to the administrative classification of the ground on which the properties are constructed (Commercial n = 10, Floating Village n = 65, Low-Density n = 1151, Moderate-Density n = 218, High-Density n = 16 contain data; Residential Low Density Park, Agricultural, Industrial do not contain records). For the purpose of this analysis, this number was reduced to four categories based on the similar behaviour of Moderate and High Density properties in  the data. This is interesting as Ames, Iowa, represents the stereotypical picture of a mid-western town in the US, displaying fewer densly populated areas; curtailing possibilities of extrapolation to similar samples. Thus, the main question of this analysis section focuses on the difference between Low and Medium to High density zoned properties.\footnote{Floating Village (n = 67) and Commercial (n =10) behave too differently to be merged due to small sample size} In addition, year of sale will be used to control for the effect of the 2008/2009 housing crisis.
 
 
 
@@ -458,6 +458,8 @@ Following this line of thought, as was done in Part 3, the interpretation of sub
 \newpage
 \newpage
 \section{Citations}
+\indent \indent Causal Graphs in LaTex - Daniel Kumor. (2018, August 15). Retrieved September 16, 2022, from $https://dkumor.com/posts/technical/2018/08/15/causal-tikz/$
+
 \indent Fox, J., \& Monette, G. (1992). Generalized collinearity diagnostics. $Journal of the American Statistical Association, 87(417)$, 178-183.
 
 \indent Hlavac, M. (2018). $stargazer: Well-Formatted Regression and Summary Statistics Tables.$ Central European Labour Studies Institute (CELSI). https://CRAN.R-project.org/package=stargazer
