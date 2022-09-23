@@ -77,6 +77,7 @@ Question: The main predictor is meant to be whether women has children; Should w
 
 \subsection{Indicate which of the coefficients(s) from equation (1) yield the following outcomes}
 
+\textbf{NOte possibly delete duplicates}
 SEE SLIDE 57 ff
 
 Important: we canot identify the monthrs; so If they become mothers at some point, we will assume that these are taken out!
@@ -100,7 +101,7 @@ $
 
 
 
-\subsection{Task 2: Provide a suiatble matrix plot as on slide 55}
+\subsection{Task 2: Provide graphic as on slide 55}
 
 
 \begin{wrapfigure}{L}{8.5cm}
@@ -138,7 +139,11 @@ Predictor is WHETHER YOU HAVE CHILD OR NOT
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 20:25:57
-\begin{table}[!htbp] \centering 
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
   \caption{Descriptive Statistics of Numeric Indepdenent and Dependent Varaible} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
@@ -155,12 +160,137 @@ Unearned Income & 1.193 & 1.382 & 0 & 0 & 1 & 2 & 9 \\
 Count Children & 0.513 & 0.500 & 0 & 0 & 1 & 1 & 1 \\ 
 \hline \\[-1.8ex] 
 \end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 13746
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
 \end{table}
 
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Sep 23, 2022 - 20:47:48
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+  \caption{Descriptive Statistics of ECIC; With Children} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+Family Income & 12,750.390 & 15,739.050 & 0.000 & 4,652.465 & 8,425.197 & 15,218.720 & 410,507.600 \\ 
+Earnings & 7,909.934 & 14,956.930 & 0.000 & 0.000 & 1,110.727 & 11,107.270 & 366,095.500 \\ 
+Age & 32.717 & 8.630 & 20 & 25 & 32 & 39 & 54 \\ 
+Education & 9.001 & 2.408 & 0 & 7 & 10 & 11 & 11 \\ 
+Education Years & 4.840 & 5.872 & 0.000 & 0.071 & 3.761 & 7.070 & 102.958 \\ 
+Unearned Income & 2.097 & 1.209 & 1 & 1 & 2 & 3 & 9 \\ 
+Count Children & 0.466 & 0.499 & 0 & 0 & 0 & 1 & 1 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 7819
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+\end{table} 
+
+
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Sep 23, 2022 - 20:47:48
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+  \caption{Descriptive Statistics of ECIC; Without Children} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+Family Income & 18,559.860 & 23,041.780 & 0.000 & 5,793.092 & 11,912.950 & 24,391.010 & 575,616.800 \\ 
+Earnings & 13,760.260 & 21,301.400 & 0.000 & 0.000 & 7,664.014 & 19,447.610 & 537,880.600 \\ 
+Age & 38.498 & 11.046 & 20 & 28 & 40 & 49 & 54 \\ 
+Education & 8.549 & 2.889 & 0 & 7 & 10 & 11 & 11 \\ 
+Education Years & 4.800 & 8.496 & 0.000 & 0.000 & 1.248 & 6.528 & 134.058 \\ 
+Unearned Income & 0.000 & 0.000 & 0 & 0 & 0 & 0 & 0 \\ 
+Count Children & 0.574 & 0.494 & 0 & 0 & 1 & 1 & 1 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 5927
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+\end{table}
 
 
 \subsection{Task 4: Matrix Diff in Diff}
 NOte: by taking the average of the periods we have two small problems: 1) the AFTER period is longer; so should we really do that?
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Sep 23, 2022 - 21:38:43
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+  \caption{Diff-in-Diff Matrix} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{8pt}}lccccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex]
+\multicolumn{2}{c}{}  & \multicolumn{2}{c}{Earning}  & \multicolumn{2}{c}{Family Income} & \multicolumn{2}{c}{Work Participation} \\ 
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} \\ 
+\hline \\[-1.8ex] 
+\multicolumn{1}{c}{Before} & 1 & 14,203.900 & 7,290.380 & 19,159.190 & 12,140.900 & 0.580 & 0.450 \\ 
+\multicolumn{1}{c}{After} & 2 & 13,507.900 & 8,277.200 & 18,218.950 & 13,111.690 & 0.570 & 0.480 \\ 
+\multicolumn{1}{c}{Difference} &  & -696.000 & 986.810 & -940.240 & 970.800 & -0.010 & 0.030 \\ 
+\hline \\[-3.6ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 5927 Childless; N = 7819 Has one or more Children
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+\end{table}
+
+
+
+\subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
+dependent variables}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
