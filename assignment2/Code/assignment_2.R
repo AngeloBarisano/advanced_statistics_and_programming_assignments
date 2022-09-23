@@ -243,28 +243,68 @@ df <- df %>%
 df$has_children <- as.factor(df$has_children)
 
 
-did_earn <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
-did_finc <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
-did_work <- work ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+##################
+# Earn models
+did_earn_sim <- earn ~ has_children + dperiod + has_children:dperiod
+did_earn_expand <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
 
-# ii) standardize
+rsltdid_earn_sim <- lm(did_earn_sim, data = df)
+rsltdid_earn_expand <- lm(did_earn_expand, data = df)
 
-# now we do not subset so that we have the control
-rsltdid_earn <- lm(did_earn, data = df)
-rsltdid_finc <- lm(did_finc, data = df)
-rsltdid_work <- lm(did_work, data = df)
+
+##################
+# finc models
+did_finc_sim <- finc ~ has_children + dperiod + has_children:dperiod
+did_finc_expand <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+
+rsltdid_finc_sim <- lm(did_finc_sim, data = df)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df)
+
+
+##################
+# work models
+did_work_sim <- work ~ has_children + dperiod + has_children:dperiod
+did_work_expand <- work ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+
+rsltdid_work_sim <- lm(did_work_sim, data = df)
+rsltdid_work_expand <- lm(did_work_expand, data = df)
+
+
+
+
+
+
+
 
 
 stargazer(
-    rsltdid_earn,
-    rsltdid_finc,
-    rsltdid_work,
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    # rsltdid_work_sim,
+    # rsltdid_work_expand,
     intercept.bottom = FALSE,
     align = TRUE,
     no.space = TRUE,
-    omit = "SHEET",
-    omit.labels = "Restaurant IDs?",
+    # omit.labels = "Restaurant IDs?",
     type = "text"
+)
+
+
+
+stargazer(
+  rsltdid_earn_sim,
+  rsltdid_earn_expand,
+  rsltdid_finc_sim,
+  rsltdid_finc_expand,
+  rsltdid_work_sim,
+  rsltdid_work_expand,
+  intercept.bottom = FALSE,
+  # align = TRUE
+  no.space = TRUE
+  # omit.labels = "Restaurant IDs?",
+  
 )
 
 
@@ -274,14 +314,36 @@ stargazer(
 
 
 #----------------------------------------
-# implement standardized?
-
-
-
-
-
-#----------------------------------------
 # implement robust standard errors
+seBasic <- sqrt(diag(vcov(rsltdid_earn)))
+seWhite <- sqrt(diag(vcovHC(rsltdid_earn, type = "HC0")))
+seClust <- sqrt(diag(vcovHC(rsltdid_earn, cluster = "state")))
+
+
+
+
+
+
+
+stargazer(rsltdid_earn, rsltdid_earn, rsltdid_earn, se = list(seBasic, seWhite, seClust), type = "text")
+
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 5 -
+
+
+
+
+
+
+
+
 
 
 

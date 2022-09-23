@@ -275,17 +275,75 @@ dependent variables}
 
 
 
+\textbf{Note:standardized coefficinets will NOT be included as they are of no interpretable interest here and there is no real effect size we want to estimate in the first place.}
+
+\textbf{Also: give a short theroy for why control variables were included! LOOK AT PQRM QUANTITATIVE CORUSE AT UVA; THEY CALLED IT SOMETHING SPECIAL!}
+
+\textbf{IMPORTANT: EXPLAIN WHY IN CERTAIN MODELS THE CONTROL VARIABLES WORK AND WHY THEY DONT WORK IN OTHER MODELS!! Build a theory in this regard }
+
+\textbf{NOTE ROBUST STANDARD ERROS MIGHT NOT EVEN BE NEEDED IN THIS CASE DUE TO THE THEORY BEHIND DIFF IN DIFF }
 
 
 
+\begin{landscape}
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 14, 2022 - 15:53:27
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Non-Robust Regression Results Part 3}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
+  & (828.375) & (1,550.012) & (886.522) & (1,655.347) & (0.023) & (0.043) \\ 
+  has\_children1 & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
+  & (1,093.444) & (1,096.506) & (1,170.197) & (1,171.022) & (0.030) & (0.030) \\ 
+  dperiod & $-$695.997 & $-$536.491 & $-$940.239$^{*}$ & $-$515.553 & $-$0.005 & $-$0.024$^{*}$ \\ 
+  & (485.413) & (500.046) & (519.486) & (534.028) & (0.013) & (0.014) \\ 
+  age &  & 22.555 &  & 78.717$^{***}$ &  & 0.002$^{***}$ \\ 
+  &  & (15.922) &  & (17.004) &  & (0.0004) \\ 
+  urate &  & 133.948 &  & 372.861$^{***}$ &  & $-$0.018$^{***}$ \\ 
+  &  & (114.614) &  & (122.403) &  & (0.003) \\ 
+  ed &  & 66.337 &  & $-$125.305$^{**}$ &  & 0.017$^{***}$ \\ 
+  &  & (59.579) &  & (63.628) &  & (0.002) \\ 
+  nonwhite1 &  & $-$1,255.622$^{***}$ &  & $-$2,438.387$^{***}$ &  & $-$0.043$^{***}$ \\ 
+  &  & (326.237) &  & (348.408) &  & (0.009) \\ 
+  has\_children1:dperiod & 1,682.810$^{***}$ & 1,722.360$^{***}$ & 1,911.035$^{***}$ & 2,006.060$^{***}$ & 0.031$^{*}$ & 0.033$^{*}$ \\ 
+  & (642.099) & (641.893) & (687.171) & (685.515) & (0.018) & (0.018) \\ 
+ \hline \\[-1.8ex] 
+Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
+R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.028 & 0.012 & 0.027 \\ 
+Adjusted R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.027 & 0.012 & 0.026 \\ 
+Residual Std. Error & 17,965.670 & 17,956.450  & 19,226.750  & 19,176.730 & 0.497  & 0.493  \\ 
+F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}$  & 54.906$^{***}$  & 54.374$^{***}$  \\ 
+\hline 
+\hline \\[-1.8ex] 
+
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 1460. All observations included in any model. *** p$<$0.01, ** p$<$0.05, * p$<$0.1. Standardized regression coefficients are reported in the adjacent column to the model. For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. The Sale Price is represented in 1000s. 
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
 
 
 
-
-
-
-
-
+\end{landscape}
 
 
 
