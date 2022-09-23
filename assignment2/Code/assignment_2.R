@@ -27,12 +27,20 @@ setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/As
 df <- read.csv("Data/DiD_dataset-1.csv", header = TRUE, sep = ",")
 
 df$nonwhite <- as.factor(df$nonwhite)
+df$state <- as.factor(df$state)
+df$year <- as.factor(df$year)
 
 
+# indicate child or not
 df <- df %>%
-    mutate(has_children = children >= 1)
-View(df)
-# drop duplicates?
+    mutate(has_children = case_when(
+        children > 0 ~ TRUE,
+        children == 0 ~ FALSE
+    ))
+
+# first set up indicator that whether treatment vs non treatment period
+df <- df %>% mutate(dperiod = case_when(year < 1993 ~ 1, year >= 1993 ~ 2))
+
 
 
 # Create Dummy indicating whether instance has child or not
@@ -47,16 +55,12 @@ View(df)
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 # Task 2; plot 3 dependent variables;
-# initial prep
-# i) group by year and take the mean
-df_g_summary <- df %>%
-    group_by(year) %>%
-    summarise_at(vars(work, finc, earn), funs(mean(., na.rm = TRUE)))
 
 # a) annual earnings (earn)
-ggplot(df, aes(year, earn)) +
+ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
     stat_summary(geom = "line", fun = mean) +
-    labs(x = "Year", y = "Earnings") +
+    labs(x = "Year", y = "Earnings", color = "Has Children") +
+    theme_minimal() +
     geom_vline(xintercept = 1993) +
     theme_set(theme_bw() + theme(legend.position = "bottom")) +
     theme(
@@ -69,9 +73,10 @@ ggplot(df, aes(year, earn)) +
 ggsave("Graphics/task2_earn_did.png")
 
 # b) annual family income (finc)
-ggplot(df, aes(year, finc)) +
+ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
     stat_summary(geom = "line", fun = mean) +
-    labs(x = "Year", y = "Family Income") +
+    labs(x = "Year", y = "Family Income", color = "Has Children") +
+    theme_minimal() +
     geom_vline(xintercept = 1993) +
     theme_set(theme_bw() + theme(legend.position = "bottom")) +
     theme(
@@ -84,9 +89,10 @@ ggplot(df, aes(year, finc)) +
 ggsave("Graphics/task2_finc_did.png")
 
 # c) working/non-working (work)
-ggplot(df, aes(year, work)) +
+ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
     stat_summary(geom = "line", fun = mean) +
-    labs(x = "Year", y = "Work") +
+    labs(x = "Year", y = "Work Proportion", color = "Has Children") +
+    theme_minimal() +
     geom_vline(xintercept = 1993) +
     theme_set(theme_bw() + theme(legend.position = "bottom")) +
     theme(
@@ -99,59 +105,50 @@ ggplot(df, aes(year, work)) +
 ggsave("Graphics/task2_work_did.png")
 
 
-
-# d) working/non-working (work) --> COUNTERARGUMENT USING SUBSETS
-ggplot(df, aes(year, work, color = "has_children"), cex.lab = 30) +
-    labs(x = "Year", y = "Work", color = "has_children") +
-    stat_summary(geom = "line", fun = mean) +
-    geom_vline(xintercept = 1993) +
-    theme_set(theme_bw() + theme(legend.position = "bottom")) +
-    theme(
-        axis.text.x = element_text(size = 17, family = "LM Roman 10"),
-        axis.text.y = element_text(size = 17, family = "LM Roman 10"),
-        axis.title = element_text(size = 20, family = "LM Roman 10"),
-        legend.text = element_text(size = 16, family = "LM Roman 10")
-    )
-ggsave("Graphics/task2_work_did.png")
 
 
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 # Task 3
+df_temp <- df %>%
+    select((c("finc", "earn", "age", "ed", "unearn", "children", "work")))
 
 stargazer(
-    df,
-    type = "text",
+    df_temp,
+    type = "latex",
     omit.summary.stat = c("N"),
     summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
-    title = "Descriptive Statistics of Numeric Indepdenent and Dependent Varaible"
+    title = "Descriptive Statistics of Numeric Indepdenent and Dependent Varaible",
+    covariate.labels = c(
+        "Family Income", "Earnings", "Age", "Education",
+        "Education Years", "Unearned Income", "Count Children", "Work"
+    )
 )
 
 
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 # Task 4 - create the matrixes
-# first set up indicator that whether treatment vs non treatment period
-df <- df %>% mutate(df, dperiod = case_when(year < 1993 ~ 1, year >= 1993 ~ 2))
-df
 
 # Find averages per year/dperiod in per earn, finc, work
-
 df_g_summary <- df %>%
     group_by(dperiod) %>%
-    summarise_at(vars(work, finc, earn), funs(mean(., na.rm = TRUE)))
+    summarise_at(vars(work, finc, earn), funs(mean(., na.rm = TRUE)), round = 2)
 
 df_g_summary <- rbind(df_g_summary, df_g_summary[2, ] - df_g_summary[1, ])
-
 rownames(df_g_summary) <- c("Before", "After", "Difference")
+df_g_summary[3, 1] <- NA
+
+# round the output
+df_g_summary[, -1] <- round(df_g_summary[, -1], 2)
 
 
-df_g_summary
+# Make a table with the results
+stargazer(df_g_summary, summary = FALSE, align = TRUE, type = "text")
 
+stargazer(df_g_summary, summary = FALSE, align = TRUE, type = "latex")
 
-
-
-
+#' df_g_summary
 
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
