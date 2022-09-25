@@ -183,7 +183,7 @@ df_ <-
 
 ```{r inspect dypes of the variables at hand}
 # adjust the scale of saleprice for easier handling
-df_$SalePrice <- df_$SalePrice / 1000
+df_$SalePrice <- df_$SalePrice 
 
 # to make it clear that only certain operations can be performed on the data
 # ID should be a character as string/factor operations are resptrictive by design
@@ -322,7 +322,7 @@ bar + stat_summary(
 
 ```{r Second Hypothesis Plot}
 # now drill down
-
+ 
 
 scatter <-
   ggplot(df_, aes(tot_liv_area, SalePrice, colour = MSZoning))
@@ -345,6 +345,7 @@ scatter <-
   ggplot(df_,
          aes(tot_liv_area, SalePrice, colour = MSZoning_gr),
          cex.lab = 30)
+
 scatter + geom_point() + geom_smooth(method = "lm", alpha = 0.1) + labs(x = 'Living space in square feet', y = "Sale Price in 1000s", color = 'MSZoning_gr') + xlim(0, 7000)  + theme_set(theme_bw() + theme(legend.position = "bottom")) + theme(
   axis.text.x = element_text(size = 17 ,family="LM Roman 10"),
   axis.text.y = element_text(size = 17,family="LM Roman 10"),
@@ -858,9 +859,31 @@ stargazer(
             coef(summary(
               full_model_sub.beta
             ))[, 5]),
-  type = 'latex'
+  type = 'text'
 )
 
+
+table(df_$MSZoning)
+
+only_broken_home <- subset(df_, MSZoning == "Moderate Density")
+
+no_broken_home <- subset(df_, MSZoning == "Low Density")
+
+
+
+
+full_model_sub2 <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem    + y_since_rem * OverallQual ,
+    data = only_broken_home
+  )
+full_model_sub3 <-
+  lm(
+    SalePrice ~ 1 + tot_liv_area  + y_since_rem    + y_since_rem * OverallQual ,
+    data = no_broken_home
+  )
+
+stargazer(full_model_sub, full_model_sub2, full_model_sub3, type = 'text')
 
 
 ```

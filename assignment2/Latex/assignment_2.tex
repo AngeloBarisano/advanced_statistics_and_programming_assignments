@@ -272,7 +272,7 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 
 \subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
 dependent variables}
-
+\textbf{NOTE STANDARDIZED COEFFICIENTS ARE NOT REPORTED AS THEY ARE USELESS IN THIS CONTEXT; WE ARE NOT LOOKIGN FOR EFFECT SIZE BUT RATHER THE CASE OF }
 
 
 \textbf{Note:standardized coefficinets will NOT be included as they are of no interpretable interest here and there is no real effect size we want to estimate in the first place.}
@@ -331,7 +331,7 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 13746. Non Robust Standard Errors applies.  Years in date range is 2006 to 2010. The Sale Price is represented in 1000s. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -342,12 +342,117 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 
 
 
+\subsection{Task 6: Subset analysis}
+\textbf{NOTE: IN THIS CASE WE USE THE SUBSET ANALYSIS and not use interactions due to the efficeincy; if we were to use interactions, the analysis would have a higher statistical power, but the problem is: it would be really difficult to discern }
 
+\textbf{NOTE WE STILL USE DIFF IN DIFF BECAUSE WE STILL WANT TO SEE THE EFFECT OF THE POLICY INTERVATION JUST HERE SUBSECTIONED BY DIFFERENT VARIABLES }
 
+\subsubsection{Women with Children compared based on high \& low education levels}
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 14, 2022 - 15:53:27
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Subsection Analysis Single Women with Children for alternating low/ high education levels}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
+  & (828.375) & (1,550.012) & (886.522) & (1,655.347) & (0.023) & (0.043) \\ 
+  has\_children1 & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
+  & (1,093.444) & (1,096.506) & (1,170.197) & (1,171.022) & (0.030) & (0.030) \\ 
+  dperiod & $-$695.997 & $-$536.491 & $-$940.239$^{*}$ & $-$515.553 & $-$0.005 & $-$0.024$^{*}$ \\ 
+  & (485.413) & (500.046) & (519.486) & (534.028) & (0.013) & (0.014) \\ 
+  age &  & 22.555 &  & 78.717$^{***}$ &  & 0.002$^{***}$ \\ 
+  &  & (15.922) &  & (17.004) &  & (0.0004) \\ 
+  urate &  & 133.948 &  & 372.861$^{***}$ &  & $-$0.018$^{***}$ \\ 
+  &  & (114.614) &  & (122.403) &  & (0.003) \\ 
+  ed &  & 66.337 &  & $-$125.305$^{**}$ &  & 0.017$^{***}$ \\ 
+  &  & (59.579) &  & (63.628) &  & (0.002) \\ 
+  nonwhite1 &  & $-$1,255.622$^{***}$ &  & $-$2,438.387$^{***}$ &  & $-$0.043$^{***}$ \\ 
+  &  & (326.237) &  & (348.408) &  & (0.009) \\ 
+  has\_children1:dperiod & 1,682.810$^{***}$ & 1,722.360$^{***}$ & 1,911.035$^{***}$ & 2,006.060$^{***}$ & 0.031$^{*}$ & 0.033$^{*}$ \\ 
+  & (642.099) & (641.893) & (687.171) & (685.515) & (0.018) & (0.018) \\ 
+ \hline \\[-1.8ex] 
+Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
+R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.028 & 0.012 & 0.027 \\ 
+Adjusted R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.027 & 0.012 & 0.026 \\ 
+Residual Std. Error & 17,965.670 & 17,956.450  & 19,226.750  & 19,176.730 & 0.497 & 0.493 \\ 
+F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}$ & 54.906$^{***}$ & 54.374$^{***}$  \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 7819 Single Women have Children. N = 5593 high education (years of eduction $>$= 9 years); N = 2226 low education (years of eduction $<$ 9 years); Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
 
+\subsubsection{Women with and without Children compared keeping education level (low) constant}
 
-
-
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 14, 2022 - 15:53:27
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Subsection Analysis Single Women with/ without Children for constant (low) education levels}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 11,066.700$^{***}$ & 4,281.758 & 17,494.530$^{***}$ & 8,507.214$^{***}$ & 0.501$^{***}$ & 0.441$^{***}$ \\ 
+  & (1,457.343) & (2,602.848) & (1,534.185) & (2,735.084) & (0.038) & (0.068) \\ 
+  has\_children1 & $-$2,323.038 & $-$2,402.722 & $-$3,739.399$^{*}$ & $-$3,267.950 & $-$0.080 & $-$0.087 \\ 
+  & (2,026.514) & (2,030.169) & (2,133.367) & (2,133.311) & (0.053) & (0.053) \\ 
+  dperiod & 783.677 & 1,378.102 & 322.393 & 1,127.629 & $-$0.004 & $-$0.007 \\ 
+  & (858.662) & (882.127) & (903.937) & (926.943) & (0.023) & (0.023) \\ 
+  age &  & 29.868 &  & 83.479$^{***}$ &  & 0.001 \\ 
+  &  & (29.856) &  & (31.373) &  & (0.001) \\ 
+  urate &  & 651.163$^{***}$ &  & 845.832$^{***}$ &  & $-$0.002 \\ 
+  &  & (216.731) &  & (227.742) &  & (0.006) \\ 
+  nonwhite1 &  & 332.812 &  & $-$2,403.220$^{***}$ &  & 0.081$^{***}$ \\ 
+  &  & (664.392) &  & (698.146) &  & (0.017) \\ 
+  has\_children1:dperiod & $-$413.449 & $-$475.403 & $-$179.637 & $-$152.761 & 0.015 & 0.012 \\ 
+  & (1,194.473) & (1,193.612) & (1,257.455) & (1,254.253) & (0.031) & (0.031) \\ 
+ \hline \\[-1.8ex] 
+Observations & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 \\ 
+R$^{2}$ & 0.006 & 0.009 & 0.010 & 0.016 & 0.003 & 0.008 \\ 
+Adjusted R$^{2}$ & 0.006 & 0.008 & 0.009 & 0.015 & 0.002 & 0.007 \\ 
+Residual Std. Error & 18,962.540 & 18,944.100  & 19,962.390  & 19,906.540 & 0.498 & 0.497  \\ 
+F Statistic & 9.304$^{***}$  & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$ & 4.494$^{***}$  & 6.121$^{***}$  \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 4411 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
 
 
 \end{document}
