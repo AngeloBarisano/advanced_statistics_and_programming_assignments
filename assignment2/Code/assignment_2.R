@@ -554,3 +554,30 @@ stargazer(
         "Age", "Years of Education", "Ln(Wage)", "Wage"
     )
 )
+
+#------------------------------------------------------------------
+# task 4 run IV reg on ln wage by  education using yob as instrument
+# convert yob to factor
+df$yob <- as.factor(df$yob)
+
+
+
+rslt2SLS <-
+    ivreg(lnwage ~ educ | educ + TaxDiff,
+        data = dfCigarettes95
+    )
+
+educ
+summary(rslt2SLS)
+
+stargazer(rslt2SLS, type = "text")
+
+
+
+View(df)
+
+
+rslt2SLS.A <-
+    ivreg(lnPacks ~ lnPrice + lnIncome | lnIncome + TaxDiff,
+        data = dfCigarettes95
+    )

@@ -483,6 +483,7 @@ Rational behind these choices: all students born in the sam year are admitted to
 \textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
 
 \subsection{Explain wHY ols is biased here - A3}
+\textbf{IMPORTANT SEE SLIDES 7 ff!!!}
 --> IMPORTANT: ALSO INCLDUE 1) THE METHOD OF IV being different than least squares (it is a method look up in notes) and 2) mention the two requirements for a good Instrument: a) cleanliness no impact on outcome causally only through the biased independent varaible and b) the relevance which is high correlcion with the independent varaibvles that are instrumentalized
 
 \textbf{In this exercies give two examples of conditions that could bias the estimated education effect if only OLS is used; This means: give examples how the variable YEARSOFEDUCATION is a biased estimator becasue mean independece is violated --> the example given was: students preference for education may influence how long they stay in school and how much they earn on the labor market which is simply their ambition; other factors might be: family background and societal status/ socioeconomic status which means something like teen pregnancy OR IN THE 1930s during the great depression just the need to support the family during time of need so you could not go to school}
@@ -493,6 +494,49 @@ Rational behind these choices: all students born in the sam year are admitted to
 relevant quantiative variables age, educ (years of education), lnwage(weekly earnings), marrital status; quarter of birth of the recorded child; SMSA: categorical variable where someone lives (urban vs not urban); yob year of birth which is also categorical
 
 --> possibly retransform lnwage to just wage by reversing the log scaling
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Sun, Sep 25, 2022 - 15:43:50
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+  \caption{Instrumental Vairable Approach Descriptive Statistics of Numeric Indepdenent and Dependent Varaible} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+Age & 44.645 & 2.940 & 40 & 42 & 45 & 47 & 50 \\ 
+Years of Education & 12.770 & 3.281 & 0 & 12 & 12 & 15 & 20 \\ 
+Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\ 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 13746; Wage is backwards transformed from lnWage
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+\end{table}
+
+
+
+\subsection{Diagnositcs of Year Of Birth as instrument: is it any good?}
+\textbf{A good instrument possesses two specifications: it is clean and it is relevant}
+
+Cleanlieness: means that the Instrument only has an impact on the outcome through the Indepdendent variable (the to be "instrumentalized" variable); this assumption cannot be tested but is rather grounded in theory (meaning that the instrument is exogeneous -- obviously you cannot test exogineity)
+
+Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)
+
+\textbf{HOW DO I CONDUCT THESE TESTS? CAN I CONDUCT THEM ON THE NORMAL 2SLS via OLS or should I better use the IVreg model?}
+
+
+
+\subsection{Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
 
 
 \end{document}
