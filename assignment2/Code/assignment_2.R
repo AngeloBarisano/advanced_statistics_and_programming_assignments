@@ -270,13 +270,6 @@ rsltdid_work_sim <- lm(did_work_sim, data = df)
 rsltdid_work_expand <- lm(did_work_expand, data = df)
 
 
-
-
-
-
-
-
-
 stargazer(
     rsltdid_earn_sim,
     rsltdid_earn_expand,
@@ -433,7 +426,7 @@ stargazer(
 
 str(df_has_children)
 
-str(subset(df_has_children, edu_lvl == "low"))
+str(subset(df_has_children, edu_lvl == "high"))
 
 
 
@@ -509,7 +502,7 @@ stargazer(
 
 str(df_low_edu)
 
-str(subset(df_low_edu, has_children == 0))
+str(subset(df_low_edu, has_children == 1))
 
 
 
@@ -575,38 +568,51 @@ summary(rslt2SLS.B, diagnostics = TRUE)
 # convert yob to factor
 df$yob <- as.factor(df$yob)
 
-rslt2SLS <-
-    ivreg(lnwage ~ educ | educ + yob,
-        data = df
-    )
-summary(rslt2SLS)
+rsltOLS5.1 <- ivreg(lnwage ~ educ | qob, data = df_IV)
+rsltOLS5.2 <- ivreg(lnwage ~ educ + married | married + qob, data = df_IV)
+rsltOLS5.3 <- ivreg(lnwage ~ educ + married + age | married + qob + age, data = df_IV)
+summary(rsltOLS5.2, diagnostics = TRUE)
+stargazer(rsltOLS5.2, type = "text")
+bptest(rsltOLS5.2)
 
-rslt2SLS <-
-    ivreg(lnwage ~ educ | yob,
-        data = df
-    )
-summary(rslt2SLS)
+# i) run basic OLS
+rsltOLS_sim <- lm(lnwage ~ educ, data = df)
 
+# ii) run OLS with controls - dont run hand made ivreg
+rsltOLS_adv <- lm(lnwage ~ educ + age + married, data = df)
 
+# iii) run Simple IVREG
+rsltiv1_sim <- ivreg(lnwage ~ educ | qob, data = df)
 
-rslt2SLS <-
-    ivreg(lnwage ~ educ | educ + TaxDiff,
-        data = dfCigarettes95
-    )
+# iiii) run more complex IV reg with more controls
+rsltiv1_adv <- ivreg(lnwage ~ educ + age + married | qob + age + married, data = df)
 
-educ
-summary(rslt2SLS)
+# iiiii) run iv reg with out controls BUT ALSO MORE THAN oNE INSTURMENT FOR PART 5!
+rsltiv2_sim <- ivreg(lnwage ~ educ | qob + yob, data = df)
 
-stargazer(rslt2SLS, type = "text")
-
-
-
-View(df)
+# iiiiiii) run ivreg with controls and multiple instruments (qob + yob)
+rsltiv2_adv <- ivreg(lnwage ~ educ + age + married | qob + yob + age + married, data = df)
 
 
 
+stargazer(
+    rsltOLS_sim,
+    rsltOLS_adv,
+    rsltiv1_sim,
+    rsltiv1_adv,
+    rsltiv2_sim,
+    rsltiv2_adv,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "latex"
+)
 
-rslt2SLS.A <-
-    ivreg(lnPacks ~ lnPrice + lnIncome | lnIncome + TaxDiff,
-        data = dfCigarettes95
-    )
+
+
+
+
+
+
+
+bptest(rsltOLS5.2)

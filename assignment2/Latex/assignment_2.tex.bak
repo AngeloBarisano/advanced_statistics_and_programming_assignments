@@ -75,10 +75,12 @@ Question: The main predictor is meant to be whether women has children; Should w
 
 
 
-\subsection{Indicate which of the coefficients(s) from equation (1) yield the following outcomes}
+\subsection{Task 1: Indicate which of the coefficients(s) from equation (1) yield the following outcomes}
 
 \textbf{NOte possibly delete duplicates}
 SEE SLIDE 57 ff
+
+\includegraphics[width=.95\linewidth]{home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/Screenshot from 2022-09-25 16-29-17.png}
 
 Important: we canot identify the monthrs; so If they become mothers at some point, we will assume that these are taken out!
 
@@ -99,12 +101,24 @@ $
 $
 
 
+\textbf{IMPORTANT SEE THE SCREENSHOT}
+
+
+\begin{enumerate}
+   \item  follow the screenshot above
+\end{enumerate}
+
+
 
 
 \subsection{Task 2: Provide graphic as on slide 55}
 
-\textbf{IMPORTANT: ALSO MENTION THE CATEGORICAL VARIABLES!!!}
+\begin{enumerate}
+   \item Describe each picture and what you can see; but also note that this is based on averages and not statistically true
+   \item IMPORTANT: you should look at the grading grid of the previous assignment to see what their requirements are for these
+\end{enumerate}
 
+\textbf{IMPORTANT: ALSO MENTION THE CATEGORICAL VARIABLES!!!}
 
 
 \begin{wrapfigure}{L}{9cm}
@@ -139,6 +153,13 @@ Predictor is WHETHER YOU HAVE CHILD OR NOT
 
 
 \subsection{Task 3: Summary Statistics for data}
+
+
+\begin{enumerate}
+   \item  dont forget to mention the categorical variables and how they distribute; you did this well during assignment 1
+   \item better only keep the table with overall stats and not the subcategories 
+   \item add skew and median!!
+\end{enumerate}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 20:25:57
@@ -241,6 +262,10 @@ Count Children & 0.574 & 0.494 & 0 & 0 & 1 & 1 & 1 \\
 \subsection{Task 4: Matrix Diff in Diff}
 NOte: by taking the average of the periods we have two small problems: 1) the AFTER period is longer; so should we really do that?
 
+\begin{enumerate}
+   \item report the same insight as you did during class! 
+   \item IMPORTANT: CHECK AND CALCULATE THE TABLE CONTENTS AGAIN! THERE MIGHT BE SOME NUMBERS OFF!!
+\end{enumerate}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 21:38:43
@@ -275,6 +300,14 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 
 \subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
 dependent variables}
+
+\begin{enumerate}
+   \item ADD A LITTLE THEORY WHY YOU ADD EACH CONTROL VAIRABLE into each model for each dependent variable! this is important: so put some effort into arguing why to include eg UNEMPLOYMENT rate into the equation of earnings (a good arugment would be: high unemployment means more people searching jobs means wage suppression ; a simple demand and suply rule)
+   \item create an example table that reports exactly the same as that one above, but here the SEs are robust!!! for clustered on state and white; they will not really differ so also report the breusch pagan test here
+   \item RUN BREUSCH PAGAN OFR EACH MODEL
+\end{enumerate}
+
+
 \textbf{NOTE STANDARDIZED COEFFICIENTS ARE NOT REPORTED AS THEY ARE USELESS IN THIS CONTEXT; WE ARE NOT LOOKIGN FOR EFFECT SIZE BUT RATHER THE CASE OF }
 
 
@@ -347,6 +380,7 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 
 
 \subsection{Task 6: Subset analysis}
+
 \textbf{NOTE: IN THIS CASE WE USE THE SUBSET ANALYSIS and not use interactions due to the efficeincy; if we were to use interactions, the analysis would have a higher statistical power, but the problem is: it would be really difficult to discern }
 
 \textbf{NOTE WE STILL USE DIFF IN DIFF BECAUSE WE STILL WANT TO SEE THE EFFECT OF THE POLICY INTERVATION JUST HERE SUBSECTIONED BY DIFFERENT VARIABLES }
@@ -355,7 +389,18 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 
 \textbf{WE ARE LOOKING AT THE POLICY EFFECT OF INTROUDCING THE TAX CREDIT WHEN CONSIDERING THE SUBSET OF WOMEN WITH CHILDREN and SUBsection HIGH vs low eduction}
 
+
+\textbf{IMPORTANT: UPDATE THE TABLES AS YOU DID NOT UPDATE THE STARGAZER AFTER THAT ONE!!!}
+
+
 \subsubsection{Women with Children compared based on high \& low education levels}
+
+\begin{enumerate}
+   \item report the same insight as you did during class! 
+   \item IMPORTANT: CHECK AND CALCULATE THE TABLE CONTENTS AGAIN! THERE MIGHT BE SOME NUMBERS OFF!!
+\end{enumerate}
+
+
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Wed, Sep 14, 2022 - 15:53:27
 \begin{table}[!htbp] \centering 
@@ -375,28 +420,26 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
 \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
 \hline \\[-1.8ex] 
- Constant & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
-  & (828.375) & (1,550.012) & (886.522) & (1,655.347) & (0.023) & (0.043) \\ 
-  has\_children1 & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
-  & (1,093.444) & (1,096.506) & (1,170.197) & (1,171.022) & (0.030) & (0.030) \\ 
-  dperiod & $-$695.997 & $-$536.491 & $-$940.239$^{*}$ & $-$515.553 & $-$0.005 & $-$0.024$^{*}$ \\ 
-  & (485.413) & (500.046) & (519.486) & (534.028) & (0.013) & (0.014) \\ 
-  age &  & 22.555 &  & 78.717$^{***}$ &  & 0.002$^{***}$ \\ 
-  &  & (15.922) &  & (17.004) &  & (0.0004) \\ 
-  urate &  & 133.948 &  & 372.861$^{***}$ &  & $-$0.018$^{***}$ \\ 
-  &  & (114.614) &  & (122.403) &  & (0.003) \\ 
-  ed &  & 66.337 &  & $-$125.305$^{**}$ &  & 0.017$^{***}$ \\ 
-  &  & (59.579) &  & (63.628) &  & (0.002) \\ 
-  nonwhite1 &  & $-$1,255.622$^{***}$ &  & $-$2,438.387$^{***}$ &  & $-$0.043$^{***}$ \\ 
-  &  & (326.237) &  & (348.408) &  & (0.009) \\ 
-  has\_children1:dperiod & 1,682.810$^{***}$ & 1,722.360$^{***}$ & 1,911.035$^{***}$ & 2,006.060$^{***}$ & 0.031$^{*}$ & 0.033$^{*}$ \\ 
-  & (642.099) & (641.893) & (687.171) & (685.515) & (0.018) & (0.018) \\ 
+ Constant & 5,316.131$^{***}$ & 1,448.297 & 10,126.090$^{***}$ & 1,096.734 & 0.424$^{***}$ & 0.533$^{***}$ \\ 
+  & (701.736) & (1,409.668) & (738.891) & (1,473.471) & (0.023) & (0.047) \\ 
+  edu\_lvllow & 3,427.529$^{***}$ & 3,177.416$^{**}$ & 3,629.042$^{***}$ & 3,079.124$^{**}$ & $-$0.002 & $-$0.006 \\ 
+  & (1,311.705) & (1,306.105) & (1,381.156) & (1,365.220) & (0.044) & (0.044) \\ 
+  dperiod & 1,241.689$^{***}$ & 1,368.092$^{***}$ & 1,308.968$^{***}$ & 1,799.017$^{***}$ & 0.032$^{**}$ & 0.010 \\ 
+  & (413.039) & (432.758) & (434.908) & (452.345) & (0.014) & (0.014) \\ 
+  age &  & 174.206$^{***}$ &  & 272.964$^{***}$ &  & 0.004$^{***}$ \\ 
+  &  & (20.082) &  & (20.991) &  & (0.001) \\ 
+  urate &  & $-$34.414 &  & 261.583$^{**}$ &  & $-$0.025$^{***}$ \\ 
+  &  & (127.034) &  & (132.784) &  & (0.004) \\ 
+  nonwhite1 &  & $-$2,547.489$^{***}$ &  & $-$3,380.644$^{***}$ &  & $-$0.061$^{***}$ \\ 
+  &  & (368.752) &  & (385.442) &  & (0.012) \\ 
+  edu\_lvllow:dperiod & $-$871.461 & $-$951.502 & $-$1,166.212 & $-$1,345.136$^{*}$ & $-$0.021 & $-$0.019 \\ 
+  & (773.065) & (767.593) & (813.996) & (802.335) & (0.026) & (0.026) \\ 
  \hline \\[-1.8ex] 
-Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
-R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.028 & 0.012 & 0.027 \\ 
-Adjusted R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.027 & 0.012 & 0.026 \\ 
-Residual Std. Error & 17,965.670 & 17,956.450  & 19,226.750  & 19,176.730 & 0.497 & 0.493 \\ 
-F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}$ & 54.906$^{***}$ & 54.374$^{***}$  \\ 
+Observations & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 \\ 
+R$^{2}$ & 0.005 & 0.020 & 0.004 & 0.033 & 0.002 & 0.016 \\ 
+Adjusted R$^{2}$ & 0.004 & 0.020 & 0.003 & 0.033 & 0.001 & 0.016 \\ 
+Residual Std. Error & 14,923.420 & 14,810.030  & 15,713.570 & 15,480.340 & 0.499 & 0.495 \\ 
+F Statistic & 12.717$^{***}$ & 26.977$^{***}$  & 9.460$^{***}$  & 44.915$^{***}$  & 4.884$^{***}$ & 21.557$^{***}$  \\
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
@@ -448,14 +491,14 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 Observations & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 \\ 
 R$^{2}$ & 0.006 & 0.009 & 0.010 & 0.016 & 0.003 & 0.008 \\ 
 Adjusted R$^{2}$ & 0.006 & 0.008 & 0.009 & 0.015 & 0.002 & 0.007 \\ 
-Residual Std. Error & 18,962.540 & 18,944.100  & 19,962.390  & 19,906.540 & 0.498 & 0.497  \\ 
-F Statistic & 9.304$^{***}$  & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$ & 4.494$^{***}$  & 6.121$^{***}$  \\ 
+Residual Std. Error & 18,962.540  & 18,944.100 & 19,962.390  & 19,906.540 & 0.498 & 0.497 \\ 
+F Statistic & 9.304$^{***}$ & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$  & 4.494$^{***}$  & 6.121$^{***}$ \\
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 4411 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 4311 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -487,7 +530,17 @@ Rational behind these choices: all students born in the sam year are admitted to
 
 \textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
 
-\subsection{Explain wHY ols is biased here - A3}
+\subsection{Task 1: Explain wHY ols is biased here - A3}
+
+\begin{enumerate}
+   \item see slide 67; 
+   \item mention that this is a 1930s during the great depression!
+   \item %https://cran.r-project.org/web/packages/ivreg/vignettes/ivreg.html
+   \item %https://rpubs.com/wsundstrom/t_ivreg
+\end{enumerate}
+
+
+
 \textbf{mention why Years of education is endogenous}
 
 \textbf{ We therefore use geographical proximity to a college when growing up as an exogenous instrument for education}
@@ -503,7 +556,13 @@ Rational behind these choices: all students born in the sam year are admitted to
 \textbf{eg IQ is a good thing}
 
 
-\subsection{Summary statistics for this task}
+\subsection{Task 2: Summary statistics for this task}
+
+\begin{enumerate}
+   \item remember to describe categorical variables in text
+   \item add skew and median!!
+\end{enumerate}
+
 
 relevant quantiative variables age, educ (years of education), lnwage(weekly earnings), marrital status; quarter of birth of the recorded child; SMSA: categorical variable where someone lives (urban vs not urban); yob year of birth which is also categorical
 
@@ -539,10 +598,14 @@ Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\
 
 
 
-\subsection{Diagnositcs of Year Of Birth as instrument: is it any good?}
+\subsection{Task 3: Diagnositcs of Year Of Birth as instrument: is it any good?}
 \textbf{see slide 88; 82}
 
-
+\begin{enumerate}
+   \item here already use the regression outputs from task 4 and also the a correlation table 
+   \itam add a plot!!!
+   \ partial f test for relevance/ strength of the instrument!
+\end{enumerate}
 
 \textbf{A good instrument possesses two specifications: it is clean and it is relevant}
 
@@ -554,7 +617,70 @@ Relevantce: Contrarily, this assumption can be tested: it states that the instru
 
 
 
-\subsection{Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
+\subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Sun, Sep 25, 2022 - 19:47:27
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{IV regression output}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
+\\[-1.8ex] & \multicolumn{2}{c}{\textit{OLS}} & \multicolumn{4}{c}{\textit{instrumental}} \\ 
+ & \multicolumn{2}{c}{\textit{}} & \multicolumn{4}{c}{\textit{variable}} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 4.995$^{***}$ & 4.601$^{***}$ & 4.633$^{***}$ & 3.243$^{***}$ & 5.892$^{***}$ & 3.790$^{***}$ \\ 
+  & (0.004) & (0.018) & (0.250) & (0.524) & (0.082) & (0.406) \\ 
+  educ & 0.071$^{***}$ & 0.070$^{***}$ & 0.099$^{***}$ & 0.159$^{***}$ & 0.001 & 0.123$^{***}$ \\ 
+  & (0.0003) & (0.0003) & (0.020) & (0.034) & (0.006) & (0.027) \\ 
+  age &  & 0.004$^{***}$ &  & 0.009$^{***}$ &  & 0.007$^{***}$ \\ 
+  &  & (0.0004) &  & (0.002) &  & (0.002) \\ 
+  married &  & 0.255$^{***}$ &  & 0.233$^{***}$ &  & 0.242$^{***}$ \\ 
+  &  & (0.003) &  & (0.009) &  & (0.007) \\ 
+ \hline \\[-1.8ex] 
+Observations & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 \\ 
+R$^{2}$ & 0.117 & 0.134 & 0.098 & $-$0.049 & 0.002 & 0.069 \\ 
+Adjusted R$^{2}$ & 0.117 & 0.134 & 0.098 & $-$0.049 & 0.002 & 0.069 \\ 
+Residual Std. Error & 0.638 & 0.632  & 0.645  & 0.695 & 0.678  & 0.655 \\ 
+F Statistic & 43,782.560$^{***}$  & 17,053.180$^{***}$  &  &  &  &  \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %$https://rpubs.com/wsundstrom/t_ivreg"
 %https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls
 \textbf{IMPORTANT: IF YOU INCLUDE CONTROL VARIABLES YOU NEED TO ARGUE WHY THEY ARE EXOGENEOUS OR NOT AS THAT THEY ARE INCLDUED INTO THE EQUATION}
@@ -565,7 +691,7 @@ IMPORTANT: USE slide 88 as an argument
 
 \subsection{5 -- }
 
-
+\textbf{IMPORTANT: WE DO NOT INCLUDE THE INSTRUMENTS IN OLS BECASUE WE AUSSME THAT THEY DONT HAVE AN IMPACT on the outcome!!!!!! in OLS; SO DONT INCLDUE THEM IN THE OLS OTHERWISE WE GO AGAINST THE UNDERLYING THEORY}
 \textbf{SLIDE 105 perform partial F test to see whether IV reg is good or not and if it is good then it is better than OLS!}
 
 \textbf{for overidentificaion run another IVREG WITH MORE insturments see introductiomn; then you can interpret the SARGAN AND HAUSMA TEST THINGI}
@@ -578,5 +704,7 @@ reasons: not clear instrument (or not clean) (make a plot; or if the instrument 
 %https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls --> a possible plot
 
 %https://www.econometrics-with-r.org/12-3-civ.html
-%
+% Plot https://www.statisticshowto.com/instrumental-variable/
+
+
 \end{document}
