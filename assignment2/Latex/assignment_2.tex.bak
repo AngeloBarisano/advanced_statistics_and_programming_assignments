@@ -331,7 +331,7 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 13746. Non Robust Standard Errors applies. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -394,7 +394,7 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 7819 Single Women have Children. N = 5593 high education (years of eduction >= 9 years); N = 2226 low education (years of eduction < 9 years); Non Robust Standard Errors applies. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 7819 Single Women have Children. N = 5593 high education (years of eduction $>$= 9 years); N = 2226 low education (years of eduction $<$ 9 years); Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -440,19 +440,30 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 Observations & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 \\ 
 R$^{2}$ & 0.006 & 0.009 & 0.010 & 0.016 & 0.003 & 0.008 \\ 
 Adjusted R$^{2}$ & 0.006 & 0.008 & 0.009 & 0.015 & 0.002 & 0.007 \\ 
-Residual Std. Error & 18,962.540 (df = 4307) & 18,944.100 (df = 4304) & 19,962.390 (df = 4307) & 19,906.540 (df = 4304) & 0.498 (df = 4307) & 0.497 (df = 4304) \\ 
-F Statistic & 9.304$^{***}$ (df = 3; 4307) & 6.559$^{***}$ (df = 6; 4304) & 14.690$^{***}$ (df = 3; 4307) & 11.920$^{***}$ (df = 6; 4304) & 4.494$^{***}$ (df = 3; 4307) & 6.121$^{***}$ (df = 6; 4304) \\ 
+Residual Std. Error & 18,962.540 & 18,944.100  & 19,962.390  & 19,906.540 & 0.498 & 0.497  \\ 
+F Statistic & 9.304$^{***}$  & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$ & 4.494$^{***}$  & 6.121$^{***}$  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 4411 Single Women have Children. N = 5593 high education (years of eduction >= 9 years); N = 2226 low education (years of eduction < 9 years); Non Robust Standard Errors applies. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 4411 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
 %
 \end{table}
 
+
+
+
+\pagebreak
+
+\section{Tart 2 Instrumental Variable approach}
+
+
+aswdassaasddsaasdsddasdsasd
+
+aspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuas 
 
 \end{document}

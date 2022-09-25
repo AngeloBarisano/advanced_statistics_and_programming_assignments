@@ -70,7 +70,7 @@ ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
 ggsave("Graphics/task2_earn_did.png", width = 11, height = 8)
 
 # b) annual family income (finc)
-ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
+ggplot(df, aes(year, finc, group = has_children, color = has_children)) +
     stat_summary(geom = "line", fun = mean) +
     labs(x = "Year", y = "Family Income", color = "Has Children") +
     theme_minimal() +
@@ -86,7 +86,7 @@ ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
 ggsave("Graphics/task2_finc_did.png", width = 11, height = 8)
 
 # c) working/non-working (work)
-ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
+ggplot(df, aes(year, work, group = has_children, color = has_children)) +
     stat_summary(geom = "line", fun = mean) +
     labs(x = "Year", y = "Work Proportion", color = "Has Children") +
     theme_minimal() +
@@ -305,6 +305,7 @@ stargazer(
     # align = TRUE,
     no.space = TRUE,
     # omit.labels = "Restaurant IDs?",
+    type = "latex"
 )
 
 
@@ -373,17 +374,6 @@ df <- df %>%
 df_has_children <- subset(df, has_children == 1)
 View(df_has_children)
 
-
-# • Single mothers with high education and with children. Compare
-# them with single mothers with low education and with children.
-
-
-
-
-
-
-
-
 ##################
 # Earn models
 did_earn_sim <- earn ~ edu_lvl + dperiod + edu_lvl:dperiod
@@ -398,8 +388,8 @@ rsltdid_earn_expand <- lm(did_earn_expand, data = df_has_children)
 did_finc_sim <- finc  ~ edu_lvl + dperiod + edu_lvl:dperiod
 did_finc_expand <- finc ~ edu_lvl + dperiod + edu_lvl:dperiod + age + urate + nonwhite
 
-rsltdid_finc_sim <- lm(did_finc_sim, data = df)
-rsltdid_finc_expand <- lm(did_finc_expand, data = df)
+rsltdid_finc_sim <- lm(did_finc_sim, data = df_has_children)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df_has_children)
 
 
 ##################
@@ -407,15 +397,47 @@ rsltdid_finc_expand <- lm(did_finc_expand, data = df)
 did_work_sim <- work  ~ edu_lvl + dperiod + edu_lvl:dperiod
 did_work_expand <- work ~ edu_lvl + dperiod + edu_lvl:dperiod + age + urate + nonwhite
 
-rsltdid_work_sim <- lm(did_work_sim, data = df)
-rsltdid_work_expand <- lm(did_work_expand, data = df)
+rsltdid_work_sim <- lm(did_work_sim, data = df_has_children)
+rsltdid_work_expand <- lm(did_work_expand, data = df_has_children)
 
 
 
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    # rsltdid_work_sim,
+    # rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "text"
+)
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    # align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "latex"
+)
+
+str(df_has_children)
+
+str(subset(df_has_children, edu_lvl == "low"))
 
 
 
-
+#---------------------------------------------------------------------------------------
 # subsection 2: Single women with low education, without children. Compare them
 # with single women with low education, with children.
 # low educ without children; Low edu with children
@@ -424,12 +446,70 @@ rsltdid_work_expand <- lm(did_work_expand, data = df)
 # first classify
 df_low_edu <- subset(df, edu_lvl == "low")
 
+View(df_low_edu)
 
 
 
+##################
+# Earn models
+did_earn_sim <- earn ~ has_children + dperiod + has_children:dperiod
+did_earn_expand <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_earn_sim <- lm(did_earn_sim, data = df_low_edu)
+rsltdid_earn_expand <- lm(did_earn_expand, data = df_low_edu)
+
+
+##################
+# finc models
+did_finc_sim <- finc  ~ has_children + dperiod + has_children:dperiod
+did_finc_expand <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_finc_sim <- lm(did_finc_sim, data = df_low_edu)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df_low_edu)
+
+
+##################
+# work models
+did_work_sim <- work ~ has_children + dperiod + has_children:dperiod
+did_work_expand <- work ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_work_sim <- lm(did_work_sim, data = df_low_edu)
+rsltdid_work_expand <- lm(did_work_expand, data = df_low_edu)
 
 
 
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    # rsltdid_work_sim,
+    # rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "text"
+)
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    # align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "latex"
+)
+
+str(df_low_edu)
+
+str(subset(df_low_edu, has_children == 0))
 
 
 
