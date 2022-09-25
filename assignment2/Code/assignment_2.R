@@ -556,9 +556,36 @@ stargazer(
 )
 
 #------------------------------------------------------------------
+# task 3 run IV reg on ln wage by  education using yob as instrument
+# convert yob to factor
+
+# fuirst run the IV model
+rslt2SLS.B <- ivreg(lnPacks ~ lnPrice + lnIncome
+# yo uuse the bar sign to define the instruments ofr an endogenous variable!!
+| lnIncome + TaxDiff + TaxLvl,
+data = dfCigarettes95
+)
+
+summary(rslt2SLS.B, diagnostics = TRUE)
+
+
+
+#------------------------------------------------------------------
 # task 4 run IV reg on ln wage by  education using yob as instrument
 # convert yob to factor
 df$yob <- as.factor(df$yob)
+
+rslt2SLS <-
+    ivreg(lnwage ~ educ | educ + yob,
+        data = df
+    )
+summary(rslt2SLS)
+
+rslt2SLS <-
+    ivreg(lnwage ~ educ | yob,
+        data = df
+    )
+summary(rslt2SLS)
 
 
 
@@ -575,6 +602,8 @@ stargazer(rslt2SLS, type = "text")
 
 
 View(df)
+
+
 
 
 rslt2SLS.A <-

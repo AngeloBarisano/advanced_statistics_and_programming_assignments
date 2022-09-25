@@ -286,6 +286,7 @@ dependent variables}
 
 \textbf{NOTE ROBUST STANDARD ERROS MIGHT NOT EVEN BE NEEDED IN THIS CASE DUE TO THE THEORY BEHIND DIFF IN DIFF }
 
+\textbf{NOTE: WRITE A THEORY FOR EACH CONTROL VARIBALE REGARDING EACH DEPEDNET: EG THE urate may not ahve a controllign effect on earnings but it may have on family income }
 
 \pagebreak
 
@@ -342,13 +343,17 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \end{table}
 
 
-
+\textbf{IMPORTANT: RUN BREUSCH PAGAN OFR EACH MODEL}
 
 
 \subsection{Task 6: Subset analysis}
 \textbf{NOTE: IN THIS CASE WE USE THE SUBSET ANALYSIS and not use interactions due to the efficeincy; if we were to use interactions, the analysis would have a higher statistical power, but the problem is: it would be really difficult to discern }
 
 \textbf{NOTE WE STILL USE DIFF IN DIFF BECAUSE WE STILL WANT TO SEE THE EFFECT OF THE POLICY INTERVATION JUST HERE SUBSECTIONED BY DIFFERENT VARIABLES }
+
+\textbf{GENERAL ASSUMTION: ALL WOMEN ARE SINGLE WOMEN IN THE DATA SET}
+
+\textbf{WE ARE LOOKING AT THE POLICY EFFECT OF INTROUDCING THE TAX CREDIT WHEN CONSIDERING THE SUBSET OF WOMEN WITH CHILDREN and SUBsection HIGH vs low eduction}
 
 \subsubsection{Women with Children compared based on high \& low education levels}
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
@@ -483,10 +488,19 @@ Rational behind these choices: all students born in the sam year are admitted to
 \textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
 
 \subsection{Explain wHY ols is biased here - A3}
-\textbf{IMPORTANT SEE SLIDES 7 ff!!!}
+\textbf{mention why Years of education is endogenous}
+
+\textbf{ We therefore use geographical proximity to a college when growing up as an exogenous instrument for education}
+
+\textbf{INCLUDE EXOGENEOUS VARIABLES AS WELL IN THE  INSTRUMENTAL PART!!!}
+
+\textbf{SLIDE 67 ff}
+\textbf{IMPORTANT SEE SLIDES 7 ff!!!.}
 --> IMPORTANT: ALSO INCLDUE 1) THE METHOD OF IV being different than least squares (it is a method look up in notes) and 2) mention the two requirements for a good Instrument: a) cleanliness no impact on outcome causally only through the biased independent varaible and b) the relevance which is high correlcion with the independent varaibvles that are instrumentalized
 
 \textbf{In this exercies give two examples of conditions that could bias the estimated education effect if only OLS is used; This means: give examples how the variable YEARSOFEDUCATION is a biased estimator becasue mean independece is violated --> the example given was: students preference for education may influence how long they stay in school and how much they earn on the labor market which is simply their ambition; other factors might be: family background and societal status/ socioeconomic status which means something like teen pregnancy OR IN THE 1930s during the great depression just the need to support the family during time of need so you could not go to school}
+
+\textbf{eg IQ is a good thing}
 
 
 \subsection{Summary statistics for this task}
@@ -526,6 +540,10 @@ Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\
 
 
 \subsection{Diagnositcs of Year Of Birth as instrument: is it any good?}
+\textbf{see slide 88; 82}
+
+
+
 \textbf{A good instrument possesses two specifications: it is clean and it is relevant}
 
 Cleanlieness: means that the Instrument only has an impact on the outcome through the Indepdendent variable (the to be "instrumentalized" variable); this assumption cannot be tested but is rather grounded in theory (meaning that the instrument is exogeneous -- obviously you cannot test exogineity)
@@ -537,6 +555,28 @@ Relevantce: Contrarily, this assumption can be tested: it states that the instru
 
 
 \subsection{Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
+%$https://rpubs.com/wsundstrom/t_ivreg"
+%https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls
+\textbf{IMPORTANT: IF YOU INCLUDE CONTROL VARIABLES YOU NEED TO ARGUE WHY THEY ARE EXOGENEOUS OR NOT AS THAT THEY ARE INCLDUED INTO THE EQUATION}
+SLIDE 99
+IMPORTANT: USE slide 88 as an argument
+
+\textbf{IMPORTANT: WHEN YOU SAY HOW CONTROL VARIABLES IMPACT THE INDEPENDENT VARIABLE SAY THE INCLUSION OF THE CONTROL VARIABLES ICNREASE IT INTO A CERTAIN DIRECTIOn; SO DEPEDNING ON THE INSTRUMENT VS NORMAL OLS, the variable was biased eg downwards or upwards}
+
+\subsection{5 -- }
 
 
+\textbf{SLIDE 105 perform partial F test to see whether IV reg is good or not and if it is good then it is better than OLS!}
+
+\textbf{for overidentificaion run another IVREG WITH MORE insturments see introductiomn; then you can interpret the SARGAN AND HAUSMA TEST THINGI}
+
+\subsection{6 -- }
+
+reasons: not clear instrument (or not clean) (make a plot; or if the instrument is not relevant or weak)
+
+%$https://rpubs.com/wsundstrom/t_ivreg"
+%https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls --> a possible plot
+
+%https://www.econometrics-with-r.org/12-3-civ.html
+%
 \end{document}
