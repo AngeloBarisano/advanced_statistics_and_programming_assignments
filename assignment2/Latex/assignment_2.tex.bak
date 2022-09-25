@@ -103,22 +103,25 @@ $
 
 \subsection{Task 2: Provide graphic as on slide 55}
 
+\textbf{IMPORTANT: ALSO MENTION THE CATEGORICAL VARIABLES!!!}
 
-\begin{wrapfigure}{L}{8.5cm}
+
+
+\begin{wrapfigure}{L}{9cm}
 \centering
-\begin{subfigure}[b]{0.55\textwidth}
+\begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_earn_did.png"} 
    \caption{Annual Earnings by Females with(out) Children}
    \label{fig:Ng2}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.55\textwidth}
+\begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_finc_did.png"} 
    \caption{Family Earnings Earnings by Females with(out) Children}
    \label{fig:Ng2}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.55\textwidth}
+\begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_work_did.png"}  
    \caption{Work Participation by Females with(out) Children}
    \label{fig:Ng2}
@@ -462,8 +465,34 @@ F Statistic & 9.304$^{***}$  & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$ 
 \section{Tart 2 Instrumental Variable approach}
 
 
-aswdassaasddsaasdsddasdsasd
+Notes:
+- Effect of cumpulsory schooling on wages
 
-aspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuasaspidnfodasnf oppoais dnfdhpaisudhpihpais ubdhnpaisubdnapiusdhpaisubdpaisubddasb hausbdnpiausd aisub dai usbhduzasbuas 
+Generaly: the quality and quantitiy of education in modern societies is on a steady rise; but it is difficult how much education contributes to future earnings on the labor market.. meansing: how much does one year of additional education add in earnings
+
+This is because of unobserved factors that are to the detrimetn of assumtion 3 (mean independence) biasing any OLS estimate of wages on years of eduction (ommitted variables and confounders).
+
+Here the solution: instruments to circumvent these biases; combining to characteristics: 
+--> Minimum legal school dropout age (which can be 16, 17, or 18 years) 
+--> and the annual quarter of birth of a person
+
+Rational behind these choices: all students born in the sam year are admitted to school in the same cohort (the same class). BUT A student born in eg January reaches the leagal school dropout age earlier than a student born in September 8eg).
+
+--> as such, the instruments function as if; we randomize school exposure to students, assuming that in each year, a constant fraction of students drops out of school adn this dorpout pattern is unrelated to when a students is born. 
+
+\textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
+
+\subsection{Explain wHY ols is biased here - A3}
+--> IMPORTANT: ALSO INCLDUE 1) THE METHOD OF IV being different than least squares (it is a method look up in notes) and 2) mention the two requirements for a good Instrument: a) cleanliness no impact on outcome causally only through the biased independent varaible and b) the relevance which is high correlcion with the independent varaibvles that are instrumentalized
+
+\textbf{In this exercies give two examples of conditions that could bias the estimated education effect if only OLS is used; This means: give examples how the variable YEARSOFEDUCATION is a biased estimator becasue mean independece is violated --> the example given was: students preference for education may influence how long they stay in school and how much they earn on the labor market which is simply their ambition; other factors might be: family background and societal status/ socioeconomic status which means something like teen pregnancy OR IN THE 1930s during the great depression just the need to support the family during time of need so you could not go to school}
+
+
+\subsection{Summary statistics for this task}
+
+relevant quantiative variables age, educ (years of education), lnwage(weekly earnings), marrital status; quarter of birth of the recorded child; SMSA: categorical variable where someone lives (urban vs not urban); yob year of birth which is also categorical
+
+--> possibly retransform lnwage to just wage by reversing the log scaling
+
 
 \end{document}

@@ -515,19 +515,42 @@ str(subset(df_low_edu, has_children == 0))
 
 
 
+#######################################################
+#######################################################
+#######################################################
+# SECTION 2
 
 
+df <- read.csv("Data/IV_dataset.csv", header = TRUE, sep = ",")
 
 
+# select the relevant variables
+df <- df %>% select(age, educ, lnwage, married, qob, SMSA, yob)
 
 
+#-------------------------------------------------------------
+# task 2 summary statistics
+# relevant quantiative variables
+# age,
+# educ (years of education),
+# lnwage(weekly earnings),
+# marrital status which is categorical;
+# quarter of birth of the recorded child;
+# SMSA: categorical variable where someone lives (urban vs not urban);
+# yob year of birth which is also categorical
+df$wage <- exp(df$lnwage)
+
+df_temp <- df %>%
+    select((c("age", "educ", "lnwage", "wage")))
 
 
-#' interpretation important:
-#' model 1 reported is just the difference between Period 1 vs 2 for the New Jersey group; not really interesting
-#' MODEL 2 however is relevant! in model 2 we have the interaction effect of State and period; Subsequently, under case STATE New Jersey,
-#' we have a 3.091 greater difference between period 1 and 2 than for state pensylavnia
-#'
-#' essentially: the interaction effect of
-#'
-#' : IMPORTANT: "Restaurant IDs? Thelast one needs to be changed to YES"
+stargazer(
+    df_temp,
+    type = "latex",
+    omit.summary.stat = c("N"),
+    summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+    title = "Descriptive Statistics of ECIC",
+    covariate.labels = c(
+        "Age", "Years of Education", "Ln(Wage)", "Wage"
+    )
+)
