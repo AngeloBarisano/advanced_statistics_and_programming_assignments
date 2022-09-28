@@ -347,26 +347,20 @@ F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{**
 
 \subsection{Task 6: Subset analysis}
 
-\textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
-
-\textbf{NOTE: IN THIS CASE WE USE THE SUBSET ANALYSIS and not use interactions due to the efficeincy; if we were to use interactions, the analysis would have a higher statistical power, but the problem is: it would be really difficult to discern }
-
-\textbf{NOTE WE STILL USE DIFF IN DIFF BECAUSE WE STILL WANT TO SEE THE EFFECT OF THE POLICY INTERVATION JUST HERE SUBSECTIONED BY DIFFERENT VARIABLES }
-
-\textbf{GENERAL ASSUMTION: ALL WOMEN ARE SINGLE WOMEN IN THE DATA SET}
-
-\textbf{WE ARE LOOKING AT THE POLICY EFFECT OF INTROUDCING THE TAX CREDIT WHEN CONSIDERING THE SUBSET OF WOMEN WITH CHILDREN and SUBsection HIGH vs low eduction}
-
-
 \textbf{IMPORTANT: UPDATE THE TABLES AS YOU DID NOT UPDATE THE STARGAZER AFTER THAT ONE!!!}
 
 
 \subsubsection{Women with Children compared based on high \& low education levels}
 
-\begin{enumerate}
-   \item report the same insight as you did during class! 
-   \item IMPORTANT: CHECK AND CALCULATE THE TABLE CONTENTS AGAIN! THERE MIGHT BE SOME NUMBERS OFF!!
-\end{enumerate}
+For brevity reasons, the covariate only models are left (intuition does not change when comapred to table 3). Considering now only women with children and the "differences in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
+\textbf{NOTE: all models are F statistic significant! but then there is nothing going on}
+
+Considering earnings, (model 1 \& 2), the DiD coefficient is interpreted as follows: during the post intervention period, high educated women gain 951.50\$ on average ($p$ $=$ 0.216) compared to low educated women; which however is not significant. This is broadly maintained when only considering the base model ($\hat{\beta}$ = 871.46, $p$ $<$ 0.26). A similar observation can be made for work participation, which is in both cases, the base model (5) and with covaraites (6), displaying an insignificant decrease in work participation for highly educated women in the post intervention period ($\hat{\beta}$ = -0.019, $p$ $=$ 0.462). Finally, family income observed a marginally significant increase of \$1345.12 at the 9.4\% percent level for highly educated women, while the base model is insignificant at the 15.2\% level for the DiD effect of education and intervention period. 
+
+
+
+
+
 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
@@ -388,26 +382,26 @@ F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{**
 \\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
 \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
 \hline \\[-1.8ex] 
- Constant & 5,316.131$^{***}$ & 1,448.297 & 10,126.090$^{***}$ & 1,096.734 & 0.424$^{***}$ & 0.533$^{***}$ \\ 
-  & (701.736) & (1,409.668) & (738.891) & (1,473.471) & (0.023) & (0.047) \\ 
-  edu\_lvllow & 3,427.529$^{***}$ & 3,177.416$^{**}$ & 3,629.042$^{***}$ & 3,079.124$^{**}$ & $-$0.002 & $-$0.006 \\ 
+ Constant & 8,743.660$^{***}$ & 4,625.713$^{***}$ & 13,755.130$^{***}$ & 4,175.858$^{**}$ & 0.422$^{***}$ & 0.527$^{***}$ \\ 
+  & (1,108.213) & (1,691.462) & (1,166.890) & (1,768.019) & (0.037) & (0.057) \\ 
+  edu\_lvl & $-$3,427.529$^{***}$ & $-$3,177.416$^{**}$ & $-$3,629.042$^{***}$ & $-$3,079.124$^{**}$ & 0.002 & 0.006 \\ 
   & (1,311.705) & (1,306.105) & (1,381.156) & (1,365.220) & (0.044) & (0.044) \\ 
-  dperiod & 1,241.689$^{***}$ & 1,368.092$^{***}$ & 1,308.968$^{***}$ & 1,799.017$^{***}$ & 0.032$^{**}$ & 0.010 \\ 
-  & (413.039) & (432.758) & (434.908) & (452.345) & (0.014) & (0.014) \\ 
+  dperiod & 370.227 & 416.590 & 142.756 & 453.880 & 0.011 & $-$0.009 \\ 
+  & (653.474) & (658.753) & (688.073) & (688.568) & (0.022) & (0.022) \\ 
   age &  & 174.206$^{***}$ &  & 272.964$^{***}$ &  & 0.004$^{***}$ \\ 
   &  & (20.082) &  & (20.991) &  & (0.001) \\ 
   urate &  & $-$34.414 &  & 261.583$^{**}$ &  & $-$0.025$^{***}$ \\ 
   &  & (127.034) &  & (132.784) &  & (0.004) \\ 
   nonwhite1 &  & $-$2,547.489$^{***}$ &  & $-$3,380.644$^{***}$ &  & $-$0.061$^{***}$ \\ 
   &  & (368.752) &  & (385.442) &  & (0.012) \\ 
-  edu\_lvllow:dperiod & $-$871.461 & $-$951.502 & $-$1,166.212 & $-$1,345.136$^{*}$ & $-$0.021 & $-$0.019 \\ 
+  edu\_lvl:dperiod & 871.461 & 951.502 & 1,166.212 & 1,345.136$^{*}$ & 0.021 & 0.019 \\ 
   & (773.065) & (767.593) & (813.996) & (802.335) & (0.026) & (0.026) \\ 
  \hline \\[-1.8ex] 
 Observations & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 \\ 
 R$^{2}$ & 0.005 & 0.020 & 0.004 & 0.033 & 0.002 & 0.016 \\ 
 Adjusted R$^{2}$ & 0.004 & 0.020 & 0.003 & 0.033 & 0.001 & 0.016 \\ 
-Residual Std. Error & 14,923.420 & 14,810.030  & 15,713.570 & 15,480.340 & 0.499 & 0.495 \\ 
-F Statistic & 12.717$^{***}$ & 26.977$^{***}$  & 9.460$^{***}$  & 44.915$^{***}$  & 4.884$^{***}$ & 21.557$^{***}$  \\
+Residual Std. Error & 14,923.420& 14,810.030 & 15,713.570 & 15,480.340  & 0.499  & 0.495 \\ 
+F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ (df = 3; 7815) & 44.915$^{***}$  & 4.884$^{***}$  & 21.557$^{***}$  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
@@ -421,6 +415,15 @@ F Statistic & 12.717$^{***}$ & 26.977$^{***}$  & 9.460$^{***}$  & 44.915$^{***}$
 \end{table}
 
 \subsubsection{Women with and without Children compared keeping education level (low) constant}
+
+Considering now only low educated women; alternating again on whether a women has a child or not, the instights are to be found in Table 5. 
+The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: ($\hat{\beta}$ = -179.637, $p$ $<$ 0.887) and work paticipation (main model: $\hat{\beta}$ = 0.012, $p$ $<$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; becasue if work would go up significantly while income drops, this would be crazy.}
+
+
+
+
+\subsection{Conclusion subsections}  
+Overall, the introduction of the tax credit does not seem to be significant across the different outcoems and subgroups. 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Wed, Sep 14, 2022 - 15:53:27
@@ -459,8 +462,8 @@ F Statistic & 12.717$^{***}$ & 26.977$^{***}$  & 9.460$^{***}$  & 44.915$^{***}$
 Observations & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 & 4,311 \\ 
 R$^{2}$ & 0.006 & 0.009 & 0.010 & 0.016 & 0.003 & 0.008 \\ 
 Adjusted R$^{2}$ & 0.006 & 0.008 & 0.009 & 0.015 & 0.002 & 0.007 \\ 
-Residual Std. Error & 18,962.540  & 18,944.100 & 19,962.390  & 19,906.540 & 0.498 & 0.497 \\ 
-F Statistic & 9.304$^{***}$ & 6.559$^{***}$ & 14.690$^{***}$  & 11.920$^{***}$  & 4.494$^{***}$  & 6.121$^{***}$ \\
+Residual Std. Error & 18,962.540 & 18,944.100 & 19,962.390  & 19,906.540  & 0.498  & 0.497 \\ 
+F Statistic & 9.304$^{***}$ & 6.559$^{***}$  & 14.690$^{***}$ & 11.920$^{***}$ & 4.494$^{***}$ & 6.121$^{***}$  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
