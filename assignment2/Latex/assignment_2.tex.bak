@@ -22,7 +22,7 @@
 \usepackage{subcaption}
 \theoremseparator{:}
 \usepackage{lscape}
-
+\usepackage{rotating}
 \usepackage[utf8]{inputenc}
 \newtheorem{hyp}{Hypothesis}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
@@ -209,24 +209,13 @@ dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
 
 
 
-\subsection{Task 4: Matrix Diff in Diff}
+\subsection{Task 4: Diff in Diff Matrix}
 
 
-Table 2 reports the simply pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. This results in a $naive$ DiD effect of \$1682.82 for women with children.\footnote{This utili}
-Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, worp participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women).
-
-NOte: this does not suggest any causailty 
+Table 2 reports the simply pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. using formula (1-2) his results in a $naive$ DiD effect of \$1682.81 for women with children.\footnote{This utilizes the aforementioned formula of $[E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]$} Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, worp participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). 
+\indent However, the aforementioned results are not signigicatn, as no formal test was conducted. Additionally, the results do not suggest causality - it only suggests a tendency. \textbf{We will discuss this next. }
 
 
-
-\textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
-
-NOte: by taking the average of the periods we have two small problems: 1) the AFTER period is longer; so should we really do that?
-
-\begin{enumerate}
-   \item report the same insight as you did during class! 
-   \item IMPORTANT: CHECK AND CALCULATE THE TABLE CONTENTS AGAIN! THERE MIGHT BE SOME NUMBERS OFF!!
-\end{enumerate}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 21:38:43
@@ -251,20 +240,60 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Notes:} N = 5927 Childless; N = 7819 Has one or more Children
+      \item\textit{Notes:} N = 5927 Childless; N = 7819 Has one or more Children.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
 \end{table}
 
 
+All observations included in any model. *** p$<$0.01, ** p$<$0.05, * p$<$0.1. Standardized regression coefficients are reported in the adjacent column to the model. For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. The Sale Price is represented in 1000s. 
 
-\subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
-dependent variables}
+
+\subsection{Task 5: Analyze the DiD regression}
+
 
 \paragraph{Control Varaibles and covariates} WHICH VARIABLES ARE ASSUMED TO HAVE AN IMPACT?
 
+\paragraph{Results} Due to breviety concerns, the main findings are compiled in one table; \textbf{THE APPENDIX WILL CONTAIN FURTHER ANALYSIS THAT WILL PROVE THAT I DID THIS}.
+Table 3 contains models for all three outcome variables, with the first model (1, 4, 7) containing a baseline model with only covariates. Models 2, 5, 8 contain only the DiD effects, and Models 3, 6, 9 contain the full model respectively. 
+Overall, all models display a significant F-statistic
 
+
+
+
+
+\indent Considerig earnings, the covariate model (1) shows only that nonwhite (indicator variable) ($\hat{\beta}$ = -2037.990, $p$ $<$ 0.001) and age ($\hat{\beta}$ = 96.038, $p$ $<$ 0.01) are significant. Overall, this model explains 0.6\% of the variation in earnings. Proceeding to only the DiD effect (model 2), as expected, women with children earn on average \$8596.33 ($p$ $<$ 0.01) less than childess women.\footnote{Note: the period indicator is not really relevant in such an exercise as it just attributes to the trend overall in $y$} Subsequently, the value from Table 2 for the DiD effect is statistically significant at conventional levels, suggesting that women with children gain a \$1682.81 ($p$ $<$ 0.01) in the post treatment/intervention period (1993 $<$) when compared to childless women; overall explaining 2.6\% of the total variation in earnings. This effect is important to be examined more closely: As implied in task 4, while childless women on average earn \$ 8596.33 more than women with children, childless women (see Table 2) drop by \$696 when comparing the before and after period, while women with children increased. These two effects cancel each other out out, most likely leading to the insignificant period coefficient. Moreover, this suggests that the comparison groups (women with vs women without children) are not comparable; as such we will not be able to discern causality from this exercise. Finally, model (3) considers the full model. Focusing on the DiD effect after including covariates, we see a slight increase in the coefficient ($\hat{\beta}$ = 1722.360, $p$ $<$ 0.01) with stable standard errors; suggesting that women with children in the post period earn \$1722.36 more than childless women. However, the inclusion of the covariates does not suggest a considarable change in the direction of the outcome. 
+\indent Moving to family income as an outcome, a similar insights can be drawn. However, now all covariates are significant; and the model explaining 1.2\% of the variation in family income. Again, the DiD effect alone in model (5) is significant ($\hat{\beta}$ = 1911.04, $p$ $<$ 0.01); suggesting again that women with childrens' familiy income increases by \$1911.04 after the intervention when compared to childess women. Additionally, women with children, again, have a lower family income of \$-8929.33 ($p$ $<$ 0.01),Interestingly, the period indicator now suggests that the overall family income drops maginally significantly ($\hat{\beta}$ = -940.24, $p$ $<$ 0.1). This model explains 2.2\% of the total variation in family income. The inclusion of covariates does not change this insight dramitically; womens' with children family oincome still improve significantly during the post period when compared to childess women and its coefficeint also increases, but the insight is the same as before ($\hat{\beta}$ = 2006.06, $p$ $<$ 0.01). 
+\indent Finally, considering work participation; the covariates alone in model (7) are all significant at the conventional level in predicting work participation, explaining 1.9\% of total variation in this outcome. As observed during task 1 through 4, work participation rises for women with children during the post intervention period (model 8) ($\hat{\beta}$ = 0.031, $p$ $<$ 0.1); however, the effect is only marinally significant. As was to be expected, women with children show a significantly lower work participation ($\hat{\beta}$ = -0.159, $p$ $<$ 0.01) when compared to childless women (15.9\$ less). When combining covariates and the base model in model (9), the overall trend is the same as in the aforementioned models. The coefficient for the DiD effect rises to 0.033 ($p$ $<$ 0.1), but is still only marginally significant.
+Thus, overall, the inclusion of the covaraites does increase the coefficints of all three DiD effects, but only marginally. This means that the overall effect, or direction of the coefficicients was not changed drastically. Moreover, the inclusion of the covariates shows that the standard errors are stable across all models, suggesting no probelm with multicollinearity. 
+\paragraph{Robustness Tests} Overall, due to the standard errrors between the models for each outcome variable respectively staying stable, this suggests that there is generally less necessity to include robust standard errors. Running the Breusch-Pagan test returns 
+
+Finally, \textbf{THE APPENDIX contains the same models }
+
+
+Moreover, the standard errors are stable (do not change a lot) for all coeficcients , while the coeficients themselfes maintain their direction; indicating no problem of multicollinearity. 
+
+
+
+
+
+\begin{enumerate}
+   \item to do: first re run the models: the baseline model with only the control variales
+   \item then one model with the did effect only 
+   \item then both together 
+\end{enumerate}
+
+Moreover, the standard errors are stable (do not change a lot) for all coeficcients , while the coeficients themselfes maintain their direction; indicating no problem of multicollinearity. 
+
+
+
+
+\begin{enumerate}
+\item + age + urate + ed + nonwhite --> all of these variables have an impact on all of the outcomes; earnings correlate with age (higher earnings later, more education, also race, and overall labour supply so also unemployment rate)
+\item robust standard errros are reported in the appendix: nothing changes so we can jsut move on.
+\item do the robustness check based on leaving out 1993 as a value 
+\end{enumerate}
 
 \textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
 
@@ -290,10 +319,12 @@ dependent variables}
 
 \pagebreak
 
+
+\begin{landscape}
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Wed, Sep 14, 2022 - 15:53:27
+% Date and time: Wed, Sep 28, 2022 - 18:35:54
 \begin{table}[!htbp] \centering 
-\begin{adjustwidth}{0.cm}{-0cm}
+\begin{adjustwidth}{1.25cm}{-0cm}
 \begin{threeparttable}
 \small
 \captionsetup{font=small, justification=raggedright,singlelinecheck=false}
@@ -301,46 +332,50 @@ dependent variables}
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{-2pt}}lccccccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-7} 
-\\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+ & \multicolumn{9}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-10} 
+\\[-1.8ex] & \multicolumn{3}{c}{earn} & \multicolumn{3}{c}{finc} & \multicolumn{3}{c}{work} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9)\\ 
 \hline \\[-1.8ex] 
- Constant & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
-  & (828.375) & (1,550.012) & (886.522) & (1,655.347) & (0.023) & (0.043) \\ 
-  has\_children1 & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
-  & (1,093.444) & (1,096.506) & (1,170.197) & (1,171.022) & (0.030) & (0.030) \\ 
-  dperiod & $-$695.997 & $-$536.491 & $-$940.239$^{*}$ & $-$515.553 & $-$0.005 & $-$0.024$^{*}$ \\ 
-  & (485.413) & (500.046) & (519.486) & (534.028) & (0.013) & (0.014) \\ 
-  age &  & 22.555 &  & 78.717$^{***}$ &  & 0.002$^{***}$ \\ 
-  &  & (15.922) &  & (17.004) &  & (0.0004) \\ 
-  urate &  & 133.948 &  & 372.861$^{***}$ &  & $-$0.018$^{***}$ \\ 
-  &  & (114.614) &  & (122.403) &  & (0.003) \\ 
-  ed &  & 66.337 &  & $-$125.305$^{**}$ &  & 0.017$^{***}$ \\ 
-  &  & (59.579) &  & (63.628) &  & (0.002) \\ 
-  nonwhite1 &  & $-$1,255.622$^{***}$ &  & $-$2,438.387$^{***}$ &  & $-$0.043$^{***}$ \\ 
-  &  & (326.237) &  & (348.408) &  & (0.009) \\ 
-  has\_children1:dperiod & 1,682.810$^{***}$ & 1,722.360$^{***}$ & 1,911.035$^{***}$ & 2,006.060$^{***}$ & 0.031$^{*}$ & 0.033$^{*}$ \\ 
-  & (642.099) & (641.893) & (687.171) & (685.515) & (0.018) & (0.018) \\ 
+ Constant & 7,977.343$^{***}$ & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 11,872.150$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.414$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
+  & (1,159.632) & (828.375) & (1,550.012) & (1,234.711) & (886.522) & (1,655.347) & (0.032) & (0.023) & (0.043) \\ 
+  age & 96.038$^{***}$ &  & 22.555 & 144.373$^{***}$ &  & 78.717$^{***}$ & 0.003$^{***}$ &  & 0.002$^{***}$ \\ 
+  & (15.489) &  & (15.922) & (16.492) &  & (17.004) & (0.0004) &  & (0.0004) \\ 
+  urate & 33.433 &  & 133.948 & 256.102$^{**}$ &  & 372.861$^{***}$ & $-$0.018$^{***}$ &  & $-$0.018$^{***}$ \\ 
+  & (108.495) &  & (114.614) & (115.519) &  & (122.403) & (0.003) &  & (0.003) \\ 
+  ed & 8.153 &  & 66.337 & $-$177.633$^{***}$ &  & $-$125.305$^{**}$ & 0.016$^{***}$ &  & 0.017$^{***}$ \\ 
+  & (60.120) &  & (59.579) & (64.013) &  & (63.628) & (0.002) &  & (0.002) \\ 
+  nonwhite1 & $-$2,037.990$^{***}$ &  & $-$1,255.622$^{***}$ & $-$3,109.127$^{***}$ &  & $-$2,438.387$^{***}$ & $-$0.058$^{***}$ &  & $-$0.043$^{***}$ \\ 
+  & (323.611) &  & (326.237) & (344.563) &  & (348.408) & (0.009) &  & (0.009) \\ 
+  has\_children1 &  & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ &  & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ &  & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
+  &  & (1,093.444) & (1,096.506) &  & (1,170.197) & (1,171.022) &  & (0.030) & (0.030) \\ 
+  dperiod &  & $-$695.997 & $-$536.491 &  & $-$940.239$^{*}$ & $-$515.553 &  & $-$0.005 & $-$0.024$^{*}$ \\ 
+  &  & (485.413) & (500.046) &  & (519.486) & (534.028) &  & (0.013) & (0.014) \\ 
+  has\_children1:dperiod &  & 1,682.810$^{***}$ & 1,722.360$^{***}$ &  & 1,911.035$^{***}$ & 2,006.060$^{***}$ &  & 0.031$^{*}$ & 0.033$^{*}$ \\ 
+  &  & (642.099) & (641.893) &  & (687.171) & (685.515) &  & (0.018) & (0.018) \\ 
  \hline \\[-1.8ex] 
-R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.028 & 0.012 & 0.027 \\ 
-Adjusted R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.027 & 0.012 & 0.026 \\ 
-Residual Std. Error & 17,965.670 & 17,956.450  & 19,226.750  & 19,176.730 & 0.497  & 0.493  \\ 
-F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}$  & 54.906$^{***}$  & 54.374$^{***}$  \\ 
+Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
+R$^{2}$ & 0.006 & 0.026 & 0.027 & 0.012 & 0.022 & 0.028 & 0.019 & 0.012 & 0.027 \\ 
+Adjusted R$^{2}$ & 0.006 & 0.026 & 0.027 & 0.012 & 0.022 & 0.027 & 0.018 & 0.012 & 0.026 \\ 
+Residual Std. Error & 18,150.240  & 17,965.670 & 17,956.450  & 19,325.370 & 19,226.750  & 19,176.730 & 0.495  & 0.497  & 0.493 \\ 
+F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{***}$  & 105.245$^{***}$ & 56.166$^{***}$ & 65.588$^{***}$& 54.906$^{***}$ & 54.374$^{***}$ \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
 %
 \end{table}
+
+\end{landscape}
+
 
 
 \textbf{IMPORTANT: RUN BREUSCH PAGAN OFR EACH MODEL}
@@ -787,6 +822,57 @@ Count Children & 0.574 & 0.494 & 0 & 0 & 1 & 1 & 1 \\
 \end{table}
 
 
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 14, 2022 - 15:53:27
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Non-Robust Regression Results Part 3}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{2}{c}{earn} & \multicolumn{2}{c}{finc} & \multicolumn{2}{c}{work} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
+  & (828.375) & (1,550.012) & (886.522) & (1,655.347) & (0.023) & (0.043) \\ 
+  has\_children1 & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
+  & (1,093.444) & (1,096.506) & (1,170.197) & (1,171.022) & (0.030) & (0.030) \\ 
+  dperiod & $-$695.997 & $-$536.491 & $-$940.239$^{*}$ & $-$515.553 & $-$0.005 & $-$0.024$^{*}$ \\ 
+  & (485.413) & (500.046) & (519.486) & (534.028) & (0.013) & (0.014) \\ 
+  age &  & 22.555 &  & 78.717$^{***}$ &  & 0.002$^{***}$ \\ 
+  &  & (15.922) &  & (17.004) &  & (0.0004) \\ 
+  urate &  & 133.948 &  & 372.861$^{***}$ &  & $-$0.018$^{***}$ \\ 
+  &  & (114.614) &  & (122.403) &  & (0.003) \\ 
+  ed &  & 66.337 &  & $-$125.305$^{**}$ &  & 0.017$^{***}$ \\ 
+  &  & (59.579) &  & (63.628) &  & (0.002) \\ 
+  nonwhite1 &  & $-$1,255.622$^{***}$ &  & $-$2,438.387$^{***}$ &  & $-$0.043$^{***}$ \\ 
+  &  & (326.237) &  & (348.408) &  & (0.009) \\ 
+  has\_children1:dperiod & 1,682.810$^{***}$ & 1,722.360$^{***}$ & 1,911.035$^{***}$ & 2,006.060$^{***}$ & 0.031$^{*}$ & 0.033$^{*}$ \\ 
+  & (642.099) & (641.893) & (687.171) & (685.515) & (0.018) & (0.018) \\ 
+ \hline \\[-1.8ex] 
+R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.028 & 0.012 & 0.027 \\ 
+Adjusted R$^{2}$ & 0.026 & 0.027 & 0.022 & 0.027 & 0.012 & 0.026 \\ 
+Residual Std. Error & 17,965.670 & 17,956.450  & 19,226.750  & 19,176.730 & 0.497  & 0.493  \\ 
+F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}$  & 54.906$^{***}$  & 54.374$^{***}$  \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
 
 \section{Code}
 
