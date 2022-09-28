@@ -351,7 +351,7 @@ F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{**
 
 
 \subsubsection{Women with Children compared based on high \& low education levels}
-
+Please note: this subsection analysis was not splti into four regression models because ofconcerns for statistical power; the itnerpretation si still the same using an intercation term.
 For brevity reasons, the covariate only models are left (intuition does not change when comapred to table 3). Considering now only women with children and the "differences in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
 \textbf{NOTE: all models are F statistic significant! but then there is nothing going on}
 
@@ -417,13 +417,13 @@ F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ (df = 3; 7815) & 
 \subsubsection{Women with and without Children compared keeping education level (low) constant}
 
 Considering now only low educated women; alternating again on whether a women has a child or not, the instights are to be found in Table 5. 
-The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$-413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model 
+The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: ($\hat{\beta}$ = -179.637, $p$ $<$ 0.887) and work paticipation (main model: $\hat{\beta}$ = 0.012, $p$ $<$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; becasue if work would go up significantly while income drops, this would be crazy.}
 
 
 
 
 \subsection{Conclusion subsections}  
-Overall, the introduction of the tax credit does not seem to be significant across the 
+Overall, the introduction of the tax credit does not seem to be significant across the different outcoems and subgroups. 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Wed, Sep 14, 2022 - 15:53:27
@@ -501,7 +501,45 @@ Rational behind these choices: all students born in the sam year are admitted to
 
 \textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
 
-\subsection{Task 1: Explain wHY ols is biased here - A3}
+\subsection{Task 1: Endogineity - A3}
+When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, endogegenous treatment, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimate severely. 
+A prominent example in what way education effect on earnings could be biased is through an ommitted varaible or covariate. A classical example for this is general ability (commonly referred to as IQ - which was introduced in 1917 already), which commonly determines not only the degree of success in education, but also future earnings. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
+A second example, admittetdly a bit constructed; but this is an exercise; is higher education means higher earnings. But in the US of the 1930s, private education might have been a thing. Thus, people with higher earnings obtain more education which then goes back and forth - simultaneous causality bias. 
+
+
+
+
+
+%Two examples of bias in the OLS estimator are as follows: - The size most likely partly depends on job
+%experience. For young starters with long educational periods this may imply that their salary may be at
+%the same level (or even lower) as that of young starters with shorter educational periods but more work
+%experience. Also, when looking at people with the same amount of years of education, say: 15, older people
+%may have a much higher wage than young people with the same amount of years of education, due to
+%their experience. - Wages depend also partly on post-educational qualifications for specific jobs, which are
+%unaccounted for in the regression equation. A longer educational period may imply openness to learning,
+%and therefore openness to acquiring these job-specific qualifications which may increase in wage in the form
+%of an earnings premium.
+
+
+%The issue here is that education is likely to be endogenously determined. A classical example of a biased
+%estimate is to omit the ability in the model. Indeed, we can easily imagine that people with higher ability
+%while in school will also better perform in their job, and therefore will earn more. Additionally, people with
+%higher abilities tend to educate themselves more to signal their abilities to their future employers. Therefore,
+%there could be a selection bias, as people with high abilities are more likely to stay longer in school and
+%thus earn more. Unfortunately, it is unclear how one should observe or measure ability. Is it the IQ or is it
+%a portfolio of different skills combined (such as the motivation)? A second example is the socio-economic
+%background of a child. Typically, educated parents will push their children to study. The socioeconomic
+%background of a person also determines in which neighbourhood a person lives. It is true that in the US, the
+%quality of schooling differs depending on the neighbourhood a child lives in. Thus, it is so that if schooling is
+%not helping children, then they will drop out of school, as schooling will not help them acquire skills that are
+%valued in the labour market. These people will thus earn less. Again, there would be a selection bias.
+%These biases lead to one question: can we observe all of the aspects that make a person who she or he is?
+%Can we control for all individual characteristics? The answer is no and IV aim to circumvent this issue.
+
+
+
+
+
 
 \begin{enumerate}
    \item see slide 67; 
