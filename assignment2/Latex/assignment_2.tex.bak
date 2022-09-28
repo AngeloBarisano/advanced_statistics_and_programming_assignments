@@ -165,25 +165,13 @@ Figure 1 displays the outcomes for both treatment and control group for earnings
 
 
 \subsection{Task 3: Summary Statistics for data}
-The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 has no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogenity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more. Finally, 
-
-A total of: had children 
+The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 has no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogenity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more (N = 7819). Of the respondents 60\% were people of colour. Unemployment rate by state was on average 6.76\% ($std$ = 1.462, $median$ = 7.7) and unearned income at \$4823 ($std$ = 7123, $median$ = 6864)
 
 
 
 
 
 
-
-\textbf{IMPORTANT: ALSO MENTION THE CATEGORICAL VARIABLES!!! AND SAMPLE SIZES FOR SUBGROUPS!!!}
-
-
-
-\begin{enumerate}
-   \item  dont forget to mention the categorical variables and how they distribute; you did this well during assignment 1
-   \item better only keep the table with overall stats and not the subcategories 
-   \item add skew and median!!
-\end{enumerate}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 20:25:57
@@ -208,7 +196,7 @@ ed & 8.806 & 2.636 & 0 & 7 & 10 & 11 & 11 \\
 work & 0.513 & 0.500 & 0 & 0 & 1 & 1 & 1 \\ 
 unearn & 4.823 & 7.123 & 0.000 & 0.000 & 2.973 & 6.864 & 134.058 \\ 
 has\_children & 0.569 & 0.495 & 0 & 0 & 1 & 1 & 1 \\ 
-dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\ 
+dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
 \hline \\[-3.6ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
@@ -222,6 +210,14 @@ dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
 
 
 \subsection{Task 4: Matrix Diff in Diff}
+
+
+Table 2 reports the simply pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. This results in a $naive$ DiD effect of \$1682.82 for women with children.\footnote{This utili}
+Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, worp participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women).
+
+NOte: this does not suggest any causailty 
+
+
 
 \textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
 
@@ -246,7 +242,7 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex]
 \multicolumn{2}{c}{}  & \multicolumn{2}{c}{Earning}  & \multicolumn{2}{c}{Family Income} & \multicolumn{2}{c}{Work Participation} \\ 
-\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} \\ 
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} \\ 
 \hline \\[-1.8ex] 
 \multicolumn{1}{c}{Before} & 1 & 14,203.900 & 7,290.380 & 19,159.190 & 12,140.900 & 0.580 & 0.450 \\ 
 \multicolumn{1}{c}{After} & 2 & 13,507.900 & 8,277.200 & 18,218.950 & 13,111.690 & 0.570 & 0.480 \\ 
@@ -265,6 +261,10 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 
 \subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
 dependent variables}
+
+\paragraph{Control Varaibles and covariates} WHICH VARIABLES ARE ASSUMED TO HAVE AN IMPACT?
+
+
 
 \textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
 

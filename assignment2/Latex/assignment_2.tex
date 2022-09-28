@@ -211,14 +211,11 @@ dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
 
 \subsection{Task 4: Matrix Diff in Diff}
 
-\textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
 
-NOte: by taking the average of the periods we have two small problems: 1) the AFTER period is longer; so should we really do that?
+Table 2 reports the simply pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. using formula (1-2) his results in a $naive$ DiD effect of \$1682.82 for women with children.\footnote{This utilizes the aforementioned formula of $[E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]$} Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, worp participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). 
+\indent However, the aforementioned results are not signigicatn, as no formal test was conducted. Additionally, the results do not suggest causality - it only suggests a tendency.
+NOte: this does not suggest any causailty 
 
-\begin{enumerate}
-   \item report the same insight as you did during class! 
-   \item IMPORTANT: CHECK AND CALCULATE THE TABLE CONTENTS AGAIN! THERE MIGHT BE SOME NUMBERS OFF!!
-\end{enumerate}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 21:38:43
@@ -234,7 +231,7 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex]
 \multicolumn{2}{c}{}  & \multicolumn{2}{c}{Earning}  & \multicolumn{2}{c}{Family Income} & \multicolumn{2}{c}{Work Participation} \\ 
-\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Has Child} \\ 
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} \\ 
 \hline \\[-1.8ex] 
 \multicolumn{1}{c}{Before} & 1 & 14,203.900 & 7,290.380 & 19,159.190 & 12,140.900 & 0.580 & 0.450 \\ 
 \multicolumn{1}{c}{After} & 2 & 13,507.900 & 8,277.200 & 18,218.950 & 13,111.690 & 0.570 & 0.480 \\ 
@@ -253,6 +250,10 @@ NOte: by taking the average of the periods we have two small problems: 1) the AF
 
 \subsection{Task 5: Analyze the DiD effect with appropriate regression models for the three
 dependent variables}
+
+\paragraph{Control Varaibles and covariates} WHICH VARIABLES ARE ASSUMED TO HAVE AN IMPACT?
+
+
 
 \textbf{REMEMBER WE DO NOT RUN LOG AS WE ARE INTERESTED NOT IN COMPARING BUT RATHER IN LOOKING AT THE EFFFECT OF ONE VARIABLE!! SO WE DO NOT LOG SCALE TO MAKE IT INTERPRETABLE}
 
