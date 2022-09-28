@@ -49,64 +49,77 @@
 \section{Difference in Difference}
 
 
-Description:
-You are tasked with estimating the effects of the 1993 policy intervention on labor supply for single women by whether or not they had children.
---> The relevant varibales in this case are: 
-state - US-State/ provice of residence
-year - Year
-urate - US-State/province unemployment rate
-children - number of children per women
-nonwhite - nonwhite
-finc - annual family income
-earn - anual earnings (of women)
-age - age of women
-ed - Years of education
-work - Indicator work status (employed or not)
-unearn - unearn Income 
-
-Outcome variable: INDICATOR WORK STATUS
-Time indicator: at 1993 (beginning) create time variable
-Goal: estimate the effect of the 1993 policy intervention on labor supply for single women by whether or not they had children (Dummy for whether they had children or not??)
-
-
-The unit of analysis are females in the US
-
-Question: The main predictor is meant to be whether women has children; Should we use that as a dummy or numeric variable?? --> something like degree of treatment
 
 
 
-\subsection{Task 1: Indicate which of the coefficients(s) from equation (1) yield the following outcomes}
+
+\subsection{Task 1: Derive Diff-In-Diff Coefficients}
+
+\centering
+$(1-1) \ {y_{it}} = \beta_{0} + \beta_{1} D_i + \beta_{2} T_t+ \beta_{3} D_i T_t + \epsilon_{it}$
+
+
+
+Considering the canonical difference-in-difference equation expressed in regression form (1-1), the individaul outcome of ${y_{it}}$ is defined by five terms:
+
+\begin{enumerate}
+	\item $\beta_{0}$; constant - will be cancelled out in later part
+	\item $\beta_{1} D_i$; treatment indicator - whether the subject is treated or not represented by either (D= 1$ | $D = 0)
+	\item $\beta_{2} T_t$; independent of the subject, the "event study" contains pre- and post-test measurements indicator for each subject
+	\item $\beta_{3} D_i T_t$; the interaction effect of the treatment indicator and the time indicator displays the assumed effect of the change from pre to post test in $T_t$ for an individual in the treatment or control - in case of treatment, this term falls out as the general assumtion of diff-in-diff pertains to the control being the same as the treatment. 
+	\item $\epsilon_{it}$; contains the disturbances
+\end{enumerate}
+
+
+The terms in 2, 3, \& 4 are relevant in describing the following outcomes:
+
+\begin{itemize}
+\item $E = (y_{T=1} | D=1)$
+\item $E = (y_{T=0} | D=1)$
+\item $E = (y_{T=1} | D=0)$
+\item $E = (y_{T=0} | D=0)$
+\end{itemize}
+
+Difference in difference means that we compare the difference between treatment and control before and after the treatment introduction (t = 0), shown as:
+
+
+\centering
+$
+(1-2) \ [E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]
+$
+
+Subsequetnly, the four outcomes described in (1-2) yield the following outcomes:
+
+\begin{itemize}
+\item $E = (y_{T=1} | D=1)$; Becasue we are observing the outcome for the post-(treatment) test for treatment group, this yields $\beta_{0}$, $\beta_{1}$, $\beta_{2}$,  $\beta_{3}$ 
+\item $E = (y_{T=0} | D=1)$; Because we are observing the outcome of the pre-(intervention) test for the treatment, this will yield $\beta_{0}$, $\beta_{1}$
+\item $E = (y_{T=1} | D=0)$; Becasue we are observing the outcome for the post-(treatment) test for the control group, this yields $\beta_{0}$, $\beta_{2}$ 
+\item $E = (y_{T=0} | D=0)$; Because we are observing the outcome of the pre-(intervention) test for the control, this will yield $\beta_{0}$
+\end{itemize}
+
+Note that the disturbance term is left out as it is assumed to be independent of the treatment selection etc.; as such we will ignore it here. 
+Additionally, the constant is present in all four outcomes; thus, it also cncels out in the following equation. This originates from the assumption that the covariates measurments in pre and post test yield the same results for both treatment and control subjects. Equivalently, by substitution the aforementioned outcomes into (1-2), the following results can be deduced:
+
+$
+(1-3) \ [E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]
+$
+
+$
+(=) E  = [(\beta_{1} + \beta_{2} + \beta_{3}) - 
+$
+
+
 
 \textbf{NOte possibly delete duplicates}
 SEE SLIDE 57 ff
 
+
+
+
+
 \includegraphics[width=.95\linewidth]{home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/Screenshot from 2022-09-25 16-29-17.png}
 
 Important: we canot identify the monthrs; so If they become mothers at some point, we will assume that these are taken out!
-
-
-
-$
-(1) {y_{it}} = \beta_{0} + \beta_{1} + \beta_{2} + \beta_{3} D_i T_t + \epsilon_{it}
-$
-
-
-$E = (y_{T=1} | D=1)$
-$E = (y_{T=0} | D=1)$
-$E = (y_{T=1} | D=0)$
-$E = (y_{T=0} | D=0)$
-
-$
-[E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]
-$
-
-
-\textbf{IMPORTANT SEE THE SCREENSHOT}
-
-
-\begin{enumerate}
-   \item  follow the screenshot above
-\end{enumerate}
 
 
 
@@ -603,8 +616,9 @@ Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\
 
 \begin{enumerate}
    \item here already use the regression outputs from task 4 and also the a correlation table 
-   \itam add a plot!!!
-   \ partial f test for relevance/ strength of the instrument!
+   \item add a plot!!!
+   \item partial f test for relevance/ strength of the instrument!
+   \item summary(rslt2SLS.B, diagnostics = TRUE) --> see the things in tutorial 2 there I descibe all of it; also the slides are relevant
 \end{enumerate}
 
 \textbf{A good instrument possesses two specifications: it is clean and it is relevant}
@@ -618,6 +632,14 @@ Relevantce: Contrarily, this assumption can be tested: it states that the instru
 
 
 \subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
+
+\begin{enumerate}
+   \item IT IS VERY IMPORTANT TO BUILD A QUICK THEORY AND ALSO EXPLAIN WHY THE CONTROL VARIABLES ARE EXOGENOEUS; SO WHY THERE CONTROLS ARE RELEVANT!!!!!
+   \item also look at the examples in those links how they didd this !
+\end{enumerate}
+
+
+
 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
@@ -690,6 +712,14 @@ IMPORTANT: USE slide 88 as an argument
 \textbf{IMPORTANT: WHEN YOU SAY HOW CONTROL VARIABLES IMPACT THE INDEPENDENT VARIABLE SAY THE INCLUSION OF THE CONTROL VARIABLES ICNREASE IT INTO A CERTAIN DIRECTIOn; SO DEPEDNING ON THE INSTRUMENT VS NORMAL OLS, the variable was biased eg downwards or upwards}
 
 \subsection{5 -- }
+\begin{enumerate}
+   \item here we do the parital F test on the IV regression!
+   \item loot in the notes for this lecture to see the argument begind this f test 
+   \item also analyse the hausman and sargan test on the same models as before; IMPORTANT THESE ARE ONLY FOR OVERIDENTIFICATION!!!
+   \item important: perform all these tests like in the tutorial and also part 3/4 already!!!! -- report all those tests formally in one table!
+\end{enumerate}
+
+
 
 \textbf{IMPORTANT: WE DO NOT INCLUDE THE INSTRUMENTS IN OLS BECASUE WE AUSSME THAT THEY DONT HAVE AN IMPACT on the outcome!!!!!! in OLS; SO DONT INCLDUE THEM IN THE OLS OTHERWISE WE GO AGAINST THE UNDERLYING THEORY}
 \textbf{SLIDE 105 perform partial F test to see whether IV reg is good or not and if it is good then it is better than OLS!}
@@ -697,6 +727,14 @@ IMPORTANT: USE slide 88 as an argument
 \textbf{for overidentificaion run another IVREG WITH MORE insturments see introductiomn; then you can interpret the SARGAN AND HAUSMA TEST THINGI}
 
 \subsection{6 -- }
+
+\begin{enumerate}
+   \item not clean insutruments! this would lead to violation of mean independence
+   \item weak insturments leads to mean indepdence violation as well becasue the indstruments simply do not work as they should 
+   \item google some stuff and see internet
+\end{enumerate}
+
+
 
 reasons: not clear instrument (or not clean) (make a plot; or if the instrument is not relevant or weak)
 
