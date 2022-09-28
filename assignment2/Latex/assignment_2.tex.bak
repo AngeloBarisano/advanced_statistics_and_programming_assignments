@@ -282,9 +282,6 @@ Moreover, the standard errors are stable (do not change a lot) for all coeficcie
 
 
 
-\pagebreak
-
-
 \begin{landscape}
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Wed, Sep 28, 2022 - 18:35:54
@@ -401,13 +398,13 @@ Observations & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 & 7,819 \\
 R$^{2}$ & 0.005 & 0.020 & 0.004 & 0.033 & 0.002 & 0.016 \\ 
 Adjusted R$^{2}$ & 0.004 & 0.020 & 0.003 & 0.033 & 0.001 & 0.016 \\ 
 Residual Std. Error & 14,923.420& 14,810.030 & 15,713.570 & 15,480.340  & 0.499  & 0.495 \\ 
-F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ (df = 3; 7815) & 44.915$^{***}$  & 4.884$^{***}$  & 21.557$^{***}$  \\ 
+F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ & 44.915$^{***}$  & 4.884$^{***}$  & 21.557$^{***}$  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 7819 Single Women have Children. N = 5593 high education (years of eduction $>$= 9 years); N = 2226 low education (years of eduction $<$ 9 years); Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 7819 Single Women have Children. N = 5593 high education (years of eduction $>$= 9 years); N = 2226 low education (years of eduction $<$ 9 years); Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -469,7 +466,7 @@ F Statistic & 9.304$^{***}$ & 6.559$^{***}$  & 14.690$^{***}$ & 11.920$^{***}$ &
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 4311 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable.
+      \item\textit{Note:} N = 4311 Single Women have Children (years of eduction $<$ 9 years). N = 2085 has no children; N = 2226 has children; Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -501,10 +498,11 @@ Rational behind these choices: all students born in the sam year are admitted to
 
 \textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
 
-\subsection{Task 1: Endogineity - A3}
+\subsection{Task 1: Endogineity problems and correlation with u - A3}
 When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, endogegenous treatment, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimate severely. 
 A prominent example in what way education effect on earnings could be biased is through an ommitted varaible or covariate. A classical example for this is general ability (commonly referred to as IQ - which was introduced in 1917 already), which commonly determines not only the degree of success in education, but also future earnings. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
 A second example, admittetdly a bit constructed; but this is an exercise; is higher education means higher earnings. But in the US of the 1930s, private education might have been a thing. Thus, people with higher earnings obtain more education which then goes back and forth - simultaneous causality bias. 
+Finally, selection bias might be a problem: if we disproportionally select our sample in university cities, this will ineviably lead to bias the results, as the effect of a universtiy education usually disproportionally outweights the effect of lets say primary school years in the job market. 
 
 
 
@@ -567,6 +565,25 @@ A second example, admittetdly a bit constructed; but this is an exercise; is hig
 
 \subsection{Task 2: Summary statistics for this task}
 
+Table 6 contains the descriptive statistics of the numeric variables. overall 329,509 observations are in the data on people born between 1930 and 1939. The age range of study subectes ranges from 40 to 50, with a median age at 45 ($mean$ = 44.645, $std$ = 2.940). The average years of education was 12.77 ($std$ = 3.281, $median$ = 12). Finally, for interpretation purposes here, lnwage ($mean$ = 5.90, $std$ = 0.679, $median$ = 6.257)\footnote{Not really interesting or relevant to display in summary statstics}  was rescaled to wage, which displayed a strong positive skew of 26.39, mean of \$439.47 ($std$ = 364.941) and a median of \$521.85. the log scaled wage will be used during the analysis. 
+Moreover, 86.3\% of respondents were married. SMSA indicates whether a study subject lives in rural or urban areas. Quarter of birth, the IV, distributes reasonably equally, with Q1 N = 81671, Q2 N = 80138, Q3 N = 86856, and Q4 N = 80844; it is influencial to when a study subject will start schooling; eg. suggesting that subjects from the fourth quarter generally obtain more years of study.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{enumerate}
    \item remember to describe categorical variables in text
    \item add skew and median!!
@@ -592,14 +609,19 @@ relevant quantiative variables age, educ (years of education), lnwage(weekly ear
 \hline \\[-1.8ex] 
 Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
 \hline \\[-1.8ex] 
-Age & 44.645 & 2.940 & 40 & 42 & 45 & 47 & 50 \\ 
-Years of Education & 12.770 & 3.281 & 0 & 12 & 12 & 15 & 20 \\ 
-Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\ 
+age & 44.645 & 2.940 & 40 & 42 & 45 & 47 & 50 \\ 
+educ & 12.770 & 3.281 & 0 & 12 & 12 & 15 & 20 \\ 
+lnwage & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\ 
+married & 0.863 & 0.344 & 0 & 1 & 1 & 1 & 1 \\ 
+qob & 2.506 & 1.112 & 1 & 2 & 3 & 3 & 4 \\ 
+SMSA & 0.186 & 0.389 & 0 & 0 & 0 & 0 & 1 \\ 
+yob & 1,934.603 & 2.905 & 1,930 & 1,932 & 1,935 & 1,937 & 1,939 \\ 
+wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\ 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Notes:} N = 13746; Wage is backwards transformed from lnWage
+      \item\textit{Notes:} N = 329,509; Wage is backwards transformed from lnWage
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -608,6 +630,73 @@ Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\
 
 
 \subsection{Task 3: Diagnositcs of Year Of Birth as instrument: is it any good?}
+
+A suitable instrument fulfills two conditions: 1) Cleanliness; meaining that the instrument only has an impact on the outcome thorugh the causal variable (here years of education). This assumtion cannot be tested, but is commonly based in theory.
+2) The instrument is relevant, meaning that the instrument strongly predicts/ correlates with the causal ("to be instrumentalized") variable. This assumption can be fulfilled thorugh conducting an F test on the two stage model. 
+
+
+
+There is a figure. In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R - we just demonstrate it here).\footnote{Note: in this case we perform this manually} Table 7 contains both quarter of birth as a factor and not.
+
+
+
+
+Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)
+
+
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{First Stage regression output - Relevancy}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lcccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{educ} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Constant & 12.641$^{***}$ & 15.150$^{***}$ & 12.688$^{***}$ & 15.213$^{***}$ \\ 
+  & (0.014) & (0.091) & (0.011) & (0.091) \\ 
+  qob & 0.052$^{***}$ & 0.032$^{***}$ &  &  \\ 
+  & (0.005) & (0.005) &  &  \\ 
+  age &  & $-$0.060$^{***}$ &  & $-$0.060$^{***}$ \\ 
+  &  & (0.002) &  & (0.002) \\ 
+  married &  & 0.248$^{***}$ &  & 0.248$^{***}$ \\ 
+  &  & (0.017) &  & (0.017) \\ 
+  qob\_fac2 &  &  & 0.057$^{***}$ & $-$0.004 \\ 
+  &  &  & (0.016) & (0.016) \\ 
+  qob\_fac3 &  &  & 0.117$^{***}$ & 0.052$^{***}$ \\ 
+  &  &  & (0.016) & (0.016) \\ 
+  qob\_fac4 &  &  & 0.151$^{***}$ & 0.088$^{***}$ \\ 
+  &  &  & (0.016) & (0.016) \\ 
+ \hline \\[-1.8ex] 
+Observations & 329,509 & 329,509 & 329,509 & 329,509 \\ 
+R$^{2}$ & 0.0003 & 0.004 & 0.0003 & 0.004 \\ 
+Adjusted R$^{2}$ & 0.0003 & 0.004 & 0.0003 & 0.004 \\ 
+Residual Std. Error & 3.281 & 3.275 & 3.281  & 3.275  \\ 
+F Statistic & 100.653$^{***}$  & 414.645$^{***}$ & 34.009$^{***}$ & 249.859$^{***}$  \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests; *** p$<$0.01, ** p$<$0.05, * p$<$0.1
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
+
+
+
+
+
 \textbf{see slide 88; 82}
 
 \begin{enumerate}
@@ -619,9 +708,7 @@ Ln(Wage) & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\
 
 \textbf{A good instrument possesses two specifications: it is clean and it is relevant}
 
-Cleanlieness: means that the Instrument only has an impact on the outcome through the Indepdendent variable (the to be "instrumentalized" variable); this assumption cannot be tested but is rather grounded in theory (meaning that the instrument is exogeneous -- obviously you cannot test exogineity)
 
-Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)
 
 \textbf{HOW DO I CONDUCT THESE TESTS? CAN I CONDUCT THEM ON THE NORMAL 2SLS via OLS or should I better use the IVreg model?}
 
@@ -629,11 +716,7 @@ Relevantce: Contrarily, this assumption can be tested: it states that the instru
 
 \subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
 
-\begin{enumerate}
-   \item IT IS VERY IMPORTANT TO BUILD A QUICK THEORY AND ALSO EXPLAIN WHY THE CONTROL VARIABLES ARE EXOGENOEUS; SO WHY THERE CONTROLS ARE RELEVANT!!!!!
-   \item also look at the examples in those links how they didd this !
-\end{enumerate}
-
+For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. 
 
 
 
@@ -678,7 +761,7 @@ F Statistic & 43,782.560$^{***}$  & 17,053.180$^{***}$  &  &  &  &  \\
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests
+      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -691,6 +774,10 @@ F Statistic & 43,782.560$^{***}$  & 17,053.180$^{***}$  &  &  &  &  \\
 
 
 
+\begin{enumerate}
+   \item IT IS VERY IMPORTANT TO BUILD A QUICK THEORY AND ALSO EXPLAIN WHY THE CONTROL VARIABLES ARE EXOGENOEUS; SO WHY THERE CONTROLS ARE RELEVANT!!!!!
+   \item also look at the examples in those links how they didd this !
+\end{enumerate}
 
 
 
