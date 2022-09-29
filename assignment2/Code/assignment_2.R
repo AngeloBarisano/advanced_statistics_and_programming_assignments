@@ -22,6 +22,7 @@ loadfonts()
 
 
 
+
 setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2")
 
 df <- read.csv("Data/DiD_dataset-1.csv", header = TRUE, sep = ",")
@@ -29,8 +30,8 @@ df <- read.csv("Data/DiD_dataset-1.csv", header = TRUE, sep = ",")
 # indicate child or not
 df <- df %>%
     mutate(has_children = case_when(
-        children > 0 ~ TRUE,
-        children == 0 ~ FALSE
+        children > 0 ~ 1,
+        children == 0 ~ 0
     ))
 
 # first set up indicator that whether treatment vs non treatment period
@@ -108,39 +109,40 @@ ggsave("Graphics/task2_work_did.png", width = 11, height = 8)
 #---------------------------------------------------------------------------------------
 # Task 3
 df_temp <- df %>%
-    select((c("finc", "earn", "age", "ed", "unearn", "children", "work")))
+    select((c("finc", "earn", "age", "urate", "ed", "unearn", "children", "work")))
 
 df_temp_w_children <- subset(
     df, has_children == TRUE
 )
 
 df_temp_w_children <- df_temp_w_children %>%
-    select((c("finc", "earn", "age", "ed", "unearn", "children", "work")))
+    select((c("finc", "earn", "age", "urate", "ed", "unearn", "children", "work")))
 
 df_temp_wo_children <- subset(
     df, has_children == FALSE
 )
-
+View(df)
 df_temp_wo_children <- df_temp_wo_children %>%
-    select((c("finc", "earn", "age", "ed", "unearn", "children", "work")))
+    select((c("finc", "earn", "age", "ed", "urate", "unearn", "children", "work")))
 
 str(df_temp_w_children)
 
 
 stargazer(
-    df_temp,
+    df,
     type = "latex",
-    omit.summary.stat = c("N"),
+    # omit.summary.stat = c("N"),
     summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
-    title = "Descriptive Statistics of ECIC",
-    covariate.labels = c(
-        "Family Income", "Earnings", "Age", "Education",
-        "Education Years", "Unearned Income", "Count Children", "Work"
-    )
+    title = "Descriptive Statistics of ECIC"
+    # covariate.labels = c(
+    #     "Family Income", "Earnings", "Age", "Education",
+    #     "Education Years", "Unearned Income", "Count Children", "Work"
+    # )
 )
-
-
-
+skewness(df$earn)
+df %>% count(has_children)
+table(df$nonwhite)
+cor(df$earn, df$finc, )
 stargazer(
     df_temp_w_children,
     type = "latex",
@@ -188,7 +190,7 @@ df_g_summary_work <- df %>%
     summarise_at(vars(work), funs(mean(., na.rm = TRUE)), round = 2)
 
 df_g_summary
-library(ftExtra)
+
 df_g_summary %>% separate_header(sep = "has_children")
 
 # long to wide transformation
@@ -245,27 +247,36 @@ df$has_children <- as.factor(df$has_children)
 
 ##################
 # Earn models
+cov_earn <- earn ~ age + urate + ed + nonwhite
+
 did_earn_sim <- earn ~ has_children + dperiod + has_children:dperiod
 did_earn_expand <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
 
+rslt_earn_cov <- lm(cov_earn, data = df)
 rsltdid_earn_sim <- lm(did_earn_sim, data = df)
 rsltdid_earn_expand <- lm(did_earn_expand, data = df)
 
 
 ##################
 # finc models
+cov_finc <- finc ~ age + urate + ed + nonwhite
+
 did_finc_sim <- finc ~ has_children + dperiod + has_children:dperiod
 did_finc_expand <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
 
+rslt_finc_cov <- lm(cov_finc, data = df)
 rsltdid_finc_sim <- lm(did_finc_sim, data = df)
 rsltdid_finc_expand <- lm(did_finc_expand, data = df)
 
 
 ##################
 # work models
+cov_work <- work ~ age + urate + ed + nonwhite
+
 did_work_sim <- work ~ has_children + dperiod + has_children:dperiod
 did_work_expand <- work ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
 
+rslt_work_cov <- lm(cov_work, data = df)
 rsltdid_work_sim <- lm(did_work_sim, data = df)
 rsltdid_work_expand <- lm(did_work_expand, data = df)
 
@@ -288,26 +299,45 @@ stargazer(
 
 
 stargazer(
+    rslt_earn_cov,
     rsltdid_earn_sim,
     rsltdid_earn_expand,
+    rslt_finc_cov,
     rsltdid_finc_sim,
     rsltdid_finc_expand,
+    rslt_work_cov,
     rsltdid_work_sim,
     rsltdid_work_expand,
     intercept.bottom = FALSE,
     # align = TRUE,
     no.space = TRUE,
     # omit.labels = "Restaurant IDs?",
-    type = "latex"
+    type = "text"
 )
 
 
 
-
-
-
-
 #----------------------------------------
+
+lmtest::bptest(rslt_earn_cov)
+lmtest::bptest(rsltdid_earn_sim)
+lmtest::bptest(rsltdid_earn_expand)
+
+lmtest::bptest(rslt_finc_cov)
+lmtest::bptest(rsltdid_finc_sim)
+lmtest::bptest(rsltdid_finc_expand)
+
+lmtest::bptest(rslt_work_cov)
+lmtest::bptest(rsltdid_work_sim)
+lmtest::bptest(rsltdid_work_expand)
+
+
+
+
+
+
+
+
 # implement robust standard errors
 seBasic <- sqrt(diag(vcov(rsltdid_earn)))
 seWhite <- sqrt(diag(vcovHC(rsltdid_earn, type = "HC0")))
@@ -358,14 +388,16 @@ View(df)
 
 df <- df %>%
     mutate(edu_lvl = case_when(
-        ed >= 9 ~ "high",
-        ed < 9 ~ "low"
+        ed >= 9 ~ 1,
+        ed < 9 ~ 0
     ))
 
 # so subset the data so that you only contain women with children
 # subset the data
 df_has_children <- subset(df, has_children == 1)
 View(df_has_children)
+
+
 
 ##################
 # Earn models
@@ -400,13 +432,14 @@ stargazer(
     rsltdid_earn_expand,
     rsltdid_finc_sim,
     rsltdid_finc_expand,
-    # rsltdid_work_sim,
-    # rsltdid_work_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
     intercept.bottom = FALSE,
     align = TRUE,
     no.space = TRUE,
     # omit.labels = "Restaurant IDs?",
-    type = "text"
+    type = "text",
+    report = ("vc*p")
 )
 
 
@@ -437,10 +470,9 @@ str(subset(df_has_children, edu_lvl == "high"))
 # goal here: impact of having children on ECTI keeping education constant
 
 # first classify
-df_low_edu <- subset(df, edu_lvl == "low")
+df_low_edu <- subset(df, edu_lvl == 0)
 
 View(df_low_edu)
-
 
 
 ##################
@@ -476,13 +508,14 @@ stargazer(
     rsltdid_earn_expand,
     rsltdid_finc_sim,
     rsltdid_finc_expand,
-    # rsltdid_work_sim,
-    # rsltdid_work_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
     intercept.bottom = FALSE,
     align = TRUE,
     no.space = TRUE,
     # omit.labels = "Restaurant IDs?",
-    type = "text"
+    type = "text",
+    report = ("vc*p")
 )
 
 
@@ -536,44 +569,112 @@ df$wage <- exp(df$lnwage)
 df_temp <- df %>%
     select((c("age", "educ", "lnwage", "wage")))
 
-
+View(df)
 stargazer(
-    df_temp,
+    df,
     type = "latex",
     omit.summary.stat = c("N"),
     summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
-    title = "Descriptive Statistics of ECIC",
-    covariate.labels = c(
-        "Age", "Years of Education", "Ln(Wage)", "Wage"
-    )
+    title = "Descriptive Statistics of ECIC"
+    # covariate.labels = c(
+    #     "Age", "Years of Education", "Ln(Wage)", "Wage"
+    # )
 )
 
+table(df$qob)
 #------------------------------------------------------------------
 # task 3 run IV reg on ln wage by  education using yob as instrument
 # convert yob to factor
 
+df$yob_fac <- as.factor(df$yob)
+df$qob_fac <- as.factor(df$qob)
+
 # fuirst run the IV model
-rslt2SLS.B <- ivreg(lnPacks ~ lnPrice + lnIncome
-# yo uuse the bar sign to define the instruments ofr an endogenous variable!!
-| lnIncome + TaxDiff + TaxLvl,
-data = dfCigarettes95
+# rslt2SLS.B <- ivreg(lnPacks ~ lnPrice + lnIncome
+# # yo uuse the bar sign to define the instruments ofr an endogenous variable!!
+# | lnIncome + TaxDiff + TaxLvl,
+# data = dfCigarettes95
+# )
+
+# summary(rslt2SLS.B, diagnostics = TRUE)
+
+# first group by year of birth and yuarter of birth, then calcualte the avg lnwage, education for each quarter for each year
+df_grouped_yq <- df %>%
+    group_by(yob, qob) %>%
+    summarise(avg_lnwage_yq = mean(lnwage), avg_yofeduc_yq = mean(educ))
+View(df_grouped_yq)
+
+ggplot(df_grouped_yq, aes(x = yob + (qob - 1) / 4, y = avg_yofeduc_yq)) +
+    geom_line()
+
+
+
+ak_age <- df %>%
+    group_by(qob, yob) %>%
+    summarise(lnw = mean(lnwage), s = mean(educ)) %>%
+    mutate(q4 = (qob == 4))
+
+
+
+ggplot(ak_age, aes(x = yob + (qob - 1) / 4, y = s)) +
+    geom_line() +
+    geom_label(mapping = aes(label = qob, color = q4)) +
+    theme(legend.position = "none") +
+    scale_x_continuous("Year of birth", breaks = 1930:1940) +
+    scale_y_continuous("Years of Education",
+        breaks = seq(12.2, 13.2, by = 0.2),
+        limits = c(12.2, 13.2)
+    )
+
+
+
+
+# just make a similar plot which groups by year: so each year we will indicate where each
+# quarter is: like the one on the right just each year grouped;
+# so: calculate the mean Years of education per quarter per year and then plot that.
+
+
+
+
+
+# simple
+first_stage_check_sim <- lm(educ ~ qob, data = df)
+
+# advanced
+first_stage_check_adv <- lm(educ ~ qob + age + married, data = df)
+
+# simple fac
+first_stage_check_sim_fac <- lm(educ ~ qob_fac, data = df)
+
+# advanced fac
+first_stage_check_adv_fac <- lm(educ ~ qob_fac + age + married, data = df)
+
+
+
+stargazer(
+    first_stage_check_sim,
+    first_stage_check_adv,
+    first_stage_check_sim_fac,
+    first_stage_check_adv_fac,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "text",
+    report = ("vc*p")
 )
-
-summary(rslt2SLS.B, diagnostics = TRUE)
-
 
 
 #------------------------------------------------------------------
 # task 4 run IV reg on ln wage by  education using yob as instrument
-# convert yob to factor
-df$yob <- as.factor(df$yob)
 
-rsltOLS5.1 <- ivreg(lnwage ~ educ | qob, data = df_IV)
-rsltOLS5.2 <- ivreg(lnwage ~ educ + married | married + qob, data = df_IV)
-rsltOLS5.3 <- ivreg(lnwage ~ educ + married + age | married + qob + age, data = df_IV)
-summary(rsltOLS5.2, diagnostics = TRUE)
-stargazer(rsltOLS5.2, type = "text")
-bptest(rsltOLS5.2)
+
+
+# rsltOLS5.1 <- ivreg(lnwage ~ educ | qob, data = df_IV)
+# rsltOLS5.2 <- ivreg(lnwage ~ educ + married | married + qob, data = df_IV)
+# rsltOLS5.3 <- ivreg(lnwage ~ educ + married + age | married + qob + age, data = df_IV)
+# summary(rsltOLS5.2, diagnostics = TRUE)
+# stargazer(rsltOLS5.2, type = "text")
+# bptest(rsltOLS5.2)
 
 # i) run basic OLS
 rsltOLS_sim <- lm(lnwage ~ educ, data = df)
@@ -588,10 +689,10 @@ rsltiv1_sim <- ivreg(lnwage ~ educ | qob, data = df)
 rsltiv1_adv <- ivreg(lnwage ~ educ + age + married | qob + age + married, data = df)
 
 # iiiii) run iv reg with out controls BUT ALSO MORE THAN oNE INSTURMENT FOR PART 5!
-rsltiv2_sim <- ivreg(lnwage ~ educ | qob + yob, data = df)
+rsltiv2_sim <- ivreg(lnwage ~ educ | qob_fac, data = df)
 
 # iiiiiii) run ivreg with controls and multiple instruments (qob + yob)
-rsltiv2_adv <- ivreg(lnwage ~ educ + age + married | qob + yob + age + married, data = df)
+rsltiv2_adv <- ivreg(lnwage ~ educ + age + married | qob_fac + yob_fac + age + married, data = df)
 
 
 
@@ -605,13 +706,73 @@ stargazer(
     intercept.bottom = FALSE,
     #   align = TRUE,
     no.space = TRUE,
-    type = "latex"
+    type = "text"
 )
 
 
 
 
 
+#------------ IMPORTANT FOR PART 4 this is the correct reporting here
+
+
+# i) run basic OLS
+rsltOLS_sim <- lm(lnwage ~ educ, data = df)
+
+# ii) run OLS with controls - dont run hand made ivreg
+rsltOLS_adv <- lm(lnwage ~ educ + age + married, data = df)
+
+# iii) run Simple IVREG - numeric
+rsltiv1_sim_numeric <- ivreg(lnwage ~ educ | qob, data = df)
+
+# iii) run Simple IVREG - fac
+rsltiv1_sim_numeric_fac <- ivreg(lnwage ~ educ | qob_fac, data = df)
+
+# iii) run adv IVREG - numeric
+rsltiv1_adv_numeric <- ivreg(lnwage ~ educ + SMSA + married | qob + SMSA + married, data = df)
+
+# iii) run adv IVREG - fac
+rsltiv1_adv_numeric_fac <- ivreg(lnwage ~ educ + SMSA + married | qob_fac + SMSA + married, data = df)
+
+# now overidentify
+rsltiv1_adv_numeric_over <- ivreg(lnwage ~ educ + SMSA + married | qob + yob + SMSA + married, data = df)
+
+# iii) run adv IVREG - fac
+rsltiv1_adv_numeric_fac_over <- ivreg(lnwage ~ educ + SMSA + married | qob_fac + yob + SMSA + married, data = df)
+
+
+
+
+stargazer(
+    rsltOLS_sim,
+    rsltOLS_adv,
+    rsltiv1_sim_numeric,
+    rsltiv1_sim_numeric_fac,
+    rsltiv1_adv_numeric,
+    rsltiv1_adv_numeric_fac,
+    rsltiv1_adv_numeric_over,
+    rsltiv1_adv_numeric_fac_over,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "text"
+)
+
+
+stargazer(
+    rsltOLS_sim,
+    rsltOLS_adv,
+    rsltiv1_sim_numeric,
+    rsltiv1_sim_numeric_fac,
+    rsltiv1_adv_numeric,
+    rsltiv1_adv_numeric_fac,
+    rsltiv1_adv_numeric_over,
+    rsltiv1_adv_numeric_fac_over,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "latex"
+)
 
 
 
