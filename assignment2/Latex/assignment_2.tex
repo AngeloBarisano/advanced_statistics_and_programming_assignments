@@ -378,7 +378,7 @@ The subsection analysis shows that the post intervention period earnings for low
 
 
 
-\subsection{Conclusion subsections}  
+\subsubsection{Conclusion subsections}  
 Overall, the introduction of the tax credit does not seem to be significant across the different outcoems and subgroups. 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
@@ -432,122 +432,17 @@ F Statistic & 9.304$^{***}$ & 6.559$^{***}$  & 14.690$^{***}$ & 11.920$^{***}$ &
 %
 \end{table}
 
-
 \section{Instrumental Variable approach}
 
 \subsection{Task 1: Endogineity problems and correlation with u - A3}
-When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, endogegenous treatment, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimator severely. 
-A prominent example in what way education effect on earnings could be biased is through an ommitted varaible or covariate. A classical example for this is general ability (commonly referred to as IQ - which was introduced in 1917 already), which commonly determines not only the degree of success in education, but also future earnings. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
-A second example, admittetdly a bit constructed; but this is an exercise; is higher education means higher earnings. But in the US of the 1930s, private education might have been a thing. Thus, people with higher earnings obtain more education which then goes back and forth - simultaneous causality bias. 
-Finally, selection bias might be a problem: if we disproportionally select our sample in university cities, this will ineviably lead to bias the results, as the effect of a universtiy education usually disproportionally outweights the effect of lets say primary school years in the job market. 
-
-
-
-%One example of such conditions may be a situation, where the preference of students for
-%receiving more years of education can be associated with the level of wealth of the close family,
-%e.g. parents, which motivate their children learn longer and fund their higher education. Also, it
-%can be arguably assumed that wealthier families have better access to good-paying jobs in some
-%sectors (f.ex. business, medicine, law) and can help their children find a better-paying job (as
-%many jobs are found through network of professionals). At In other words, people from those
-%families would receive higher salaries regardless of their level of education. In this case, the not
-%including the economic background of the family can create an omitted variable bias, because
-%the wealth of the family (being the part of ϵ is supposedly associated with the effect of education
-%on wages.
-%The second example of a bias can be the quality of education received, which in the USA
-%is, in many cases, correlated with the average income in the neighbourhood on the primary and
-%secondary level (districts/counties with lower incomes have higher education budgets, which is
-%possibly associated with the quality of education). As there is no information in the data about
-%the mean/median income in the area of residence or the quality of education receive, it may be
-%arguably assummed that people leave at poorer areas receive worse education and are more likely
-%to drop out. At the same time, the wages in poorer areas are lower than in wealthy ones, so it
-%states another omitted variable bias.
-
-%Two examples of bias in the OLS estimator are as follows: - The size most likely partly depends on job
-%experience. For young starters with long educational periods this may imply that their salary may be at
-%the same level (or even lower) as that of young starters with shorter educational periods but more work
-%experience. Also, when looking at people with the same amount of years of education, say: 15, older people
-%may have a much higher wage than young people with the same amount of years of education, due to
-%their experience. - Wages depend also partly on post-educational qualifications for specific jobs, which are
-%unaccounted for in the regression equation. A longer educational period may imply openness to learning,
-%and therefore openness to acquiring these job-specific qualifications which may increase in wage in the form
-%of an earnings premium.
-
-
-%The issue here is that education is likely to be endogenously determined. A classical example of a biased
-%estimate is to omit the ability in the model. Indeed, we can easily imagine that people with higher ability
-%while in school will also better perform in their job, and therefore will earn more. Additionally, people with
-%higher abilities tend to educate themselves more to signal their abilities to their future employers. Therefore,
-%there could be a selection bias, as people with high abilities are more likely to stay longer in school and
-%thus earn more. Unfortunately, it is unclear how one should observe or measure ability. Is it the IQ or is it
-%a portfolio of different skills combined (such as the motivation)? A second example is the socio-economic
-%background of a child. Typically, educated parents will push their children to study. The socioeconomic
-%background of a person also determines in which neighbourhood a person lives. It is true that in the US, the
-%quality of schooling differs depending on the neighbourhood a child lives in. Thus, it is so that if schooling is
-%not helping children, then they will drop out of school, as schooling will not help them acquire skills that are
-%valued in the labour market. These people will thus earn less. Again, there would be a selection bias.
-%These biases lead to one question: can we observe all of the aspects that make a person who she or he is?
-%Can we control for all individual characteristics? The answer is no and IV aim to circumvent this issue.
-
-
-
-
-
-
-\begin{enumerate}
-   \item see slide 67; 
-   \item mention that this is a 1930s during the great depression!
-   \item %https://cran.r-project.org/web/packages/ivreg/vignettes/ivreg.html
-   \item %https://rpubs.com/wsundstrom/t_ivreg
-\end{enumerate}
-
-
-
-\textbf{mention why Years of education is endogenous}
-
-\textbf{ We therefore use geographical proximity to a college when growing up as an exogenous instrument for education}
-
-\textbf{INCLUDE EXOGENEOUS VARIABLES AS WELL IN THE  INSTRUMENTAL PART!!!}
-
-\textbf{SLIDE 67 ff}
-\textbf{IMPORTANT SEE SLIDES 7 ff!!!.}
---> IMPORTANT: ALSO INCLDUE 1) THE METHOD OF IV being different than least squares (it is a method look up in notes) and 2) mention the two requirements for a good Instrument: a) cleanliness no impact on outcome causally only through the biased independent varaible and b) the relevance which is high correlcion with the independent varaibvles that are instrumentalized
-
-\textbf{In this exercies give two examples of conditions that could bias the estimated education effect if only OLS is used; This means: give examples how the variable YEARSOFEDUCATION is a biased estimator becasue mean independece is violated --> the example given was: students preference for education may influence how long they stay in school and how much they earn on the labor market which is simply their ambition; other factors might be: family background and societal status/ socioeconomic status which means something like teen pregnancy OR IN THE 1930s during the great depression just the need to support the family during time of need so you could not go to school}
-
-\textbf{eg IQ is a good thing}
-
+When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimator severely. 
+A prominent example in what way education effect on earnings could be biased is through an ommitted varaible. A classical example for this is general ability, which commonly determines not only the degree of success in education, but also future earnings. Through this, education would correlate with the disturbance term, violating A3. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
+A second example could be socioeconomic factors. Not only tend wealthier families to send their children to better schools, but also do such children participate more often in tertiary education; thereby impacting years of education. Contrarily, worse off families may require their children to drop out of school to contribute to the family income (considering that it is the 1950s this is not unlikely). Moreover, wealthy family tend to create more job opportunitities for their children through connections and inheritance etc.. Thus, socioeconomic status of the family not only impacts the duration (years) of education of their child, but also their later income. This is not only decribing omitted variable bias, but also (self) selection bias into another (higher ed) treatment group; another detrimental bias.
 
 \subsection{Task 2: Summary statistics for this task}
 
-Table 6 contains the descriptive statistics of the numeric variables. overall 329,509 observations are in the data on people born between 1930 and 1939. The age range of study subectes ranges from 40 to 50, with a median age at 45 ($mean$ = 44.645, $std$ = 2.940). The average years of education was 12.77 ($std$ = 3.281, $median$ = 12). Finally, for interpretation purposes here, lnwage ($mean$ = 5.90, $std$ = 0.679, $median$ = 6.257)\footnote{Not really interesting or relevant to display in summary statstics}  was rescaled to wage, which displayed a strong positive skew of 26.39, mean of \$439.47 ($std$ = 364.941) and a median of \$521.85. the log scaled wage will be used during the analysis. 
-Moreover, 86.3\% of respondents were married. SMSA indicates whether a study subject lives in rural or urban areas. Quarter of birth, the IV, distributes reasonably equally, with Q1 N = 81671, Q2 N = 80138, Q3 N = 86856, and Q4 N = 80844; it is influencial to when a study subject will start schooling; eg. suggesting that subjects from the fourth quarter generally obtain more years of study.  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{enumerate}
-   \item remember to describe categorical variables in text
-   \item add skew and median!!
-\end{enumerate}
-
-
-relevant quantiative variables age, educ (years of education), lnwage(weekly earnings), marrital status; quarter of birth of the recorded child; SMSA: categorical variable where someone lives (urban vs not urban); yob year of birth which is also categorical
-
---> possibly retransform lnwage to just wage by reversing the log scaling
-
+Table 6 contains the descriptive statistics of the numeric variables. Overall 329,509 observations are in the data on people born between 1930 and 1939. The age range of study subectes ranges from 40 to 50, with a median age at 45 ($mean$ = 44.645, $std$ = 2.940). The average years of education was 12.77 ($std$ = 3.281, $median$ = 12). Finally, for interpretation purposes here, lnwage ($mean$ = 5.90, $std$ = 0.679, $median$ = 6.257) was rescaled to wage, which displayed a strong positive skew of 26.39, mean of \$439.47 ($std$ = 364.941) and a median of \$521.85. The log scaled wage will be used during the analysis. 
+Moreover, 86.3\% of respondents were married. SMSA indicates whether a study subject lives in rural or urban areas. Quarter of birth, the IV, distributes reasonably equally, with Q1 N = 81671, Q2 N = 80138, Q3 N = 86856, and Q4 N = 80844 - it is influencial to when a study subject will start schooling; eg. suggesting that subjects from the fourth quarter generally obtain more years of study.  
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Sun, Sep 25, 2022 - 15:43:50
@@ -559,23 +454,21 @@ relevant quantiative variables age, educ (years of education), lnwage(weekly ear
   \caption{Instrumental Vairable Approach Descriptive Statistics of Numeric Indepdenent and Dependent Varaible} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
-\\[-1.8ex]\hline 
+\\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
 Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
 \hline \\[-1.8ex] 
-age & 44.645 & 2.940 & 40 & 42 & 45 & 47 & 50 \\ 
-educ & 12.770 & 3.281 & 0 & 12 & 12 & 15 & 20 \\ 
+Age & 44.645 & 2.940 & 40 & 42 & 45 & 47 & 50 \\ 
+Education in Years & 12.770 & 3.281 & 0 & 12 & 12 & 15 & 20 \\ 
 lnwage & 5.900 & 0.679 & $-$2.342 & 5.637 & 5.952 & 6.257 & 10.532 \\ 
-married & 0.863 & 0.344 & 0 & 1 & 1 & 1 & 1 \\ 
-qob & 2.506 & 1.112 & 1 & 2 & 3 & 3 & 4 \\ 
-SMSA & 0.186 & 0.389 & 0 & 0 & 0 & 0 & 1 \\ 
-yob & 1,934.603 & 2.905 & 1,930 & 1,932 & 1,935 & 1,937 & 1,939 \\ 
-wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\ 
-\hline \\[-3.5ex] 
+Wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\ 
+Quarter of Birth & 2.506 & 1.112 & 1 & 2 & 3 & 3 & 4 \\ 
+\hline \\
+[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Notes:} N = 329,509; Wage is backwards transformed from lnWage
+      \item\textit{Notes:} N = 329,509; Wage is backwards transformed from lnWage; Categorical varaibles described in text.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -583,40 +476,33 @@ wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\
 
 
 
-\subsection{Task 3: Diagnositcs of Year Of Birth as instrument: is it any good?}
-\textbf{We can also do the partial F test here. But we do it manually iwth an OLS}
-\begin{enumerate}
-   \item to do: interpret the regression from table 7
-   \item add a plot!!! groub by year: each year gets a qob average years of education ; the foruth quarter should be higher than all others on average
-   \item also do the pearson correlatipon between qob and years of education
-   \item summary(rslt2SLS.B, diagnostics = TRUE) --> also refer to the diagnostics from part 4!
-   \item \textbf{see slide 88; 82}
-\end{enumerate}
+\subsection{Task 3: Diagnositcs of Year Of Birth as instrument: Is it relevant?}
 
+A suitable instrument fulfills two conditions: 1) Cleanliness; meaining that the instrument only has an impact on the outcome thorugh the causal variable (here years of education). This assumtion cannot be tested, but is based in theory (and logic).
+2) The instrument is relevant, meaning that the instrument significantly predicts (and preferably strongly correlates) with the causal ("to be instrumentalized") variable. This assumption can be tested i.a. thorugh conducting an F test on the first stage of 2SLS. 
+In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R).Table 7 contains both quarter of birth as a factor and quantitaitve variable. 
 
-A suitable instrument fulfills two conditions: 1) Cleanliness; meaining that the instrument only has an impact on the outcome thorugh the causal variable (here years of education). This assumtion cannot be tested, but is commonly based in theory.
-2) The instrument is relevant, meaning that the instrument strongly predicts/ correlates with the causal ("to be instrumentalized") variable. This assumption can be fulfilled thorugh conducting an F test on the two stage model. 
-In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R - we just demonstrate it here).\footnote{Note: in this case we perform this manually} Table 7 contains both quarter of birth as a factor and quantitaitve variable. 
-\textbf{First of all, all models are }
+Firstly, all models reported show a significant F statistic ($F$ = 100.653, $p$ $<$ 0.01; $F$ = 414.645, $p$ $<$ 0.01; $F$ = 30.009, $p$ $<$ 0.01; $F$ = 249.859, $p$ $<$ 0.01); which promises that qob might fulfill the relevane criterion.
+
 COnsidering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qub) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alteranting the catgory of comparison for quarter. 
-Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument. 
+Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument.\footnote{Note: the correlation is weak at 0.0175, $p$ < 0.01}
 
-\textbf{Furthmore, when considering the graph one can see that on average, Q4 and Q3 tend to have more years of education than Q1 and Q2; this implicitly also might explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7.}
+\begin{figure}[htp]
+		\centering
+         \includegraphics[scale=0.45]{"home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task3_ivreg_proof.png"}
+         \small
+         \caption{Displaying association between Quarter of Birth and Years of Education}
+\end{figure}
+
+Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend to have significantly more years of education than Q1 and Q2 - this might also explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7. 
+
+
 \textbf{IMPORTANT ADD CORRELATION}
-Overall, the instrument is assumed to meet the relevance criterion; and regarding the cleanliness, this is difficult; but it is likely that qob only effects earnings through the causal variable, years of education.
+Overall, the instrument appears to meet the relevance criterion. 
 
 
 
 
-
-Considering both basis models (1) \& (3) we can observe that all coefficients for the quarter of birth is significant at the 1\% level. 
-
-
-
-
-
-
-Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)
 
 
 \begin{table}[!htbp] \centering 
@@ -869,6 +755,8 @@ Sargan                1     NA     18.84 1.42e-05 ***
 
 
 \subsection{6 -- }
+\textbf{Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)}
+
 Elaborate on possible causes of concern that could render your instrumen-
 tal variable identification strategy invalid. Base your argumentation on
 the required assumptions of instrumental variables as taught in the lecture.
