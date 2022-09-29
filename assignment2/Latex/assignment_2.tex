@@ -917,6 +917,33 @@ Sargan                1     NA     18.84 1.42e-05 ***
 
 
 \subsection{6 -- }
+Elaborate on possible causes of concern that could render your instrumen-
+tal variable identification strategy invalid. Base your argumentation on
+the required assumptions of instrumental variables as taught in the lecture.
+An arbitrarily made-up example would be: “Birthdays in the US have
+been recorded with a varying delay between 1 and 6 months. Hence, the
+measurement of school years for dropout students could be inaccurate.”
+
+
+
+There are multiple ways which could invalidate the ninstrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogeneous variable; it is notable that correaltion does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relvant instrument and that the correlation is not strong enough. 2) The (supposed) variable years of education is actually not endogeneous; remember that this is mostly based on theory and not on tests.
+However, the most interesting point to discuss is considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the edogeneous variable alone, but rather is a confounder itself, thus, having an impact on lnwage. 
+4) the instrument is endogeneous itself; such as measuremtn errors or it may be realted to further backdoor paths such as socioeconomic status. 
+
+%Although it seems reasonable to think that qob has an impact on education exclusively because of compulsory
+%schooling, we will examine the validity of this instrument. In order to be valid, an instrument must fulfil the
+%following two assumptions:
+%• relevance: the IV is preferably strongly correlated with the explanatory variables (i.e. cov(Z, X) 6= 0).
+%• exogeneity: the IV is uncorrelated with the disturbances in the regression model, meaning that qob
+%only affects the lnwage through educ (i.e. cov(Z, u) = 0).
+%As relevance was discussed in chapter 2.3 of this assignment, we will examine the exogeneity assumption.
+%Age may play a role in academic performance. Indeed, it could be that students born in Q1 start school at
+%an older age and are, thus, more mature and perform better in school. From another angle, students born in
+%Q1 benefit from less time in school (for compulsory education). This would then bias the result and make the
+%IV invalid.
+%It is also possible that qob is related to the socioeconomic status of children’s parents. Indeed, there could
+%be a connection between quarter of birth and education. For example, we could observe more unwanted
+%pregnancies in a specific quarter and this would bias the result and make the IV invalid.
 
 
 CLeanliness; Endogeneity of independent; Relevance

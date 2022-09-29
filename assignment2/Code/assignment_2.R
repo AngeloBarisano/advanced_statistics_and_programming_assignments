@@ -748,44 +748,44 @@ rsltOLS_adv <- lm(lnwage ~ educ + SMSA + married, data = df)
 
 # THen run the Two stage OLS manually
 
-# 1.first with qob numeric 
+# 1.first with qob numeric
 educ.hat <-
-  fitted(lm(educ ~ qob, data = df))
+    fitted(lm(educ ~ qob, data = df))
 
 rslt2sls_manual_sim <-
-  lm(lnwage ~ educ.hat , data = df)
+    lm(lnwage ~ educ.hat, data = df)
 
 # 2.now do with covariates
 educ.hat <-
-  fitted(lm(educ ~ qob  + SMSA + married, data = df))
+    fitted(lm(educ ~ qob + SMSA + married, data = df))
 
-rslt2sls_manual_adv<-
-  lm(lnwage ~ educ.hat  + SMSA + married, data = df)
+rslt2sls_manual_adv <-
+    lm(lnwage ~ educ.hat + SMSA + married, data = df)
 
 
 
-#3. then qob as factor
+# 3. then qob as factor
 educ.hat <-
-  fitted(lm(educ ~ qob_fac, data = df))
+    fitted(lm(educ ~ qob_fac, data = df))
 
 rslt2sls_manual_sim_fac <-
-  lm(lnwage ~ educ.hat , data = df)
+    lm(lnwage ~ educ.hat, data = df)
 
 
-#4. now do with covariates
+# 4. now do with covariates
 educ.hat <-
-  fitted(lm(educ ~ qob_fac  + SMSA + married, data = df))
+    fitted(lm(educ ~ qob_fac + SMSA + married, data = df))
 
 rslt2sls_manual_adv_fac <-
-  lm(lnwage ~ educ.hat  + SMSA + married, data = df)
+    lm(lnwage ~ educ.hat + SMSA + married, data = df)
 
 
 
 
 
 stargazer(
-rsltOLS_sim,
-rsltOLS_adv,
+    rsltOLS_sim,
+    rsltOLS_adv,
     rslt2sls_manual_sim,
     rslt2sls_manual_adv,
     rslt2sls_manual_sim_fac,
@@ -799,10 +799,20 @@ rsltOLS_adv,
 
 
 
+## perform Weak isntrument, Hasuamn, and sargan test
 
 
-#THEN REPORT THE DIAGNOSTICS 
-# TO do: 
+
+summary(rsltiv1_adv_numeric, diagnostics = TRUE)
+summary(rsltiv1_adv_numeric_fac, diagnostics = TRUE)
+summary(rsltiv1_adv_numeric_over, diagnostics = TRUE)
+
+
+
+
+
+# THEN REPORT THE DIAGNOSTICS
+# TO do:
 # 1. Do a hand made IV reg<; refer to normal OLS 	; but rather look at the diagnostics which tells you hausman which about whether ols or IV reg does the job
 # 2. Hausman test says whether there is a favour for ols or IV; summary (reg, diagnostics = TRUE)
 # 3. You want insignificant sargan test for oberidentifiaction
@@ -815,18 +825,3 @@ rsltOLS_adv,
 
 
 # get diagnostics
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

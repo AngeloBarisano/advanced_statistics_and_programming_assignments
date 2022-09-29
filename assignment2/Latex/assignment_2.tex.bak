@@ -899,13 +899,8 @@ Model (1) and (2) in Table 9 report the OLS regressions of lnwage on the endogen
 \indent Moving on now to the manual 2SLS, as expected, the reported coefficients in models 3 thorugh 6 in Table 9 correspond exactly with those reported in Table 8 (models 1 through 4). However, the manual 2SLS does not correct for the fact that years of education (hat) originates as a predicted outcome of the first stage. Thus, the standard errors differ slightly.
 \indent COnsidering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from the $summary(IVREG_model, diagnostics = TRUE)$ in R, together with a test for weak instruments and, in case of overidentification, the Sargan-Hansen ${\chi}^2$ over-identification test. To keep it short, two models are considered fro demonstrative purposes: 1) Table 8 model (3) where qob is a numeric varaible (so no overidentification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that thechically, the inclusion of qob as a factor implies overidentification of the first stage; this will be ignored in this question.
 
-\indent Considering Table 10, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals ca
+\indent Considering Table 10, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals cannot be assumed. Thus, the instruments themselfes are assumed to be endogeneous themselfes and overidentification poses a problem for model (5). It may be interesting to note that if we considered qob as a factor, this test statistic would be insignificant, suggesting that the qob as a factor is exogenoeus and, thus, overidentification is no problem. 
 
-
-Maintaining H0 implies that the assumed independence is not violated,
-while a significant test result means that not all extra restrictions hold,
-which suggests that the instruments are not independent of the
-residuals
 
 
                     df1    df2 statistic p-value    
@@ -920,12 +915,36 @@ Wu-Hausman            1 329504     82.16  < 2e-16 ***
 Sargan                1     NA     18.84 1.42e-05 ***
 
 
-\textbf{IMPORTANT: WE DO NOT INCLUDE THE INSTRUMENTS IN OLS BECASUE WE AUSSME THAT THEY DONT HAVE AN IMPACT on the outcome!!!!!! in OLS; SO DONT INCLDUE THEM IN THE OLS OTHERWISE WE GO AGAINST THE UNDERLYING THEORY}
-\textbf{SLIDE 105 perform partial F test to see whether IV reg is good or not and if it is good then it is better than OLS!}
-
-\textbf{for overidentificaion run another IVREG WITH MORE insturments see introductiomn; then you can interpret the SARGAN AND HAUSMA TEST THINGI}
 
 \subsection{6 -- }
+Elaborate on possible causes of concern that could render your instrumen-
+tal variable identification strategy invalid. Base your argumentation on
+the required assumptions of instrumental variables as taught in the lecture.
+An arbitrarily made-up example would be: “Birthdays in the US have
+been recorded with a varying delay between 1 and 6 months. Hence, the
+measurement of school years for dropout students could be inaccurate.”
+
+
+
+There are multiple ways which could invalidate the ninstrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogeneous variable; it is notable that correaltion does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relvant instrument and that the correlation is not strong enough. 2) The (supposed) variable years of education is actually not endogeneous; remember that this is mostly based on theory and not on tests.
+Howeve
+
+%Although it seems reasonable to think that qob has an impact on education exclusively because of compulsory
+%schooling, we will examine the validity of this instrument. In order to be valid, an instrument must fulfil the
+%following two assumptions:
+%• relevance: the IV is preferably strongly correlated with the explanatory variables (i.e. cov(Z, X) 6= 0).
+%• exogeneity: the IV is uncorrelated with the disturbances in the regression model, meaning that qob
+%only affects the lnwage through educ (i.e. cov(Z, u) = 0).
+%As relevance was discussed in chapter 2.3 of this assignment, we will examine the exogeneity assumption.
+%Age may play a role in academic performance. Indeed, it could be that students born in Q1 start school at
+%an older age and are, thus, more mature and perform better in school. From another angle, students born in
+%Q1 benefit from less time in school (for compulsory education). This would then bias the result and make the
+%IV invalid.
+%It is also possible that qob is related to the socioeconomic status of children’s parents. Indeed, there could
+%be a connection between quarter of birth and education. For example, we could observe more unwanted
+%pregnancies in a specific quarter and this would bias the result and make the IV invalid.
+
+
 CLeanliness; Endogeneity of independent; Relevance
 --> Cleanliness 
 
