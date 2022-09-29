@@ -147,7 +147,7 @@ Important: we canot identify the monthrs; so If they become mothers at some poin
 \caption{Pre-Post Intervention of EICT Credit for Women with(out) Children}
 \end{wrapfigure}
 
-Figure 1 displays the outcomes for both treatment and control group for earnings (earn), family income (finc), and work-participation indicator (work) over the period form 1991 to 1996. THe treatment in this case is defined as a binary state of Females with children (one or many) (D = 1) and females without children (D = 0).\footnote{I do refer to females/ males as the study subject in question}. The tax credit (EITC) is assumed to be introduced on the 1st of January 1993.\footnote{see canvas discussion board}
+Figure 1 displays the outcomes for both treatment and control group for earnings (earn), family income (finc), and work-participation indicator (work) over the period form 1991 to 1996. THe treatment in this case is defined as a binary state of Females with children (one or many) (D = 1) and females without children (D = 0).\footnote{I do refer to females/ males as the study subject in question} The tax credit (EITC) is assumed to be introduced on the 1st of January 1993.\footnote{see canvas discussion board}
 \indent Figure 1 a) displays the development of earnings and the introduction of the EITC is marked by the vertical line (as in the other graphics). Females without children earned considerably more on average than females with children, starting out at slightly less than \$14800 and dropping to \$13000 at its lowest. Overall, both groups displayed a downward trend before 1993. After 1993, the supposed introduction of the EITC, both groups experienced an increase in earnings; However, the childless group did not display a continous increase in earnings when compared to females with children, which displayed a continous increase of earnings after the introduction. This might suggest that the introduction of the  EITC is associated to the average earnings of women with children but not for women without children.
 \indent Figure 1 b) shows the same features as the plot before but the outcome is now Family Income. Overall, the point of origin general trend is similar for both groups as in Figure 1 a); it may be noted that the trend for females with child is less pronounced than in a). Thus, the conclusion is the same as in a): an overall positive trend is displayed for females with children, while childless females do not improve considerably during the post period. 
 \indent Figure 1 c) displays workparticipation of females with and without children.Again, childless women start out higher at around 54\% workparticipation vs 46\% workparticipation for women with children. Moreover, the trends are somewhat comparable to the two preceeding graphics, as females with children display an increase to 50.3\% (and then a slight drop in the following year), while childless women tend to decrease. Thus, on average during the post treatment period, we see a substantial increase for women with children in workparticipation.
@@ -251,7 +251,9 @@ All observations included in any model. *** p$<$0.01, ** p$<$0.05, * p$<$0.1. St
 
 
 \subsection{Task 5: Analyze the DiD regression}
+\textbf{ADD POPULATION REGRESSION}
 
+\textbf{Tutoial 1 plot for heteroscedasiticty fitted vs standardized residuals}
 
 \paragraph{Control Varaibles and covariates} WHICH VARIABLES ARE ASSUMED TO HAVE AN IMPACT? 
 
@@ -414,7 +416,7 @@ F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ & 44.915$^{***}$ 
 \subsubsection{Women with and without Children compared keeping education level (low) constant}
 
 Considering now only low educated women; alternating again on whether a women has a child or not, the instights are to be found in Table 5. 
-The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: ($\hat{\beta}$ = -179.637, $p$ $<$ 0.887) and work paticipation (main model: $\hat{\beta}$ = 0.012, $p$ $<$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; becasue if work would go up significantly while income drops, this would be crazy.}
+The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: $\hat{\beta}$ = -179.637, $p$ $=$ 0.887) and work paticipation (main model: $\hat{\beta}$ = 0.012, $p$ $=$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; becasue if work would go up significantly while income drops, this would be crazy.}
 
 
 
@@ -642,10 +644,19 @@ wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\
 
 A suitable instrument fulfills two conditions: 1) Cleanliness; meaining that the instrument only has an impact on the outcome thorugh the causal variable (here years of education). This assumtion cannot be tested, but is commonly based in theory.
 2) The instrument is relevant, meaning that the instrument strongly predicts/ correlates with the causal ("to be instrumentalized") variable. This assumption can be fulfilled thorugh conducting an F test on the two stage model. 
+In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R - we just demonstrate it here).\footnote{Note: in this case we perform this manually} Table 7 contains both quarter of birth as a factor and quantitaitve variable. 
+\textbf{First of all, all models are }
+COnsidering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qub) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alteranting the catgory of comparison for quarter. 
+Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument. 
+
+\textbf{Furthmore, when considering the graph one can see that on average, Q4 and Q3 tend to have more years of education than Q1 and Q2; this implicitly also might explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7.}
+Overall, the instrument is assumed to meet the relevance criterion; and regarding the cleanliness, this is difficult; but it is likely that qob only effects earnings through the causal variable, years of education.
 
 
 
-There is a figure. In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R - we just demonstrate it here).\footnote{Note: in this case we perform this manually} Table 7 contains both quarter of birth as a factor and quantitaitve variable. Considering both basis models (1) \& (3) we can observe that all coefficients for the quarter of birth is significant at the 1\% level. 
+
+
+Considering both basis models (1) \& (3) we can observe that all coefficients for the quarter of birth is significant at the 1\% level. 
 
 
 
