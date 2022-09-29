@@ -54,6 +54,8 @@
 
 
 \subsection{Task 1: Derive Diff-In-Diff Coefficients}
+
+
 The canonical difference-in-difference equation is expressed in regression form (1-1): 
 
 \
@@ -112,7 +114,6 @@ $
 $
 (=) \ E(y_{it}) = (\beta_{2} + \beta_{3}) - \beta_{2} = \beta_{3}
 $
-
 
 
 
@@ -224,13 +225,13 @@ Table 2 reports the pre-post intervention averages for the two groups - Women wi
 \textbf{maybe describe a bit more}
 
 \subsection{Task 5: Analyze the DiD regression}
-\textbf{ADD POPULATION REGRESSION}
+%\textbf{ADD POPULATION REGRESSION}
 
-\textbf{Tutoial 1 plot for heteroscedasiticty fitted vs standardized residuals}
 
-\paragraph{No model without theory} Considering possible covariates, earnings, workparticipation, and family income all tend to vary with age (inverted u). Moreover, higher unemployment implies more labour supply and suppression of wages, family income and (obviously) work participation. Furthermore, higher education positively correlates with earnings, family income, and workparticipation. Finally, the US is known for racial tensions; people of colour tend to show lower incomes and lower work pariticpation in general. 
 
-\textbf{CITE A COUPLE OF THINGS FOR THIS!!}
+\paragraph{No model without theory} Considering possible covariates, earnings, workparticipation, and family income all tend to vary with age (inverted u). Moreover, higher unemployment implies more labour supply and suppression of wages, family income and (obviously) work participation. Furthermore, higher education positively correlates with earnings, family income, and workparticipation. Finally, the US is known for racial tensions; people of colour tend to show lower incomes and lower work pariticpation in general (Morgan \& Winship, 2015). 
+
+
 
 \paragraph{Results} For brevity reasons, Table 3 contains models for all three outcome variables, with the first model per outcome (1, 4, 7) containing a baseline model with only covariates. Models 2, 5, 8 contain only the DiD effects, and Models 3, 6, 9 contain the full model respectively. 
 
@@ -435,7 +436,7 @@ F Statistic & 9.304$^{***}$ & 6.559$^{***}$  & 14.690$^{***}$ & 11.920$^{***}$ &
 \section{Instrumental Variable approach}
 
 \subsection{Task 1: Endogineity problems and correlation with u - A3}
-When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimator severely. 
+When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways, which bias the (eg. OLS) estimator severely (Morgan \& Winship, 2015). 
 A prominent example in what way education effect on earnings could be biased is through an ommitted varaible. A classical example for this is general ability, which commonly determines not only the degree of success in education, but also future earnings. Through this, education would correlate with the disturbance term, violating A3. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
 A second example could be socioeconomic factors. Not only tend wealthier families to send their children to better schools, but also do such children participate more often in tertiary education; thereby impacting years of education. Contrarily, worse off families may require their children to drop out of school to contribute to the family income (considering that it is the 1950s this is not unlikely). Moreover, wealthy family tend to create more job opportunitities for their children through connections and inheritance etc.. Thus, socioeconomic status of the family not only impacts the duration (years) of education of their child, but also their later income. This is not only decribing omitted variable bias, but also (self) selection bias into another (higher ed) treatment group; another detrimental bias.
 
@@ -562,7 +563,7 @@ Considering the base models (1 - numeric) and (2 - categorical), we can observe 
 
 Moving to model (4 - categorical), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (2) (same for model 3 and 1), reporting a significant positive coefficient for education ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. ALso the control variables are significant which are both categoricals (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. Thus, the inclusion of (assumed) exogeneous controls does not impact change insights derived from the model.
 
-Regarding robustness, the breusch pagan test was significant at conventional levels for all six models (not surprising at this sample size), suggesting no issues regarding heteroscedasticity. Moreover, when applying (White) standard errors, the non standardized standard errors maintai nstability , suggesting that this research is not suffering from heteroscedasticity (see Appendix Table 14). Finally, an analysis of the (Residual Distribution) QQ Plot of model (4) (see Appendix Figure 3) also do not suggest extreme deviations in the residuals from a constant. Thus, statistical inference is not impacted by the inclsuion of robust standard errors. 
+Regarding robustness, the breusch pagan test was significant at conventional levels for all six models (not surprising at this sample size), suggesting no issues regarding heteroscedasticity. Moreover, when applying (White) standard errors, the non standardized standard errors maintai nstability , suggesting that this research is not suffering from heteroscedasticity (see Appendix Table 16). Finally, an analysis of the (Residual Distribution) QQ Plot of model (4) (see Appendix Figure 3) also do not suggest extreme deviations in the residuals from a constant. Thus, statistical inference is not impacted by the inclsuion of robust standard errors. 
 
 
 
@@ -613,7 +614,7 @@ Residual Std. Error & 0.645  & 0.646  & 0.635  & 0.637 & 0.650 & 0.650  \\
 
 
 
-\subsection{5 -- Manual OLS}
+\subsection{Task 5: Manual OLS and Selection}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Thu, Sep 29, 2022 - 17:18:36
@@ -661,83 +662,58 @@ F Statistic & 43,782.560$^{***}$ & 18,646.640$^{***}$  & 23.145$^{***}$  & 4,738
 \end{adjustwidth}
 %
 \end{table}
-Note: this question was not particularly precise wrt. whether to run a manual 2SLS or just normal OLS.
+Note: this question was not precise wrt. whether to run a manual 2SLS or just normal OLS.
 
 Model (1) and (2) in Table 9 report the OLS regressions of lnwage on the endogeneous education with and without covariates. Models (3) and (4) report the manual 2SLS for quarter of birth as a numeric. Models (5) and (6) report quarter of birth as a factor. 
 
 \indent Considering model (2), standard OLS with covaraiates, the overall effect of education on is significantly positie ($\hat{\beta}$ = 0.067, $p$ $<$ 0.01), which does not deviate drasically from its (assumed) exogeneous counterpart in the other models in Table 8 (and 9). However, we can observe a considerably lower standard error for the years of education coefficient in model (2) when compared to Table 8 models 1 through 6.
 
 \indent Moving on now to the manual 2SLS, as expected, the reported coefficients in models 3 thorugh 6 in Table 9 correspond exactly with those reported in Table 8 (models 1 through 4). However, the manual 2SLS does not correct for the fact that years of education (hat) originates as a predicted outcome of the first stage. Thus, the standard errors differ slightly.
-\indent COnsidering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from the $summary(IVREG_model, diagnostics = TRUE)$ in R, together with a test for weak instruments and, in case of overidentification, the Sargan-Hansen ${\chi}^2$ over-identification test. To keep it short, two models are considered fro demonstrative purposes: 1) Table 8 model (3) where qob is a numeric varaible (so no overidentification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that thechically, the inclusion of qob as a factor implies overidentification of the first stage; this will be ignored in this question.
 
-\indent Considering Table 10, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals cannot be assumed. Thus, the instruments themselfes are assumed to be endogeneous themselfes and overidentification poses a problem for model (5). It may be interesting to note that if we considered qob as a factor, this test statistic would be insignificant, suggesting that the qob as a factor is exogenoeus and, thus, overidentification is no problem. 
+\indent COnsidering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from R directly, together with a test for weak instruments and, in case of overidentification, the Sargan-Hansen ${\chi}^2$ over-identification test (there is no true test of exogineity). To keep it short, two models are considered for demonstrative purposes: 1) Table 8 model (3) where qob is a numeric varaible (so no overidentification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that thechically, the inclusion of qob as a factor implies overidentification of the first stage; this will be ignored in this question.
 
-
-
-                    df1    df2 statistic p-value    
-Weak instruments      1 329505   100.159  <2e-16 ***
-Wu-Hausman            1 329504     2.477   0.116    
-Sargan                0     NA        NA      NA    
-
-Diagnostic tests:
-                    df1    df2 statistic  p-value    
-Weak instruments      2 329504    557.21  < 2e-16 ***
-Wu-Hausman            1 329504     82.16  < 2e-16 ***
-Sargan                1     NA     18.84 1.42e-05 ***
+\indent Considering Table 10 and 11, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals cannot be assumed. Thus, the instruments themselfes are assumed to be endogeneous themselfes and overidentification poses a problem for model (5). It may be interesting to note that if we considered qob as a factor and only use it as a n instrument, this test statistic would be insignificant, suggesting that the qob as a factor is exogenoeus and, thus, overidentification is no problem. 
 
 
 
-\subsection{6 -- }
-\textbf{Relevantce: Contrarily, this assumption can be tested: it states that the instrument used for the "to be instrumentalize" variable is strong, meaning that there is a relevant correlation between the instrument and the independent variables. Note: a correlation between the instrument adn the independent variables beyond the baised variable is welcome. It only becomes a problem when the instrument and the dependent varaible are related; btu there will always be some correlation in that regard. To this end, an anova is run on the two stage model in order to conduct the F test, which helps with multiple outputs: Wu-Hausman, Sargan, and F test (the former two are only relevant if the model is overidentified by the instrument)}
+% latex table generated in R 4.1.3 by xtable 1.8-4 package
+% Fri Sep 30 00:06:01 2022
+\begin{table}[ht]
+\captionsetup{font=small, justification=centering,singlelinecheck=false}
+\caption{\textsc{IV Tests - QOB only}}
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & df1 & df2 & statistic & p-value \\ 
+  \hline
+Weak instruments & 1.00 & 329505.00 & 100.16 & 0.00 \\ 
+  Wu-Hausman & 1.00 & 329504.00 & 2.48 & 0.12 \\ 
+  Sargan & 0.00 &  &  &  \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-Elaborate on possible causes of concern that could render your instrumen-
-tal variable identification strategy invalid. Base your argumentation on
-the required assumptions of instrumental variables as taught in the lecture.
-An arbitrarily made-up example would be: “Birthdays in the US have
-been recorded with a varying delay between 1 and 6 months. Hence, the
-measurement of school years for dropout students could be inaccurate.”
+% latex table generated in R 4.1.3 by xtable 1.8-4 package
+% Fri Sep 30 00:04:18 2022
+\begin{table}[ht]
+\captionsetup{font=small, justification=centering,singlelinecheck=false}
+\caption{\textsc{IV Tests Overidentified}}
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & df1 & df2 & statistic & p-value \\ 
+  \hline
+Weak instruments & 2.00 & 329504.00 & 557.21 & 0.00 \\ 
+  Wu-Hausman & 1.00 & 329504.00 & 82.16 & 0.00 \\ 
+  Sargan & 1.00 &  & 18.84 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-
-
-There are multiple ways which could invalidate the ninstrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogeneous variable; it is notable that correaltion does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relvant instrument and that the correlation is not strong enough. 2) The (supposed) variable years of education is actually not endogeneous; remember that this is mostly based on theory and not on tests.
-However, the most interesting point to discuss is considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the edogeneous variable alone, but rather is a confounder itself, thus, having an impact on lnwage. 
-4) the instrument is endogeneous itself; such as measuremtn errors or it may be realted to further backdoor paths such as socioeconomic status. 
-
-%Although it seems reasonable to think that qob has an impact on education exclusively because of compulsory
-%schooling, we will examine the validity of this instrument. In order to be valid, an instrument must fulfil the
-%following two assumptions:
-%• relevance: the IV is preferably strongly correlated with the explanatory variables (i.e. cov(Z, X) 6= 0).
-%• exogeneity: the IV is uncorrelated with the disturbances in the regression model, meaning that qob
-%only affects the lnwage through educ (i.e. cov(Z, u) = 0).
-%As relevance was discussed in chapter 2.3 of this assignment, we will examine the exogeneity assumption.
-%Age may play a role in academic performance. Indeed, it could be that students born in Q1 start school at
-%an older age and are, thus, more mature and perform better in school. From another angle, students born in
-%Q1 benefit from less time in school (for compulsory education). This would then bias the result and make the
-%IV invalid.
-%It is also possible that qob is related to the socioeconomic status of children’s parents. Indeed, there could
-%be a connection between quarter of birth and education. For example, we could observe more unwanted
-%pregnancies in a specific quarter and this would bias the result and make the IV invalid.
-
-
-CLeanliness; Endogeneity of independent; Relevance
---> Cleanliness 
-
-
-\begin{enumerate}
-   \item not clean insutruments! this would lead to violation of mean independence
-   \item weak insturments leads to mean indepdence violation as well becasue the indstruments simply do not work as they should 
-   \item google some stuff and see internet
-\end{enumerate}
-
-
-
-reasons: not clear instrument (or not clean) (make a plot; or if the instrument is not relevant or weak)
-
-%$https://rpubs.com/wsundstrom/t_ivreg"
-%https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls --> a possible plot
-
-%https://www.econometrics-with-r.org/12-3-civ.html
-% Plot https://www.statisticshowto.com/instrumental-variable/
+\subsection{Task 6: Cleanliness of the Instrument}
+There are multiple ways which could invalidate the ninstrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogeneous variable; it is notable that correaltion does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relvant instrument and that the correlation is not strong enough - but that was dealt with in task 3. 2) The (supposed) variable years of education is actually not endogeneous; remember that this is mostly based on theory and not on tests. 
+However, the most interesting point to discuss considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the edogeneous variable alone, but rather is a confounder itself, thus, having an impact on lnwage at the same time. One such case might be (hypothetically exagerated) the developmental state of the child in question - meaning that eg. people from the first and second quarter, though having on average fewer years of education than people born in quarter 3 and 4, might still be further in terms of mental development at that time. This might lead to higher earnings for those older children and, thereby, relate the instrument to earnings. 
+Finally, 4) the instrument is endogeneous itself, i.e. not mean independent - the instrument would be opening up further backdoor paths. A good example is that my father was born on the 11th of september but only registered one month later; late registration would incur a fee (true story). Thus, in rural communities, non compliance with this specific requirement might be lacking. This would imply that qob is related to the error term and, thus, ednogeneous. 
 
 
 
@@ -751,11 +727,18 @@ reasons: not clear instrument (or not clean) (make a plot; or if the instrument 
 
 
 \section{Bibliography}
+\begin{thebibliography}{9}
+
+\bibitem{ecitextbook}
+@book{morgan2015counterfactuals,
+  title={Counterfactuals and causal inference},
+  author={Morgan, Stephen L and Winship, Christopher},
+  year={2015},
+  publisher={Cambridge University Press}
+}
 
 
-
-
-
+\end{thebibliography}
 
 \section{Appendix}
 
@@ -1003,10 +986,821 @@ Residual Std. Error & 0.645  & 0.645 & 0.635 & 0.635  & 0.650  & 0.650  \\
 
 \section{Code}
 
+\begin{lstlisting}[language=R]
+
+# clear environment
+rm(list = ls())
+
+# import the necessary libraries
+library("tidyverse")
+library("stargazer")
+library("tidyverse")
+library("reshape2")
+library("Hmisc")
+library("ggplot2")
+library("dplyr")
+library("moments")
+library("lm.beta")
+library("fastDummies")
+library("stringr")
+library("extrafont")
+library("gridExtra")
+library("AER")
+library("DAAG")
+loadfonts()
 
 
 
 
+
+setwd("/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2")
+
+df <- read.csv("Data/DiD_dataset-1.csv", header = TRUE, sep = ",")
+
+# indicate child or not
+df <- df %>%
+    mutate(has_children = case_when(
+        children > 0 ~ TRUE,
+        children == 0 ~ FALSE
+    ))
+
+# first set up indicator that whether treatment vs non treatment period
+df <- df %>% mutate(dperiod = case_when(year < 1993 ~ 1, year >= 1993 ~ 2))
+
+df$nonwhite <- as.factor(df$nonwhite)
+df$state <- as.factor(df$state)
+df$year <- as.factor(df$year)
+
+
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 2; plot 3 dependent variables;
+
+# a) annual earnings (earn)
+ggplot(df, aes(year, earn, group = has_children, color = has_children)) +
+    stat_summary(geom = "line", fun = mean) +
+    labs(x = "Year", y = "Earnings", color = "Has Children") +
+    theme_minimal() +
+    geom_vline(xintercept = "1993") +
+    theme_set(theme_bw() + theme(legend.position = "bottom")) +
+    theme(
+        axis.text.x = element_text(size = 20, family = "LM Roman 10"),
+        axis.text.y = element_text(size = 20, family = "LM Roman 10"),
+        axis.title = element_text(size = 20, family = "LM Roman 10"),
+        legend.text = element_text(size = 20, family = "LM Roman 10")
+    )
+
+ggsave("Graphics/task2_earn_did.png", width = 11, height = 8)
+
+# b) annual family income (finc)
+ggplot(df, aes(year, finc, group = has_children, color = has_children)) +
+    stat_summary(geom = "line", fun = mean) +
+    labs(x = "Year", y = "Family Income", color = "Has Children") +
+    theme_minimal() +
+    geom_vline(xintercept = "1993") +
+    theme_set(theme_bw() + theme(legend.position = "bottom")) +
+    theme(
+        axis.text.x = element_text(size = 20, family = "LM Roman 10"),
+        axis.text.y = element_text(size = 20, family = "LM Roman 10"),
+        axis.title = element_text(size = 20, family = "LM Roman 10"),
+        legend.text = element_text(size = 20, family = "LM Roman 10")
+    )
+
+ggsave("Graphics/task2_finc_did.png", width = 11, height = 8)
+
+# c) working/non-working (work)
+ggplot(df, aes(year, work, group = has_children, color = has_children)) +
+    stat_summary(geom = "line", fun = mean) +
+    labs(x = "Year", y = "Work Proportion", color = "Has Children") +
+    theme_minimal() +
+    geom_vline(xintercept = "1993") +
+    theme_set(theme_bw() + theme(legend.position = "bottom")) +
+    theme(
+        axis.text.x = element_text(size = 20, family = "LM Roman 10"),
+        axis.text.y = element_text(size = 20, family = "LM Roman 10"),
+        axis.title = element_text(size = 20, family = "LM Roman 10"),
+        legend.text = element_text(size = 20, family = "LM Roman 10")
+    )
+
+ggsave("Graphics/task2_work_did.png", width = 11, height = 8)
+
+
+df <- df %>%
+    mutate(has_children = case_when(
+        children > 0 ~ 1,
+        children == 0 ~ 0
+    ))
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 3
+df_temp <- df %>%
+    select((c("finc", "earn", "age", "urate", "ed", "unearn", "children", "work")))
+
+df_temp_w_children <- subset(
+    df, has_children == TRUE
+)
+
+df_temp_w_children <- df_temp_w_children %>%
+    select((c("finc", "earn", "age", "urate", "ed", "unearn", "children", "work")))
+
+df_temp_wo_children <- subset(
+    df, has_children == FALSE
+)
+View(df)
+df_temp_wo_children <- df_temp_wo_children %>%
+    select((c("finc", "earn", "age", "ed", "urate", "unearn", "children", "work")))
+
+str(df_temp_w_children)
+
+
+stargazer(
+    df,
+    type = "latex",
+    # omit.summary.stat = c("N"),
+    summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+    title = "Descriptive Statistics of ECIC"
+
+)
+skewness(df$earn)
+df %>% count(has_children)
+table(df$nonwhite)
+cor(df$earn, df$finc, )
+stargazer(
+    df_temp_w_children,
+    type = "latex",
+    omit.summary.stat = c("N"),
+    summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+    title = "Descriptive Statistics of ECIC; With Children",
+    covariate.labels = c(
+        "Family Income", "Earnings", "Age", "Education",
+        "Education Years", "Unearned Income", "Count Children", "Work"
+    )
+)
+
+stargazer(
+    df_temp_wo_children,
+    type = "latex",
+    omit.summary.stat = c("N"),
+    summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+    title = "Descriptive Statistics of ECIC; Without Children",
+    covariate.labels = c(
+        "Family Income", "Earnings", "Age", "Education",
+        "Education Years", "Unearned Income", "Count Children", "Work"
+    )
+)
+
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 4 - create the matrixes
+
+# Find averages per year/dperiod in per earn, finc, work
+df_g_summary <- df %>%
+    group_by(dperiod, has_children) %>%
+    summarise_at(vars(earn, finc, work), funs(mean(., na.rm = TRUE)), round = 2)
+
+df_g_summary_earn <- df %>%
+    group_by(dperiod, has_children) %>%
+    summarise_at(vars(earn), funs(mean(., na.rm = TRUE)), round = 2)
+
+df_g_summary_finc <- df %>%
+    group_by(dperiod, has_children) %>%
+    summarise_at(vars(finc), funs(mean(., na.rm = TRUE)), round = 2)
+
+df_g_summary_work <- df %>%
+    group_by(dperiod, has_children) %>%
+    summarise_at(vars(work), funs(mean(., na.rm = TRUE)), round = 2)
+
+df_g_summary
+
+df_g_summary %>% separate_header(sep = "has_children")
+
+# long to wide transformation
+tmp_earn <- dcast(df_g_summary_earn, dperiod ~ has_children, value.var = c("earn"))
+tmp_finc <- dcast(df_g_summary_finc, dperiod ~ has_children, value.var = c("finc"))
+tmp_work <- dcast(df_g_summary_work, dperiod ~ has_children, value.var = c("work"))
+
+
+tmp <- merge(tmp_earn, tmp_finc, by.x = "dperiod", by.y = "dperiod")
+tmp <- merge(tmp, tmp_work, by.x = "dperiod", by.y = "dperiod")
+tmp
+
+tmp <- rbind(tmp, tmp[2, ] - tmp[1, ])
+rownames(tmp) <- c("Before", "After", "Difference")
+tmp[3, 1] <- NA
+tmp
+
+
+# round the output
+tmp[, -1] <- round(tmp[, -1], 2)
+tmp
+
+# Make a table with the results
+stargazer(tmp, summary = FALSE, align = TRUE, type = "text")
+
+stargazer(tmp, summary = FALSE, align = TRUE, type = "latex")
+
+#' df_g_summary
+
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 5 -
+
+df <- df %>%
+    mutate(has_children = case_when(
+        children > 0 ~ 1,
+        children == 0 ~ 0
+    ))
+df$has_children <- as.factor(df$has_children)
+
+
+##################
+# Earn models
+cov_earn <- earn ~ age + urate + ed + nonwhite
+
+did_earn_sim <- earn ~ has_children + dperiod + has_children:dperiod
+did_earn_expand <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+
+rslt_earn_cov <- lm(cov_earn, data = df)
+rsltdid_earn_sim <- lm(did_earn_sim, data = df)
+rsltdid_earn_expand <- lm(did_earn_expand, data = df)
+
+
+##################
+# finc models
+cov_finc <- finc ~ age + urate + ed + nonwhite
+
+did_finc_sim <- finc ~ has_children + dperiod + has_children:dperiod
+did_finc_expand <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+
+rslt_finc_cov <- lm(cov_finc, data = df)
+rsltdid_finc_sim <- lm(did_finc_sim, data = df)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df)
+
+
+##################
+# work models
+cov_work <- work ~ age + urate + ed + nonwhite
+
+did_work_sim <- work ~ has_children + dperiod + has_children:dperiod
+did_work_expand <- work ~ has_children + dperiod + has_children:dperiod + age + urate + ed + nonwhite
+
+rslt_work_cov <- lm(cov_work, data = df)
+rsltdid_work_sim <- lm(did_work_sim, data = df)
+rsltdid_work_expand <- lm(did_work_expand, data = df)
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    # rsltdid_work_sim,
+    # rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "text"
+)
+
+
+
+
+stargazer(
+    rslt_earn_cov,
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rslt_finc_cov,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rslt_work_cov,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    # align = TRUE,
+    # no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "latex"
+)
+
+
+
+#----------------------------------------
+
+lmtest::bptest(rslt_earn_cov)
+lmtest::bptest(rsltdid_earn_sim)
+lmtest::bptest(rsltdid_earn_expand)
+
+lmtest::bptest(rslt_finc_cov)
+lmtest::bptest(rsltdid_finc_sim)
+lmtest::bptest(rsltdid_finc_expand)
+
+lmtest::bptest(rslt_work_cov)
+lmtest::bptest(rsltdid_work_sim)
+lmtest::bptest(rsltdid_work_expand)
+
+
+
+
+
+
+
+
+# implement robust standard errors
+seBasic <- sqrt(diag(vcov(rsltdid_earn_expand)))
+seWhite <- sqrt(diag(vcovHC(rsltdid_earn_expand, type = "HC0")))
+seClust <- sqrt(diag(vcovHC(rsltdid_earn_expand, cluster = "state")))
+
+seBasic1 <- sqrt(diag(vcov(rsltdid_finc_expand)))
+seWhite1 <- sqrt(diag(vcovHC(rsltdid_finc_expand, type = "HC0")))
+seClust1 <- sqrt(diag(vcovHC(rsltdid_finc_expand, cluster = "state")))
+
+seBasic2 <- sqrt(diag(vcov(rsltdid_work_expand)))
+seWhite2 <- sqrt(diag(vcovHC(rsltdid_work_expand, type = "HC0")))
+seClust2 <- sqrt(diag(vcovHC(rsltdid_work_expand, cluster = "state")))
+
+
+
+stargazer(rsltdid_earn_expand, rsltdid_earn_expand, rsltdid_earn_expand, rsltdid_finc_expand, rsltdid_finc_expand, rsltdid_finc_expand, rsltdid_work_expand, rsltdid_work_expand, rsltdid_work_expand, se = list(seBasic, seWhite, seClust, seBasic1, seWhite1, seClust1, seBasic2, seWhite2, seClust2), type = "latex")
+
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Task 6 -
+
+df$unearn <- df$unearn * 1000
+
+
+
+# subpoint 1: high education with children vs low education with children
+
+
+df <- df %>%
+    mutate(edu_lvl = case_when(
+        ed >= 9 ~ 1,
+        ed < 9 ~ 0
+    ))
+
+# so subset the data so that you only contain women with children
+# subset the data
+df_has_children <- subset(df, has_children == 1)
+View(df_has_children)
+
+
+
+##################
+# Earn models
+did_earn_sim <- earn ~ edu_lvl + dperiod + edu_lvl:dperiod
+did_earn_expand <- earn ~ edu_lvl + dperiod + edu_lvl:dperiod + age + urate + nonwhite
+
+rsltdid_earn_sim <- lm(did_earn_sim, data = df_has_children)
+rsltdid_earn_expand <- lm(did_earn_expand, data = df_has_children)
+
+
+##################
+# finc models
+did_finc_sim <- finc  ~ edu_lvl + dperiod + edu_lvl:dperiod
+did_finc_expand <- finc ~ edu_lvl + dperiod + edu_lvl:dperiod + age + urate + nonwhite
+
+rsltdid_finc_sim <- lm(did_finc_sim, data = df_has_children)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df_has_children)
+
+
+##################
+# work models
+did_work_sim <- work  ~ edu_lvl + dperiod + edu_lvl:dperiod
+did_work_expand <- work ~ edu_lvl + dperiod + edu_lvl:dperiod + age + urate + nonwhite
+
+rsltdid_work_sim <- lm(did_work_sim, data = df_has_children)
+rsltdid_work_expand <- lm(did_work_expand, data = df_has_children)
+
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "text",
+    report = ("vc*p")
+)
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    # align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "latex"
+)
+
+str(df_has_children)
+
+str(subset(df_has_children, edu_lvl == "high"))
+
+
+
+#---------------------------------------------------------------------------------------
+# subsection 2: Single women with low education, without children. Compare them
+
+
+# first classify
+df_low_edu <- subset(df, edu_lvl == 0)
+
+View(df_low_edu)
+
+
+##################
+# Earn models
+did_earn_sim <- earn ~ has_children + dperiod + has_children:dperiod
+did_earn_expand <- earn ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_earn_sim <- lm(did_earn_sim, data = df_low_edu)
+rsltdid_earn_expand <- lm(did_earn_expand, data = df_low_edu)
+
+
+##################
+# finc models
+did_finc_sim <- finc  ~ has_children + dperiod + has_children:dperiod
+did_finc_expand <- finc ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_finc_sim <- lm(did_finc_sim, data = df_low_edu)
+rsltdid_finc_expand <- lm(did_finc_expand, data = df_low_edu)
+
+
+##################
+# work models
+did_work_sim <- work ~ has_children + dperiod + has_children:dperiod
+did_work_expand <- work ~ has_children + dperiod + has_children:dperiod + age + urate + nonwhite
+
+rsltdid_work_sim <- lm(did_work_sim, data = df_low_edu)
+rsltdid_work_expand <- lm(did_work_expand, data = df_low_edu)
+
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "text",
+    report = ("vc*p")
+)
+
+
+stargazer(
+    rsltdid_earn_sim,
+    rsltdid_earn_expand,
+    rsltdid_finc_sim,
+    rsltdid_finc_expand,
+    rsltdid_work_sim,
+    rsltdid_work_expand,
+    intercept.bottom = FALSE,
+    # align = TRUE,
+    no.space = TRUE,
+    # omit.labels = "Restaurant IDs?",
+    type = "latex"
+)
+
+str(df_low_edu)
+
+str(subset(df_low_edu, has_children == 1))
+
+
+
+
+
+#######################################################
+#######################################################
+#######################################################
+# SECTION 2
+
+
+df <- read.csv("Data/IV_dataset.csv", header = TRUE, sep = ",")
+
+
+# select the relevant variables
+df <- df %>% select(age, educ, lnwage, married, qob, SMSA, yob)
+
+
+#-------------------------------------------------------------
+# task 2 summary statistics
+
+df$wage <- exp(df$lnwage)
+
+df_temp <- df %>%
+    select((c("age", "educ", "lnwage", "wage")))
+
+View(df)
+stargazer(
+    df,
+    type = "latex",
+    omit.summary.stat = c("N"),
+    summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+    title = "Descriptive Statistics of ECIC"
+    # covariate.labels = c(
+    #     "Age", "Years of Education", "Ln(Wage)", "Wage"
+    # )
+)
+
+table(df$qob)
+#------------------------------------------------------------------
+# task 3 run IV reg on ln wage by  education using yob as instrument
+# convert yob to factor
+
+df$yob_fac <- as.factor(df$yob)
+df$qob_fac <- as.factor(df$qob)
+
+
+cor.test(df$qob, y = df$educ)
+cor(x =df$qob_fac, y = df$educ)
+
+# first group by year of birth and yuarter of birth, then calcualte the avg lnwage, education for each quarter for each year
+df_grouped_yq <- df %>%
+    group_by(yob, qob) %>%
+    summarise(avg_lnwage_yq = mean(lnwage), avg_yofeduc_yq = mean(educ))%>%
+    mutate(q34 = ((qob == 4) | (qob == 3)))
+
+# View(df_grouped_yq)
+
+
+
+ggplot(df_grouped_yq, aes(x = yob , y = avg_yofeduc_yq)) +
+    geom_line() +
+    geom_label(mapping = aes(label = qob, color = q34)) +
+    scale_x_continuous("Year of Birth", breaks = 1930:1940) +
+    scale_y_continuous("Years of Education",
+        breaks = seq(12.2, 13.2, by = 0.2),
+        limits = c(12.2, 13.2)
+    )+
+    theme_set(theme_bw() + theme(legend.position = "none")) +
+    theme(
+        axis.text.x = element_text(size = 18, family = "LM Roman 10"),
+        axis.text.y = element_text(size = 18, family = "LM Roman 10"),
+        axis.title = element_text(size = 20, family = "LM Roman 10"),
+        legend.text = element_text(size = 20, family = "LM Roman 10")
+    )
+
+ggsave("Graphics/task3_ivreg_proof.png", width = 11, height = 8)
+
+
+
+
+# simple
+first_stage_check_sim <- lm(educ ~ qob, data = df)
+
+# advanced
+first_stage_check_adv <- lm(educ ~ qob + age + married, data = df)
+
+# simple fac
+first_stage_check_sim_fac <- lm(educ ~ qob_fac, data = df)
+
+# advanced fac
+first_stage_check_adv_fac <- lm(educ ~ qob_fac + age + married, data = df)
+
+
+
+stargazer(
+    first_stage_check_sim,
+    first_stage_check_adv,
+    first_stage_check_sim_fac,
+    first_stage_check_adv_fac,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "text",
+    report = ("vc*p")
+)
+
+
+#------------------------------------------------------------------
+# task 4 run IV reg on ln wage by  education using yob as instrument
+
+
+
+
+#------------ IMPORTANT FOR PART 4 this is the correct reporting here
+
+
+
+
+# iii) run Simple IVREG - numeric
+rsltiv1_sim_numeric <- ivreg(lnwage ~ educ | qob, data = df)
+
+# iii) run Simple IVREG - fac
+rsltiv1_sim_numeric_fac <- ivreg(lnwage ~ educ | qob_fac, data = df)
+
+# iii) run adv IVREG - numeric
+rsltiv1_adv_numeric <- ivreg(lnwage ~ educ + SMSA + married | qob + SMSA + married, data = df)
+
+# iii) run adv IVREG - fac
+rsltiv1_adv_numeric_fac <- ivreg(lnwage ~ educ + SMSA + married | qob_fac + SMSA + married, data = df)
+
+# now overidentify
+rsltiv1_adv_numeric_over <- ivreg(lnwage ~ educ + SMSA + married | qob + yob + SMSA + married, data = df)
+
+# iii) run adv IVREG - fac
+rsltiv1_adv_numeric_fac_over <- ivreg(lnwage ~ educ + SMSA + married | qob_fac + yob + SMSA + married, data = df)
+
+
+
+
+stargazer(
+
+    rsltiv1_sim_numeric,
+    rsltiv1_sim_numeric_fac,
+    rsltiv1_adv_numeric,
+    rsltiv1_adv_numeric_fac,
+    rsltiv1_adv_numeric_over,
+    rsltiv1_adv_numeric_fac_over,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "text"
+)
+
+
+stargazer(
+
+    rsltiv1_sim_numeric,
+    rsltiv1_sim_numeric_fac,
+    rsltiv1_adv_numeric,
+    rsltiv1_adv_numeric_fac,
+    rsltiv1_adv_numeric_over,
+    rsltiv1_adv_numeric_fac_over,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "latex"
+)
+
+
+
+
+lmtest::bptest(rsltiv1_sim_numeric)
+lmtest::bptest(rsltiv1_sim_numeric_fac)
+lmtest::bptest(rsltiv1_adv_numeric)
+
+lmtest::bptest(rsltiv1_adv_numeric_fac)
+lmtest::bptest(rsltiv1_adv_numeric_over)
+lmtest::bptest(rsltiv1_adv_numeric_fac_over)
+
+
+
+
+
+
+
+# implement robust standard errors
+seBasic <- sqrt(diag(vcov(rsltiv1_sim_numeric)))
+seWhite <- sqrt(diag(vcovHC(rsltiv1_sim_numeric, type = "HC0")))
+
+
+seBasic1 <- sqrt(diag(vcov(rsltiv1_adv_numeric)))
+seWhite1 <- sqrt(diag(vcovHC(rsltiv1_adv_numeric, type = "HC0")))
+
+
+seBasic2 <- sqrt(diag(vcov(rsltiv1_adv_numeric_over)))
+seWhite2 <- sqrt(diag(vcovHC(rsltiv1_adv_numeric_over, type = "HC0")))
+
+
+
+
+stargazer(rsltiv1_sim_numeric, rsltiv1_sim_numeric, rsltiv1_adv_numeric, rsltiv1_adv_numeric, rsltiv1_adv_numeric_over, rsltiv1_adv_numeric_over, se = list(seBasic, seWhite, seBasic1, seWhite1, seBasic2, seWhite2), type = "latex")
+
+
+
+qplot(sample = rsltiv1_sim_numeric$residuals) + theme_classic()
+grid.arrange(p1, p2, nrow = 1)
+
+
+ggsave("Graphics/qqplots.png")
+
+qqplot.income_hist <- qplot(sample = CASchools$income, stat ='qq')
+qqplot.income_hist
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------
+# task 5
+
+# first run normal OLS
+# endogeneous educ
+# i) run basic OLS
+rsltOLS_sim <- lm(lnwage ~ educ, data = df)
+
+# ii) run OLS with controls - dont run hand made ivreg
+rsltOLS_adv <- lm(lnwage ~ educ + SMSA + married, data = df)
+
+
+
+# THen run the Two stage OLS manually
+
+# 1.first with qob numeric
+educ.hat <-
+    fitted(lm(educ ~ qob, data = df))
+
+rslt2sls_manual_sim <-
+    lm(lnwage ~ educ.hat, data = df)
+
+# 2.now do with covariates
+educ.hat <-
+    fitted(lm(educ ~ qob + SMSA + married, data = df))
+
+rslt2sls_manual_adv <-
+    lm(lnwage ~ educ.hat + SMSA + married, data = df)
+
+
+
+# 3. then qob as factor
+educ.hat <-
+    fitted(lm(educ ~ qob_fac, data = df))
+
+rslt2sls_manual_sim_fac <-
+    lm(lnwage ~ educ.hat, data = df)
+
+
+# 4. now do with covariates
+educ.hat <-
+    fitted(lm(educ ~ qob_fac + SMSA + married, data = df))
+
+rslt2sls_manual_adv_fac <-
+    lm(lnwage ~ educ.hat + SMSA + married, data = df)
+
+
+
+
+
+stargazer(
+    rsltOLS_sim,
+    rsltOLS_adv,
+    rslt2sls_manual_sim,
+    rslt2sls_manual_adv,
+    rslt2sls_manual_sim_fac,
+    rslt2sls_manual_adv_fac,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "latex"
+)
+
+
+## perform Weak isntrument, Hasuamn, and sargan test
+
+
+library(xtable)
+
+summary(rsltiv1_adv_numeric, diagnostics = TRUE)
+summary(rsltiv1_adv_numeric_fac, diagnostics = TRUE)
+summary(rsltiv1_adv_numeric_over, diagnostics = TRUE)
+
+
+# you need xtable
+saa <- summary(rsltiv1_adv_numeric, diagnostics = TRUE)
+saasaa <- summary(rsltiv1_adv_numeric_fac, diagnostics = TRUE)
+saasaaa <- summary(rsltiv1_adv_numeric_over, diagnostics = TRUE)
+
+statstable = xtable(as.data.frame((saa$diagnostics)))
+statstable2 = xtable(as.data.frame((saasaa$diagnostics)))
+statstable3= xtable(as.data.frame((saasaaa$diagnostics)))
+print(statstable)
+
+
+
+\end{lstlisting}
 
 
 \end{document}
