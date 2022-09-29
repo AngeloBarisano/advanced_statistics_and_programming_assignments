@@ -30,8 +30,8 @@ df <- read.csv("Data/DiD_dataset-1.csv", header = TRUE, sep = ",")
 # indicate child or not
 df <- df %>%
     mutate(has_children = case_when(
-        children > 0 ~ 1,
-        children == 0 ~ 0
+        children > 0 ~ TRUE,
+        children == 0 ~ FALSE
     ))
 
 # first set up indicator that whether treatment vs non treatment period
@@ -103,7 +103,11 @@ ggplot(df, aes(year, work, group = has_children, color = has_children)) +
 ggsave("Graphics/task2_work_did.png", width = 11, height = 8)
 
 
-
+df <- df %>%
+    mutate(has_children = case_when(
+        children > 0 ~ 1,
+        children == 0 ~ 0
+    ))
 
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
@@ -339,17 +343,21 @@ lmtest::bptest(rsltdid_work_expand)
 
 
 # implement robust standard errors
-seBasic <- sqrt(diag(vcov(rsltdid_earn)))
-seWhite <- sqrt(diag(vcovHC(rsltdid_earn, type = "HC0")))
-seClust <- sqrt(diag(vcovHC(rsltdid_earn, cluster = "state")))
+seBasic <- sqrt(diag(vcov(rsltdid_earn_expand)))
+seWhite <- sqrt(diag(vcovHC(rsltdid_earn_expand, type = "HC0")))
+seClust <- sqrt(diag(vcovHC(rsltdid_earn_expand, cluster = "state")))
+
+seBasic1 <- sqrt(diag(vcov(rsltdid_finc_expand)))
+seWhite1 <- sqrt(diag(vcovHC(rsltdid_finc_expand, type = "HC0")))
+seClust1 <- sqrt(diag(vcovHC(rsltdid_finc_expand, cluster = "state")))
+
+seBasic2 <- sqrt(diag(vcov(rsltdid_work_expand)))
+seWhite2 <- sqrt(diag(vcovHC(rsltdid_work_expand, type = "HC0")))
+seClust2 <- sqrt(diag(vcovHC(rsltdid_work_expand, cluster = "state")))
 
 
 
-
-
-
-
-stargazer(rsltdid_earn, rsltdid_earn, rsltdid_earn, se = list(seBasic, seWhite, seClust), type = "text")
+stargazer(rsltdid_earn_expand, rsltdid_earn_expand, rsltdid_earn_expand, rsltdid_finc_expand, rsltdid_finc_expand, rsltdid_finc_expand, rsltdid_work_expand, rsltdid_work_expand, rsltdid_work_expand, se = list(seBasic, seWhite, seClust, seBasic1, seWhite1, seClust1, seBasic2, seWhite2, seClust2), type = "latex")
 
 
 

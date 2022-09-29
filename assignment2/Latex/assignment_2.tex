@@ -42,7 +42,7 @@
 
 \title{ASAP Assignment 2}
 \author{Angelo Barisano; 508903 }
-\date{September 23rd, 2022}
+\date{September 28th, 2022}
 \maketitle
 
 \newpage
@@ -54,42 +54,46 @@
 
 
 \subsection{Task 1: Derive Diff-In-Diff Coefficients}
+The canonical difference-in-difference equation is expressed in regression form (1-1): 
+
+\
 
 $(1-1) \ {y_{it}} = \beta_{0} + \beta_{1} D_i + \beta_{2} T_t+ \beta_{3} D_i T_t + \epsilon_{it}$
 
+\
 
-
-Considering the canonical difference-in-difference equation expressed in regression form (1-1), the individaul outcome of ${y_{it}}$ is defined by five terms:
-
-\begin{enumerate}
-	\item $\beta_{0}$; constant - will be cancelled out in later part
-	\item $\beta_{1} D_i$; treatment indicator - whether the subject is treated or not represented by either (D= 1$ | $D = 0)
-	\item $\beta_{2} T_t$; independent of the subject, the "event study" contains pre- and post-test measurements indicator for each subject
-	\item $\beta_{3} D_i T_t$; the interaction effect of the treatment indicator and the time indicator displays the assumed effect of the change from pre to post test in $T_t$ for an individual in the treatment or control - in case of treatment, this term falls out as the general assumtion of diff-in-diff pertains to the control being the same as the treatment. 
-	\item $\epsilon_{it}$; contains the disturbances
-\end{enumerate}
+%, the individaul outcome of ${y_{it}}$ is defined by five terms:
+%
+%\begin{enumerate}
+%	\item $\beta_{0}$; constant - will be cancelled out in later part
+%    \item $\beta_{1} D_i$; treatment indicator - whether the subject is treated or not represented by either (D= 1$ | $D = 0)
+%	\item $\beta_{2} T_t$; independent of the subject, the "event study" contains pre- and post-test measurements indicator for each subject
+%	\item $\beta_{3} D_i T_t$; the interaction effect of the treatment indicator and the time indicator displays the assumed effect of the change from pre to post test in $T_t$ for an individual in the treatment or control - in case of treatment, this term falls out as the general assumtion of diff-in-diff pertains to the control being the same as the treatment. 
+%	\item $\epsilon_{it}$; contains the disturbances
+%\end{enumerate}
 
 
 The terms in 2, 3, \& 4 are relevant in describing the potential outcome assumption in difference in difference analysis. Difference in difference suggests that we compare the difference between treatment and control before and after the treatment introduction (t = 0), shown as:
 
-
+\
 
 $
 (1-2) \ [E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]
 $
 
+\
 
 Subsequetnly, the four outcomes described in (1-2) yield the following outcomes:
 
 \begin{itemize}
-\item $E = (y_{T=1} | D=1)$; Becasue we are observing the outcome for the post-(treatment) test for treatment group, this yields $\beta_{0}$, $\beta_{1}$, $\beta_{2}$, $\beta_{3}$ 
+\item $E = (y_{T=1} | D=1)$; Becasue we are observing the outcome for the post-(treatment) test for treatment group, this yields $\beta_{0}$, $\beta_{1}$, $\beta_{2}$, $\beta_{3}$
 \item $E = (y_{T=0} | D=1)$; Because we are observing the outcome of the pre-(intervention) test for the treatment, this will yield $\beta_{0}$, $\beta_{1}$
 \item $E = (y_{T=1} | D=0)$; Becasue we are observing the outcome for the post-(treatment) test for the control group, this yields $\beta_{0}$, $\beta_{2}$ 
 \item $E = (y_{T=0} | D=0)$; Because we are observing the outcome of the pre-(intervention) test for the control, this will yield $\beta_{0}$
 \end{itemize}
 
-Note that the disturbance term is left out as it is assumed to be independent of the treatment selection etc.; as such we will ignore it here. 
-Additionally, the constant is present in all four outcomes; thus, it also cncels out in the following equation. This originates from the assumption that the covariates measurments in pre and post test yield the same results for both treatment and control subjects. Equivalently, by substitution the aforementioned outcomes into (1-2), the following results can be deduced:
+Note that the disturbance term ($\beta_{0}$)is left out as it is assumed to be independent of the treatment allocation; as such we will ignore it here. 
+Additionally, the constant is present in all four outcomes; thus, it also technically cancels out in the following equation. This originates from the assumption that the covariates measurements in pre- and post test yield the same results for both treatment and control subjects. Equivalently, by substitution the aforementioned outcomes into (1-2), the following results can be deduced (excluding the constant):
 
 \
 
@@ -100,7 +104,7 @@ $
 \
 
 $
-(=) \ E(y_{it}) = [(\beta_{1} + \beta_{2} + \beta_{3}) - (\beta_{1})] - [(\beta_{2})]
+ (=) \ E(y_{it}) = [(\beta_{1} + \beta_{2} + \beta_{3}) - (\beta_{1})] - [(\beta_{2})]
 $
 
 \
@@ -108,67 +112,6 @@ $
 $
 (=) \ E(y_{it}) = (\beta_{2} + \beta_{3}) - \beta_{2} = \beta_{3}
 $
-
-\
-
-
-
-\textbf{NOte possibly delete duplicates}
-
-
-
-Important: we canot identify the monthrs; so If they become mothers at some point, we will assume that these are taken out!
-
-
-
-
-\subsection{Task 2: Provice Graphical "evidence" for the presence of the DiD effect}
-
-\begin{wrapfigure}{L}{9cm}
-\centering
-\begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_earn_did.png"} 
-   \caption{Annual Earnings by Females with(out) Children}
-   \label{fig:Ng2}
-\end{subfigure}
-
-\begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_finc_did.png"} 
-   \caption{Family Earnings Earnings by Females with(out) Children}
-   \label{fig:Ng2}
-\end{subfigure}
-
-\begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_work_did.png"}  
-   \caption{Work Participation by Females with(out) Children}
-   \label{fig:Ng2}
-\end{subfigure}
-\captionsetup{justification=centering}
-\caption{Pre-Post Intervention of EICT Credit for Women with(out) Children}
-\end{wrapfigure}
-
-Figure 1 displays the outcomes for both treatment and control group for earnings (earn), family income (finc), and work-participation indicator (work) over the period form 1991 to 1996. THe treatment in this case is defined as a binary state of Females with children (one or many) (D = 1) and females without children (D = 0).\footnote{I do refer to females/ males as the study subject in question} The tax credit (EITC) is assumed to be introduced on the 1st of January 1993.\footnote{see canvas discussion board}
-\indent Figure 1 a) displays the development of earnings and the introduction of the EITC is marked by the vertical line (as in the other graphics). Females without children earned considerably more on average than females with children, starting out at slightly less than \$14800 and dropping to \$13000 at its lowest. Overall, both groups displayed a downward trend before 1993. After 1993, the supposed introduction of the EITC, both groups experienced an increase in earnings; However, the childless group did not display a continous increase in earnings when compared to females with children, which displayed a continous increase of earnings after the introduction. This might suggest that the introduction of the  EITC is associated to the average earnings of women with children but not for women without children.
-\indent Figure 1 b) shows the same features as the plot before but the outcome is now Family Income. Overall, the point of origin general trend is similar for both groups as in Figure 1 a); it may be noted that the trend for females with child is less pronounced than in a). Thus, the conclusion is the same as in a): an overall positive trend is displayed for females with children, while childless females do not improve considerably during the post period. 
-\indent Figure 1 c) displays workparticipation of females with and without children.Again, childless women start out higher at around 54\% workparticipation vs 46\% workparticipation for women with children. Moreover, the trends are somewhat comparable to the two preceeding graphics, as females with children display an increase to 50.3\% (and then a slight drop in the following year), while childless women tend to decrease. Thus, on average during the post treatment period, we see a substantial increase for women with children in workparticipation.
-
-
-
-
-
-
-\begin{enumerate}
-   \item Describe each picture and what you can see; but also note that this is based on averages and not statistically true
-   \item IMPORTANT: you should look at the grading grid of the previous assignment to see what their requirements are for these
-\end{enumerate}
-
-
-
-\subsection{Task 3: Summary Statistics for data}
-The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 has no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogenity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more (N = 7819). Of the respondents 60\% were people of colour. Unemployment rate by state was on average 6.76\% ($std$ = 1.462, $median$ = 7.7) and unearned income at \$4823 ($std$ = 7123, $median$ = 6864)
-
-
-
 
 
 
@@ -187,16 +130,13 @@ The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, 
 \hline \\[-1.8ex] 
 Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
 \hline \\[-1.8ex] 
-urate & 6.762 & 1.462 & 2.600 & 5.700 & 6.800 & 7.700 & 11.400 \\ 
-children & 1.193 & 1.382 & 0 & 0 & 1 & 2 & 9 \\ 
-finc & 15,255.320 & 19,444.250 & 0.000 & 5,123.418 & 9,636.664 & 18,659.180 & 575,616.800 \\ 
-earn & 10,432.480 & 18,200.760 & 0.000 & 0.000 & 3,332.180 & 14,321.220 & 537,880.600 \\ 
-age & 35.210 & 10.157 & 20 & 26 & 34 & 44 & 54 \\ 
-ed & 8.806 & 2.636 & 0 & 7 & 10 & 11 & 11 \\ 
-work & 0.513 & 0.500 & 0 & 0 & 1 & 1 & 1 \\ 
-unearn & 4.823 & 7.123 & 0.000 & 0.000 & 2.973 & 6.864 & 134.058 \\ 
-has\_children & 0.569 & 0.495 & 0 & 0 & 1 & 1 & 1 \\ 
-dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
+Unemp. Rate & 6.762 & 1.462 & 2.600 & 5.700 & 6.800 & 7.700 & 11.400 \\ 
+Number Children & 1.193 & 1.382 & 0 & 0 & 1 & 2 & 9 \\ 
+Family Income & 15,255.320 & 19,444.250 & 0.000 & 5,123.418 & 9,636.664 & 18,659.180 & 575,616.800 \\ 
+Earnings & 10,432.480 & 18,200.760 & 0.000 & 0.000 & 3,332.180 & 14,321.220 & 537,880.600 \\ 
+Age & 35.210 & 10.157 & 20 & 26 & 34 & 44 & 54 \\ 
+Education (y) & 8.806 & 2.636 & 0 & 7 & 10 & 11 & 11 \\ 
+Unearned Income & 4.823 & 7.123 & 0.000 & 0.000 & 2.973 & 6.864 & 134.058 \\ 
 \hline \\[-3.6ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
@@ -206,16 +146,6 @@ dperiod & 1.632 & 0.482 & 1 & 1 & 2 & 2 & 2 \\
 \end{threeparttable}
 \end{adjustwidth}
 \end{table}
-
-
-
-\subsection{Task 4: Diff in Diff Matrix}
-
-
-Table 2 reports the simply pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. using formula (1-2) his results in a $naive$ DiD effect of \$1682.81 for women with children.\footnote{This utilizes the aforementioned formula of $[E(y_{T=1} | D=1) - E(y_{T=0} | D=1)] - [E(y_{T=1} | D=0) - E(y_{T=0} | D=0)]$} Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, worp participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). 
-\indent However, the aforementioned results are not signigicatn, as no formal test was conducted. Additionally, the results do not suggest causality - it only suggests a tendency. \textbf{We will discuss this next. }
-
-
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 21:38:43
@@ -246,42 +176,69 @@ Table 2 reports the simply pre-post intervention averages for the two groups - W
 \end{adjustwidth}
 \end{table}
 
+\subsection{Task 2: Provice Graphical "evidence" for the presence of the DiD effect}
 
-All observations included in any model. *** p$<$0.01, ** p$<$0.05, * p$<$0.1. Standardized regression coefficients are reported in the adjacent column to the model. For complementary regression models \textbf{see appendix}. The comparison category in "Zone" (IV) is "Moderate-to-High Density". Years in date range is 2006 to 2010. The Sale Price is represented in 1000s. 
+\begin{wrapfigure}{L}{9cm}
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_earn_did.png"} 
+   \caption{Annual Earnings by Females with(out) Children}
+   \label{fig:Ng2}
+\end{subfigure}
 
+\begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_finc_did.png"} 
+   \caption{Family Earnings Earnings by Females with(out) Children}
+   \label{fig:Ng2}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=.95\linewidth]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/task2_work_did.png"}  
+   \caption{Work Participation by Females with(out) Children}
+   \label{fig:Ng2}
+\end{subfigure}
+\captionsetup{justification=centering}
+\caption{Pre-Post Intervention of EICT Credit for Women with(out) Children}
+\end{wrapfigure}
+
+Figure 1 displays the outcomes for both treatment and control group for earnings (earn), family income (finc), and work-participation indicator (work) over the period form 1991 to 1996. THe treatment in this case is defined as a binary state of females with children (one or many) (D = 1) and females without children (D = 0). The tax credit (EITC) is assumed to be introduced on the 1st of January 1993.
+\indent Figure 1 a) displays the development of earnings and the introduction of the EITC is marked by the vertical line (as in the other graphics). Females without children earned considerably more on average than females with children (pre-period $mean$ = 7290.38) during the pre-period, starting out at slightly less than \$14800 and dropping to \$13000 at its lowest, with and average pre-intervention earnings of \$14203.90. Overall, both groups displayed a downward trend before 1993. After 1993, the supposed introduction of the EITC, both groups experienced an increase in earnings; However, the childless group did not display a continous increase in earnings (post-period $mean$  = 13507.90) when compared to females with children (post-period $mean$  = 8277.20). This might suggest that the introduction of the  EITC is associated to the average earnings of women with children but not for women without children.
+\indent Figure 1 b) shows the same features as the plot before but the outcome is now Family Income (numbers discussed in exercise 3 and 4). Overall, the general trend is similar for both groups as in Figure 1 a); it may be noted that the trend for females with child is less pronounced than in a). Nonetheless, the conclusion is the same as in a): During the pre-period, childless women earned more, but drecreased stronger than women with children, while the post treatment movement is not continous (dropping to pre treatment levels) for childless women when compared to women with children, which experience continous growth on average.
+\indent Figure 1 c) displays workparticipation of females with and without children.Again, childless women start out higher at around 54\% workparticipation vs 46\% workparticipation for women with children. Moreover, the trends are somewhat comparable to the two preceeding graphics, as females with children display an increase to 50.3\% (and then a slight drop in the following year), while childless women tend to decrease: As such, women with children again experience an average net gain in work participation during the post period, while childless women drop below pre-treatment levels. 
+
+
+
+
+
+
+
+
+
+\subsection{Task 3: Summary Statistics for data}
+The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 have no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogenity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more (N = 7819). Of the respondents 60\% were people of colour. Unemployment rate by state was on average 6.76\% ($std$ = 1.462, $median$ = 7.7) and unearned income at \$4823 ($std$ = 7123, $median$ = 6864)
+
+\subsection{Task 4: Diff in Diff Matrix}
+
+
+Table 2 reports the pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. Using formula (1-2) this results in a $naive$ DiD effect of \$1682.81 for women with children. Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, work participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). Please note that these are just pre-post averages of the groups, complementing the descriptive statistics from part 2-3
+\textbf{maybe describe a bit more}
 
 \subsection{Task 5: Analyze the DiD regression}
 \textbf{ADD POPULATION REGRESSION}
 
 \textbf{Tutoial 1 plot for heteroscedasiticty fitted vs standardized residuals}
 
-\paragraph{Control Varaibles and covariates} WHICH VARIABLES ARE ASSUMED TO HAVE AN IMPACT? 
+\paragraph{No model without theory} Considering possible covariates, earnings, workparticipation, and family income all tend to vary with age (inverted u). Moreover, higher unemployment implies more labour supply and suppression of wages, family income and (obviously) work participation. Furthermore, higher education positively correlates with earnings, family income, and workparticipation. Finally, the US is known for racial tensions; people of colour tend to show lower incomes and lower work pariticpation in general. 
 
-\paragraph{Results} Due to breviety concerns, the main findings are compiled in one table; \textbf{THE APPENDIX WILL CONTAIN FURTHER ANALYSIS THAT WILL PROVE THAT I DID THIS}.
-Table 3 contains models for all three outcome variables, with the first model (1, 4, 7) containing a baseline model with only covariates. Models 2, 5, 8 contain only the DiD effects, and Models 3, 6, 9 contain the full model respectively. 
-Overall, all models display a significant F-statistic
+\textbf{CITE A COUPLE OF THINGS FOR THIS!!}
 
-\textbf{Please note there was little need to include Standardized coefficeints as we were only interested in the DiD effect and not the comparison to other terms. Additionally, no log specification was performed as this would make the interpretation more difficult; nonlinearity did not seem to pose a large problem}
+\paragraph{Results} For brevity reasons, Table 3 contains models for all three outcome variables, with the first model per outcome (1, 4, 7) containing a baseline model with only covariates. Models 2, 5, 8 contain only the DiD effects, and Models 3, 6, 9 contain the full model respectively. 
 
-
-
-\indent Considerig earnings, the covariate model (1) shows only that nonwhite (indicator variable) ($\hat{\beta}$ = -2037.990, $p$ $<$ 0.001) and age ($\hat{\beta}$ = 96.038, $p$ $<$ 0.01) are significant. Overall, this model explains 0.6\% of the variation in earnings. Proceeding to only the DiD effect (model 2), as expected, women with children earn on average \$8596.33 ($p$ $<$ 0.01) less than childess women.\footnote{Note: the period indicator is not really relevant in such an exercise as it just attributes to the trend overall in $y$} Subsequently, the value from Table 2 for the DiD effect is statistically significant at conventional levels, suggesting that women with children gain a \$1682.81 ($p$ $<$ 0.01) in the post treatment/intervention period (1993 $<$) when compared to childless women; overall explaining 2.6\% of the total variation in earnings. This effect is important to be examined more closely: As implied in task 4, while childless women on average earn \$ 8596.33 more than women with children, childless women (see Table 2) drop by \$696 when comparing the before and after period, while women with children increased. These two effects cancel each other out out, most likely leading to the insignificant period coefficient. Moreover, this suggests that the comparison groups (women with vs women without children) are not comparable; as such we will not be able to discern causality from this exercise. Finally, model (3) considers the full model. Focusing on the DiD effect after including covariates, we see a slight increase in the coefficient ($\hat{\beta}$ = 1722.360, $p$ $<$ 0.01) with stable standard errors; suggesting that women with children in the post period earn \$1722.36 more than childless women. However, the inclusion of the covariates does not suggest a considarable change in the direction of the outcome. 
-\indent Moving to family income as an outcome, a similar insights can be drawn. However, now all covariates are significant; and the model explaining 1.2\% of the variation in family income. Again, the DiD effect alone in model (5) is significant ($\hat{\beta}$ = 1911.04, $p$ $<$ 0.01); suggesting again that women with childrens' familiy income increases by \$1911.04 after the intervention when compared to childess women. Additionally, women with children, again, have a lower family income of \$-8929.33 ($p$ $<$ 0.01),Interestingly, the period indicator now suggests that the overall family income drops maginally significantly ($\hat{\beta}$ = -940.24, $p$ $<$ 0.1). This model explains 2.2\% of the total variation in family income. The inclusion of covariates does not change this insight dramitically; womens' with children family oincome still improve significantly during the post period when compared to childess women and its coefficeint also increases, but the insight is the same as before ($\hat{\beta}$ = 2006.06, $p$ $<$ 0.01). 
-\indent Finally, considering work participation; the covariates alone in model (7) are all significant at the conventional level in predicting work participation, explaining 1.9\% of total variation in this outcome. As observed during task 1 through 4, work participation rises for women with children during the post intervention period (model 8) ($\hat{\beta}$ = 0.031, $p$ $<$ 0.1); however, the effect is only marinally significant. As was to be expected, women with children show a significantly lower work participation ($\hat{\beta}$ = -0.159, $p$ $<$ 0.01) when compared to childless women (15.9\$ less). When combining covariates and the base model in model (9), the overall trend is the same as in the aforementioned models. The coefficient for the DiD effect rises to 0.033 ($p$ $<$ 0.1), but is still only marginally significant.
+\indent Considerig earnings, the covariate model (1) shows only that nonwhite (indicator variable) ($\hat{\beta}$ = -2037.990, $p$ $<$ 0.001) and age ($\hat{\beta}$ = 96.038, $p$ $<$ 0.01) are significant. Overall, this model explains 0.6\% of the variation in earnings. Proceeding to only the DiD effect (model 2), as expected, women with children earn on average \$8596.33 ($p$ $<$ 0.01) less than childess women.\footnote{Note: the period indicator is not really relevant in such an exercise as compares the total trend change for two converging groups $y$} Subsequently, the value from Table 2 for the DiD effect is statistically significant at conventional levels, suggesting that women with children gain a \$1682.81 ($p$ $<$ 0.01) in the post treatment/intervention period (compared to pre period) (1993 $<$) when compared to childless women; overall explaining 2.6\% of the total variation in earnings. This effect is important to be examined more closely: As implied in task 4, while childless women on average earn \$ 8596.33 more than women with children, childless women (see Table 2) drop by \$696 when comparing the before and after period, while women with children increased. These two effects cancel each other out out, most likely leading to the insignificant period coefficient. Moreover, this suggests that the comparison groups (women with vs women without children) are not comparable; as such we will not be able to discern causality from this exercise. Finally, model (3) considers the full model. Focusing on the DiD effect after including covariates, we see a slight increase in the coefficient ($\hat{\beta}$ = 1722.360, $p$ $<$ 0.01) with stable standard errors; suggesting that women with children in the post period earn \$1722.36 more than childless women. However, the inclusion of the covariates does not suggest a considarable change in the direction of the outcome. 
+\indent Moving to family income as an outcome, a similar insights can be drawn. However, now all covariates are significant - model explaining 1.2\% of the variation in family income. Again, the DiD effect alone in model (5) is significant ($\hat{\beta}$ = 1911.04, $p$ $<$ 0.01); suggesting again that women with childrens' familiy income increases by \$1911.04 after the intervention (when compared to the pre-period) when compared to childess women. Additionally, women with children, again, have a lower family income of \$-8929.33 ($p$ $<$ 0.01). This model explains 2.2\% of the total variation in family income. The inclusion of covariates does not change this insight dramitically; womens' with children family income still improve significantly by \$2006.06 during the post period when compared to childess women and its coefficeint also increases, but the insight is the same as before ($p$ $<$ 0.01). 
+\indent Finally, considering work participation; the covariates in model (7) are all significant at the conventional level in predicting work participation, explaining 1.9\% of total variation in this outcome. As observed during task 1 through 4, work participation rises for women with children during the post intervention period (model 8) ($\hat{\beta}$ = 0.031, $p$ $<$ 0.1); however, the effect is only marinally significant. As was to be expected, women with children show a significantly lower work participation ($\hat{\beta}$ = -0.159, $p$ $<$ 0.01) when compared to childless women (15.9\$ less). When combining covariates and the base model in model (9), the overall trend is the same as in the aforementioned models. The coefficient for the DiD effect rises to 0.033 ($p$ $<$ 0.1), but is still only marginally significant.
 Thus, overall, the inclusion of the covaraites does increase the coefficints of all three DiD effects, but only marginally. This means that the overall effect, or direction of the coefficicients was not changed drastically. Moreover, the inclusion of the covariates shows that the standard errors are stable across all models, suggesting no probelm with multicollinearity. 
-\paragraph{Robustness Tests} Overall, due to the standard errrors between the models for each outcome variable respectively staying stable, this suggests that there is generally less necessity to include robust standard errors. Running the Breusch-Pagan test on all models in Table 3 - only model (1) and model (4) (both covariate-only models) fail to reject the null hypothesis of heteroscedasitc residuals. Finally, \textbf{THE APPENDIX contains the same models just with robust standard errros and clustered by state}. Overall, the standard erros do not start flailing around, which suggests, that there is little need to use robust standard errors. 
-
-
-
-
-\begin{enumerate}
-   \item to do: first re run the models: the baseline model with only the control variales
-   \item then one model with the did effect only 
-   \item then both together 
-\end{enumerate}
-
-Moreover, the standard errors are stable (do not change a lot) for all coeficcients , while the coeficients themselfes maintain their direction; indicating no problem of multicollinearity. 
-
+\paragraph{Robustness Tests} Overall, due to the standard errrors between the models for each outcome variable respectively staying stable, this suggests that there is generally less necessity to include robust standard errors. Running the Breusch-Pagan test on all models in Table 3 - only model (1) and model (4) (both covariate-only models) fail to reject the null hypothesis of heteroscedasitc residuals. Finally, Table 11 in the appendix reports robust standard errors (white) and clustered by state. Overall, the standard errors are stable across models, which suggests, that there is little need to use robust standard errors.\footnote{Stability in coefficients also implies no multicollinearity; additionally, standardized coefficeints are not of use here becasue we are interested in the DiD effect.} 
 
 
 \begin{landscape}
@@ -306,32 +263,40 @@ Moreover, the standard errors are stable (do not change a lot) for all coeficcie
 \hline \\[-1.8ex] 
  Constant & 7,977.343$^{***}$ & 14,899.900$^{***}$ & 12,958.640$^{***}$ & 11,872.150$^{***}$ & 20,099.430$^{***}$ & 16,218.430$^{***}$ & 0.414$^{***}$ & 0.582$^{***}$ & 0.532$^{***}$ \\ 
   & (1,159.632) & (828.375) & (1,550.012) & (1,234.711) & (886.522) & (1,655.347) & (0.032) & (0.023) & (0.043) \\ 
-  age & 96.038$^{***}$ &  & 22.555 & 144.373$^{***}$ &  & 78.717$^{***}$ & 0.003$^{***}$ &  & 0.002$^{***}$ \\ 
+  & & & & & & & & & \\ 
+ Age & 96.038$^{***}$ &  & 22.555 & 144.373$^{***}$ &  & 78.717$^{***}$ & 0.003$^{***}$ &  & 0.002$^{***}$ \\ 
   & (15.489) &  & (15.922) & (16.492) &  & (17.004) & (0.0004) &  & (0.0004) \\ 
-  urate & 33.433 &  & 133.948 & 256.102$^{**}$ &  & 372.861$^{***}$ & $-$0.018$^{***}$ &  & $-$0.018$^{***}$ \\ 
+  & & & & & & & & & \\ 
+ Unemp. Rate & 33.433 &  & 133.948 & 256.102$^{**}$ &  & 372.861$^{***}$ & $-$0.018$^{***}$ &  & $-$0.018$^{***}$ \\ 
   & (108.495) &  & (114.614) & (115.519) &  & (122.403) & (0.003) &  & (0.003) \\ 
-  ed & 8.153 &  & 66.337 & $-$177.633$^{***}$ &  & $-$125.305$^{**}$ & 0.016$^{***}$ &  & 0.017$^{***}$ \\ 
+  & & & & & & & & & \\ 
+ Education (y) & 8.153 &  & 66.337 & $-$177.633$^{***}$ &  & $-$125.305$^{**}$ & 0.016$^{***}$ &  & 0.017$^{***}$ \\ 
   & (60.120) &  & (59.579) & (64.013) &  & (63.628) & (0.002) &  & (0.002) \\ 
-  nonwhite1 & $-$2,037.990$^{***}$ &  & $-$1,255.622$^{***}$ & $-$3,109.127$^{***}$ &  & $-$2,438.387$^{***}$ & $-$0.058$^{***}$ &  & $-$0.043$^{***}$ \\ 
+  & & & & & & & & & \\ 
+ Race & $-$2,037.990$^{***}$ &  & $-$1,255.622$^{***}$ & $-$3,109.127$^{***}$ &  & $-$2,438.387$^{***}$ & $-$0.058$^{***}$ &  & $-$0.043$^{***}$ \\ 
   & (323.611) &  & (326.237) & (344.563) &  & (348.408) & (0.009) &  & (0.009) \\ 
-  has\_children1 &  & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ &  & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ &  & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
+  & & & & & & & & & \\ 
+ Has Child &  & $-$8,596.327$^{***}$ & $-$8,394.973$^{***}$ &  & $-$8,929.330$^{***}$ & $-$8,269.567$^{***}$ &  & $-$0.159$^{***}$ & $-$0.150$^{***}$ \\ 
   &  & (1,093.444) & (1,096.506) &  & (1,170.197) & (1,171.022) &  & (0.030) & (0.030) \\ 
-  dperiod &  & $-$695.997 & $-$536.491 &  & $-$940.239$^{*}$ & $-$515.553 &  & $-$0.005 & $-$0.024$^{*}$ \\ 
+  & & & & & & & & & \\ 
+ dperiod &  & $-$695.997 & $-$536.491 &  & $-$940.239$^{*}$ & $-$515.553 &  & $-$0.005 & $-$0.024$^{*}$ \\ 
   &  & (485.413) & (500.046) &  & (519.486) & (534.028) &  & (0.013) & (0.014) \\ 
-  has\_children1:dperiod &  & 1,682.810$^{***}$ & 1,722.360$^{***}$ &  & 1,911.035$^{***}$ & 2,006.060$^{***}$ &  & 0.031$^{*}$ & 0.033$^{*}$ \\ 
+  & & & & & & & & & \\ 
+ has\_children1:dperiod &  & 1,682.810$^{***}$ & 1,722.360$^{***}$ &  & 1,911.035$^{***}$ & 2,006.060$^{***}$ &  & 0.031$^{*}$ & 0.033$^{*}$ \\ 
   &  & (642.099) & (641.893) &  & (687.171) & (685.515) &  & (0.018) & (0.018) \\ 
- \hline \\[-1.8ex] 
+  & & & & & & & & & \\ 
+\hline \\[-1.8ex] 
 Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
 R$^{2}$ & 0.006 & 0.026 & 0.027 & 0.012 & 0.022 & 0.028 & 0.019 & 0.012 & 0.027 \\ 
 Adjusted R$^{2}$ & 0.006 & 0.026 & 0.027 & 0.012 & 0.022 & 0.027 & 0.018 & 0.012 & 0.026 \\ 
-Residual Std. Error & 18,150.240  & 17,965.670 & 17,956.450  & 19,325.370 & 19,226.750  & 19,176.730 & 0.495  & 0.497  & 0.493 \\ 
-F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{***}$  & 105.245$^{***}$ & 56.166$^{***}$ & 65.588$^{***}$& 54.906$^{***}$ & 54.374$^{***}$ \\ 
+Residual Std. Error & 18,150.240  & 17,965.670  & 17,956.450 & 19,325.370 & 19,226.750  & 19,176.730  & 0.495  & 0.497  & 0.493  \\ 
+F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$ & 43.406$^{***}$  & 105.245$^{***}$  & 56.166$^{***}$ & 65.588$^{***}$  & 54.906$^{***}$  & 54.374$^{***}$  \\
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+      \item\textit{Note:} N = 13746. Non Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. First model of each outcome ony covariates; second model only DiD effect with causal varaibles; thrid model complete. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -341,20 +306,12 @@ F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$  & 43.406$^{**
 \end{landscape}
 
 
-
-
-
 \subsection{Task 6: Subset analysis}
 
-\textbf{IMPORTANT: UPDATE THE TABLES AS YOU DID NOT UPDATE THE STARGAZER AFTER THAT ONE!!!}
-
-
 \subsubsection{Women with Children compared based on high \& low education levels}
-Please note: this subsection analysis was not splti into four regression models because ofconcerns for statistical power; the itnerpretation si still the same using an intercation term.
-For brevity reasons, the covariate only models are left (intuition does not change when comapred to table 3). Considering now only women with children and the "differences in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
-\textbf{NOTE: all models are F statistic significant! but then there is nothing going on}
-
-Considering earnings, (model 1 \& 2), the DiD coefficient is interpreted as follows: during the post intervention period, high educated women gain 951.50\$ on average ($p$ $=$ 0.216) compared to low educated women; which however is not significant. This is broadly maintained when only considering the base model ($\hat{\beta}$ = 871.46, $p$ $<$ 0.26). A similar observation can be made for work participation, which is in both cases, the base model (5) and with covaraites (6), displaying an insignificant decrease in work participation for highly educated women in the post intervention period ($\hat{\beta}$ = -0.019, $p$ $=$ 0.462). Finally, family income observed a marginally significant increase of \$1345.12 at the 9.4\% percent level for highly educated women, while the base model is insignificant at the 15.2\% level for the DiD effect of education and intervention period. 
+Please note: after subsetting the data per subtask, interaction effects were used in order to maintain statistical power of the model (the interpretation is the same).
+For brevity reasons, the covariate only models are left out (intuition does not change when comapred to table 3). Considering now only women with children: the "difference in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
+Considering earnings, (model 1 \& 2), the DiD coefficient is interpreted as follows: during the post intervention period (compared to the pre-intervention period), high educated women gain 951.50\$ on average ($p$ $=$ 0.216) compared to low educated women; which however is not significant. This is broadly maintained when only considering the base model ($\hat{\beta}$ = 871.46, $p$ $<$ 0.26). A similar observation can be made for work participation, which is in both cases, the base model (5) and with covaraites (6), displaying an insignificant decrease in work participation for highly educated women (compared to low educated women) in the post intervention period when compared to the per-period ($\hat{\beta}$ = -0.019, $p$ $=$ 0.462). Finally, family income observed a marginally significant increase of \$1345.12 at the 9.4\% percent level for highly educated women during the post period compared to low educated women, while the base model is insignificant at the 15.2\% level for the DiD effect of education and intervention period. 
 
 
 
@@ -476,39 +433,34 @@ F Statistic & 9.304$^{***}$ & 6.559$^{***}$  & 14.690$^{***}$ & 11.920$^{***}$ &
 \end{table}
 
 
-
-
-\pagebreak
-
-\section{Tart 2 Instrumental Variable approach}
-
-
-Notes:
-- Effect of cumpulsory schooling on wages
-
-Generaly: the quality and quantitiy of education in modern societies is on a steady rise; but it is difficult how much education contributes to future earnings on the labor market.. meansing: how much does one year of additional education add in earnings
-
-This is because of unobserved factors that are to the detrimetn of assumtion 3 (mean independence) biasing any OLS estimate of wages on years of eduction (ommitted variables and confounders).
-
-Here the solution: instruments to circumvent these biases; combining to characteristics: 
---> Minimum legal school dropout age (which can be 16, 17, or 18 years) 
---> and the annual quarter of birth of a person
-
-Rational behind these choices: all students born in the sam year are admitted to school in the same cohort (the same class). BUT A student born in eg January reaches the leagal school dropout age earlier than a student born in September 8eg).
-
---> as such, the instruments function as if; we randomize school exposure to students, assuming that in each year, a constant fraction of students drops out of school adn this dorpout pattern is unrelated to when a students is born. 
-
-\textbf{MAIN TASK: Estimate the effect of the yerars of education on the LOG scaled wages}
+\section{Instrumental Variable approach}
 
 \subsection{Task 1: Endogineity problems and correlation with u - A3}
-When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, endogegenous treatment, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimate severely. 
+When considering the problem of mean independence (A3), there can be multiple root causes to this issue; ommitted variable bias, endogegenous treatment, sampling bias, attrition bais, simultaneous caulsailty bias. All of these issues introduce backdoor pathways \textbf{CITE ECI HERE}, which bias the (eg. OLS) estimator severely. 
 A prominent example in what way education effect on earnings could be biased is through an ommitted varaible or covariate. A classical example for this is general ability (commonly referred to as IQ - which was introduced in 1917 already), which commonly determines not only the degree of success in education, but also future earnings. Thus, neglecting to include this confounder, will lead to a biased estimate of the effect of years of education on earnings.
 A second example, admittetdly a bit constructed; but this is an exercise; is higher education means higher earnings. But in the US of the 1930s, private education might have been a thing. Thus, people with higher earnings obtain more education which then goes back and forth - simultaneous causality bias. 
 Finally, selection bias might be a problem: if we disproportionally select our sample in university cities, this will ineviably lead to bias the results, as the effect of a universtiy education usually disproportionally outweights the effect of lets say primary school years in the job market. 
 
 
 
-
+%One example of such conditions may be a situation, where the preference of students for
+%receiving more years of education can be associated with the level of wealth of the close family,
+%e.g. parents, which motivate their children learn longer and fund their higher education. Also, it
+%can be arguably assumed that wealthier families have better access to good-paying jobs in some
+%sectors (f.ex. business, medicine, law) and can help their children find a better-paying job (as
+%many jobs are found through network of professionals). At In other words, people from those
+%families would receive higher salaries regardless of their level of education. In this case, the not
+%including the economic background of the family can create an omitted variable bias, because
+%the wealth of the family (being the part of ϵ is supposedly associated with the effect of education
+%on wages.
+%The second example of a bias can be the quality of education received, which in the USA
+%is, in many cases, correlated with the average income in the neighbourhood on the primary and
+%secondary level (districts/counties with lower incomes have higher education budgets, which is
+%possibly associated with the quality of education). As there is no information in the data about
+%the mean/median income in the area of residence or the quality of education receive, it may be
+%arguably assummed that people leave at poorer areas receive worse education and are more likely
+%to drop out. At the same time, the wages in poorer areas are lower than in wealthy ones, so it
+%states another omitted variable bias.
 
 %Two examples of bias in the OLS estimator are as follows: - The size most likely partly depends on job
 %experience. For young starters with long educational periods this may imply that their salary may be at
@@ -985,7 +937,7 @@ reasons: not clear instrument (or not clean) (make a plot; or if the instrument 
 
 
 \section{Appendix}
-\subsection{Additional demographics}
+
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Fri, Sep 23, 2022 - 20:47:48
@@ -1104,6 +1056,71 @@ F Statistic & 121.691$^{***}$ & 54.794$^{***}$ & 105.245$^{***}$ & 56.166$^{***}
 \end{adjustwidth}
 %
 \end{table}
+
+\begin{landscape}
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Wed, Sep 28, 2022 - 18:35:54
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{1.25cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{Non-Robust Regression Results Part 3}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-2pt}}lccccccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{9}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-10} 
+\\[-1.8ex] & \multicolumn{3}{c}{earn} & \multicolumn{3}{c}{finc} & \multicolumn{3}{c}{work} \\ 
+\\[-1.8ex] & Basic(1) & White(2) & Cluster(3) & Basic(4) & White(5) & Cluster(6) & Basic(7) & White(8) & Cluster(9)\\ 
+\hline \\[-1.8ex] 
+ has\_children1 & $-$8,394.973$^{***}$ & $-$8,394.973$^{***}$ & $-$8,394.973$^{***}$ & $-$8,269.567$^{***}$ & $-$8,269.567$^{***}$ & $-$8,269.567$^{***}$ & $-$0.150$^{***}$ & $-$0.150$^{***}$ & $-$0.150$^{***}$ \\ 
+  & (1,096.506) & (1,056.274) & (1,057.069) & (1,171.022) & (1,146.704) & (1,147.577) & (0.030) & (0.030) & (0.030) \\ 
+  & & & & & & & & & \\ 
+ dperiod & $-$536.491 & $-$536.491 & $-$536.491 & $-$515.553 & $-$515.553 & $-$515.553 & $-$0.024$^{*}$ & $-$0.024$^{*}$ & $-$0.024$^{*}$ \\ 
+  & (500.046) & (564.674) & (565.075) & (534.028) & (618.997) & (619.444) & (0.014) & (0.014) & (0.014) \\ 
+  & & & & & & & & & \\ 
+ age & 22.555 & 22.555 & 22.555 & 78.717$^{***}$ & 78.717$^{***}$ & 78.717$^{***}$ & 0.002$^{***}$ & 0.002$^{***}$ & 0.002$^{***}$ \\ 
+  & (15.922) & (19.063) & (19.077) & (17.004) & (20.183) & (20.198) & (0.0004) & (0.0004) & (0.0004) \\ 
+  & & & & & & & & & \\ 
+ urate & 133.948 & 133.948 & 133.948 & 372.861$^{***}$ & 372.861$^{***}$ & 372.861$^{***}$ & $-$0.018$^{***}$ & $-$0.018$^{***}$ & $-$0.018$^{***}$ \\ 
+  & (114.614) & (114.009) & (114.096) & (122.403) & (123.441) & (123.537) & (0.003) & (0.003) & (0.003) \\ 
+  & & & & & & & & & \\ 
+ ed & 66.337 & 66.337 & 66.337 & $-$125.305$^{**}$ & $-$125.305$^{*}$ & $-$125.305$^{*}$ & 0.017$^{***}$ & 0.017$^{***}$ & 0.017$^{***}$ \\ 
+  & (59.579) & (59.876) & (59.937) & (63.628) & (67.467) & (67.538) & (0.002) & (0.002) & (0.002) \\ 
+  & & & & & & & & & \\ 
+ nonwhite1 & $-$1,255.622$^{***}$ & $-$1,255.622$^{***}$ & $-$1,255.622$^{***}$ & $-$2,438.387$^{***}$ & $-$2,438.387$^{***}$ & $-$2,438.387$^{***}$ & $-$0.043$^{***}$ & $-$0.043$^{***}$ & $-$0.043$^{***}$ \\ 
+  & (326.237) & (341.701) & (341.929) & (348.408) & (368.776) & (369.027) & (0.009) & (0.009) & (0.009) \\ 
+  & & & & & & & & & \\ 
+ has\_children1:dperiod & 1,722.360$^{***}$ & 1,722.360$^{***}$ & 1,722.360$^{***}$ & 2,006.060$^{***}$ & 2,006.060$^{***}$ & 2,006.060$^{***}$ & 0.033$^{*}$ & 0.033$^{*}$ & 0.033$^{*}$ \\ 
+  & (641.893) & (647.317) & (647.764) & (685.515) & (698.628) & (699.118) & (0.018) & (0.018) & (0.018) \\ 
+  & & & & & & & & & \\ 
+ Constant & 12,958.640$^{***}$ & 12,958.640$^{***}$ & 12,958.640$^{***}$ & 16,218.430$^{***}$ & 16,218.430$^{***}$ & 16,218.430$^{***}$ & 0.532$^{***}$ & 0.532$^{***}$ & 0.532$^{***}$ \\ 
+  & (1,550.012) & (1,622.488) & (1,623.778) & (1,655.347) & (1,771.017) & (1,772.450) & (0.043) & (0.042) & (0.042) \\ 
+  & & & & & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 & 13,746 \\ 
+R$^{2}$ & 0.027 & 0.027 & 0.027 & 0.028 & 0.028 & 0.028 & 0.027 & 0.027 & 0.027 \\ 
+Adjusted R$^{2}$ & 0.027 & 0.027 & 0.027 & 0.027 & 0.027 & 0.027 & 0.026 & 0.026 & 0.026 \\ 
+Residual Std. Error  & 17,956.450 & 17,956.450 & 17,956.450 & 19,176.730 & 19,176.730 & 19,176.730 & 0.493 & 0.493 & 0.493 \\ 
+F Statistic  & 54.794$^{***}$ & 54.794$^{***}$ & 54.794$^{***}$ & 56.166$^{***}$ & 56.166$^{***}$ & 56.166$^{***}$ & 54.374$^{***}$ & 54.374$^{***}$ & 54.374$^{***}$ \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} N = 13746. Robust Standard Errors applied. "White" is reference category for "non-White" categorical variable. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
+
+\end{landscape}
+
 
 \section{Code}
 
