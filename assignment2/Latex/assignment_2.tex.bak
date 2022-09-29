@@ -632,7 +632,7 @@ wage & 439.471 & 364.941 & 0.096 & 280.481 & 384.711 & 521.848 & 37,499.990 \\
 
 
 \subsection{Task 3: Diagnositcs of Year Of Birth as instrument: is it any good?}
-
+\textbf{We can also do the partial F test here. But we do it manually iwth an OLS}
 \begin{enumerate}
    \item to do: interpret the regression from table 7
    \item add a plot!!! groub by year: each year gets a qob average years of education ; the foruth quarter should be higher than all others on average
@@ -650,7 +650,7 @@ COnsidering first the basis models (1 \& 3) without the inclusion of the covaria
 Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument. 
 
 \textbf{Furthmore, when considering the graph one can see that on average, Q4 and Q3 tend to have more years of education than Q1 and Q2; this implicitly also might explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7.}
-
+\textbf{IMPORTANT ADD CORRELATION}
 Overall, the instrument is assumed to meet the relevance criterion; and regarding the cleanliness, this is difficult; but it is likely that qob only effects earnings through the causal variable, years of education.
 
 
@@ -739,13 +739,18 @@ F Statistic & 100.653$^{***}$  & 414.645$^{***}$ & 34.009$^{***}$ & 249.859$^{**
 
 \subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
 
-For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. Table 8 reports the corresponding outputs; model (3) and (5) consider qob as a numeric variable and model (4) and (6) consider it as a categorical variable. It may be noted that qob should be interpreted as a categorical variable to be precise. Models (1) and (2) report a standard OLS with and without covariates without applying the instrument in 2SLS. Models (7) and (8) consider an additional instrument (discussed in part 5).
+\textbf{$NOTE FOR TASK 4: test whether using qob as factor works differently when you only include the 3 dummies for it instaead of qob_fac$}
+
+
+
+For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. Table 8 reports the corresponding outputs; model (1) and (3) consider qob as a numeric variable and model (2) and (4) consider it as a categorical variable. It may be noted that qob should be interpreted as a categorical variable to be precise.
+Models (5) and (6) consider an additional instrument (discussed in part 5).
 The control variables chosen are SMSA and whether married or not. Married was included because the proportion of married men tends to be higher for higher educated men, suggesting more education but also more income. Moreover, SMSA indicates whether a person lives in a rural or urban surrounding; people in urban areas may have better access to education and better work opportunities.
-Considering model (3) and (4), the causal variable education is significant (model 1: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 2: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). Considering for instance qob as a categorical IV, (model 4) we can see that if education increases by one year wage increases by 10.2\%. Moving to model (5 / 6) we can also see that the choice between qob as numeric or category seems to have little effect on the general statement.
+Considering model (3) and (4), the causal variable education is significant (model 3: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 4: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). Considering for instance qob as a categorical IV, (model 4) we can see that if education increases by one year wage increases by 10.2\%. Moving to model (5 / 6) we can also see that the choice between qob as numeric or category seems to have little effect on the general statement.
 COnsidering model (6), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (4) (both qob as factor IV) ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. ALso the control variables are significant which are both categoricals (SMSA comparison category is rural; married comparison category is not maried) (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. 
 
 TO DO: Include PLOT AND BPAGAN TEST INFERENCE HERE
- 
+ \textbf{ROBUST STANDARD ERRORS!!!}
  
 %Column (1): this model explains 9.8% of the variation in the outcome variable. An additional year of
 %education is associated with an increase in the log wage by 9.9%. This effect is highly statistically significant
@@ -775,32 +780,27 @@ TO DO: Include PLOT AND BPAGAN TEST INFERENCE HERE
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-5pt}}lcccccccc} 
+\begin{tabular}{@{\extracolsep{-5pt}}lcccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{8}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-9} 
-\\[-1.8ex] & \multicolumn{8}{c}{lnwage} \\ 
-\\[-1.8ex] & \multicolumn{2}{c}{\textit{OLS}} & \multicolumn{6}{c}{\textit{instrumental}} \\ 
- & \multicolumn{2}{c}{\textit{}} & \multicolumn{6}{c}{\textit{variable}} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)\\ 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
 \hline \\[-1.8ex] 
- Constant & 4.995$^{***}$ & 4.601$^{***}$ & 4.633$^{***}$ & 4.590$^{***}$ & 4.461$^{***}$ & 4.425$^{***}$ & 5.514$^{***}$ & 5.511$^{***}$ \\ 
-  & (0.004) & (0.018) & (0.250) & (0.249) & (0.249) & (0.248) & (0.076) & (0.076) \\ 
-  educ & 0.071$^{***}$ & 0.070$^{***}$ & 0.099$^{***}$ & 0.103$^{***}$ & 0.098$^{***}$ & 0.100$^{***}$ & 0.015$^{**}$ & 0.015$^{**}$ \\ 
-  & (0.0003) & (0.0003) & (0.020) & (0.020) & (0.020) & (0.019) & (0.006) & (0.006) \\ 
-  age &  & 0.004$^{***}$ &  &  &  &  &  &  \\ 
-  &  & (0.0004) &  &  &  &  &  &  \\ 
-  SMSA &  &  &  &  & $-$0.151$^{***}$ & $-$0.148$^{***}$ & $-$0.243$^{***}$ & $-$0.243$^{***}$ \\ 
-  &  &  &  &  & (0.022) & (0.022) & (0.007) & (0.007) \\ 
-  married &  & 0.255$^{***}$ &  &  & 0.256$^{***}$ & 0.255$^{***}$ & 0.280$^{***}$ & 0.280$^{***}$ \\ 
-  &  & (0.003) &  &  & (0.006) & (0.006) & (0.004) & (0.004) \\ 
+ Constant & 4.633$^{***}$ & 4.590$^{***}$ & 4.461$^{***}$ & 4.425$^{***}$ & 5.514$^{***}$ & 5.511$^{***}$ \\ 
+  & (0.250) & (0.249) & (0.249) & (0.248) & (0.076) & (0.076) \\ 
+  educ & 0.099$^{***}$ & 0.103$^{***}$ & 0.098$^{***}$ & 0.100$^{***}$ & 0.015$^{**}$ & 0.015$^{**}$ \\ 
+  & (0.020) & (0.020) & (0.020) & (0.019) & (0.006) & (0.006) \\ 
+  SMSA &  &  & $-$0.151$^{***}$ & $-$0.148$^{***}$ & $-$0.243$^{***}$ & $-$0.243$^{***}$ \\ 
+  &  &  & (0.022) & (0.022) & (0.007) & (0.007) \\ 
+  married &  &  & 0.256$^{***}$ & 0.255$^{***}$ & 0.280$^{***}$ & 0.280$^{***}$ \\ 
+  &  &  & (0.006) & (0.006) & (0.004) & (0.004) \\ 
  \hline \\[-1.8ex] 
-Observations & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 \\ 
-R$^{2}$ & 0.117 & 0.134 & 0.098 & 0.094 & 0.124 & 0.120 & 0.082 & 0.083 \\ 
-Adjusted R$^{2}$ & 0.117 & 0.134 & 0.098 & 0.094 & 0.124 & 0.120 & 0.082 & 0.083 \\ 
-Residual Std. Error & 0.638  & 0.632 & 0.645  & 0.646  & 0.635  & 0.637  & 0.650  & 0.650  \\ 
-F Statistic & 43,782.560$^{***}$ & 17,053.180$^{***}$  &  &  &  &  &  &  \\ 
+Observations & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 \\ 
+R$^{2}$ & 0.098 & 0.094 & 0.124 & 0.120 & 0.082 & 0.083 \\ 
+Adjusted R$^{2}$ & 0.098 & 0.094 & 0.124 & 0.120 & 0.082 & 0.083 \\ 
+Residual Std. Error & 0.645  & 0.646  & 0.635  & 0.637 & 0.650 & 0.650  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
@@ -812,6 +812,7 @@ F Statistic & 43,782.560$^{***}$ & 17,053.180$^{***}$  &  &  &  &  &  &  \\
 \end{adjustwidth}
 %
 \end{table}
+
 
 
 
@@ -842,13 +843,81 @@ IMPORTANT: USE slide 88 as an argument
 \textbf{IMPORTANT: WHEN YOU SAY HOW CONTROL VARIABLES IMPACT THE INDEPENDENT VARIABLE SAY THE INCLUSION OF THE CONTROL VARIABLES ICNREASE IT INTO A CERTAIN DIRECTIOn; SO DEPEDNING ON THE INSTRUMENT VS NORMAL OLS, the variable was biased eg downwards or upwards}
 
 \subsection{5 -- }
-\begin{enumerate}
-   \item here we do the parital F test on the IV regression!
-   \item loot in the notes for this lecture to see the argument begind this f test 
-   \item also analyse the hausman and sargan test on the same models as before; IMPORTANT THESE ARE ONLY FOR OVERIDENTIFICATION!!!
-   \item important: perform all these tests like in the tutorial and also part 3/4 already!!!! -- report all those tests formally in one table!
-\end{enumerate}
 
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Thu, Sep 29, 2022 - 17:18:36
+\begin{table}[!htbp] \centering 
+\begin{adjustwidth}{0.cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+\caption{\textsc{IV regression output}}
+\centering 
+  \label{}
+\small 
+\begin{tabular}{@{\extracolsep{-5pt}}lcccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
+\\[-1.8ex] & OLS (1) & OLS (2) & HandIVREG(3) & HandIVREG(4) & HandIVREG(5) & HandIVREG(6)\\ 
+\hline \\[-1.8ex] 
+ Constant & 4.995$^{***}$ & 4.847$^{***}$ & 4.633$^{***}$ & 4.461$^{***}$ & 4.590$^{***}$ & 4.425$^{***}$ \\ 
+  & (0.004) & (0.005) & (0.263) & (0.260) & (0.262) & (0.259) \\ 
+  educ & 0.071$^{***}$ & 0.067$^{***}$ &  &  &  &  \\ 
+  & (0.0003) & (0.0003) &  &  &  &  \\ 
+  SMSA &  & $-$0.185$^{***}$ &  & $-$0.151$^{***}$ &  & $-$0.148$^{***}$ \\ 
+  &  & (0.003) &  & (0.023) &  & (0.023) \\ 
+  married &  & 0.265$^{***}$ &  & 0.256$^{***}$ &  & 0.255$^{***}$ \\ 
+  &  & (0.003) &  & (0.007) &  & (0.007) \\ 
+  educ.hat &  &  & 0.099$^{***}$ & 0.098$^{***}$ & 0.103$^{***}$ & 0.100$^{***}$ \\ 
+  &  &  & (0.021) & (0.020) & (0.020) & (0.020) \\ 
+ \hline \\[-1.8ex] 
+Observations & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 \\ 
+R$^{2}$ & 0.117 & 0.145 & 0.0001 & 0.041 & 0.0001 & 0.041 \\ 
+Adjusted R$^{2}$ & 0.117 & 0.145 & 0.0001 & 0.041 & 0.0001 & 0.041 \\ 
+Residual Std. Error & 0.638 & 0.628 & 0.679 & 0.665  & 0.679& 0.665  \\ 
+F Statistic & 43,782.560$^{***}$ & 18,646.640$^{***}$  & 23.145$^{***}$  & 4,738.984$^{***}$ & 25.088$^{***}$ & 4,739.535$^{***}$ \\ 
+\hline 
+\hline \\[-3.5ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Note:} ALL ARE IV REGRESSION OUTPUTS!!! tests. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+%
+\end{table}
+Note: this question was not particularly precise wrt. whether to run a manual 2SLS or just normal OLS.
+
+Model (1) and (2) in Table 9 report the OLS regressions of lnwage on the endogeneous education with and without covariates. Models (3) and (4) report the manual 2SLS for quarter of birth as a numeric. Models (5) and (6) report quarter of birth as a factor. 
+
+\indent Considering model (2), standard OLS with covaraiates, the overall effect of education on is significantly positie ($\hat{\beta}$ = 0.067, $p$ $<$ 0.01), which does not deviate drasically from its (assumed) exogeneous counterpart in the other models in Table 8 (and 9). However, we can observe a considerably lower standard error for the years of education coefficient in model (2) when compared to Table 8 models 1 through 6.
+
+\indent Moving on now to the manual 2SLS, as expected, the reported coefficients in models 3 thorugh 6 in Table 9 correspond exactly with those reported in Table 8 (models 1 through 4). However, the manual 2SLS does not correct for the fact that years of education (hat) originates as a predicted outcome of the first stage. Thus, the standard errors differ slightly.
+\indent COnsidering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from the $summary(IVREG_model, diagnostics = TRUE)$ in R, together with a test for weak instruments and, in case of overidentification, the Sargan-Hansen ${\chi}^2$ over-identification test. To keep it short, two models are considered fro demonstrative purposes: 1) Table 8 model (3) where qob is a numeric varaible (so no overidentification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that thechically, the inclusion of qob as a factor implies overidentification of the first stage; this will be ignored in this question.
+
+\indent Considering Table 10, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals ca
+
+
+Maintaining H0 implies that the assumed independence is not violated,
+while a significant test result means that not all extra restrictions hold,
+which suggests that the instruments are not independent of the
+residuals
+
+
+                    df1    df2 statistic p-value    
+Weak instruments      1 329505   100.159  <2e-16 ***
+Wu-Hausman            1 329504     2.477   0.116    
+Sargan                0     NA        NA      NA    
+
+Diagnostic tests:
+                    df1    df2 statistic  p-value    
+Weak instruments      2 329504    557.21  < 2e-16 ***
+Wu-Hausman            1 329504     82.16  < 2e-16 ***
+Sargan                1     NA     18.84 1.42e-05 ***
 
 
 \textbf{IMPORTANT: WE DO NOT INCLUDE THE INSTRUMENTS IN OLS BECASUE WE AUSSME THAT THEY DONT HAVE AN IMPACT on the outcome!!!!!! in OLS; SO DONT INCLDUE THEM IN THE OLS OTHERWISE WE GO AGAINST THE UNDERLYING THEORY}
@@ -857,6 +926,9 @@ IMPORTANT: USE slide 88 as an argument
 \textbf{for overidentificaion run another IVREG WITH MORE insturments see introductiomn; then you can interpret the SARGAN AND HAUSMA TEST THINGI}
 
 \subsection{6 -- }
+CLeanliness; Endogeneity of independent; Relevance
+--> Cleanliness 
+
 
 \begin{enumerate}
    \item not clean insutruments! this would lead to violation of mean independence

@@ -669,58 +669,11 @@ stargazer(
 
 
 
-# rsltOLS5.1 <- ivreg(lnwage ~ educ | qob, data = df_IV)
-# rsltOLS5.2 <- ivreg(lnwage ~ educ + married | married + qob, data = df_IV)
-# rsltOLS5.3 <- ivreg(lnwage ~ educ + married + age | married + qob + age, data = df_IV)
-# summary(rsltOLS5.2, diagnostics = TRUE)
-# stargazer(rsltOLS5.2, type = "text")
-# bptest(rsltOLS5.2)
-
-# i) run basic OLS
-rsltOLS_sim <- lm(lnwage ~ educ, data = df)
-
-# ii) run OLS with controls - dont run hand made ivreg
-rsltOLS_adv <- lm(lnwage ~ educ + age + married, data = df)
-
-# iii) run Simple IVREG
-rsltiv1_sim <- ivreg(lnwage ~ educ | qob, data = df)
-
-# iiii) run more complex IV reg with more controls
-rsltiv1_adv <- ivreg(lnwage ~ educ + age + married | qob + age + married, data = df)
-
-# iiiii) run iv reg with out controls BUT ALSO MORE THAN oNE INSTURMENT FOR PART 5!
-rsltiv2_sim <- ivreg(lnwage ~ educ | qob_fac, data = df)
-
-# iiiiiii) run ivreg with controls and multiple instruments (qob + yob)
-rsltiv2_adv <- ivreg(lnwage ~ educ + age + married | qob_fac + yob_fac + age + married, data = df)
-
-
-
-stargazer(
-    rsltOLS_sim,
-    rsltOLS_adv,
-    rsltiv1_sim,
-    rsltiv1_adv,
-    rsltiv2_sim,
-    rsltiv2_adv,
-    intercept.bottom = FALSE,
-    #   align = TRUE,
-    no.space = TRUE,
-    type = "text"
-)
-
-
-
-
 
 #------------ IMPORTANT FOR PART 4 this is the correct reporting here
 
 
-# i) run basic OLS
-rsltOLS_sim <- lm(lnwage ~ educ, data = df)
 
-# ii) run OLS with controls - dont run hand made ivreg
-rsltOLS_adv <- lm(lnwage ~ educ + age + married, data = df)
 
 # iii) run Simple IVREG - numeric
 rsltiv1_sim_numeric <- ivreg(lnwage ~ educ | qob, data = df)
@@ -744,8 +697,7 @@ rsltiv1_adv_numeric_fac_over <- ivreg(lnwage ~ educ + SMSA + married | qob_fac +
 
 
 stargazer(
-    rsltOLS_sim,
-    rsltOLS_adv,
+
     rsltiv1_sim_numeric,
     rsltiv1_sim_numeric_fac,
     rsltiv1_adv_numeric,
@@ -760,8 +712,7 @@ stargazer(
 
 
 stargazer(
-    rsltOLS_sim,
-    rsltOLS_adv,
+
     rsltiv1_sim_numeric,
     rsltiv1_sim_numeric_fac,
     rsltiv1_adv_numeric,
@@ -777,3 +728,105 @@ stargazer(
 
 
 bptest(rsltOLS5.2)
+
+
+
+
+
+#------------------------------------------------------------------
+# task 5
+
+# first run normal OLS
+# endogeneous educ
+# i) run basic OLS
+rsltOLS_sim <- lm(lnwage ~ educ, data = df)
+
+# ii) run OLS with controls - dont run hand made ivreg
+rsltOLS_adv <- lm(lnwage ~ educ + SMSA + married, data = df)
+
+
+
+# THen run the Two stage OLS manually
+
+# 1.first with qob numeric 
+educ.hat <-
+  fitted(lm(educ ~ qob, data = df))
+
+rslt2sls_manual_sim <-
+  lm(lnwage ~ educ.hat , data = df)
+
+# 2.now do with covariates
+educ.hat <-
+  fitted(lm(educ ~ qob  + SMSA + married, data = df))
+
+rslt2sls_manual_adv<-
+  lm(lnwage ~ educ.hat  + SMSA + married, data = df)
+
+
+
+#3. then qob as factor
+educ.hat <-
+  fitted(lm(educ ~ qob_fac, data = df))
+
+rslt2sls_manual_sim_fac <-
+  lm(lnwage ~ educ.hat , data = df)
+
+
+#4. now do with covariates
+educ.hat <-
+  fitted(lm(educ ~ qob_fac  + SMSA + married, data = df))
+
+rslt2sls_manual_adv_fac <-
+  lm(lnwage ~ educ.hat  + SMSA + married, data = df)
+
+
+
+
+
+stargazer(
+rsltOLS_sim,
+rsltOLS_adv,
+    rslt2sls_manual_sim,
+    rslt2sls_manual_adv,
+    rslt2sls_manual_sim_fac,
+    rslt2sls_manual_adv_fac,
+    intercept.bottom = FALSE,
+    #   align = TRUE,
+    no.space = TRUE,
+    type = "latex"
+)
+
+
+
+
+
+
+#THEN REPORT THE DIAGNOSTICS 
+# TO do: 
+# 1. Do a hand made IV reg<; refer to normal OLS 	; but rather look at the diagnostics which tells you hausman which about whether ols or IV reg does the job
+# 2. Hausman test says whether there is a favour for ols or IV; summary (reg, diagnostics = TRUE)
+# 3. You want insignificant sargan test for oberidentifiaction
+# 4. weak instrument test
+
+
+
+
+
+
+
+# get diagnostics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
