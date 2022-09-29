@@ -484,7 +484,7 @@ In order to assess the relevance of the instrument statisically, one regresses t
 
 Firstly, all models reported show a significant F statistic ($F$ = 100.653, $p$ $<$ 0.01; $F$ = 414.645, $p$ $<$ 0.01; $F$ = 30.009, $p$ $<$ 0.01; $F$ = 249.859, $p$ $<$ 0.01); which promises that qob might fulfill the relevane criterion.
 
-COnsidering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qub) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alteranting the catgory of comparison for quarter. 
+Considering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qub) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alteranting the catgory of comparison for quarter. 
 Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument.\footnote{Note: the correlation is weak at 0.0175, $p$ < 0.01}
 
 \begin{figure}[htp]
@@ -494,11 +494,7 @@ Considering the relevance of qob when combined with covariates (model 2 \&3), a 
          \caption{Displaying association between Quarter of Birth and Years of Education}
 \end{figure}
 
-Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend to have significantly more years of education than Q1 and Q2 - this might also explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7. 
-
-
-\textbf{IMPORTANT ADD CORRELATION}
-Overall, the instrument appears to meet the relevance criterion. 
+Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend to have significantly more years of education than Q1 and Q2 - this might also explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7. Overall, the instrument appears to meet the relevance criterion. 
 
 
 
@@ -520,7 +516,7 @@ Overall, the instrument appears to meet the relevance criterion.
  & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-5} 
 \\[-1.8ex] & \multicolumn{4}{c}{educ} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\\[-1.8ex] & (1 - numeric) & (2 - numeric) & (3 - categorical) & (4 - categorical)\\ 
 \hline \\[-1.8ex] 
  Constant & 12.641$^{***}$ & 15.150$^{***}$ & 12.688$^{***}$ & 15.213$^{***}$ \\ 
   & (0.014) & (0.091) & (0.011) & (0.091) \\ 
@@ -547,7 +543,7 @@ F Statistic & 100.653$^{***}$  & 414.645$^{***}$ & 34.009$^{***}$ & 249.859$^{**
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests; *** p$<$0.01, ** p$<$0.05, * p$<$0.1
+      \item\textit{Note:} N = 329,509 - degrees of freedom are not reported for F tests; *** p$<$0.01, ** p$<$0.05, * p$<$0.1
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -558,53 +554,17 @@ F Statistic & 100.653$^{***}$  & 414.645$^{***}$ & 34.009$^{***}$ & 249.859$^{**
 
 
 
-\textbf{see slide 88; 82}
-
-\begin{enumerate}
-   \item here already use the regression outputs from task 4 and also the a correlation table 
-   \item add a plot!!!
-   \item partial f test for relevance/ strength of the instrument!
-   \item summary(rslt2SLS.B, diagnostics = TRUE) --> see the things in tutorial 2 there I descibe all of it; also the slides are relevant
-\end{enumerate}
-
-\textbf{A good instrument possesses two specifications: it is clean and it is relevant}
-
-
-
-\textbf{HOW DO I CONDUCT THESE TESTS? CAN I CONDUCT THEM ON THE NORMAL 2SLS via OLS or should I better use the IVreg model?}
-
-
-
 \subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
 
-\textbf{$NOTE FOR TASK 4: test whether using qob as factor works differently when you only include the 3 dummies for it instaead of qob_fac$}
-
-
-
-For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. Table 8 reports the corresponding outputs; model (1) and (3) consider qob as a numeric variable and model (2) and (4) consider it as a categorical variable. It may be noted that qob should be interpreted as a categorical variable to be precise.
-Models (5) and (6) consider an additional instrument (discussed in part 5).
+For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. Table 8 reports the corresponding outputs; model (1) and (3) consider qob as a numeric variable and model (2) and (4) consider it as a categorical variable.\footnote{It may be noted that qob should be interpreted as a categorical variable in actuality.} Models (5) and (6) consider an additional instrument (discussed in part 5).
 The control variables chosen are SMSA and whether married or not. Married was included because the proportion of married men tends to be higher for higher educated men, suggesting more education but also more income. Moreover, SMSA indicates whether a person lives in a rural or urban surrounding; people in urban areas may have better access to education and better work opportunities.
-Considering model (3) and (4), the causal variable education is significant (model 3: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 4: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). Considering for instance qob as a categorical IV, (model 4) we can see that if education increases by one year wage increases by 10.2\%. Moving to model (5 / 6) we can also see that the choice between qob as numeric or category seems to have little effect on the general statement.
-COnsidering model (6), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (4) (both qob as factor IV) ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. ALso the control variables are significant which are both categoricals (SMSA comparison category is rural; married comparison category is not maried) (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. 
+Considering the base models (1 - numeric) and (2 - categorical), we can observe that the choice between qob as a numeric or categorical variable instrument barely changes the coefficients and standard errors; reporting a significant postive coeficient for the years of education coeffieient (model 1: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 2: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). For example, for model (2), this implies that one year more we can see that if education increases by one year wage increases by 10.3\%. 
 
-TO DO: Include PLOT AND BPAGAN TEST INFERENCE HERE
- \textbf{ROBUST STANDARD ERRORS!!!}
- 
-%Column (1): this model explains 9.8% of the variation in the outcome variable. An additional year of
-%education is associated with an increase in the log wage by 9.9%. This effect is highly statistically significant
-%on any conventional levels of significance. The constant is also highly significant.
-%Column (2): when qob is used as a factor, this variable explains 9.4% of the variation in the outcome
-%variable. Now, an additional year of education is associated with a highly significant increase in the log wage
-%by 10.3%. The constant is again highly significant and is it important to note that the intercept effect of Q1
-%is included in the constant.
-%Column (3): When adding yob as a control variable, an additional year of education is associated with an
-%increase in the log wage by 10.2%. This effect is highly significant. This model explains 9.5% of the variation
-%in the outcome variable
-%Column (4): When adding yob as a control variable, an additional year of education is associated with an
-%increase in the log wage by 10.5%. This effect is highly significant. This model explains 9.1% of the variation
-%in the outcome variable.
+Moving to model (4 - categorical), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (2) (same for model 3 and 1), reporting a significant positive coefficient for education ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. ALso the control variables are significant which are both categoricals (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. Thus, the inclusion of (assumed) exogeneous controls does not impact change insights derived from the model.
 
-%In the IV regression without control variables the education coefficient is statistically significant ($\beta$ = 0.103, p $<$ 0.01). In the IV regression with control variables the education coefficient is also statistically significant ($\beta$ = 0.102, p $<$ 0.01). When the education goes up by one year, the wages will increase by approximately 10.2 percent. Also the married control variable is statistically significant ($\beta$ = 0.248, p $<$ 0.01). When a person is married their wage increases by approximately 24.8 percent. For the 2SLS regression with over identification, 'educ' is statistically significant ($\beta$ = 0.231, p $<$ 0.01). This result can be interpreted as when an additional year of education is followed the wage increases by approximately 23.1 percent. This is more than twice as high as in the IV regression before. The control variable married is also statistically significant in this model ($\beta$ = 0.218, p $<$ 0.01). The difference between the last two models might be caused by endogeneity of the instruments used. In figure 5 the summary statistics are given of the last regression. When looking at the Sargan test statistic the null hypothesis of no violation of exogeneity by over-identification is rejected. Lastly, I checked whether using robust standard errors affected my results. The results from the regression using white's standard errors are found in appendix E. Using robust standard errors had no affect on the models.
+Regarding robustness, the breusch pagan test was significant at conventional levels for all six models (not surprising at this sample size), suggesting no issues regarding heteroscedasticity. Moreover, when applying (White) standard errors, the non standardized standard errors maintai nstability , suggesting that this research is not suffering from heteroscedasticity (see Appendix Table 14). Finally, an analysis of the (Residual Distribution) QQ Plot of model (4) (see Appendix Figure 3) also do not suggest extreme deviations in the residuals from a constant. Thus, statistical inference is not impacted by the inclsuion of robust standard errors. 
+
+
 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
@@ -618,13 +578,13 @@ TO DO: Include PLOT AND BPAGAN TEST INFERENCE HERE
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-5pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{-3pt}}lcccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-7} 
 \\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\\[-1.8ex] & (1 numeric) & (2 categorical) & (3 numeric) & (4 categorical) & (5 numeric) & (6 categorical)\\ 
 \hline \\[-1.8ex] 
  Constant & 4.633$^{***}$ & 4.590$^{***}$ & 4.461$^{***}$ & 4.425$^{***}$ & 5.514$^{***}$ & 5.511$^{***}$ \\ 
   & (0.250) & (0.249) & (0.249) & (0.248) & (0.076) & (0.076) \\ 
@@ -644,7 +604,7 @@ Residual Std. Error & 0.645  & 0.646  & 0.635  & 0.637 & 0.650 & 0.650  \\
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+      \item\textit{Note:} N = 329,509 - degrees of freedom are not reported for F tests. SMSA comparison category is rural; married comparison category is not maried. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -653,34 +613,7 @@ Residual Std. Error & 0.645  & 0.646  & 0.635  & 0.637 & 0.650 & 0.650  \\
 
 
 
-
-
-
-
-
-
-
-\begin{enumerate}
-   \item IT IS VERY IMPORTANT TO BUILD A QUICK THEORY AND ALSO EXPLAIN WHY THE CONTROL VARIABLES ARE EXOGENOEUS; SO WHY THERE CONTROLS ARE RELEVANT!!!!!
-   \item also look at the examples in those links how they didd this !
-\end{enumerate}
-
-
-
-
-
-
-
-
-%$https://rpubs.com/wsundstrom/t_ivreg"
-%https://stats.stackexchange.com/questions/56722/where-do-i-put-the-control-variables-in-2sls
-\textbf{IMPORTANT: IF YOU INCLUDE CONTROL VARIABLES YOU NEED TO ARGUE WHY THEY ARE EXOGENEOUS OR NOT AS THAT THEY ARE INCLDUED INTO THE EQUATION}
-SLIDE 99
-IMPORTANT: USE slide 88 as an argument
-
-\textbf{IMPORTANT: WHEN YOU SAY HOW CONTROL VARIABLES IMPACT THE INDEPENDENT VARIABLE SAY THE INCLUSION OF THE CONTROL VARIABLES ICNREASE IT INTO A CERTAIN DIRECTIOn; SO DEPEDNING ON THE INSTRUMENT VS NORMAL OLS, the variable was biased eg downwards or upwards}
-
-\subsection{5 -- }
+\subsection{5 -- Manual OLS}
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Thu, Sep 29, 2022 - 17:18:36
@@ -1010,18 +943,15 @@ F Statistic  & 54.794$^{***}$ & 54.794$^{***}$ & 54.794$^{***}$ & 56.166$^{***}$
 \end{landscape}
 
 
-\section{Code}
-
-
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Sun, Sep 25, 2022 - 19:47:27
+% Date and time: Thu, Sep 29, 2022 - 23:52:12
 \begin{table}[!htbp] \centering 
-\begin{adjustwidth}{0.cm}{-0cm}
+\begin{adjustwidth}{1.25cm}{-0cm}
 \begin{threeparttable}
 \small
 \captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{IV regression output BACKUP TABLE}}
+\caption{\textsc{White-Robust Regression Results QOB numeric only}}
 \centering 
   \label{}
 \small 
@@ -1031,34 +961,52 @@ F Statistic  & 54.794$^{***}$ & 54.794$^{***}$ & 54.794$^{***}$ & 56.166$^{***}$
  & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-7} 
 \\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
-\\[-1.8ex] & \multicolumn{2}{c}{\textit{OLS}} & \multicolumn{4}{c}{\textit{instrumental}} \\ 
- & \multicolumn{2}{c}{\textit{}} & \multicolumn{4}{c}{\textit{variable}} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\\[-1.8ex] & Basic(1) & White(2) & Basic(3) & White(4) & Basic(5) & White(6)\\ 
 \hline \\[-1.8ex] 
- Constant & 4.995$^{***}$ & 4.601$^{***}$ & 4.633$^{***}$ & 3.243$^{***}$ & 5.892$^{***}$ & 3.790$^{***}$ \\ 
-  & (0.004) & (0.018) & (0.250) & (0.524) & (0.082) & (0.406) \\ 
-  educ & 0.071$^{***}$ & 0.070$^{***}$ & 0.099$^{***}$ & 0.159$^{***}$ & 0.001 & 0.123$^{***}$ \\ 
-  & (0.0003) & (0.0003) & (0.020) & (0.034) & (0.006) & (0.027) \\ 
-  age &  & 0.004$^{***}$ &  & 0.009$^{***}$ &  & 0.007$^{***}$ \\ 
-  &  & (0.0004) &  & (0.002) &  & (0.002) \\ 
-  married &  & 0.255$^{***}$ &  & 0.233$^{***}$ &  & 0.242$^{***}$ \\ 
-  &  & (0.003) &  & (0.009) &  & (0.007) \\ 
- \hline \\[-1.8ex] 
+ educ & 0.099$^{***}$ & 0.099$^{***}$ & 0.098$^{***}$ & 0.098$^{***}$ & 0.015$^{**}$ & 0.015$^{**}$ \\ 
+  & (0.020) & (0.020) & (0.020) & (0.020) & (0.006) & (0.006) \\ 
+  & & & & & & \\ 
+ SMSA &  &  & $-$0.151$^{***}$ & $-$0.151$^{***}$ & $-$0.243$^{***}$ & $-$0.243$^{***}$ \\ 
+  &  &  & (0.022) & (0.022) & (0.007) & (0.007) \\ 
+  & & & & & & \\ 
+ married &  &  & 0.256$^{***}$ & 0.256$^{***}$ & 0.280$^{***}$ & 0.280$^{***}$ \\ 
+  &  &  & (0.006) & (0.007) & (0.004) & (0.004) \\ 
+  & & & & & & \\ 
+ Constant & 4.633$^{***}$ & 4.633$^{***}$ & 4.461$^{***}$ & 4.461$^{***}$ & 5.514$^{***}$ & 5.514$^{***}$ \\ 
+  & (0.250) & (0.249) & (0.249) & (0.248) & (0.076) & (0.076) \\ 
+  & & & & & & \\ 
+\hline \\[-1.8ex] 
 Observations & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 & 329,509 \\ 
-R$^{2}$ & 0.117 & 0.134 & 0.098 & $-$0.049 & 0.002 & 0.069 \\ 
-Adjusted R$^{2}$ & 0.117 & 0.134 & 0.098 & $-$0.049 & 0.002 & 0.069 \\ 
-Residual Std. Error & 0.638 & 0.632  & 0.645  & 0.695 & 0.678  & 0.655 \\ 
-F Statistic & 43,782.560$^{***}$  & 17,053.180$^{***}$  &  &  &  &  \\ 
+R$^{2}$ & 0.098 & 0.098 & 0.124 & 0.124 & 0.082 & 0.082 \\ 
+Adjusted R$^{2}$ & 0.098 & 0.098 & 0.124 & 0.124 & 0.082 & 0.082 \\ 
+Residual Std. Error & 0.645  & 0.645 & 0.635 & 0.635  & 0.650  & 0.650  \\ 
 \hline 
 \hline \\[-3.5ex] 
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} N = HUUUUGE; so degrees of freedom are not reported for F tests. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+      \item\textit{Note:} *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
 %
 \end{table}
+
+
+\begin{figure}[htp]
+		\centering
+         \includegraphics[scale=0.35]{"/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Graphics/qqplots.png"}
+         \small
+         \caption{Residual Distribution Plot}
+\end{figure}
+
+
+\section{Code}
+
+
+
+
+
+
 
 \end{document}
