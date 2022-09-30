@@ -55,7 +55,6 @@
 
 \subsection{Task 1: Derive Diff-In-Diff Coefficients}
 
-
 The canonical difference-in-difference equation is expressed in regression form (1-1): 
 
 \
@@ -75,7 +74,7 @@ $(1-1) \ {y_{it}} = \beta_{0} + \beta_{1} D_i + \beta_{2} T_t+ \beta_{3} D_i T_t
 %\end{enumerate}
 
 
-The terms in 2, 3, \& 4 are relevant in describing the potential outcome assumption in difference in difference analysis. Difference in difference suggests that we compare the difference between treatment and control before and after the treatment introduction (t = 0), shown as:
+The terms in 2, 3, \& 4 are relevant in describing the potential outcome assumption in difference in difference analysis. Difference in difference suggests that we compare the difference (in the within group difference) between treatment and control before and after the treatment introduction (t = 0), shown as:
 
 \
 
@@ -85,17 +84,17 @@ $
 
 \
 
-Subsequetnly, the four outcomes described in (1-2) yield the following outcomes:
+Subsequently, the four outcomes described in (1-2) yield the following coefficients:
 
 \begin{itemize}
-\item $E = (y_{T=1} | D=1)$; Becasue we are observing the outcome for the post-(treatment) test for treatment group, this yields $\beta_{0}$, $\beta_{1}$, $\beta_{2}$, $\beta_{3}$
+\item $E = (y_{T=1} | D=1)$; Because we are observing the outcome for the post-(treatment) test for treatment group, this yields $\beta_{0}$, $\beta_{1}$, $\beta_{2}$, $\beta_{3}$
 \item $E = (y_{T=0} | D=1)$; Because we are observing the outcome of the pre-(intervention) test for the treatment, this will yield $\beta_{0}$, $\beta_{1}$
-\item $E = (y_{T=1} | D=0)$; Becasue we are observing the outcome for the post-(treatment) test for the control group, this yields $\beta_{0}$, $\beta_{2}$ 
+\item $E = (y_{T=1} | D=0)$; Because we are observing the outcome for the post-(treatment) test for the control group, this yields $\beta_{0}$, $\beta_{2}$ 
 \item $E = (y_{T=0} | D=0)$; Because we are observing the outcome of the pre-(intervention) test for the control, this will yield $\beta_{0}$
 \end{itemize}
 
 Note that the disturbance term ($\beta_{0}$)is left out as it is assumed to be independent of the treatment allocation; as such we will ignore it here. 
-Additionally, the constant is present in all four outcomes; thus, it also technically cancels out in the following equation. This originates from the assumption that the covariates measurements in pre- and post test yield the same results for both treatment and control subjects. Equivalently, by substitution the aforementioned outcomes into (1-2), the following results can be deduced (excluding the constant):
+Additionally, the constant is present in all four outcomes; thus, it also technically cancels out in the following equation. This originates from the assumption that the covariates measurements in pre- and post test yield the same results for both treatment and control subjects. Equivalently, by substituting the aforementioned outcomes into (1-2), the following results can be deduced (excluding the constant), resulting in only the DiD coefficient remaining; all other effects cancel out:
 
 \
 
@@ -124,9 +123,9 @@ $
 \begin{threeparttable}
 \small
 \captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-  \caption{Descriptive Statistics of Numeric Indepdenent and Dependent Varaible} 
+  \caption{Descriptive Statistics of Numeric Varaibles} 
   \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\begin{tabular}{@{\extracolsep{4pt}}lccccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
 Statistic & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
@@ -142,36 +141,7 @@ Unearned Income & 4.823 & 7.123 & 0.000 & 0.000 & 2.973 & 6.864 & 134.058 \\
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Notes:} N = 13746
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-\end{table}
-
-% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
-% Date and time: Fri, Sep 23, 2022 - 21:38:43
-% Requires LaTeX packages: dcolumn 
-\begin{table}[!htbp] 
-\begin{adjustwidth}{-0cm}{-0cm}
-\begin{threeparttable}
-\small
-\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-  \caption{Diff-in-Diff Matrix} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{8pt}}lccccccc} 
-\\[-5.8ex]\hline 
-\hline \\[-1.8ex]
-\multicolumn{2}{c}{}  & \multicolumn{2}{c}{Earning}  & \multicolumn{2}{c}{Family Income} & \multicolumn{2}{c}{Work Participation} \\ 
-\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} \\ 
-\hline \\[-1.8ex] 
-\multicolumn{1}{c}{Before} & 1 & 14,203.900 & 7,290.380 & 19,159.190 & 12,140.900 & 0.580 & 0.450 \\ 
-\multicolumn{1}{c}{After} & 2 & 13,507.900 & 8,277.200 & 18,218.950 & 13,111.690 & 0.570 & 0.480 \\ 
-\multicolumn{1}{c}{Difference} &  & -696.000 & 986.810 & -940.240 & 970.800 & -0.010 & 0.030 \\ 
-\hline \\[-3.6ex] 
-\end{tabular} 
-\begin{tablenotes}[para,flushleft]
-      \small
-      \item\textit{Notes:} N = 5927 Childless; N = 7819 Has one or more Children.
+      \item\textit{Notes:} N = 13746; split equally over 5 years; Assumption cannot be held up regarding fixed and balanced requirements.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
@@ -202,30 +172,55 @@ Unearned Income & 4.823 & 7.123 & 0.000 & 0.000 & 2.973 & 6.864 & 134.058 \\
 \caption{Pre-Post Intervention of EICT Credit for Women with(out) Children}
 \end{wrapfigure}
 
+
 Figure 1 displays the outcomes for both treatment and control group for earnings (earn), family income (finc), and work-participation indicator (work) over the period form 1991 to 1996. THe treatment in this case is defined as a binary state of females with children (one or many) (D = 1) and females without children (D = 0). The tax credit (EITC) is assumed to be introduced on the 1st of January 1993.
-\indent Figure 1 a) displays the development of earnings and the introduction of the EITC is marked by the vertical line (as in the other graphics). Females without children earned considerably more on average than females with children (pre-period $mean$ = 7290.38) during the pre-period, starting out at slightly less than \$14800 and dropping to \$13000 at its lowest, with and average pre-intervention earnings of \$14203.90. Overall, both groups displayed a downward trend before 1993. After 1993, the supposed introduction of the EITC, both groups experienced an increase in earnings; However, the childless group did not display a continous increase in earnings (post-period $mean$  = 13507.90) when compared to females with children (post-period $mean$  = 8277.20). This might suggest that the introduction of the  EITC is associated to the average earnings of women with children but not for women without children.
-\indent Figure 1 b) shows the same features as the plot before but the outcome is now Family Income (numbers discussed in exercise 3 and 4). Overall, the general trend is similar for both groups as in Figure 1 a); it may be noted that the trend for females with child is less pronounced than in a). Nonetheless, the conclusion is the same as in a): During the pre-period, childless women earned more, but drecreased stronger than women with children, while the post treatment movement is not continous (dropping to pre treatment levels) for childless women when compared to women with children, which experience continous growth on average.
-\indent Figure 1 c) displays workparticipation of females with and without children.Again, childless women start out higher at around 54\% workparticipation vs 46\% workparticipation for women with children. Moreover, the trends are somewhat comparable to the two preceeding graphics, as females with children display an increase to 50.3\% (and then a slight drop in the following year), while childless women tend to decrease: As such, women with children again experience an average net gain in work participation during the post period, while childless women drop below pre-treatment levels. 
-
-
-
-
-
-
-
+\indent Figure 1 a) displays the development of earnings and the introduction of the EITC is marked by the vertical line (as in the other graphics). Females without children earned considerably more on average than females with children (pre-period $mean$ = 7290.38) during the pre-period, starting out at slightly less than \$14800 and dropping to \$13000 at its lowest, with and average pre-intervention earnings of \$14203.90. Overall, both groups displayed a downward trend before 1993. After 1993, the supposed introduction of the EITC, both groups experienced an increase in earnings; However, the childless group did not display a continuous increase in earnings (post-period $mean$  = 13507.90) when compared to females with children (post-period $mean$  = 8277.20). This might suggest that the introduction of the  EITC is associated to the average earnings of women with children but not for women without children.
+\indent Figure 1 b) shows the same features as the plot before but the outcome is now Family Income (numbers discussed in exercise 3 and 4). Overall, the general trend is similar for both groups as in Figure 1 a); it may be noted that the trend for females with child is less pronounced than in a). Nonetheless, the conclusion is the same as in a): During the pre-period, childless women earned more, but decreased stronger than women with children, while the post treatment movement is not continuous (dropping to pre treatment levels) for childless women when compared to women with children, which experience continuous growth on average.
+\indent Figure 1 c) displays work-participation of females with and without children.Again, childless women start out higher at around 54\% work-participation vs 46\% work-participation for women with children. Moreover, the trends are somewhat comparable to the two preceding graphics, as females with children display an increase to 50.3\% (and then a slight drop in the following year), while childless women tend to decrease: As such, women with children again experience an average net gain in work participation during the post period, while childless women drop below pre-treatment levels. 
 
 
 \subsection{Task 3: Summary Statistics for data}
-The dataset is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 have no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogenity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more (N = 7819). Of the respondents 60\% were people of colour. Unemployment rate by state was on average 6.76\% ($std$ = 1.462, $median$ = 7.7) and unearned income at \$4823 ($std$ = 7123, $median$ = 6864)
+
+The data-set is not balanced and we cannot assure that it is fixed. Nonetheless, for the purpose of this exercise, it is assumed that it is balanced and fixed. The data contains yearly records from 1991 to 1996; the reported values per variable are thus averages over all six years. Pre period is 1991 to 1992 and post treatment is 1993 to 1996. A total of 13746 records were made, split by year into 2610, 2449, 2342, 2255, and 2085 observations respectively. Of the total 13746 observations, 7819 have one or more children, and 5927 have no children.\footnote{additional summary statistics can be found for women with and without children in Appendix 4.1}. Of the relevant outcome variables (earnings, family income, work participation), the average family income was \$15255.32 ($std$ = 19444.24, $median$ = 9636.66). This large spread around the mean was partially addressed by Figure 1 a) displaying a large difference between women with and without children; this suggests a strong heterogeneity in the data wrt. to the outcomes. Additionally, as was to be expected by the financial nature of family income, there is a severe positive skewness of 7.06. Earnings displays a similar pattern as family income ($mean$ = 10432.48, $std$ = 18200.76, $median$ = 3332.18 $skew$ = 6.766), which is supported by Figure 1 b). As expected, earnings and family income correlate strongly with a Pearson correlation coefficient of .93 ($p$ $<$ 0.001); thus, earnings and family income are assumed to behave similarly as outcome variables. Finally, work participation shows that 51.3\% of records over all six years are in employment (std. and median have no meaning here as it is a binary variable). Considering possible covariates, the average years in education is 8.8 ($std$ = 2.636), with 11 years in the median. On average, per year, one women had 1.19 children ($std$ = 1.382, $median$ = 1), with 56.9\% of respondents having one child or more (N = 7819). Of the respondents 60\% were people of colour. Unemployment rate by state was on average 6.76\% ($std$ = 1.462, $median$ = 7.7) and unearned income at \$4823 ($std$ = 7123, $median$ = 6864).
 
 \subsection{Task 4: Diff in Diff Matrix}
 
 
-Table 2 reports the pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion. As shown in Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children. However, only women with children show a positive average gain over the post intervention period of \$986.82, when compared to the average over the pre treatment period, while childless women even drop in earnings in the post period. Using formula (1-2) this results in a $naive$ DiD effect of \$1682.81 for women with children. Again, a similar observation can be made for family income which displays a DiD of \$1911.04. Finally, work participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). Please note that these are just pre-post averages of the groups, complementing the descriptive statistics from part 2-3
-\textbf{maybe describe a bit more}
+Table 2 reports the pre-post intervention averages for the two groups - Women with children and women without children - for earnings, family income, and work participation proportion; concluding in the DiD effect. Congruent with Figure 1 a) childless women have on average higher earnings in both pre- and post period than women with children (childless women diff mean diff pre-post: -696.00; women with children mean diff pre-post: 986.81). However, only women with children show a positive average gain over the post intervention period of \$986.81 (when compared to the average over the pre treatment period), while childless women even drop in earnings in the post period. Using formula (1-2) this results in a $naive$ DiD effect of \$1682.81 for women with children; which is simply the 1) difference within each group of pre and post intervention period and then 2) the difference between the groups. Again, a similar observation can be made for family income which displays a DiD of \$1911.04 (I am not repeating the numbers again). Finally, work participation also followed the trend observed in Figure 1 c), suggesting a DiD effect of 0.04 (or 4\% point gain ov women with children over childless women). Please note that these are just pre-post averages of the groups, complementing the descriptive statistics from part 2-3.
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Sep 23, 2022 - 21:38:43
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] 
+\begin{adjustwidth}{-0cm}{-0cm}
+\begin{threeparttable}
+\small
+\captionsetup{font=small, justification=raggedright,singlelinecheck=false}
+  \caption{Diff-in-Diff Matrix} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{8pt}}lccccccc} 
+\\[-5.8ex]\hline 
+\hline \\[-1.8ex]
+\multicolumn{2}{c}{}  & \multicolumn{2}{c}{Earning}  & \multicolumn{2}{c}{Family Income} & \multicolumn{2}{c}{Work Participation} \\ 
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{dperiod} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} & \multicolumn{1}{c}{Childless} & \multicolumn{1}{c}{Children} \\ 
+\hline \\[-1.8ex] 
+\multicolumn{1}{c}{Before} & 1 & 14,203.900 & 7,290.380 & 19,159.190 & 12,140.900 & 0.580 & 0.450 \\ 
+\multicolumn{1}{c}{After} & 2 & 13,507.900 & 8,277.200 & 18,218.950 & 13,111.690 & 0.570 & 0.480 \\ 
+\multicolumn{1}{c}{Difference} &  & -696.000 & 986.810 & -940.240 & 970.800 & -0.010 & 0.030 \\ 
+\hline \\[-3.6ex] 
+\end{tabular} 
+\begin{tablenotes}[para,flushleft]
+      \small
+      \item\textit{Notes:} N = 5927 Childless; N = 7819 Has one or more Children.
+    \end{tablenotes}
+\end{threeparttable}
+\end{adjustwidth}
+\end{table}
+
 
 \subsection{Task 5: Analyze the DiD regression}
-%\textbf{ADD POPULATION REGRESSION}
+
 
 
 
@@ -239,7 +234,7 @@ Table 2 reports the pre-post intervention averages for the two groups - Women wi
 \indent Moving to family income as an outcome, a similar insights can be drawn. However, now all covariates are significant - model explaining 1.2\% of the variation in family income. Again, the DiD effect alone in model (5) is significant ($\hat{\beta}$ = 1911.04, $p$ $<$ 0.01); suggesting again that women with childrens' familiy income increases by \$1911.04 after the intervention (when compared to the pre-period) when compared to childess women. Additionally, women with children, again, have a lower family income of \$-8929.33 ($p$ $<$ 0.01). This model explains 2.2\% of the total variation in family income. The inclusion of covariates does not change this insight dramitically; womens' with children family income still improve significantly by \$2006.06 during the post period when compared to childess women and its coefficeint also increases, but the insight is the same as before ($p$ $<$ 0.01). 
 \indent Finally, considering work participation; the covariates in model (7) are all significant at the conventional level in predicting work participation, explaining 1.9\% of total variation in this outcome. As observed during task 1 through 4, work participation rises for women with children during the post intervention period (model 8) ($\hat{\beta}$ = 0.031, $p$ $<$ 0.1); however, the effect is only marinally significant. As was to be expected, women with children show a significantly lower work participation ($\hat{\beta}$ = -0.159, $p$ $<$ 0.01) when compared to childless women (15.9\$ less). When combining covariates and the base model in model (9), the overall trend is the same as in the aforementioned models. The coefficient for the DiD effect rises to 0.033 ($p$ $<$ 0.1), but is still only marginally significant.
 Thus, overall, the inclusion of the covaraites does increase the coefficints of all three DiD effects, but only marginally. This means that the overall effect, or direction of the coefficicients was not changed drastically. Moreover, the inclusion of the covariates shows that the standard errors are stable across all models, suggesting no probelm with multicollinearity. 
-\paragraph{Robustness Tests} Overall, due to the standard errrors between the models for each outcome variable respectively staying stable, this suggests that there is generally less necessity to include robust standard errors. Running the Breusch-Pagan test on all models in Table 3 - only model (1) and model (4) (both covariate-only models) fail to reject the null hypothesis of heteroscedasitc residuals. Finally, Table 11 in the appendix reports robust standard errors (white) and clustered by state. Overall, the standard errors are stable across models, which suggests, that there is little need to use robust standard errors.\footnote{Stability in coefficients also implies no multicollinearity; additionally, standardized coefficeints are not of use here becasue we are interested in the DiD effect.} 
+\paragraph{Robustness Tests} Overall, due to the standard errrors between the models for each outcome variable respectively staying stable, this suggests that there is generally less necessity to include robust standard errors. Running the Breusch-Pagan test on all models in Table 3 - only model (1) and model (4) (both covariate-only models) fail to reject the null hypothesis of heteroscedasitc residuals. Finally, Table 11 in the appendix reports robust standard errors (white) and clustered by state. Overall, the standard errors are stable across models, which suggests, that there is little need to use robust standard errors; inference is not changed.\footnote{Stability in coefficients also implies no multicollinearity; additionally, standardized coefficeints are not of use here becasue we are interested in the DiD effect.} 
 
 
 \begin{landscape}
@@ -310,8 +305,8 @@ F Statistic & 20.153$^{***}$  & 121.691$^{***}$  & 54.794$^{***}$ & 43.406$^{***
 \subsection{Task 6: Subset analysis}
 
 \subsubsection{Women with Children compared based on high \& low education levels}
-Please note: after subsetting the data per subtask, interaction effects were used in order to maintain statistical power of the model (the interpretation is the same).
-For brevity reasons, the covariate only models are left out (intuition does not change when comapred to table 3). Considering now only women with children: the "difference in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
+Please note: after sub-setting the data per sub-task, interaction effects were used in order to maintain statistical power of the model (the interpretation is the same).
+For brevity reasons, the covariate only models are left out (intuition does not change when compared to table 3). Considering now only women with children: the "difference in groups" as women with high vs low education, table 4 reports a baseline and a complete model per outcome. The comparison group is low education women with children.
 Considering earnings, (model 1 \& 2), the DiD coefficient is interpreted as follows: during the post intervention period (compared to the pre-intervention period), high educated women gain 951.50\$ on average ($p$ $=$ 0.216) compared to low educated women; which however is not significant. This is broadly maintained when only considering the base model ($\hat{\beta}$ = 871.46, $p$ $<$ 0.26). A similar observation can be made for work participation, which is in both cases, the base model (5) and with covaraites (6), displaying an insignificant decrease in work participation for highly educated women (compared to low educated women) in the post intervention period when compared to the per-period ($\hat{\beta}$ = -0.019, $p$ $=$ 0.462). Finally, family income observed a marginally significant increase of \$1345.12 at the 9.4\% percent level for highly educated women during the post period compared to low educated women, while the base model is insignificant at the 15.2\% level for the DiD effect of education and intervention period. 
 
 
@@ -331,7 +326,7 @@ Considering earnings, (model 1 \& 2), the DiD coefficient is interpreted as foll
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{-1pt}}lcccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
@@ -373,14 +368,10 @@ F Statistic & 12.717$^{***}$  & 26.977$^{***}$ & 9.460$^{***}$ & 44.915$^{***}$ 
 
 \subsubsection{Women with and without Children compared keeping education level (low) constant}
 
-Considering now only low educated women; alternating again on whether a women has a child or not, the instights are to be found in Table 5. 
-The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignficant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: $\hat{\beta}$ = -179.637, $p$ $=$ 0.887) and work paticipation (main model: $\hat{\beta}$ = 0.012, $p$ $=$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; becasue if work would go up significantly while income drops, this would be crazy.}
+Considering now only low educated women; alternating again on whether a women has a child or not, the insights are to be found in Table 5. 
+The subsection analysis shows that the post intervention period earnings for low educated women with children decrease by \$413.45 when compared to women without children in the base model; however all insignificant ($p$ $=$ 0.730). This does not change for the complete model ($\hat{\beta}$ = -475.403, $p$ $<$ 0.691). Same can be observed for the outcome variables Family Income (main model: $\hat{\beta}$ = -179.637, $p$ $=$ 0.887) and work participation (main model: $\hat{\beta}$ = 0.012, $p$ $=$ 0.702). Thus, there is no statistical support that work participation rises by 1.2\% for women with children compared to childless women during the post intervention period and likewise for family income decreases.\footnote{this would have been very interesting; because if work would go up significantly while income drops, this would be crazy.}
+Overall, the introduction of the tax credit does not seem to display a significant DiD across the different outcoems and subgroups.
 
-
-
-
-\subsubsection{Conclusion subsections}  
-Overall, the introduction of the tax credit does not seem to be significant across the different outcoems and subgroups. 
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Wed, Sep 14, 2022 - 15:53:27
@@ -393,7 +384,7 @@ Overall, the introduction of the tax credit does not seem to be significant acro
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-2pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{3pt}}lcccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
@@ -442,8 +433,8 @@ A second example could be socioeconomic factors. Not only tend wealthier familie
 
 \subsection{Task 2: Summary statistics for this task}
 
-Table 6 contains the descriptive statistics of the numeric variables. Overall 329,509 observations are in the data on people born between 1930 and 1939. The age range of study subectes ranges from 40 to 50, with a median age at 45 ($mean$ = 44.645, $std$ = 2.940). The average years of education was 12.77 ($std$ = 3.281, $median$ = 12). Finally, for interpretation purposes here, lnwage ($mean$ = 5.90, $std$ = 0.679, $median$ = 6.257) was rescaled to wage, which displayed a strong positive skew of 26.39, mean of \$439.47 ($std$ = 364.941) and a median of \$521.85. The log scaled wage will be used during the analysis. 
-Moreover, 86.3\% of respondents were married. SMSA indicates whether a study subject lives in rural or urban areas. Quarter of birth, the IV, distributes reasonably equally, with Q1 N = 81671, Q2 N = 80138, Q3 N = 86856, and Q4 N = 80844 - it is influencial to when a study subject will start schooling; eg. suggesting that subjects from the fourth quarter generally obtain more years of study.  
+Table 6 contains the descriptive statistics of the numeric variables. Overall 329,509 observations are in the data on people born between 1930 and 1939. The age range of study subjects ranges from 40 to 50, with a median age at 45 ($mean$ = 44.645, $std$ = 2.940). The average years of education was 12.77 ($std$ = 3.281, $median$ = 12). Finally, for interpretation purposes here, lnwage ($mean$ = 5.90, $std$ = 0.679, $median$ = 6.257) was re-scaled to wage, which displayed a strong positive skew of 26.39, mean of \$439.47 ($std$ = 364.941) and a median of \$521.85. The log scaled wage will be used during the analysis. 
+Moreover, 86.3\% of respondents were married. SMSA indicates whether a study subject lives in rural or urban areas. Quarter of birth, the IV, distributes reasonably equally, with Q1 N = 81671, Q2 N = 80138, Q3 N = 86856, and Q4 N = 80844 - it is influential to when a study subject will start schooling; eg. suggesting that subjects from the fourth quarter generally obtain more years of study.  
 
 % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
 % Date and time: Sun, Sep 25, 2022 - 15:43:50
@@ -478,15 +469,14 @@ Quarter of Birth & 2.506 & 1.112 & 1 & 2 & 3 & 3 & 4 \\
 
 
 \subsection{Task 3: Diagnositcs of Year Of Birth as instrument: Is it relevant?}
+A suitable instrument fulfills two conditions: 1) Cleanliness; meaning that the instrument only has an impact on the outcome through the causal variable (here years of education). This assumtion cannot be tested, but is based in theory (and logic).
+2) The instrument is relevant, meaning that the instrument significantly predicts (and preferably strongly correlates) with the causal ("to be instrumentalized") variable. This assumption can be tested i.a. through conducting an F test on the first stage of 2SLS. 
+In order to assess the relevance of the instrument statistically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R).Table 7 contains both quarter of birth as a factor and quantitative variable. 
 
-A suitable instrument fulfills two conditions: 1) Cleanliness; meaining that the instrument only has an impact on the outcome thorugh the causal variable (here years of education). This assumtion cannot be tested, but is based in theory (and logic).
-2) The instrument is relevant, meaning that the instrument significantly predicts (and preferably strongly correlates) with the causal ("to be instrumentalized") variable. This assumption can be tested i.a. thorugh conducting an F test on the first stage of 2SLS. 
-In order to assess the relevance of the instrument statisically, one regresses the casual variable on the instrument and exogenous covariates - i.e. the first stage of the 2SLS (this can also be retrieved from the 2SLS function in R).Table 7 contains both quarter of birth as a factor and quantitaitve variable. 
+Firstly, all models reported show a significant F statistic ($F$ = 100.653, $p$ $<$ 0.01; $F$ = 414.645, $p$ $<$ 0.01; $F$ = 30.009, $p$ $<$ 0.01; $F$ = 249.859, $p$ $<$ 0.01); which promises that qob might fulfill the relevance criterion.
 
-Firstly, all models reported show a significant F statistic ($F$ = 100.653, $p$ $<$ 0.01; $F$ = 414.645, $p$ $<$ 0.01; $F$ = 30.009, $p$ $<$ 0.01; $F$ = 249.859, $p$ $<$ 0.01); which promises that qob might fulfill the relevane criterion.
-
-Considering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qub) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alteranting the catgory of comparison for quarter. 
-Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picutre can be observed. It is assumed that the covaraites are exogenoeus. Interpreted as a numberic variable, qob is sifnificant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be asusmed qob is a relevant instrument.\footnote{Note: the correlation is weak at 0.0175, $p$ < 0.01}
+Considering first the basis models (1 \& 3) without the inclusion of the covariates, one can observe for quarter of birth (qob) as a numeric (model 1), that it significantly predicts years of education ($\hat{\beta}$ = 0.052, $p$ $<$ 0.01) at conventional levels. Similarly, quarter two to four are all significantly different from quarter one (Q2: $\hat{\beta}$ = 0.057, $p$ $<$ 0.01; Q3: $\hat{\beta}$ = 0.117, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.151, $p$ $<$ 0.01); Similarly, this can be also  observed when alternating the category of comparison for quarter. 
+Considering the relevance of qob when combined with covariates (model 2 \&3), a similar picture can be observed. It is assumed that the covaraites are exogenous. Interpreted as a numeric variable, qob is significant at conventional levels in predicting years of education ($\hat{\beta}$ = 0.032, $p$ $<$ 0.01). In model (4), most categories are also significantly different from the first quarter in years of education (Q2: $\hat{\beta}$ = -0.004, $p$ $=$ 0.812; Q3: $\hat{\beta}$ = 0.052, $p$ $<$ 0.01; Q4: $\hat{\beta}$ = 0.088, $p$ $<$ 0.01). Statistically, it can be assumed qob is a relevant instrument.\footnote{Note: the correlation is weak at 0.0175, $p$ < 0.01}
 
 \begin{figure}[htp]
 		\centering
@@ -495,7 +485,7 @@ Considering the relevance of qob when combined with covariates (model 2 \&3), a 
          \caption{Displaying association between Quarter of Birth and Years of Education}
 \end{figure}
 
-Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend to have significantly more years of education than Q1 and Q2 - this might also explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7. Overall, the instrument appears to meet the relevance criterion. 
+Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend to have significantly more years of education than Q1 and Q2 - this might also explain the aforementioend results regarding Q2 difference to Q1 in model (4) in table 7. Overall, the instrument appears to meet the relevance criterion (ignoring cleanlisness etc here).\footnote{YOB seems to have a connection as well (see task 5)}
 
 
 
@@ -511,7 +501,7 @@ Finally, when considering Figure 2, one can seethat on average, Q4 and Q3 tend t
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-2pt}}lcccc} 
+\begin{tabular}{@{\extracolsep{25pt}}lcccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
@@ -556,15 +546,13 @@ F Statistic & 100.653$^{***}$  & 414.645$^{***}$ & 34.009$^{***}$ & 249.859$^{**
 
 
 \subsection{Task 4: Conduct IVreg of the effect of effect of education on log wages, using quarter of birth as the instrument; are robust SE needed?}
-
-For the purpose of this analysis, it is assumed that the control variables are all exogenoeus. Table 8 reports the corresponding outputs; model (1) and (3) consider qob as a numeric variable and model (2) and (4) consider it as a categorical variable.\footnote{It may be noted that qob should be interpreted as a categorical variable in actuality.} Models (5) and (6) consider an additional instrument (discussed in part 5).
+For the purpose of this analysis, it is assumed that the control variables are all exogenous. Table 8 reports the corresponding outputs; model (1) and (3) consider qob as a numeric variable and model (2) and (4) consider it as a categorical variable.\footnote{It may be noted that qob should be interpreted as a categorical variable in actuality.} Models (5) and (6) consider an additional instrument (discussed in part 5).
 The control variables chosen are SMSA and whether married or not. Married was included because the proportion of married men tends to be higher for higher educated men, suggesting more education but also more income. Moreover, SMSA indicates whether a person lives in a rural or urban surrounding; people in urban areas may have better access to education and better work opportunities.
-Considering the base models (1 - numeric) and (2 - categorical), we can observe that the choice between qob as a numeric or categorical variable instrument barely changes the coefficients and standard errors; reporting a significant postive coeficient for the years of education coeffieient (model 1: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 2: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). For example, for model (2), this implies that one year more we can see that if education increases by one year wage increases by 10.3\%. 
+Considering the base models (1 - numeric) and (2 - categorical), we can observe that the choice between qob as a numeric or categorical variable instrument barely changes the coefficients and standard errors; reporting a significant positive coefficient for the years of education coefficient (model 1: $\hat{\beta}$ = 0.099, $p$ $<$ 0.01; model 2: $\hat{\beta}$ = 0.103, $p$ $<$ 0.01). For example, for model (2), this implies that one year more we can see that if education increases by one year wage increases by 10.3\%. 
 
-Moving to model (4 - categorical), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (2) (same for model 3 and 1), reporting a significant positive coefficient for education ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. ALso the control variables are significant which are both categoricals (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. Thus, the inclusion of (assumed) exogeneous controls does not impact change insights derived from the model.
+Moving to model (4 - categorical), which contains SMSA and married as exogenous controls, the direction and magnitude, in addition to reported standard errors, for years of education do not change considerably when compared to model (2) (same for model 3 and 1), reporting a significant positive coefficient for education ($\hat{\beta}$ = 0.100, $p$ $<$ 0.01). Meaning, that an increase by one year in years of education is associated with a 10\% higher wage. Also the control variables are significant which are both categorical (SMSA: $\hat{\beta}$ = -0.148, $p$ $<$ 0.01; married: $\hat{\beta}$ = -0.255, $p$ $<$ 0.01); However, due to them being controls, we refrain from interpreting them here as we did with education. Thus, the inclusion of (assumed) exogenous controls does not impact change insights derived from the model.
 
-Regarding robustness, the breusch pagan test was significant at conventional levels for all six models (not surprising at this sample size), suggesting no issues regarding heteroscedasticity. Moreover, when applying (White) standard errors, the non standardized standard errors maintai nstability , suggesting that this research is not suffering from heteroscedasticity (see Appendix Table 16). Finally, an analysis of the (Residual Distribution) QQ Plot of model (4) (see Appendix Figure 3) also do not suggest extreme deviations in the residuals from a constant. Thus, statistical inference is not impacted by the inclsuion of robust standard errors. 
-
+Regarding robustness, the Breusch Pagan test was significant at conventional levels for all six models (not surprising at this sample size), suggesting no issues regarding heteroscedasticity. Moreover, when applying (White) standard errors, the non standardized standard errors maintain stability , suggesting that this research is not suffering from heteroscedasticity (see Appendix Table 16). Finally, an analysis of the (Residual Distribution) QQ Plot of model (4) (see Appendix Figure 3) also do not suggest extreme deviations in the residuals from a constant. Thus, statistical inference is not impacted by the inclusion of robust standard errors. 
 
 
 
@@ -623,17 +611,17 @@ Residual Std. Error & 0.645  & 0.646  & 0.635  & 0.637 & 0.650 & 0.650  \\
 \begin{threeparttable}
 \small
 \captionsetup{font=small, justification=raggedright,singlelinecheck=false}
-\caption{\textsc{IV regression output}}
+\caption{\textsc{IV regression output Manual}}
 \centering 
   \label{}
 \small 
-\begin{tabular}{@{\extracolsep{-5pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{-4pt}}lcccccc} 
 \\[-5.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-7} 
 \\[-1.8ex] & \multicolumn{6}{c}{lnwage} \\ 
-\\[-1.8ex] & OLS (1) & OLS (2) & HandIVREG(3) & HandIVREG(4) & HandIVREG(5) & HandIVREG(6)\\ 
+\\[-1.8ex] & OLS (1) & OLS (2) & ManualIV(3) & ManualIV(4) & ManualIV(5) & ManualIV(6)\\ 
 \hline \\[-1.8ex] 
  Constant & 4.995$^{***}$ & 4.847$^{***}$ & 4.633$^{***}$ & 4.461$^{***}$ & 4.590$^{***}$ & 4.425$^{***}$ \\ 
   & (0.004) & (0.005) & (0.263) & (0.260) & (0.262) & (0.259) \\ 
@@ -656,23 +644,24 @@ F Statistic & 43,782.560$^{***}$ & 18,646.640$^{***}$  & 23.145$^{***}$  & 4,738
 \end{tabular} 
 \begin{tablenotes}[para,flushleft]
       \small
-      \item\textit{Note:} ALL ARE IV REGRESSION OUTPUTS!!! tests. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+      \item\textit{Note:} *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
     \end{tablenotes}
 \end{threeparttable}
 \end{adjustwidth}
 %
 \end{table}
+
 Note: this question was not precise wrt. whether to run a manual 2SLS or just normal OLS.
 
-Model (1) and (2) in Table 9 report the OLS regressions of lnwage on the endogeneous education with and without covariates. Models (3) and (4) report the manual 2SLS for quarter of birth as a numeric. Models (5) and (6) report quarter of birth as a factor. 
+Model (1) and (2) in Table 9 report the OLS regressions of lnwage on the endogenous education with and without covariates. Models (3) and (4) report the manual 2SLS for quarter of birth as a numeric. Models (5) and (6) report quarter of birth as a factor. 
 
-\indent Considering model (2), standard OLS with covaraiates, the overall effect of education on is significantly positie ($\hat{\beta}$ = 0.067, $p$ $<$ 0.01), which does not deviate drasically from its (assumed) exogeneous counterpart in the other models in Table 8 (and 9). However, we can observe a considerably lower standard error for the years of education coefficient in model (2) when compared to Table 8 models 1 through 6.
+\indent Considering model (2), standard OLS with covariates, the overall effect of education on is significantly positive ($\hat{\beta}$ = 0.067, $p$ $<$ 0.01), which does not deviate drastically from its (assumed) exogenous counterpart in the other models in Table 8 (and 9). However, we can observe a considerably lower standard error for the years of education coefficient in model (2) when compared to Table 8 models 1 through 6.
 
-\indent Moving on now to the manual 2SLS, as expected, the reported coefficients in models 3 thorugh 6 in Table 9 correspond exactly with those reported in Table 8 (models 1 through 4). However, the manual 2SLS does not correct for the fact that years of education (hat) originates as a predicted outcome of the first stage. Thus, the standard errors differ slightly.
+\indent Moving on now to the manual 2SLS, as expected, the reported coefficients in models 3 through 6 in Table 9 correspond exactly with those reported in Table 8 (models 1 through 4). However, the manual 2SLS does not correct for the fact that years of education (hat) originates as a predicted outcome of the first stage. Thus, the standard errors differ slightly.
 
-\indent COnsidering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from R directly, together with a test for weak instruments and, in case of overidentification, the Sargan-Hansen ${\chi}^2$ over-identification test (there is no true test of exogineity). To keep it short, two models are considered for demonstrative purposes: 1) Table 8 model (3) where qob is a numeric varaible (so no overidentification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that thechically, the inclusion of qob as a factor implies overidentification of the first stage; this will be ignored in this question.
+\indent Considering how which model to prefer, OLS vs model of methods or IVREG, the Hausman's ${\chi}^2$ can be used to assess which estimator is to be preferred. These are output from R directly, together with a test for weak instruments and, in case of over identification, the Sargan-Hansen ${\chi}^2$ over-identification test (there is no true test of exogenity). To keep it short, two models are considered for demonstrative purposes: 1) Table 8 model (3) where qob is a numeric variable (so no over-identification), and 2) Table 8 model (5) is considered where $yob$ (year of birth) was added as an instrument to demonstrate over identification. Please note that technically, the inclusion of qob as a factor implies over-identification of the first stage; this will be ignored in this question.
 
-\indent Considering Table 10 and 11, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of overidentification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of overidentification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that indepedence of the instruments of the residuals cannot be assumed. Thus, the instruments themselfes are assumed to be endogeneous themselfes and overidentification poses a problem for model (5). It may be interesting to note that if we considered qob as a factor and only use it as a n instrument, this test statistic would be insignificant, suggesting that the qob as a factor is exogenoeus and, thus, overidentification is no problem. 
+\indent Considering Table 10 and 11, the weak instruments test, which is just a partial F-test on the first stage of 2SLS, reports significant F statistics for both models (model 3: $F Statistic$ = 100.159, $p$ $<$ 0.01; model 5:$F Statistic$ = 557.21, $p$ $<$ 0.01), suggesting that the relevance criterion is fulfilled. Moving to the Wu-Hausman test however, the models differ. Model (3) (qob numeric model) reports and insignificant test statistic (${\chi}^2$ = 2.477, $p$ = 0.116), suggesting a preference for the OLS estimator. Contrarily, Model (5) reports a significant test statistic (${\chi}^2$ = 82.16), suggesting that the usage of model of methods (2SLS) is preferred over OLS in this case.\footnote{Please note that I included this example on purpose} Finally, considering the question of over-identification, this is not applicable to model (3), when considering qob as a numeric; it would, however, be relevant if we considered qob as a factor. Model (5), on the other hand, contains a second instrument, year of birth, as a demonstrative example. As can be seen in Table 10, the Sargan-Hansen ${\chi}^2$ test of over-identification reports a significant test statistic (${\chi}^2$ = 18.84, $p$ $<$ 0.01). Rejecting the null hypothesis implies that independence of the instruments of the residuals cannot be assumed. Thus, the instruments themselves are assumed to be endogenous themselves and over-identification poses a problem for model (5). It may be interesting to note that if we considered qob as a factor and only use it as a n instrument, this test statistic would be insignificant, suggesting that the qob as a factor is exogenous and, thus, over-identification is no problem. 
 
 
 
@@ -711,10 +700,11 @@ Weak instruments & 2.00 & 329504.00 & 557.21 & 0.00 \\
 \end{table}
 
 \subsection{Task 6: Cleanliness of the Instrument}
-There are multiple ways which could invalidate the ninstrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogeneous variable; it is notable that correaltion does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relvant instrument and that the correlation is not strong enough - but that was dealt with in task 3. 2) The (supposed) variable years of education is actually not endogeneous; remember that this is mostly based on theory and not on tests. 
-However, the most interesting point to discuss considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the edogeneous variable alone, but rather is a confounder itself, thus, having an impact on lnwage at the same time. One such case might be (hypothetically exagerated) the developmental state of the child in question - meaning that eg. people from the first and second quarter, though having on average fewer years of education than people born in quarter 3 and 4, might still be further in terms of mental development at that time. This might lead to higher earnings for those older children and, thereby, relate the instrument to earnings. 
-Finally, 4) the instrument is endogeneous itself, i.e. not mean independent - the instrument would be opening up further backdoor paths. A good example is that my father was born on the 11th of september but only registered one month later; late registration would incur a fee (true story). Thus, in rural communities, non compliance with this specific requirement might be lacking. This would imply that qob is related to the error term and, thus, ednogeneous. 
+There are multiple ways which could invalidate the instrumental variable identification strategy invalid. 1) the instrument may not be relevant for the endogenous variable; it is notable that correlation does not necessarily guarantee relevance. Thus, it might actually be the case that qob is just not a relevant instrument and that the correlation is not strong enough - but that was dealt with in task 3. 2) The (supposed) variable years of education is actually not endogenous; remember that this is mostly based on theory and not on tests. 
 
+However, the most interesting point to discuss considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the endogenous variable alone, but rather is a confounder itself, thus, having an impact on lnwage at the same time. One such case might be the developmental state of the child in question - meaning that eg. people from the first and second quarter, though having on average fewer years of education than people born in quarter third and fourth quarter, might still be "further" in terms of mental development at that time. This might lead to higher earnings for those older children and, thereby, relate the instrument to earnings. Thus, the assumption of cleanliness would be invalid.
+
+Finally, 4) the instrument is endogenous itself, i.e. not mean independent - the instrument would be opening up further backdoor paths. A good example is that my father was born on the 11th of September but was only registered one month later; late registration would incur a fee (true story). Thus, in rural communities, non compliance with this specific requirement might be lacking. As such, qob would suffer from measurement error, particularly in the US during the 1930s. This would imply that qob is conditionally related to the error term and, thus, endogenous. Endogenous instruments themselves bias the resulting coefficient. 
 
 
 
@@ -736,6 +726,24 @@ Finally, 4) the instrument is endogeneous itself, i.e. not mean independent - th
   year={2015},
   publisher={Cambridge University Press}
 }
+
+\indent Hlavac, M. (2018). $stargazer: Well-Formatted Regression and Summary Statistics Tables.$ Central European Labour Studies Institute (CELSI). https://CRAN.R-project.org/package=stargazer
+
+\indent $Housing Prices Competition for Kaggle Learn Users, Dean De Cock$. (n.d.). Retrieved September 14, 2022, from https://www.kaggle.com/c/home-data-for-ml-course/data?select=train.csv
+
+\indent Morgan, S. L., \& Winship, C. (2015). $Counterfactuals and causal inference.$ Cambridge University Press.
+
+
+\indent  R Core Team (2013). R: A language and environment for statistical
+  computing. R Foundation for Statistical Computing, Vienna, Austria.
+  URL http://www.R-project.org/.
+  
+\indent Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” $Journal of Open Source Software$, 4(43), 1686. $doi:10.21105/joss.01686.$
+
+Wickham H (2007). “Reshaping Data with the reshape Package.” $Journal of Statistical Software$, 21(12), 1–20. http://www.jstatsoft.org/v21/i12/.
+
+
+
 
 
 \end{thebibliography}
