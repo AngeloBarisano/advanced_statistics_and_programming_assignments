@@ -9,8 +9,7 @@ dst-env/
 tests/.cache/v/cache/lastfailed
 .vscode/settings.json
 
-/*assignment2/Data/
-/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment2/Data
+/assignment2/Data/
 
 ##
 ## R Section - See https://github.com/github/gitignore/blob/master/R.gitignore

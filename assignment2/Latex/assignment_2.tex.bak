@@ -93,7 +93,7 @@ Subsequently, the four outcomes described in (1-2) yield the following coefficie
 \item $E = (y_{T=0} | D=0)$; Because we are observing the outcome of the pre-(intervention) test for the control, this will yield $\beta_{0}$
 \end{itemize}
 
-Note that the disturbance term ($\beta_{0}$)is left out as it is assumed to be independent of the treatment allocation; as such we will ignore it here. 
+Note that the disturbance term ($\beta_{it}$)is left out as it is assumed to be independent of the treatment allocation; as such we will ignore it here. 
 Additionally, the constant is present in all four outcomes; thus, it also technically cancels out in the following equation. This originates from the assumption that the covariates measurements in pre- and post test yield the same results for both treatment and control subjects. Equivalently, by substituting the aforementioned outcomes into (1-2), the following results can be deduced (excluding the constant), resulting in only the DiD coefficient remaining; all other effects cancel out:
 
 \
@@ -704,7 +704,7 @@ There are multiple ways which could invalidate the instrumental variable identif
 
 However, the most interesting point to discuss considers 3) the cleanliness of the instrument. This would mean, that qob does not only have an effect on lnwage through the endogenous variable alone, but rather is a confounder itself, thus, having an impact on lnwage at the same time. One such case might be the developmental state of the child in question - meaning that eg. people from the first and second quarter, though having on average fewer years of education than people born in quarter third and fourth quarter, might still be "further" in terms of mental development at that time. This might lead to higher earnings for those older children and, thereby, relate the instrument to earnings. Thus, the assumption of cleanliness would be invalid.
 
-Finally, 4) the instrument is endogenous itself, i.e. not mean independent - the instrument would be opening up further backdoor paths. A good example is that my father was born on the 11th of September but only registered one month later; late registration would incur a fee (true story). Thus, in rural communities, non compliance with this specific requirement might be lacking. As such, qob would suffer from measurement error, particularly in the US during the 1930s. This would imply that qob is conditionally related to the error term and, thus, endogenous. Endogenous instruments themselves bias the resulting coefficient. 
+Finally, 4) the instrument is endogenous itself, i.e. not mean independent - the instrument would be opening up further backdoor paths. A good example is that my father was born on the 11th of September but was only registered one month later; late registration would incur a fee (true story). Thus, in rural communities, non compliance with this specific requirement might be lacking. As such, qob would suffer from measurement error, particularly in the US during the 1930s. This would imply that qob is conditionally related to the error term and, thus, endogenous. Endogenous instruments themselves bias the resulting coefficient. 
 
 
 
