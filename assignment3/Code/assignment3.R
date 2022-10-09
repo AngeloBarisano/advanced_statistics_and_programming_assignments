@@ -1,3 +1,5 @@
+# clear environment
+rm(list = ls())
 
 dir <-
   "/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment3/"
@@ -43,7 +45,6 @@ dfTime2Export <-
   wb_data( indicator = c("IC.EXP.TMBC",
                          "NY.GDP.PCAP.KD", # higher GDP per capita means higher development of economy 
                          "NE.EXP.GNFS.ZS", # this is "Exports of goods and services (% of GDP)"
-                         "SP.URB.TOTL.IN.ZS", #pctUrbPop becasue more urban population means more production export
                          "NV.IND.TOTL.ZS"# "Industry (including construction)  value added (% of GDP)"
   ) ,
            country = "countries_only",
@@ -61,13 +62,10 @@ save(dfTime2Export, file=paste0(dirData, "assignemt_part1.sav"))
 
 # Q 1
 colnames(dfTime2Export)[colnames(dfTime2Export) == "NY.GDP.PCAP.KD"]    <- "GDPcap"
-colnames(dfTime2Export)[colnames(dfTime2Export) == "iso2c"]             <- "Country.iso2"
-colnames(dfTime2Export)[colnames(dfTime2Export) == "iso3c" ]            <- "Country.iso3"
 colnames(dfTime2Export)[colnames(dfTime2Export) == "country"]           <- "Country"
 colnames(dfTime2Export)[colnames(dfTime2Export) == "date"]              <- "Year"
 colnames(dfTime2Export)[colnames(dfTime2Export) == "IC.EXP.TMBC"]    <- "TimeToExport"
 colnames(dfTime2Export)[colnames(dfTime2Export) == "NE.EXP.GNFS.ZS"]    <- "Exports_pct_GDP"
-colnames(dfTime2Export)[colnames(dfTime2Export) == "SP.URB.TOTL.IN.ZS"]    <- "pctUrbPop"
 colnames(dfTime2Export)[colnames(dfTime2Export) == "NV.IND.TOTL.ZS"]    <- "Industry_pct_GDP"
 
 df <- dfTime2Export
@@ -82,8 +80,8 @@ df <- dfTime2Export
 # q2 Clean data into balanced
 # remove missing values
 
-df$Country.iso2 <- NULL
-df$Country.iso3 <- NULL
+df$iso2c <- NULL
+df$iso3c <- NULL
 
 
 # remove those outside the timerange of 2014 and 2019
@@ -104,7 +102,6 @@ df.avg <-
         avg.TimeToExport   = mean(TimeToExport, na.rm=TRUE),
         avg.GDPcap   = mean(GDPcap, na.rm=TRUE),
         avg.Exports_pct_GDP = mean(Exports_pct_GDP, na.rm=TRUE),
-        avg.pctUrbPop = mean(pctUrbPop, na.rm=TRUE),
         avg.Industry_pct_GDP = mean(Industry_pct_GDP, na.rm=TRUE),
         # for later checking that the right amount of instances are incldued
         numValid         = length(Country))
@@ -122,7 +119,6 @@ df.sub <- merge(df.sub, df.avg, by="Country")
 attach(df.sub)
 df.sub$diff.TimeToExport   <- TimeToExport   - avg.TimeToExport
 df.sub$diff.Exports_pct_GDP     <- Exports_pct_GDP     - avg.Exports_pct_GDP
-df.sub$diff.pctUrbPop   <- pctUrbPop   - avg.pctUrbPop
 df.sub$diff.Industry_pct_GDP <- Industry_pct_GDP - avg.Industry_pct_GDP
 df.sub$diff.GDPcap <- GDPcap - avg.GDPcap
 detach(df.sub)
@@ -136,7 +132,7 @@ df.avg <- df.avg[df.avg$numValid == 6,]
 
 ### Question 2: obtain summary statistics
 df_temp <- df.sub %>%
-  select((c("Year", "TimeToExport", "GDPcap", "Exports_pct_GDP", "Industry_pct_GDP", "pctUrbPop")))
+  select((c("Year", "TimeToExport", "GDPcap", "Exports_pct_GDP", "Industry_pct_GDP")))
 
 stargazer(
   df_temp,
@@ -146,30 +142,61 @@ stargazer(
   title = "Descriptive Statistics Time to Export"
 )
 
+stargazer(
+  df_temp,
+  type = "latex",
+  omit.summary.stat = c("N"),
+  summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
+  title = "Descriptive Statistics Time to Export"
+)
+
+skewness(df_temp$TimeToExport)
+skewness(df_temp$GDPcap)
+skewness(df_temp$Exports_pct_GDP)
+
 #' arguments:
 #' Exports_pct_GDP --> makes sense
 #' Industry_pct_GDP --> more industry means more to export
 #' GDPcap --> is an indicator of the development of the country ; how strong is the economy
 
 
+
+###################
+# check whether all worked fine!
+
+#' firstly : all numvalid have length 6 (160 countries) --> should make 160 * 6 = 960
+table(df.avg$numValid)
+
+# check number of rows (both compliant!)
+nrow(df.avg)
+nrow(df.sub)
+
+which.max(table(df.avg$numValid))
+which.max(table(df.sub$numValid))
+
+
+## now only select those with numvalid 6 just to make sure
+df.sub <- df.sub[df.sub$numValid == 6,]
+df.avg <- df.avg[df.avg$numValid == 6,]
+
+
+
 ##################################
 # run the models 
 
-View(df.sub)
+
 # model formulation
 mdlA <- TimeToExport ~ Exports_pct_GDP + Industry_pct_GDP + GDPcap 
 
-# ... find the variables of interest
-mdlVars      <- all.vars(mdlA)
+# ind the variables of interest
+mdlVars <- all.vars(mdlA)
 
 
-# here we get the average vars
+# here we get the average vars and fdifferecne vars
 mdlVars.avg  <- paste0("avg.", mdlVars)
 mdlVars.diff <- paste0("diff.", mdlVars)
 
-# ... select variables from the data frames
-
-
+# select variables from the data frames
 df.between <- df.avg[mdlVars.avg]
 df.within  <- df.sub[mdlVars.diff]
 # ... rename column names in order to make use of the 
@@ -233,9 +260,13 @@ rsltRE.Country <-
 
 
 # Tabulate the results
-stargazer(rsltPool.Country, rsltBetween.Country, rsltFE.Country, rsltRE.Country,
-          align=TRUE, no.space=TRUE, intercept.bottom = FALSE, type="text")
+stargazer(rsltPool.Country, rsltBetween.Country, rsltFE.Country, rsltWithin, rsltRE.Country,
+          align=TRUE, no.space=TRUE, intercept.bottom = FALSE, type="text",report=("vc*p"))
 
+
+stargazer(rsltPool.Country, rsltBetween.Country, rsltFE.Country, rsltRE.Country,
+          # align=TRUE, 
+          no.space=TRUE, intercept.bottom = FALSE, type="latex")
 
 
 

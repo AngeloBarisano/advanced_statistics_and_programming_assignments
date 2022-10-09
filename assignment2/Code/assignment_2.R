@@ -136,6 +136,8 @@ skewness(df$earn)
 df %>% count(has_children)
 table(df$nonwhite)
 cor(df$earn, df$finc, )
+
+
 stargazer(
     df_temp_w_children,
     type = "latex",
