@@ -48,7 +48,7 @@ dfTime2Export <-
                          "NV.IND.TOTL.ZS"# "Industry (including construction)  value added (% of GDP)"
   ) ,
            country = "countries_only",
-           start_date = 1960 ,
+           start_date = 2014 ,
            end_date = 2021)
 
 View(dfTime2Export)
@@ -88,11 +88,12 @@ df$iso3c <- NULL
 # only keep complete cases 
 df.sub <- df[complete.cases(df),]
 # remove all outside the timerange
-df.sub <- df.sub[(df.sub$Year >= 2000) & (df.sub$Year <= 2019),]
+df.sub <- df.sub[(df.sub$Year >= 2014) & (df.sub$Year <= 2019),]
 
 sum(is.na(df.sub))
 is.na(df.sub)
 
+View(df.sub)
 
 df.sub %>% 
   summarise_all(~sum(is.na(.)))
