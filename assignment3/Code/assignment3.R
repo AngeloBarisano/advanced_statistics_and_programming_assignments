@@ -292,8 +292,6 @@ summary(fixef(rsltFE.Country, type="dmean"))
 
 
 
-
-
 ###################################
 # Question 3
 #' finally do an F test!!! (or pooled test) between fixed effects model and the 
