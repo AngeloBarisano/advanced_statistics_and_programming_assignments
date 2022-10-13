@@ -217,22 +217,23 @@ stargazer(rsltLogit, rsltProbit, rsltordLogit, rsltordProbit, type="text",
 
 
 
-add.lnL <- c("lnL", round(logLik(rsltordLogit),3), 
+add.lnL <- c("lnL", round(AIC(rsltLogit),3)
+             ,round(AIC(rsltProbit),3),
+             round(logLik(rsltordLogit),3), 
              round(logLik(rsltordProbit),3))
-add.Aic <- c("AIC", round(AIC(rsltordLogit),3), 
-             round(AIC(rsltordProbit),3))
 
+add.Aic <- c("AIC", round(AIC(rsltLogit),3)
+             ,round(AIC(rsltProbit),3),
+             round(logLik(rsltordLogit),3), 
+             round(logLik(rsltordProbit),3))
 
+add.Aic
 summary(rsltordLogit)
 stargazer(rsltordLogit, type="text")
 summary(rsltordProbit)
 
-# Add log likelihood and AIC to stargazer table
 
-add.lnL <- c("lnL", round(logLik(rsltordLogit),3), 
-             round(logLik(rsltordProbit),3))
-add.Aic <- c("AIC", round(AIC(rsltordLogit),3), 
-             round(AIC(rsltordProbit),3))
+
 
 # summary to extract the intercepts 
 
@@ -290,6 +291,8 @@ stargazer(rsltLogit, rsltProbit, rsltordLogit, rsltordProbit,
           align=FALSE, no.space = TRUE, intercept.bottom = FALSE, type="latex",
           add.lines = list(add.mu1.est, add.mu1.std,
                            add.mu2.est, add.mu2.std,
+                           add.mu3.est, add.mu3.std,
+                           add.mu4.est, add.mu4.std,
                            add.lnL, add.Aic))
 
 
@@ -314,213 +317,161 @@ Rsquared(rsltordProbit, measure = "mcfadden")
 # rsltLogit, rsltProbit, rsltordLogit, rsltordProbit
 
 # Check contents of the glm object
-str(rsltordLogit)
+
+
+
+
+
+mdlbin_null <- dFiveStars ~ +1
+
+
+
+# logit GLM (generalized linear model); BINOMINAL DISTREIBUTION!!!
+rsltLogit_null  <- glm(mdlbin_null, data = df_r, 
+                  family=binomial(link = "logit"))
+
+# PROBIT IT IS A PROBIT LINK!!!!
+rsltProbit_null <- glm(mdlbin_null, data = df_r, 
+                  family=binomial(link = "probit"))
+
+
+
+
+# Define the model
+mdlordR_null <- review_stars ~  + 1
+
+
+rsltordLogit_null  <- polr(mdlordR_null, data = as.data.frame(df_r), method = "logistic")
+
+
+
+rsltordProbit_null <- polr(mdlordR_null, data = df_r, method = "probit")
+
+
+rsltLogit_null
+rsltProbit_null
+rsltordLogit_null
+rsltordProbit_null
 
 ## Log-likelihood values
 # rsltLogit
 lnL.fitted_rsltLogit <- -0.5*rsltLogit$deviance
-lnL.null_rsltLogit   <- -0.5*rsltLogit$null.deviance
+lnL.null_rsltLogit   <- -0.5*rsltLogit_null$null.deviance
 lnL.fitted_rsltLogit
 lnL.null_rsltLogit
 # rsltProbit
 lnL.fitted_rsltProbit <- -0.5*rsltProbit$deviance
-lnL.null_rsltProbit   <- -0.5*rsltProbit$null.deviance
+lnL.null_rsltProbit   <- -0.5*rsltProbit_null$null.deviance
 lnL.fitted_rsltProbit
 lnL.null_rsltProbit
 # rsltordLogit
 lnL.fitted_rsltordLogit <- -0.5*rsltordLogit$deviance
-lnL.null_rsltordLogit   <- -0.5*rsltordLogit$null.deviance
+lnL.null_rsltordLogit   <- -0.5*rsltordLogit_null$null.deviance
 lnL.fitted_rsltordLogit
 lnL.null_rsltordLogit
 # rsltordProbit
 lnL.fitted_rsltordProbit <- -0.5*rsltordProbit$deviance
-lnL.null_rsltordProbit   <- -0.5*rsltordProbit$null.deviance
+lnL.null_rsltordProbit   <- -0.5*rsltordProbit_null$null.deviance
 lnL.fitted_rsltordProbit
 lnL.null_rsltordProbit
 
 
-# Degrees of freedom of both models
-str(rsltLogit)
-# rsltLogit
-df_r.fitted_rsltLogit  <- rsltLogit$df_r.residual
-df_r.null_rsltLogit    <- rsltLogit$df_r.null
-df_r.fitted_rsltLogit
-df_r.null_rsltLogit
+# probit
+rsltProbit_null  <- polr( review_stars ~  1, data = df_r, method = "logistic")
+lnL.null <- -0.5* rsltLogit_null$deviance
+lnL.fitted <- -0.5* rsltLogit$deviance
+lnL.null <- -0.5* rsltLogit_null$deviance
+df.fitted <- rsltLogit$df.residual
+df.null <- rsltLogit_null$df.residual
+K <- df.null - df.fitted
+N <- df.null + 1
+probLogit <- predict.glm(rsltLogit,type="response")
+yvalue <- df_r$review_stars %>% as.numeric()
+
+McFadden.R2_Logis <- 1 - (lnL.fitted/lnL.null)
+McFadden.R2adj_Logis <- 1 - ((lnL.fitted - K)/lnL.null)
+
+McFadden.R2_Logis
 
 
-Nullmodel <- polr(review_stars ~ 1 , data = df_r, method = "probit")
+McFadden.R2adj_Logis
 
-# rsltProbit
-df_r.fitted_rsltProbit  <- rsltProbit$df_r.residual
-df_r.null_rsltProbit    <- rsltProbit$df_r.null
-df_r.fitted_rsltProbit
-df_r.null_rsltProbit
-# rsltordLogit
-df_r.fitted_rsltordLogit  <- rsltordLogit$df_r.residual
-df_r.null_rsltordLogit    <- rsltordLogit$df_r.null
-df_r.fitted_rsltordLogit
-df_r.null_rsltordLogit
-# rsltordProbit
-df_r.fitted_rsltordProbit  <- rsltordProbit$df_r.residual
-df_r.null_rsltordProbit    <- rsltordProbit$df_r.null
-df_r.fitted_rsltordProbit
-df_r.null_rsltordProbit
+# probit
+rsltProbit_null  <- polr( review_stars ~  1, data = df_r, method = "probit")
+lnL.null <- -0.5* rsltLogit_null$deviance
+lnL.fitted <- -0.5* rsltLogit$deviance
+lnL.null <- -0.5* rsltLogit_null$deviance
+df.fitted <- rsltLogit$df.residual
+df.null <- rsltLogit_null$df.residual
+K <- df.null - df.fitted
+N <- df.null + 1
+probLogit <- predict.glm(rsltLogit,type="response")
+yvalue <- df_r$review_stars %>% as.numeric()
 
+McFadden.R2_probit <- 1 - (lnL.fitted/lnL.null)
+McFadden.R2adj_probit <- 1 - ((lnL.fitted - K)/lnL.null)
 
-
+McFadden.R2_probit
 
 
-# Number of predictors and sample size
-# rsltLogit
-K_rsltLogit  <- df_r.null_rsltLogit - df_r.fitted_rsltLogit
-N_rsltLogit  <- df_r.null_rsltLogit + 1
-K_rsltLogit
-N_rsltLogit
-# rsltProbit
-K_rsltProbit <- df_r.null_rsltProbit - df_r.fitted_rsltProbit
-N_rsltProbit  <- df_r.null_rsltProbit + 1
-K_rsltProbit
-N_rsltProbit
-
-# rsltordLogit
-K_rsltordLogit <- df_r.null_rsltordLogit - df_r.fitted_rsltordLogit
-N_rsltordLogit  <- df_r.null_rsltordLogit + 1
-K_rsltordLogit
-N_rsltordLogit
-# rsltordProbit
-K_rsltordProbit  <- df_r.null_rsltordProbit - df_r.fitted_rsltordProbit
-N_rsltordProbit  <- df_r.null_rsltordProbit + 1
-K_rsltordProbit
-N_rsltordProbit
-
-
-
-# Predicted and observed value of the target
-# rsltLogit
-probLogit_rsltLogit <- predict.glm(rsltLogit, type = "response")
-yvalue_rsltLogit    <- df_r$dFiveStars
-
-
-# rsltProbit
-probLogit_rsltProbit <- predict.glm(rsltProbit, type = "response")
-yvalue_rsltProbit    <- df_r$dFiveStars
-
-
-# rsltordLogit
-probLogit_rsltordLogit <- predict.glm(rsltordLogit, type = "response")
-yvalue_rsltordLogit    <- df_r$review_stars
-
-
-# rsltordProbit
-probLogit_rsltordProbit <- predict.glm(rsltordProbit, type = "response")
-yvalue_rsltordProbit    <- df_r$review_stars
-
-
-
-# 1. Pseudo R2 and adjusted pseudo R2, McFadden. Resembles 
-# R2 defined as percentage explained variation and as 
-# improvement of fitted model over null model. The adjusted 
-# version penalizes extra predictor variables. The closer
-# to 1, the larger the improvement
-
-#' it resembles R2; it is defined as percentage of explanation and improvement over null model
-#' the closer to 1 the larger the model improvement compare to the null model!
-
-
-# rsltLogit
-McFadden.R2_rsltLogit    <- 1 - (lnL.fitted_rsltLogit/lnL.null_rsltLogit)
-McFadden.R2adj_rsltLogit <- 1 - ((lnL.fitted_rsltLogit - K_rsltLogit)/lnL.null_rsltLogit)
-McFadden.R2_rsltLogit
-McFadden.R2adj_rsltLogit
-# rsltProbit
-McFadden.R2_rsltProbit    <- 1 - (lnL.fitted_rsltProbit/lnL.null_rsltProbit)
-McFadden.R2adj_rsltProbit <- 1 - ((lnL.fitted_rsltProbit - K_rsltProbit)/lnL.null_rsltProbit)
-McFadden.R2_rsltProbit
-McFadden.R2adj_rsltProbit
-# rsltordLogit
-McFadden.R2_rsltordLogit    <- 1 - (lnL.fitted_rsltordLogit/lnL.null_rsltordLogit)
-McFadden.R2adj_rsltordLogit <- 1 - ((lnL.fitted_rsltordLogit - K_rsltordLogit)/lnL.null_rsltordLogit)
-McFadden.R2_rsltordLogit
-McFadden.R2adj_rsltordLogit
-# rsltordProbit
-McFadden.R2_rsltordProbit    <- 1 - (lnL.fitted_rsltordProbit/lnL.null_rsltordProbit)
-McFadden.R2adj_rsltordProbit <- 1 - ((lnL.fitted_rsltordProbit - K_rsltordProbit)/lnL.null_rsltordProbit)
-McFadden.R2_rsltordProbit
-McFadden.R2adj_rsltordProbit
+McFadden.R2adj_probit
 
 
 
 
 
-# 2. Cox & Snell. Resembles R2 as improvement of fitted 
-# model over the null model. Taking N-th root yields the 
-# contribution of each observation (it is based on the 
-# LRT statistic, which explains the '2'). Note that the 
-# maximum is smaller than 1.
 
-#'you take acount for the number of observations as the goodness of fit 
+# probit bin
+rsltProbit_null  <- glm( dFiveStars ~  1, data = df_r, 
+                         family=binomial(link = "probit"))
+lnL.null <- -0.5* rsltLogit_null$deviance
+lnL.fitted <- -0.5* rsltLogit$deviance
+lnL.null <- -0.5* rsltLogit_null$deviance
+df.fitted <- rsltLogit$df.residual
+df.null <- rsltLogit_null$df.residual
+K <- df.null - df.fitted
+N <- df.null + 1
+probLogit <- predict.glm(rsltLogit,type="response")
+yvalue <- df_r$review_stars %>% as.numeric()
 
+McFadden.R2_binprobit <- 1 - (lnL.fitted/lnL.null)
+McFadden.R2adj_binprobit <- 1 - ((lnL.fitted - K)/lnL.null)
 
-# rsltLogit
-CoxSnell.R2_rsltLogit <- 1 - (exp(lnL.null_rsltLogit)/exp(lnL.fitted_rsltLogit))^(2/N_rsltLogit)
-CoxSnell.R2_rsltLogit
-# rsltProbit
-CoxSnell.R2_rsltProbit <- 1 - (exp(lnL.null_rsltProbit)/exp(lnL.fitted_rsltProbit))^(2/N_rsltProbit)
-CoxSnell.R2_rsltProbit
-# rsltordLogit
-CoxSnell.R2_rsltordLogit <- 1 - (exp(lnL.null_rsltordLogit)/exp(lnL.fitted_rsltordLogit))^(2/N_rsltordLogit)
-CoxSnell.R2_rsltordLogit
-# rsltordProbit
-CoxSnell.R2_rsltordProbit <- 1 - (exp(lnL.null_rsltordProbit)/exp(lnL.fitted_rsltordProbit))^(2/N_rsltordProbit)
-CoxSnell.R2_rsltordProbit
+McFadden.R2_binprobit
 
 
-
-# 3. Nagelkerke/Crag and Uhle. Resembles R2 as improvement
-# of fitted model over the null model. SImilar to Cox and 
-# Snell's pseudo R2, but divided by the latter's maximum.
-
-#' builds  upon cox snel
-# rsltLogit
-Nagelkerke.R2_rsltLogit <- CoxSnell.R2_rsltLogit/(1 - exp(lnL.null_rsltLogit)^(2/N_rsltLogit))
-Nagelkerke.R2_rsltLogit
-
-# rsltProbit
-Nagelkerke.R2_rsltProbit <- CoxSnell.R2_rsltProbit/(1 - exp(lnL.null_rsltProbit)^(2/N_rsltProbit))
-Nagelkerke.R2_rsltProbit
-
-# rsltordLogit
-Nagelkerke.R2_rsltordLogit <- CoxSnell.R2_rsltordLogit/(1 - exp(lnL.null_rsltordLogit)^(2/N_rsltordLogit))
-Nagelkerke.R2_rsltordLogit
-
-# rsltordProbit
-Nagelkerke.R2_rsltordProbit <- CoxSnell.R2_rsltordProbit/(1 - exp(lnL.null_rsltordProbit)^(2/N_rsltordProbit))
-Nagelkerke.R2_rsltordProbit
+McFadden.R2adj_binprobit
 
 
-# 4. Efron. Resembles R2 defined as percentage explained 
-# variation and as squared correlation between predicted 
-# and actual dependent values
 
-#' this one resembles R2 explaiing the varaition as the squared correlationbetween the actual and the predicted depednent
-#' difference between what you expect and what is actually going on difference
+# logit bin
+rsltProbit_null  <- glm( dFiveStars ~  1, data = df_r, 
+                         family=binomial(link = "logit"))
+lnL.null <- -0.5* rsltLogit_null$deviance
+lnL.fitted <- -0.5* rsltLogit$deviance
+lnL.null <- -0.5* rsltLogit_null$deviance
+df.fitted <- rsltLogit$df.residual
+df.null <- rsltLogit_null$df.residual
+K <- df.null - df.fitted
+N <- df.null + 1
+probLogit <- predict.glm(rsltLogit,type="response")
+yvalue <- df_r$review_stars %>% as.numeric()
 
-# rsltLogit
-Efron.R2_rsltLogit <- 1 - 
-  sum((yvalue_rsltLogit-probLogit_rsltLogit)^2)/sum((yvalue_rsltLogit-mean(yvalue_rsltLogit))^2)
-Efron.R2_rsltLogit
-# rsltProbit
-Efron.R2_rsltProbit <- 1 - 
-  sum((yvalue_rsltProbit-probLogit_rsltProbit)^2)/sum((yvalue_rsltProbit-mean(yvalue_rsltProbit))^2)
-Efron.R2_rsltProbit
-# rsltordLogit
-Efron.R2_rsltordLogit <- 1 - 
-  sum((yvalue_rsltordLogit-probLogit_rsltordLogit)^2)/sum((yvalue_rsltordLogit-mean(yvalue_rsltordLogit))^2)
-Efron.R2_rsltordLogit
-# rsltordProbit
-Efron.R2_rsltordProbit <- 1 - 
-  sum((yvalue_rsltordProbit-probLogit_rsltordProbit)^2)/sum((yvalue_rsltordProbit-mean(yvalue_rsltordProbit))^2)
-Efron.R2_rsltordProbit
+McFadden.R2_binlogit <- 1 - (lnL.fitted/lnL.null)
+McFadden.R2adj_binlogit <- 1 - ((lnL.fitted - K)/lnL.null)
+
+McFadden.R2_binlogit
+
+
+McFadden.R2adj_binlogit
+
+
+
+
+
+
+
+
 
 
 
@@ -587,39 +538,153 @@ t(round(
 
 
 
+#------------------
+# BINARY CHOICE MODELS APE: average partial effects
+#------------------
+
+# Determine average partial effects for all explanatory 
+# variables regardless measurement levels
+
+betaLogit  <- coefficients(rsltLogit)
+betaProbit <- coefficients(rsltProbit)
+
+
+
+# Predict (type="link) gives avg-x'beta, function dlogis/dnorm
+# calculates the density f(avg-x'beta); different from PEA, these
+# predictions are made for individual observations, which are
+# averaged with function mean  - note that the estimates beta's
+# are the same for each observation and are therefore left outside
+# the averaging
+APElogit.1   <- mean(dlogis(predict(rsltLogit, type="link")))*betaLogit
+APEprobit.1  <- mean(dnorm(predict(rsltProbit, type="link")))*betaProbit
+
+# The average partial effect for dummy variables is the average
+# of the differences between success probabilities if the dummy 
+# event does occur and does not occur for each observations; in 
+# the example this only needs to be done for variable dNearby
+tmp             <- df_r
+
+# Predict (type="response") gives P(Y=1|avg-x'beta)
+tmp$dFiveStars  <- 0
+
+tmpAPElogit.0 <- 
+  mean(predict(rsltLogit, newdata=tmp, type="response"))
+tmpAPEprobit.0<- 
+  mean(predict(rsltProbit,newdata=tmp, type="response"))
+
+tmp$dFiveStars  <- 1
+
+tmpAPElogit.1 <- 
+  mean(predict(rsltLogit, newdata=tmp, type="response"))
+tmpAPEprobit.1<- 
+  mean(predict(rsltProbit,newdata=tmp, type="response"))
+
+APElogit.2 <- APElogit.1
+APElogit.2["travel"] <- tmpAPElogit.1 - tmpAPElogit.0
+
+APEprobit.2 <- APEprobit.1
+APEprobit.2["travel"]<- tmpAPEprobit.1 -tmpAPEprobit.0
 
 
 
 
+stargazer(cbind(APElogit.1, APElogit.2,APEprobit.1,APEprobit.2), type = "text",
+          header=FALSE,
+          no.space = TRUE,  
+          column.sep.width = "0pt", 
+          digits = 4,
+          font.size = "small")
 
 
 
 
+#------------------
+# ORDINAL RESPONSE MODELS APE: average partial effects
+#------------------
+
+#Cumulative prob
+
+
+prb.Logit  <- as.data.frame(predict(rsltordLogit,  type="probs"))
+prb.Probit <- as.data.frame(predict(rsltordProbit, type="probs"))
+
+
+cdf.Logit.1 <- prb.Logit[, 1]
+
+cdf.Logit.2 <- prb.Logit[, 1] + prb.Logit[, 2]
+
+cdf.Logit.3 <- prb.Logit[, 1] + prb.Logit[, 2] + prb.Logit[, 3]
+
+cdf.Logit.4 <- prb.Logit[, 1] + prb.Logit[, 2] + prb.Logit[, 3] + prb.Logit[, 4]
+
+cdf.Logit.5 <- prb.Logit[, 1] + prb.Logit[, 2] + prb.Logit[, 3] + prb.Logit[, 4] + prb.Logit[, 5]
+
+
+cdf.Probit.1 <- prb.Probit[, 1]
+cdf.Probit.2 <- prb.Probit[, 1] + prb.Probit[, 2]
+cdf.Probit.3 <- prb.Probit[, 1] + prb.Probit[, 2] + prb.Probit[, 3]
+cdf.Probit.4 <- prb.Probit[, 1] + prb.Probit[, 2] + prb.Probit[, 3] + prb.Probit[, 4]
+cdf.Probit.5 <- prb.Probit[, 1] + prb.Probit[, 2] + prb.Probit[, 3] + prb.Probit[, 4] + prb.Probit[, 5]
 
 
 
+# Calculate density parts of the effects (Greene, p.910)
+prb.Logit$pdf.1 <- 
+  -dlogis(qlogis(cdf.Logit.1))
+prb.Logit$pdf.2 <- 
+  dlogis(qlogis(cdf.Logit.1)) - dlogis(qlogis(cdf.Logit.2))
+prb.Logit$pdf.3 <- 
+  dlogis(qlogis(cdf.Logit.2)) - dlogis(qlogis(cdf.Logit.3))
+prb.Logit$pdf.4 <- 
+  dlogis(qlogis(cdf.Logit.3)) - dlogis(qlogis(cdf.Logit.4))
+prb.Logit$pdf.5 <- 
+  dlogis(qlogis(cdf.Logit.4))
+
+
+prb.Probit$pdf.1 <- 
+  -dlogis(qlogis(cdf.Probit.1))
+prb.Probit$pdf.2 <- 
+  dlogis(qlogis(cdf.Probit.1)) - dlogis(qlogis(cdf.Probit.2))
+prb.Probit$pdf.3 <- 
+  dlogis(qlogis(cdf.Probit.2)) - dlogis(qlogis(cdf.Probit.3))
+prb.Probit$pdf.4 <- 
+  dlogis(qlogis(cdf.Probit.3)) - dlogis(qlogis(cdf.Probit.4))
+prb.Probit$pdf.5 <- 
+  dlogis(qlogis(cdf.Probit.4))
 
 
 
+# Determine the average effects (apart from the estimated 
+# effects)
+avgAPE.Logit  <- colMeans(prb.Logit[c("pdf.1", "pdf.2", "pdf.3", "pdf.4", "pdf.5" )])
+avgAPE.Probit <- colMeans(prb.Probit[c("pdf.1", "pdf.2", "pdf.3", "pdf.4", "pdf.5")])
 
-# get the odds ratio
-stargazer(exp(rsltLogit$coefficients), type="text")
-stargazer(exp(rsltProbit$coefficients), type="text")
-stargazer(exp(rsltordLogit$coefficients), type="text")
-stargazer(exp(rsltordProbit$coefficients), type="text")
-#' see slide 49: the odds ratio is simply the expected number of the successful events  divided by the 
-#' number of unsuccessful events (expectd number of flight travelses divided by the expected number of NON
-#'  flight travelers; when a dummy switches from 0 to 1)
-#' for dummies it is fairly easy:
-#' so take the exponential of all the logistic regression coef (slide 48)
-#' eg -0.445 --> take the exponential: exp (-0.445)
-#' 
-#' Interpretation: the odds of traveling by flight decreases by roughly 35.9 percent
-#' If the dummy switches from 0 to 1, then the odds by traveling by air (based on closeness of airport) tje odds of travleing by air increases by 48%!!!
+# Extract the estimated effects from the logit
+# and probit objects
+est.Logit  <- coef(rsltordLogit)
+est.Probit <- coef(rsltordProbit)
 
+# Determine the APE
+dfAPE.Logit  <- as.data.frame(avgAPE.Logit %*% t(est.Logit))
+dfAPE.Probit <- as.data.frame(avgAPE.Probit %*% t(est.Probit))
 
+rownames(dfAPE.Logit) <- rownames(dfAPE.Probit) <- c("P(y=1)", "P(y=2)", "P(y=3)", "P(y=4)", "P(y=5)" )
 
 
+
+# Make the table
+
+stargazer(dfAPE.Logit, summary = FALSE,
+          align = F, no.space = F, type="latex",
+          header=F,
+          font.size = "small")
+
+
+stargazer(dfAPE.Probit, summary = FALSE,
+          align = F, no.space = F, type="latex",
+          header=F,
+          font.size = "small")
 
 
 

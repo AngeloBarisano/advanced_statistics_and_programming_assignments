@@ -51,7 +51,7 @@ dfTime2Export <-
            start_date = 2014 ,
            end_date = 2021)
 
-View(dfTime2Export)
+#View(dfTime2Export)
 
 
 save(dfTime2Export, file=paste0(dirData, "assignemt_part1.sav"))
@@ -93,7 +93,7 @@ df.sub <- df.sub[(df.sub$Year >= 2014) & (df.sub$Year <= 2019),]
 sum(is.na(df.sub))
 is.na(df.sub)
 
-View(df.sub)
+#View(df.sub)
 
 df.sub %>% 
   summarise_all(~sum(is.na(.)))
@@ -282,6 +282,9 @@ stargazer(rsltPool.Country, rsltBetween.Country, rsltFE.Country, rsltRE.Country,
 # Explore the estimated intercepts
 summary(fixef(rsltFE.Country, type="dmean"))
 
+
+stargazer(head(summary(fixef(rsltFE.Country, type="dmean"))), type ="latex")
+
 #' TO see whether fixed effects 8within model) is justified: see whether the intercepts are different from each other
 #' if the intercepts on an entity level are considerably different this impleis that FIXED EFFECTS MODEL IS RELEVANT!!
 #' IMPORTNAT: SOME THE INTERCEPTS SHOULD ALSO BE SIGNIFICATN--> if all are insignifiacnt then the pooled
@@ -297,12 +300,14 @@ summary(fixef(rsltFE.Country, type="dmean"))
 #' finally do an F test!!! (or pooled test) between fixed effects model and the 
 #' pooled model
 #' So in order to know whether to use pooled or Fixed model use the partial F test!!!!
-
+var(residuals(rsltFE.Country))
+rsltFE.Country$model$GHGcap
 
 # Calculate for the fixed country effect model
 R2.LSDV <- 1 - (var(residuals(rsltFE.Country))/
-                  var(rsltFE.Country$model$GHGcap))
-R2.LSDV
+                  var(rsltFE.Country$model$TimeToExport))
+
+R2.LSDV- 1
 
 
 #' result: an inisgnificant test says that both models are consistent! 
@@ -314,17 +319,12 @@ R2.LSDV
 
 # Evaluate the fixed effects model versus the pooled 
 # regression model 8same thing as partial f test again
+
+# Evaluate the fixed effects model versus the pooled 
+# regression model 8same thing as partial f test again
 pFtest(rsltFE.Country, rsltPool.Country)
-pooltest(rsltFE.Country, rsltRE.Country)
+pooltest(rsltPool.Country, rsltFE.Country)
 
 
-
-
-
-
-
-
-
-
-
+phtest(rsltFE.Country, rsltRE.Country)
 

@@ -42,7 +42,7 @@ df <- read.csv(file = paste0(dirData,"OnlineNewsPopularity.csv"),
 #Choose relevant variables 
 
 
-df<- df_news[, c("shares", "n_unique_tokens", "num_hrefs", "num_imgs", 
+df<- df[, c("shares", "n_unique_tokens", "num_hrefs", "num_imgs", 
                        "num_videos", "average_token_length", 
                        "title_sentiment_polarity","avg_negative_polarity", "rate_positive_words",
                        "num_keywords"                       )]
@@ -153,33 +153,11 @@ exp(0.001)
 # OLS 
 rsltOLS <- lm(mdlA, data=df)
 
-
-stargazer(rslt.NegBin, rsltOLS,
-          align=FALSE, no.space=TRUE, intercept.bottom = FALSE, type="text")
+#Partial effects for NB model
 
 
-stargazer(rslt.NegBin, rsltOLS,
-          align=FALSE, no.space=TRUE, intercept.bottom = FALSE, type="latex")
 
-
-#OLS model
-
-# Model estimation
-rsltOLS <- lm(mdlA, data=dfs_news)
-
-stargazer(rsltNegBin, rsltOLS, type="latex",
-          align=TRUE, no.space = TRUE, intercept.bottom = FALSE,
-          header=FALSE, 
-          
-          single.row = TRUE, #
-          
-          column.sep.width = "0pt", 
-          
-          font.size = "small" 
-          
-)
-
-# Type 'link' 
+# Type 'link' gives the predicted link function x'beta,
 head(predict.glm(rslt.NegBin, type="link"))
 
 # Find parameter estimates 
@@ -189,46 +167,26 @@ estBeta <- coef(rslt.NegBin)
 APE <- mean(exp(predict.glm(rslt.NegBin, type="link")))*estBeta
 round(APE, 3)
 
-# Calculate the average partial effects for dummies (ds_sm)
-tmp <- df
-
-tmp$dc_sm[tmp$dc_sm ==0] <- 1
-tmpAPE.1 <- mean(exp(predict.glm(rslt.NegBin, newdata=tmp, type="link")))
-round(tmpAPE.1, 3)
-
-tmp$dc_sm[tmp$dc_sm ==1] <- 0
-tmpAPE.0 <- mean(exp(predict.glm(rslt.NegBin, newdata=tmp, type="link")))
-round(tmpAPE.0, 3)
-
-APE.dc_sm <- tmpAPE.1 - tmpAPE.0
-round(cbind(tmpAPE.1, tmpAPE.0, APE.dc_sm), 3)
-
-# Calculate the average partial effects for dummies (wkd)
-
-
-tmp$wkd[tmp$wkd ==0] <- 1
-tmpAPE.1.1 <- mean(exp(predict.glm(rsltNeg.Bin, newdata=tmp, type="link")))
-round(tmpAPE.1.1, 3)
-
-tmp$wkd[tmp$wkd ==1] <- 0
-tmpAPE.0.0 <- mean(exp(predict.glm(rsltNeg.Bin, newdata=tmp, type="link")))
-round(tmpAPE.0.0, 3)
-
-APE.wkd <- tmpAPE.1.1 - tmpAPE.0.0
-round(cbind(tmpAPE.1.1, tmpAPE.0.0, APE.wkd), 3)
 
 
 #### Table to paste
 
 stargazer(APE, summary = FALSE,
-          align = FALSE, no.space = TRUE, type="latex")
+          align = TRUE, no.space = TRUE, type="latex")
 
 
 
+stargazer(rslt.NegBin$coefficients, APE, rsltOLS$coefficients,
+          align=FALSE, no.space=TRUE, intercept.bottom = FALSE, type="text")
+
+
+stargazer(rslt.NegBin$coefficients, APE, rsltOLS$coefficients,
+          align=FALSE, no.space=TRUE, intercept.bottom = FALSE, type="latex")
 
 
 
-
-
-
-
+stargazer(rslt.NegBin, rsltOLS,
+          p.auto = FALSE, intercept.bottom = F,
+          type = 'latex')
+round(APE, 3)
+rslt.NegBin$coefficients
