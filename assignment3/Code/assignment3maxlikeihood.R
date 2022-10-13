@@ -39,8 +39,9 @@ library("DAAG")
 library("MASS")
 library(RColorBrewer)
 library(psych)
+library(gofcat)
 library(ROCR)
-
+install.packages("gofcat", dependencies = T)
 ########################################
 
 df_r <- read.csv(file = "/home/angelo/Documents/Uni/Courses/Advanced Statistics and programming/Assignments/assignment3/Data/online_ratings_travel.csv", sep = ";")
@@ -113,7 +114,7 @@ stargazer(
   summary.stat = c("mean", "sd", "min", "p25", "median", "p75", "max"),
   title = "Descriptive Statistics Time to Export"
 )
-stargazer(df_r, type = 'text')
+
 
 #### Task 2.1 : Formal Specification w. interaction#### 
 # retrieve the dummies in price range
@@ -134,7 +135,7 @@ table(df_r$price_range)
 table(df_r$price_range)
 
 skewness(df_r$numb_friends)
-
+skewness(df_r$reviews_in_city)
 
 
 #### Task 3.1 :  Run the binary choice model (logit + probit and with goodness of fit measure here#### 
@@ -182,7 +183,7 @@ summary(rsltordLogit)
 
 rsltordProbit <- polr(mdlordR, data = df_r, method = "probit")
 
-Nullmodel <- polr(review_stars ~ 1 , data = df_r, method = "probit")
+# Nullmodel <- polr(review_stars ~ 1 , data = df_r, method = "probit")
 
 
 summary(rsltordProbit)
@@ -199,6 +200,109 @@ stargazer(rsltLogit, rsltProbit, rsltordLogit, rsltordProbit, type="text",
           font.size = "small" 
           
 )
+
+
+stargazer(rsltLogit, rsltProbit, rsltordLogit, rsltordProbit, type="text",
+          align=TRUE, no.space = TRUE, intercept.bottom = FALSE,  header=FALSE, 
+          
+          # single.row = TRUE, #
+          
+          column.sep.width = "0pt", 
+          
+          font.size = "small" 
+          
+)
+
+
+
+
+
+add.lnL <- c("lnL", round(logLik(rsltordLogit),3), 
+             round(logLik(rsltordProbit),3))
+add.Aic <- c("AIC", round(AIC(rsltordLogit),3), 
+             round(AIC(rsltordProbit),3))
+
+
+summary(rsltordLogit)
+stargazer(rsltordLogit, type="text")
+summary(rsltordProbit)
+
+# Add log likelihood and AIC to stargazer table
+
+add.lnL <- c("lnL", round(logLik(rsltordLogit),3), 
+             round(logLik(rsltordProbit),3))
+add.Aic <- c("AIC", round(AIC(rsltordLogit),3), 
+             round(AIC(rsltordProbit),3))
+
+# summary to extract the intercepts 
+
+est.Logit  <- summary(rsltordLogit)$coefficients
+est.Probit <- summary(rsltordProbit)$coefficients
+
+add.mu1.est <- c("mu.1",
+                 round(est.Logit[nrow(est.Logit)-3,  "Value"], 3),
+                 round(est.Probit[nrow(est.Logit)-3, "Value"], 3)
+)
+add.mu1.std <- c("",
+                 round(est.Logit[nrow(est.Logit)-3,  "Std. Error"], 3),
+                 round(est.Probit[nrow(est.Logit)-3, "Std. Error"], 3)
+)
+add.mu2.est <- c("mu.2",
+                 round(est.Logit[nrow(est.Logit)-2,  "Value"], 3),
+                 round(est.Probit[nrow(est.Logit)-2, "Value"], 3)
+)
+add.mu2.std <- c("",
+                 round(est.Logit[nrow(est.Logit)-2,  "Std. Error"], 3),
+                 round(est.Probit[nrow(est.Logit)-2, "Std. Error"], 3)
+)
+
+
+add.mu3.est <- c("mu.3",
+                 round(est.Logit[nrow(est.Logit)-1,  "Value"], 3),
+                 round(est.Probit[nrow(est.Logit)-1, "Value"], 3)
+)
+add.mu3.std <- c("",
+                 round(est.Logit[nrow(est.Logit)-1,  "Std. Error"], 3),
+                 round(est.Probit[nrow(est.Logit)-1, "Std. Error"], 3)
+)
+
+add.mu4.est <- c("mu.4",
+                 round(est.Logit[nrow(est.Logit),  "Value"], 3),
+                 round(est.Probit[nrow(est.Logit), "Value"], 3)
+)
+add.mu4.std <- c("",
+                 round(est.Logit[nrow(est.Logit),  "Std. Error"], 3),
+                 round(est.Probit[nrow(est.Logit), "Std. Error"], 3)
+)
+
+
+
+# Make the table
+stargazer(rsltordLogit, rsltordProbit,
+          align=TRUE, no.space = TRUE, intercept.bottom = TRUE, type="text",
+          add.lines = list(add.mu1.est, add.mu1.std,
+                           add.mu2.est, add.mu2.std,
+                           add.lnL, add.Aic))
+
+
+
+stargazer(rsltLogit, rsltProbit, rsltordLogit, rsltordProbit,
+          align=FALSE, no.space = TRUE, intercept.bottom = FALSE, type="latex",
+          add.lines = list(add.mu1.est, add.mu1.std,
+                           add.mu2.est, add.mu2.std,
+                           add.lnL, add.Aic))
+
+
+#########
+
+# quick way
+
+library("piecewiseSEM")
+piecewiseSEM::Rsquared(rsltLogit, measure = "mcfadden")
+Rsquared(rsltProbit, measure = "mcfadden")
+
+Rsquared(rsltordLogit, measure = "mcfadden")
+Rsquared(rsltordProbit, measure = "mcfadden")
 
 
 #### Task 3.3: goodness of fit for each 
@@ -242,6 +346,10 @@ df_r.fitted_rsltLogit  <- rsltLogit$df_r.residual
 df_r.null_rsltLogit    <- rsltLogit$df_r.null
 df_r.fitted_rsltLogit
 df_r.null_rsltLogit
+
+
+Nullmodel <- polr(review_stars ~ 1 , data = df_r, method = "probit")
+
 # rsltProbit
 df_r.fitted_rsltProbit  <- rsltProbit$df_r.residual
 df_r.null_rsltProbit    <- rsltProbit$df_r.null
